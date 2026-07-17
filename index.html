@@ -136,26 +136,6 @@
       padding: 30px 0 20px;
     }
 
-    .view-tabs {
-      display: flex;
-      gap: 8px;
-      padding-top: 16px;
-    }
-
-    .view-tab {
-      min-height: 38px;
-      padding: 8px 12px;
-      border: 1px solid var(--ink);
-      border-radius: var(--radius);
-      background: #fffdf7;
-      color: var(--ink);
-      box-shadow: 2px 2px 0 var(--ink);
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .view-tab.active { color: #fff; background: var(--sea-2); }
-
     .pass-view { padding: 30px 0 48px; }
 
     .pass-heading {
@@ -1025,6 +1005,8 @@
         text-align: center;
       }
 
+      .actions .icon-btn[data-view="pass"] { grid-column: 1 / -1; }
+
       .day-tabs {
         margin-inline: -9px;
         padding: 8px 9px 12px;
@@ -1087,16 +1069,11 @@
       </div>
       <div class="actions">
         <button class="icon-btn" id="expandAll" type="button">展開全部</button>
-        <button class="icon-btn" id="todayBtn" type="button">回到 Day 1</button>
-        <button class="icon-btn" type="button" onclick="window.print()">列印</button>
+        <button class="icon-btn active" type="button" data-view="itinerary">行程列表</button>
+        <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
       </div>
     </div>
   </header>
-
-  <nav class="shell view-tabs" aria-label="內容分頁" id="viewTabs">
-    <button class="view-tab active" type="button" data-view="itinerary">行程手冊</button>
-    <button class="view-tab" type="button" data-view="pass">釜山 PASS 景點</button>
-  </nav>
 
   <main class="shell">
     <div id="itineraryView">
@@ -1575,7 +1552,6 @@
 
       const todayIndex = getTripDayIndex();
       const todayKey = todayIndex === -1 ? "" : tripDateKeys[todayIndex];
-      document.getElementById("todayBtn").textContent = todayIndex === -1 ? "回到 Day 1" : "今日行程";
       if (todayIndex !== -1 && autoSelectedDate !== todayKey) {
         activeDay = todayIndex;
         autoSelectedDate = todayKey;
@@ -1743,7 +1719,7 @@
       scrollToDayPanel();
     });
 
-    document.getElementById("viewTabs").addEventListener("click", (event) => {
+    document.querySelector(".actions").addEventListener("click", (event) => {
       const button = event.target.closest("[data-view]");
       if (!button) return;
       setView(button.dataset.view);
@@ -1787,12 +1763,6 @@
       const button = event.target.closest(".copy-address");
       if (!button) return;
       copyAddress(button.dataset.address, button);
-    });
-
-    document.getElementById("todayBtn").addEventListener("click", () => {
-      activeDay = Math.max(0, getTripDayIndex());
-      renderDay();
-      scrollToDayPanel();
     });
 
     document.getElementById("expandAll").addEventListener("click", (event) => {
