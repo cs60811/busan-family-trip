@@ -647,6 +647,23 @@
       font-size: 14px;
     }
 
+    .event-map-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      margin-top: 9px;
+      padding: 5px 9px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: #03c75a;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .event-map-link:hover { transform: translateY(-1px); }
+
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -1451,12 +1468,12 @@
         events: [
           ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
           ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
-          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "找大型置物櫃", ["luggage"]],
+          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "站內找「물품보관함」與大型置物櫃", ["luggage"]],
           ["11:20", "搭車到甘川洞文化村", "30 分", "輕裝上山", ["transport"]],
           ["11:50", "甘川洞文化村", "150 分", "拍照、逛小店、可順便吃小點", []],
           ["14:20", "搭車回札嘎其 / BIFF 廣場", "30 分", "", ["transport"]],
           ["14:50", "札嘎其市場 / BIFF 廣場午餐", "90 分", "午餐偏晚，甘川洞可先墊胃", ["food"]],
-          ["16:20", "取行李", "20 分", "回札嘎其站", ["luggage"]],
+          ["16:20", "取行李", "20 分", "回札嘎其站內取回行李", ["luggage"]],
           ["16:40", "搭車到 El Momento Songdo", "25 分", "建議計程車", ["transport", "luggage"]],
           ["17:10", "Check in / 休息", "80 分", "放空、整理行李", ["rest", "luggage"]],
           ["18:30", "松島附近晚餐 / 海邊散步", "90 分", "不再拉回南浦", ["food"]],
@@ -1546,6 +1563,11 @@
       luggage: "行李",
       ticket: "訂票",
       pass: "PASS可用"
+    };
+
+    const eventLocations = {
+      "d5-2": { query: "자갈치역", label: "札嘎其站（置物櫃）" },
+      "d5-7": { query: "자갈치역", label: "札嘎其站（取回行李）" }
     };
 
     const phrases = [
@@ -1788,6 +1810,7 @@
       const tagHtml = tags.map(tag => `<span class="tag ${tag}"${tag === "pass" ? ' title="VISIT BUSAN PASS 可用"' : ""}>${tagNames[tag]}</span>`).join("");
       const checkKey = `busan-event-${dayId}-${index}`;
       const completed = localStorage.getItem(checkKey) === "1";
+      const location = eventLocations[`${dayId}-${index}`];
       return `
         <section class="event ${completed ? "completed" : ""}" style="animation-delay:${Math.min(index * 28, 280)}ms">
           <div class="time">${time}</div>
@@ -1800,6 +1823,7 @@
               </div>
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
+            ${location ? `<a class="event-map-link" href="nmap://search?query=${encodeURIComponent(location.query)}&appname=https://cs60811.github.io/busan-family-trip/" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
         </section>
