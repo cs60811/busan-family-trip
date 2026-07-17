@@ -924,6 +924,19 @@
       overflow-wrap: anywhere;
     }
 
+    .stay-card .local-address {
+      margin-top: 8px;
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .local-address span {
+      color: var(--coral);
+      margin-right: 6px;
+    }
+
     .copy-address {
       width: 100%;
       min-height: 36px;
@@ -1232,40 +1245,44 @@
           <small>9/13 - 9/14</small>
           <h3>Hotel Kyungsung</h3>
           <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
+          <p class="local-address"><span>MAP / TAXI</span>부산광역시 부산진구 서면문화로 26</p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Kyungsung 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Kyungsung 地址">KakaoMap</a>
-            <button class="copy-address" type="button" data-address="26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256">複製地址</button>
+            <button class="copy-address" type="button" data-address="부산광역시 부산진구 서면문화로 26">複製韓文地址</button>
           </div>
         </div>
         <div class="stay-card">
           <small>9/15 - 9/16</small>
           <h3>UH Continental CenterPoint</h3>
           <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
+          <p class="local-address"><span>MAP / TAXI</span>부산광역시 해운대구 달맞이길 2-21</p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 UH Continental CenterPoint 地址">KakaoMap</a>
-            <button class="copy-address" type="button" data-address="2-21, Dalmaji-gil, Haeundae-gu, Busan 48099">複製地址</button>
+            <button class="copy-address" type="button" data-address="부산광역시 해운대구 달맞이길 2-21">複製韓文地址</button>
           </div>
         </div>
         <div class="stay-card">
           <small>9/17 - 9/18</small>
           <h3>Elmomento Songdo</h3>
           <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
+          <p class="local-address"><span>MAP / TAXI</span>부산광역시 서구 등대로 9</p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Songdo 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Songdo 地址">KakaoMap</a>
-            <button class="copy-address" type="button" data-address="9, Deungdae-ro, Seo-gu, Busan 49263">複製地址</button>
+            <button class="copy-address" type="button" data-address="부산광역시 서구 등대로 9">複製韓文地址</button>
           </div>
         </div>
         <div class="stay-card">
           <small>9/19</small>
           <h3>Hotel Andrest</h3>
           <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
+          <p class="local-address"><span>MAP / TAXI</span>부산광역시 사상구 광장로86번길 2</p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Andrest 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Andrest 地址">KakaoMap</a>
-            <button class="copy-address" type="button" data-address="2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975">複製地址</button>
+            <button class="copy-address" type="button" data-address="부산광역시 사상구 광장로86번길 2">複製韓文地址</button>
           </div>
         </div>
       </section>
@@ -1852,12 +1869,12 @@
         button.textContent = "已複製";
         button.classList.add("copied");
         window.setTimeout(() => {
-          button.textContent = "複製地址";
+          button.textContent = "複製韓文地址";
           button.classList.remove("copied");
         }, 1600);
       } catch {
         button.textContent = "請長按複製";
-        window.setTimeout(() => { button.textContent = "複製地址"; }, 2200);
+        window.setTimeout(() => { button.textContent = "複製韓文地址"; }, 2200);
       }
     }
 
