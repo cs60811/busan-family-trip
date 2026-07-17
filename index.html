@@ -518,6 +518,7 @@
     .tag.transport { background: var(--sea-2); }
     .tag.luggage { background: #7c4a2d; }
     .tag.ticket { background: #875a9f; }
+    .tag.pass { background: #9a6a19; }
 
     aside {
       position: sticky;
@@ -1079,6 +1080,7 @@
         <button class="chip" data-filter="rest" type="button">休息</button>
         <button class="chip" data-filter="luggage" type="button">行李</button>
         <button class="chip" data-filter="ticket" type="button">訂票</button>
+        <button class="chip" data-filter="pass" type="button">釜山PASS</button>
       </div>
     </section>
 
@@ -1168,9 +1170,9 @@
           ["10:30", "搭車到海東龍宮寺", "45 分", "建議計程車", ["transport"]],
           ["11:15", "海東龍宮寺", "90 分", "樓梯多，慢慢走", []],
           ["12:45", "午餐 / 前往 Osiria 周邊", "75 分", "可在龍宮寺或樂天 Outlet 周邊吃", ["food"]],
-          ["14:00", "Skyline Luge 斜坡滑車", "120 分", "確認 2 歲幼童搭乘規定", ["ticket"]],
+          ["14:00", "Skyline Luge 斜坡滑車", "120 分", "確認 2 歲幼童搭乘規定", ["ticket", "pass"]],
           ["16:00", "搭車到 Museum 1", "40 分", "往 Centum City 方向", ["transport"]],
-          ["16:40", "Museum 1 現代美術館", "90 分", "最後入場為關門前 1 小時", ["ticket"]],
+          ["16:40", "Museum 1 現代美術館", "90 分", "最後入場為關門前 1 小時", ["ticket", "pass"]],
           ["18:10", "搭車回 UH Continental", "30 分", "", ["transport"]],
           ["18:40", "UH Continental Check in / 休息", "60 分", "先讓小孩休息", ["rest", "luggage"]],
           ["19:40", "海雲台附近晚餐", "80 分", "不建議再拉遠", ["food"]],
@@ -1191,8 +1193,8 @@
           ["11:00", "釜山自然島鹽麵包", "30 分", "順路買麵包 / 小點", ["food"]],
           ["11:30", "Sea Life 釜山水族館", "120 分", "適合幼童，室內可休息", ["ticket"]],
           ["13:30", "午餐 / 回飯店休息", "120 分", "保留午睡或放空時間", ["food", "rest"]],
-          ["15:30", "海雲台膠囊列車", "90 分", "建議預約 15:30 左右", ["ticket", "transport"]],
-          ["17:00", "BUSAN X the SKY", "90 分", "看夕陽接夜景", ["ticket"]],
+          ["15:30", "海雲台膠囊列車", "90 分", "膠囊列車不含 Pass；可改海灘列車使用 Pass", ["ticket", "transport"]],
+          ["17:00", "BUSAN X the SKY", "90 分", "看夕陽接夜景", ["ticket", "pass"]],
           ["18:30", "THE BAY 101", "60 分", "夜景散步、拍照", []],
           ["19:30", "Outdark Chicken House 炸雞", "90 分", "晚餐 / 宵夜", ["food"]],
           ["21:00", "回飯店 UH Continental", "", "休息", ["rest"]]
@@ -1232,13 +1234,13 @@
         events: [
           ["09:00", "晨喚", "60 分", "", ["rest"]],
           ["10:00", "松島沙灘 / 挖沙 / 海邊散步", "90 分", "早上比較不熱", []],
-          ["11:30", "松島纜車", "90 分", "可接松島龍宮天空步道", ["ticket"]],
-          ["13:00", "松島龍宮天空步道", "60 分", "", []],
+          ["11:30", "松島纜車", "90 分", "可接松島龍宮天空步道", ["ticket", "pass"]],
+          ["13:00", "松島龍宮天空步道", "60 分", "", ["pass"]],
           ["14:00", "豚笑南浦店", "90 分", "從松島移動到南浦吃午餐", ["food", "transport"]],
           ["15:30", "國際市場 - 재미완구 玩具店", "90 分", "玩具、雜貨", []],
           ["17:00", "南浦洞商圈 / 光復路", "90 分", "藥妝、伴手禮、零食", []],
           ["18:30", "海豚豆腐鍋", "60 分", "晚餐", ["food"]],
-          ["19:30", "龍頭山公園 & 釜山塔", "90 分", "看夜景", ["ticket"]],
+          ["19:30", "龍頭山公園 & 釜山塔", "90 分", "看夜景", ["ticket", "pass"]],
           ["21:00", "回 El Momento Songdo", "", "", ["transport", "rest"]]
         ]
       },
@@ -1302,7 +1304,8 @@
       food: "餐食",
       rest: "休息",
       luggage: "行李",
-      ticket: "訂票"
+      ticket: "訂票",
+      pass: "PASS可用"
     };
 
     const phrases = [
@@ -1427,7 +1430,7 @@
 
     function renderEvent(event, index) {
       const [time, title, duration, note, tags] = event;
-      const tagHtml = tags.map(tag => `<span class="tag ${tag}">${tagNames[tag]}</span>`).join("");
+      const tagHtml = tags.map(tag => `<span class="tag ${tag}"${tag === "pass" ? ' title="VISIT BUSAN PASS 可用"' : ""}>${tagNames[tag]}</span>`).join("");
       return `
         <section class="event" style="animation-delay:${Math.min(index * 28, 280)}ms">
           <div class="time">${time}</div>
