@@ -695,109 +695,134 @@
       font-weight: 800;
     }
 
-    .locker-rebuild-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 10px;
-      color: var(--muted);
-      font-size: 11px;
+    .locker-handmap {
+      margin: 0;
+      padding: 13px 10px 10px;
+      border: 2px dashed var(--ink);
+      border-radius: 6px;
+      background: #fff2c9;
     }
 
-    .locker-rebuild-meta strong { color: var(--coral); }
-
-    .locker-floorplan {
-      display: grid;
-      gap: 9px;
-    }
-
-    .plan-level {
-      border: 2px solid var(--ink);
-      border-radius: 7px 4px 6px 5px;
-      background: #fffdf7;
-      overflow: hidden;
-    }
-
-    .plan-level-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 6px 9px;
-      border-bottom: 1px dashed var(--ink);
-      background: #e4f0ec;
-      color: var(--sea-2);
+    .handmap-kicker {
+      margin: 0 0 10px;
+      color: var(--coral);
       font-family: var(--mono);
       font-size: 11px;
       font-weight: 800;
+      text-align: center;
     }
 
-    .plan-concourse {
+    .handmap-route {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1.2fr);
+      align-items: center;
+      gap: 3px;
+    }
+
+    .handmap-stop {
+      min-height: 122px;
+      padding: 9px 6px 8px;
+      border: 2px solid var(--ink);
+      border-radius: 9px 4px 8px 5px;
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 rgba(25, 57, 74, .2);
+      text-align: center;
+    }
+
+    .handmap-stop.station { transform: rotate(1deg); }
+    .handmap-stop.desk { background: #e8eef7; transform: rotate(-1deg); }
+    .handmap-stop.locker { background: #dff3e6; transform: rotate(1deg); }
+    .handmap-stop strong,
+    .handmap-stop small { display: block; }
+    .handmap-stop strong { margin-top: 6px; font-size: 12px; line-height: 1.25; }
+    .handmap-stop small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.25; }
+
+    .handmap-arrow {
+      color: var(--coral);
+      font-family: var(--mono);
+      font-size: 27px;
+      font-weight: 800;
+      text-align: center;
+      transform: rotate(-3deg);
+    }
+
+    .train-icon,
+    .info-icon,
+    .locker-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .train-icon {
       position: relative;
-      min-height: 172px;
-      padding: 13px 11px 10px;
+      width: 42px;
+      height: 28px;
+      border: 2px solid var(--ink);
+      border-radius: 9px 9px 5px 5px;
+      background: #f7e4dc;
     }
 
-    .plan-columns {
-      display: flex;
-      justify-content: space-between;
-      margin: 8px 5% 13px;
-    }
-
-    .plan-columns span {
-      width: 13px;
-      height: 13px;
+    .train-icon::before,
+    .train-icon::after {
+      position: absolute;
+      bottom: -6px;
+      width: 7px;
+      height: 7px;
       border: 2px solid var(--ink);
       border-radius: 50%;
-      background: #d6d0c2;
+      background: var(--ink);
+      content: "";
     }
 
-    .plan-amenity-zone {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1.25fr);
-      align-items: center;
-      gap: 6px;
-    }
+    .train-icon::before { left: 6px; }
+    .train-icon::after { right: 6px; }
 
-    .plan-amenity {
-      min-height: 62px;
-      padding: 8px 6px;
+    .info-icon {
+      width: 34px;
+      height: 34px;
       border: 2px solid var(--ink);
-      border-radius: 5px 8px 5px 7px;
-      text-align: center;
+      border-radius: 50%;
+      background: #fffdf7;
+      color: var(--sea-2);
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 800;
     }
 
-    .plan-amenity strong,
-    .plan-amenity small { display: block; }
-    .plan-amenity strong { font-size: 12px; line-height: 1.2; }
-    .plan-amenity small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.2; }
-    .plan-amenity.desk { background: #e8eef7; }
-    .plan-amenity.locker { background: #dff3e6; box-shadow: 3px 3px 0 rgba(25, 57, 74, .2); transform: rotate(-1deg); }
-    .plan-adjacent { color: var(--coral); font-family: var(--mono); font-size: 11px; font-weight: 800; text-align: center; }
-
-    .plan-down {
-      margin-top: 12px;
-      padding: 7px;
-      border-top: 1px dashed var(--line);
-      color: var(--muted);
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .plan-down strong { color: var(--sea-2); }
-
-    .plan-platform {
+    .locker-icon {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      padding: 9px;
+      grid-template-columns: repeat(3, 10px);
+      grid-template-rows: repeat(2, 14px);
+      gap: 3px;
     }
 
-    .plan-platform div {
-      padding: 7px;
+    .locker-icon span {
+      border: 2px solid var(--ink);
+      border-radius: 2px;
+      background: #c4dfd0;
+    }
+
+    .handmap-target {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 2px 5px;
       border: 1px solid var(--ink);
       border-radius: 4px;
-      background: #f7e4dc;
-      font-size: 11px;
+      background: var(--coral);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      transform: rotate(-2deg);
+    }
+
+    .handmap-caption {
+      margin: 11px 0 0;
+      color: var(--sea-2);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
       text-align: center;
     }
 
@@ -1223,7 +1248,18 @@
 
       .duration { padding: 3px 6px; }
 
-      .locker-rebuild-meta { align-items: flex-start; flex-direction: column; gap: 3px; }
+      .handmap-route {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .handmap-arrow {
+        height: 16px;
+        line-height: 16px;
+        transform: rotate(90deg);
+      }
+
+      .handmap-stop { min-height: 0; }
 
       .day-head {
         grid-template-columns: 1fr;
@@ -1961,30 +1997,21 @@
       const completed = localStorage.getItem(checkKey) === "1";
       const location = eventLocations[`${dayId}-${index}`];
       const lockerSketch = location && location.sketch ? `
-        <details class="locker-sketch">
-          <summary>公開照片重建：站內置物櫃位置圖</summary>
+        <details class="locker-sketch" open>
+          <summary>札嘎其站內：手繪找櫃圖</summary>
           <div class="locker-sketch-body">
-            <p class="locker-sketch-title">JAGALCHI STATION · 자갈치역</p>
-            <div class="locker-rebuild-meta"><strong>非比例圖／重建版</strong><span>已確認：置物櫃在觀光資訊台旁</span></div>
-            <div class="locker-floorplan" aria-label="札嘎其站室內重建平面圖">
-              <section class="plan-level">
-                <div class="plan-level-head"><span>B1 · 대합실 / 大廳層</span><span>長通道・中央圓柱</span></div>
-                <div class="plan-concourse">
-                  <div class="plan-columns" aria-label="中央圓柱"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                  <div class="plan-amenity-zone">
-                    <div class="plan-amenity desk"><strong>관광안내데스크</strong><small>觀光資訊台</small></div>
-                    <div class="plan-adjacent">旁</div>
-                    <div class="plan-amenity locker"><strong>물품보관함</strong><small>置物櫃・找大型櫃</small></div>
-                  </div>
-                  <div class="plan-down">沿大廳動線找服務台；<strong>不需要先找特定出口</strong><br>月台往上可接至此大廳層</div>
-                </div>
-              </section>
-              <section class="plan-level">
-                <div class="plan-level-head"><span>B2 · 승강장 / 月台層</span><span>1號線</span></div>
-                <div class="plan-platform"><div>往 토성<br>多大浦海水浴場方向</div><div>往 남포<br>老圃方向</div></div>
-              </section>
-            </div>
-            <p class="locker-sketch-note">前往寄放時，直接在 B1 大廳找「관광안내데스크」，置物櫃就在旁邊。此重建圖不主張出口、閘門與服務台的精確相對距離；現場設備或空櫃狀況仍以指標為準。</p>
+            <figure class="locker-handmap" aria-label="札嘎其站 B1 大廳的手繪置物櫃導航圖">
+              <p class="handmap-kicker">B1 大廳 · 非比例手繪圖</p>
+              <div class="handmap-route">
+                <div class="handmap-stop station"><span class="train-icon" aria-hidden="true"></span><strong>進入 자갈치역</strong><small>到 B1 大廳層</small></div>
+                <div class="handmap-arrow" aria-hidden="true">→</div>
+                <div class="handmap-stop desk"><span class="info-icon" aria-hidden="true">i</span><strong>관광안내데스크</strong><small>觀光資訊台</small></div>
+                <div class="handmap-arrow" aria-hidden="true">→</div>
+                <div class="handmap-stop locker"><span class="locker-icon" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span><strong>물품보관함</strong><small>找大型置物櫃</small><span class="handmap-target">就在服務台旁</span></div>
+              </div>
+              <figcaption class="handmap-caption">看到觀光資訊台後，往旁邊找一整排置物櫃即可。</figcaption>
+            </figure>
+            <p class="locker-sketch-note">直接以 NAVER Map 導航到札嘎其站；進入 B1 大廳後，不必先找特定出口，找「관광안내데스크」最快。</p>
             <p class="locker-sketch-source">重建依據：<a href="https://www2.humetro.busan.kr/homepage/cht/page/subLocation.do?menu_no=1001020804" target="_blank" rel="noreferrer">釜山交通公社札嘎其站大廳實景</a>、<a href="https://dargo.tistory.com/380" target="_blank" rel="noreferrer">公開設施位置資料</a>。</p>
           </div>
         </details>` : "";
