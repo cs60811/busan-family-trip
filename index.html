@@ -230,6 +230,28 @@
       text-align: center;
     }
 
+    .backup-section + .backup-section { margin-top: 30px; }
+
+    .backup-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 11px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .backup-section-head h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 26px;
+    }
+
+    .backup-section-head span { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+
+    .backup-card .backup-note { margin-top: 8px; line-height: 1.45; }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
@@ -1377,8 +1399,6 @@
         text-align: center;
       }
 
-      .actions .icon-btn[data-view="pass"] { grid-column: 1 / -1; }
-
       .day-tabs {
         margin-inline: -9px;
         padding: 8px 9px 12px;
@@ -1443,6 +1463,7 @@
         <button class="icon-btn" id="expandAll" type="button">展開全部</button>
         <button class="icon-btn active" type="button" data-view="itinerary">行程列表</button>
         <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
+        <button class="icon-btn" type="button" data-view="backup">備用景點</button>
       </div>
     </div>
   </header>
@@ -1621,6 +1642,25 @@
         </div>
       </div>
       <div class="pass-grid" id="passGrid"></div>
+    </section>
+
+    <section class="pass-view" id="backupView" hidden aria-labelledby="backupTitle">
+      <div class="pass-heading">
+        <div>
+          <span class="kicker">BUSAN BACKUP DIRECTORY · FAMILY FRIENDLY</span>
+          <h2 id="backupTitle">備用景點冊</h2>
+          <p>需要換景點時可快速依美食、室外、室內查看。已排進本次行程的項目會以黃色背景與「已排入」標示；其餘卡片附上最適合替換的日期或情境。</p>
+        </div>
+        <a class="pass-link" href="https://www.visitbusan.net/" target="_blank" rel="noreferrer">開啟 Visit Busan ↗</a>
+      </div>
+      <div class="pass-toolbar">
+        <span class="pass-count" id="backupCount"></span>
+        <div class="pass-toggle" id="backupToggle">
+          <button class="toggle active" type="button" data-backup-filter="all">全部推薦</button>
+          <button class="toggle" type="button" data-backup-filter="scheduled">已排入行程</button>
+        </div>
+      </div>
+      <div id="backupDirectory"></div>
     </section>
   </main>
 
@@ -1874,6 +1914,39 @@
       { name: "釜山電影體驗博物館", region: "南浦／舊城區" }
     ];
 
+    const backupCategories = [
+      { id: "food", label: "美食", hint: "臨時換餐、加點心" },
+      { id: "outdoor", label: "室外景點", hint: "天氣舒服時優先" },
+      { id: "indoor", label: "室內景點", hint: "下雨、午睡後備案" }
+    ];
+
+    const backupAttractions = [
+      { category: "food", name: "田浦咖啡街", region: "西面／田浦", note: "咖啡、早午餐與親子休息點集中", scheduled: "Day 2" },
+      { category: "food", name: "松亭3代豬肉湯飯", region: "西面", note: "行程中的晚餐；想吃暖胃湯飯可直接保留", scheduled: "Day 2" },
+      { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐" },
+      { category: "food", name: "青沙浦烤貝", region: "青沙浦", note: "海景晚餐選項；膠囊列車周邊可順接", alternative: "可替換 Day 4 晚餐" },
+      { category: "food", name: "札嘎其市場／BIFF 廣場", region: "南浦／舊城區", note: "市場小吃、種子糖餅與午餐選擇集中", scheduled: "Day 5" },
+      { category: "food", name: "富平罐頭夜市", region: "南浦／富平市場", note: "19:30 後開市；人潮多，幼童累時不必勉強", alternative: "可替換 Day 6 晚餐" },
+      { category: "food", name: "豚笑南浦店", region: "南浦／舊城區", note: "松島行程後移動到南浦的午餐選項", scheduled: "Day 6" },
+
+      { category: "outdoor", name: "海東龍宮寺", region: "機張", note: "海邊寺廟與步道；階梯多，推車不易", scheduled: "Day 3" },
+      { category: "outdoor", name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", note: "幼童搭乘規定請先確認；不適合可改 Outlet", scheduled: "Day 3" },
+      { category: "outdoor", name: "海雲台沙灘", region: "海雲台", note: "晨間玩沙最輕鬆，避開正午曝曬", scheduled: "Day 4" },
+      { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；可接膠囊列車", alternative: "可替換 Day 4 下午" },
+      { category: "outdoor", name: "甘川洞文化村", region: "甘川洞", note: "坡度與階梯多，帶背巾比推車輕鬆", scheduled: "Day 5" },
+      { category: "outdoor", name: "松島海灘／龍宮雲橋", region: "松島", note: "纜車後順接海邊散步；強風或下雨時縮短", scheduled: "Day 6" },
+      { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；可用 Danubi 列車減少步行", alternative: "可替換 Day 6 半日" },
+      { category: "outdoor", name: "五六島天空步道", region: "南區", note: "免費海景步道；雨天或強風可能限制開放", alternative: "天氣好時半日備案" },
+
+      { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術，平日下午適合躲熱與休息", scheduled: "Day 3" },
+      { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案", scheduled: "Day 4" },
+      { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4" },
+      { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天" },
+      { category: "indoor", name: "國立海洋博物館", region: "影島", note: "海洋主題常設展，適合親子放慢腳步", alternative: "可替換 Day 6 雨天" },
+      { category: "indoor", name: "國立釜山科學館", region: "機張", note: "適合親子；若 Luge 不適合或下雨可改這裡", alternative: "可替換 Day 3 雨天" },
+      { category: "indoor", name: "Arte Museum 釜山", region: "影島", note: "沉浸式展覽；可和影島／南浦行程擇一搭配", alternative: "可替換 Day 6 下午" }
+    ];
+
     const departureAt = new Date("2026-09-13T10:00:00+08:00");
     const tripDateKeys = ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20"];
 
@@ -1884,6 +1957,7 @@
     let autoSelectedDate = "";
     let activeView = "itinerary";
     let passFilter = "all";
+    let backupFilter = "all";
 
     const tabs = document.getElementById("dayTabs");
     const panel = document.getElementById("dayPanel");
@@ -1892,12 +1966,14 @@
     const itineraryView = document.getElementById("itineraryView");
     const passView = document.getElementById("passView");
     const passGrid = document.getElementById("passGrid");
+    const backupView = document.getElementById("backupView");
+    const backupDirectory = document.getElementById("backupDirectory");
 
     function setView(view, shouldScroll = true) {
       activeView = view;
-      const showPass = view === "pass";
-      itineraryView.hidden = showPass;
-      passView.hidden = !showPass;
+      itineraryView.hidden = view !== "itinerary";
+      passView.hidden = view !== "pass";
+      backupView.hidden = view !== "backup";
       document.querySelectorAll("[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === view));
       if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -1913,6 +1989,31 @@
           <p class="pass-place">${item.region}</p>
         </article>
       `).join("") : `<div class="pass-empty">目前沒有符合的景點。</div>`;
+    }
+
+    function renderBackupDirectory() {
+      const scheduledCount = backupAttractions.filter(item => item.scheduled).length;
+      const visibleCount = backupAttractions.filter(item => backupFilter === "all" || item.scheduled).length;
+      document.getElementById("backupCount").textContent = `${visibleCount} 個推薦 · 已排入 ${scheduledCount} 個`;
+      const sections = backupCategories.map(category => {
+        const items = backupAttractions.filter(item => item.category === category.id && (backupFilter === "all" || item.scheduled));
+        if (!items.length) return "";
+        return `
+          <section class="backup-section" aria-labelledby="backup-${category.id}">
+            <div class="backup-section-head"><h3 id="backup-${category.id}">${category.label}</h3><span>${category.hint} · ${items.length} 個</span></div>
+            <div class="pass-grid">
+              ${items.map(item => `
+                <article class="pass-card backup-card ${item.scheduled ? "scheduled" : ""}">
+                  <span class="pass-status ${item.scheduled ? "" : "available"}">${item.scheduled ? `已排入 ${item.scheduled}` : item.alternative || "尚未安排"}</span>
+                  <h3>${item.name}</h3>
+                  <p class="pass-place">${item.region}</p>
+                  <p class="backup-note">${item.note}</p>
+                </article>
+              `).join("")}
+            </div>
+          </section>`;
+      }).join("");
+      backupDirectory.innerHTML = sections || `<div class="pass-empty">目前沒有符合的景點。</div>`;
     }
 
     function getBusanDateKey(date = new Date()) {
@@ -2232,6 +2333,14 @@
       renderPassDirectory();
     });
 
+    document.getElementById("backupToggle").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-backup-filter]");
+      if (!button) return;
+      backupFilter = button.dataset.backupFilter;
+      document.querySelectorAll("[data-backup-filter]").forEach(item => item.classList.toggle("active", item === button));
+      renderBackupDirectory();
+    });
+
     document.querySelector(".chips").addEventListener("click", (event) => {
       const button = event.target.closest("[data-filter]");
       if (!button) return;
@@ -2296,6 +2405,7 @@
     renderPhrases();
     setupMapLinks();
     renderPassDirectory();
+    renderBackupDirectory();
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
     window.addEventListener("resize", updateStickyOffsets);
