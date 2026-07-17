@@ -136,6 +136,120 @@
       padding: 30px 0 20px;
     }
 
+    .view-tabs {
+      display: flex;
+      gap: 8px;
+      padding-top: 16px;
+    }
+
+    .view-tab {
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      color: var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .view-tab.active { color: #fff; background: var(--sea-2); }
+
+    .pass-view { padding: 30px 0 48px; }
+
+    .pass-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      padding: 12px 0 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .pass-heading h2 {
+      margin: 5px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(31px, 5vw, 56px);
+      line-height: .98;
+    }
+
+    .pass-heading p {
+      max-width: 720px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pass-link {
+      color: var(--sea-2);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pass-toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0;
+    }
+
+    .pass-count { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+
+    .pass-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .pass-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pass-card {
+      position: relative;
+      min-height: 152px;
+      padding: 16px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .pass-card.scheduled { background: linear-gradient(130deg, rgba(240,193,75,.42), rgba(255,253,247,.94) 65%); }
+
+    .pass-card h3 {
+      margin: 11px 0 7px;
+      font-family: var(--serif);
+      font-size: 23px;
+      line-height: 1.12;
+    }
+
+    .pass-card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .pass-card .pass-place { font-family: var(--mono); font-size: 12px; }
+
+    .pass-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 3px 7px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--sea);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pass-status.available { color: var(--ink); background: var(--paper-2); }
+
+    .pass-empty {
+      padding: 36px;
+      border: 2px dashed var(--line);
+      color: var(--muted);
+      text-align: center;
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
@@ -808,7 +922,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid {
+      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid, .pass-grid {
         grid-template-columns: 1fr;
       }
 
@@ -916,6 +1030,10 @@
         padding: 8px 9px 12px;
       }
 
+      .pass-heading { grid-template-columns: 1fr; align-items: start; }
+
+      .pass-toolbar { align-items: flex-start; flex-direction: column; }
+
       .tab {
         min-width: 82px;
         min-height: 54px;
@@ -975,7 +1093,13 @@
     </div>
   </header>
 
+  <nav class="shell view-tabs" aria-label="內容分頁" id="viewTabs">
+    <button class="view-tab active" type="button" data-view="itinerary">行程手冊</button>
+    <button class="view-tab" type="button" data-view="pass">釜山 PASS 景點</button>
+  </nav>
+
   <main class="shell">
+    <div id="itineraryView">
     <section class="hero">
       <div class="hero-grid">
         <div class="intro">
@@ -1108,6 +1232,26 @@
           <ul class="mini-list" id="backupList"></ul>
         </div>
       </aside>
+    </section>
+    </div>
+
+    <section class="pass-view" id="passView" hidden aria-labelledby="passTitle">
+      <div class="pass-heading">
+        <div>
+          <span class="kicker">VISIT BUSAN PASS · FREE ATTRACTIONS</span>
+          <h2 id="passTitle">釜山 PASS 免費景點</h2>
+          <p>依官方目前列出的 34 個免費入場景點整理。已排進本次行程的項目會以黃色背景與「已排入」標示；折扣合作店家未列入此頁。</p>
+        </div>
+        <a class="pass-link" href="https://www.visitbusanpass.com/attractions/?attrtp=free" target="_blank" rel="noreferrer">開啟官方清單 ↗</a>
+      </div>
+      <div class="pass-toolbar">
+        <span class="pass-count" id="passCount"></span>
+        <div class="pass-toggle">
+          <button class="toggle active" type="button" data-pass-filter="all">全部景點</button>
+          <button class="toggle" type="button" data-pass-filter="scheduled">已排入行程</button>
+        </div>
+      </div>
+      <div class="pass-grid" id="passGrid"></div>
     </section>
   </main>
 
@@ -1319,6 +1463,43 @@
       { zh: "請幫忙", ko: "도와주세요", rom: "do-wa-ju-se-yo" }
     ];
 
+    const passAttractions = [
+      { name: "雷射競技場 松島", region: "松島／西區" },
+      { name: "松島龍宮雲橋", region: "松島／西區", scheduled: "Day 6" },
+      { name: "Surfholic 多大浦", region: "多大浦" },
+      { name: "入庫家韓服租借", region: "西區" },
+      { name: "洛東江生態探訪船", region: "沙上／洛東江" },
+      { name: "哲洙與英熙", region: "松島／西區" },
+      { name: "松島海上纜車", region: "松島／西區", scheduled: "Day 6" },
+      { name: "甘川浪漫韓服租借", region: "甘川洞" },
+      { name: "會動的照片商店", region: "松島／西區" },
+      { name: "小王子屋", region: "甘川洞" },
+      { name: "雷射競技場 三井塔", region: "西面" },
+      { name: "Diamond Egg 密室逃脫", region: "西面" },
+      { name: "Running Man 釜山", region: "西面" },
+      { name: "樂天世界釜山", region: "機張／Osiria" },
+      { name: "Club D Oasis", region: "海雲台" },
+      { name: "Surfholic 松亭", region: "松亭" },
+      { name: "Hill Spa", region: "海雲台" },
+      { name: "Spa Land Centum City", region: "Centum City" },
+      { name: "國立釜山科學館", region: "機張" },
+      { name: "海雲台 Haeeon 韓服租借", region: "海雲台" },
+      { name: "海雲台海灘列車", region: "海雲台", alternative: "可替換 Day 4" },
+      { name: "BUSAN X the SKY", region: "海雲台", scheduled: "Day 4" },
+      { name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", scheduled: "Day 3" },
+      { name: "Brick Campus 釜山", region: "機張" },
+      { name: "Museum 1", region: "Centum City", scheduled: "Day 3" },
+      { name: "阿九山森林", region: "機張" },
+      { name: "大榮跆拳道", region: "南浦／舊城區" },
+      { name: "太宗台 Danubi 列車", region: "影島" },
+      { name: "Arte Museum 釜山", region: "影島" },
+      { name: "釜山塔", region: "南浦／舊城區", scheduled: "Day 6" },
+      { name: "釜山 Diamond Bay 遊艇", region: "南浦／舊城區" },
+      { name: "國立海洋博物館", region: "影島" },
+      { name: "釜山市區觀光巴士", region: "釜山站／多路線" },
+      { name: "釜山電影體驗博物館", region: "南浦／舊城區" }
+    ];
+
     const departureAt = new Date("2026-09-13T10:00:00+08:00");
     const tripDateKeys = ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20"];
 
@@ -1327,11 +1508,38 @@
     let query = "";
     let allExpanded = false;
     let autoSelectedDate = "";
+    let activeView = "itinerary";
+    let passFilter = "all";
 
     const tabs = document.getElementById("dayTabs");
     const panel = document.getElementById("dayPanel");
     const searchInput = document.getElementById("searchInput");
     const backupList = document.getElementById("backupList");
+    const itineraryView = document.getElementById("itineraryView");
+    const passView = document.getElementById("passView");
+    const passGrid = document.getElementById("passGrid");
+
+    function setView(view, shouldScroll = true) {
+      activeView = view;
+      const showPass = view === "pass";
+      itineraryView.hidden = showPass;
+      passView.hidden = !showPass;
+      document.querySelectorAll("[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === view));
+      if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderPassDirectory() {
+      const visible = passFilter === "scheduled" ? passAttractions.filter(item => item.scheduled) : passAttractions;
+      const scheduledCount = passAttractions.filter(item => item.scheduled).length;
+      document.getElementById("passCount").textContent = `${visible.length} 個景點 · 已排入 ${scheduledCount} 個`;
+      passGrid.innerHTML = visible.length ? visible.map(item => `
+        <article class="pass-card ${item.scheduled ? "scheduled" : ""}">
+          <span class="pass-status ${item.scheduled ? "" : "available"}">${item.scheduled ? `已排入 ${item.scheduled}` : item.alternative || "尚未安排"}</span>
+          <h3>${item.name}</h3>
+          <p class="pass-place">${item.region}</p>
+        </article>
+      `).join("") : `<div class="pass-empty">目前沒有符合的景點。</div>`;
+    }
 
     function getBusanDateKey(date = new Date()) {
       const parts = new Intl.DateTimeFormat("en-US", {
@@ -1371,6 +1579,7 @@
       if (todayIndex !== -1 && autoSelectedDate !== todayKey) {
         activeDay = todayIndex;
         autoSelectedDate = todayKey;
+        setView("itinerary", false);
         renderDay();
         scrollToDayPanel();
       }
@@ -1534,6 +1743,20 @@
       scrollToDayPanel();
     });
 
+    document.getElementById("viewTabs").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-view]");
+      if (!button) return;
+      setView(button.dataset.view);
+    });
+
+    document.querySelector(".pass-toggle").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-pass-filter]");
+      if (!button) return;
+      passFilter = button.dataset.passFilter;
+      document.querySelectorAll("[data-pass-filter]").forEach(item => item.classList.toggle("active", item === button));
+      renderPassDirectory();
+    });
+
     document.querySelector(".chips").addEventListener("click", (event) => {
       const button = event.target.closest("[data-filter]");
       if (!button) return;
@@ -1602,6 +1825,7 @@
     renderDay();
     renderChecklist();
     renderPhrases();
+    renderPassDirectory();
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
     window.addEventListener("resize", updateStickyOffsets);
