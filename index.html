@@ -539,6 +539,38 @@
       font-weight: 700;
     }
 
+    .day-live {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--ink);
+      background: rgba(255,255,255,.68);
+    }
+
+    .day-live small {
+      display: block;
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .day-live strong { display: block; margin-top: 2px; font-size: 15px; }
+
+    .day-progress {
+      flex: 0 0 auto;
+      padding: 5px 7px;
+      border: 1px solid var(--line);
+      background: var(--paper-2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
     .timeline {
       padding: 18px;
     }
@@ -554,6 +586,8 @@
 
     .event:last-child { border-bottom: 0; }
 
+    .event.completed { opacity: .58; }
+
     .time {
       font-family: var(--mono);
       color: var(--sea-2);
@@ -567,6 +601,13 @@
       align-items: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
+    }
+
+    .event-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex: 0 0 auto;
     }
 
     .event h3 {
@@ -584,6 +625,20 @@
       padding: 4px 8px;
       white-space: nowrap;
     }
+
+    .event-done {
+      min-height: 27px;
+      padding: 3px 7px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: #fffdf7;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .event-done[aria-pressed="true"] { color: #fff; background: var(--sea); }
 
     .note {
       color: var(--muted);
@@ -962,11 +1017,17 @@
 
       .event-title { gap: 6px; }
 
+      .event-actions { width: 100%; justify-content: flex-end; }
+
       .duration { padding: 3px 6px; }
 
       .day-head {
         grid-template-columns: 1fr;
       }
+
+      .day-live { align-items: flex-start; }
+
+      .day-live strong { font-size: 14px; }
 
       .sleep-badge {
         white-space: normal;
@@ -1559,6 +1620,7 @@
         renderDay();
         scrollToDayPanel();
       }
+      updateDayStatus();
     }
 
     function updateStickyOffsets() {
@@ -1592,9 +1654,55 @@
       return filterOk && queryOk;
     }
 
+    function getCompletedEventCount(day) {
+      return day.events.filter((_, index) => localStorage.getItem(`busan-event-${day.id}-${index}`) === "1").length;
+    }
+
+    function getBusanClockMinutes(date = new Date()) {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Seoul",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }).formatToParts(date);
+      const values = Object.fromEntries(parts.filter(part => part.type !== "literal").map(part => [part.type, part.value]));
+      return Number(values.hour) * 60 + Number(values.minute);
+    }
+
+    function getDayGuide(day) {
+      const tripDayIndex = getTripDayIndex();
+      const firstEvent = day.events[0];
+      if (tripDayIndex !== activeDay) return `首站 ${firstEvent[0]} · ${firstEvent[1]}`;
+
+      const now = getBusanClockMinutes();
+      const timedEvents = day.events.filter(event => /^\d{2}:\d{2}$/.test(event[0]));
+      const current = timedEvents.find(event => {
+        const [hours, minutes] = event[0].split(":").map(Number);
+        const start = hours * 60 + minutes;
+        const duration = Number.parseInt(event[2], 10) || 30;
+        return now >= start && now < start + duration;
+      });
+      if (current) return `現在 · ${current[1]}`;
+
+      const next = timedEvents.find(event => {
+        const [hours, minutes] = event[0].split(":").map(Number);
+        return hours * 60 + minutes > now;
+      });
+      return next ? `下一個 ${next[0]} · ${next[1]}` : "今日行程完成，回飯店休息";
+    }
+
+    function updateDayStatus() {
+      const day = days[activeDay];
+      const guide = document.getElementById("dayGuide");
+      const progress = document.getElementById("dayProgress");
+      if (guide) guide.textContent = getDayGuide(day);
+      if (progress) progress.textContent = `${getCompletedEventCount(day)} / ${day.events.length} 完成`;
+    }
+
     function renderDay() {
       const day = days[activeDay];
-      const events = day.events.filter(eventMatches);
+      const events = day.events.map((event, index) => ({ event, index })).filter(({ event }) => eventMatches(event));
+      const completed = getCompletedEventCount(day);
       panel.innerHTML = `
         <div class="day-head">
           <div>
@@ -1603,9 +1711,13 @@
             <p>${day.focus}</p>
           </div>
           <div class="sleep-badge">住宿：${day.stay}</div>
+          <div class="day-live">
+            <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
+            <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
+          </div>
         </div>
         <div class="timeline">
-          ${events.length ? events.map((event, i) => renderEvent(event, i)).join("") : `<div class="empty">沒有符合搜尋或篩選的行程。</div>`}
+          ${events.length ? events.map(({ event, index }) => renderEvent(event, index, day.id)).join("") : `<div class="empty">沒有符合搜尋或篩選的行程。</div>`}
         </div>
       `;
       backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
@@ -1613,16 +1725,21 @@
       updateStickyOffsets();
     }
 
-    function renderEvent(event, index) {
+    function renderEvent(event, index, dayId) {
       const [time, title, duration, note, tags] = event;
       const tagHtml = tags.map(tag => `<span class="tag ${tag}"${tag === "pass" ? ' title="VISIT BUSAN PASS 可用"' : ""}>${tagNames[tag]}</span>`).join("");
+      const checkKey = `busan-event-${dayId}-${index}`;
+      const completed = localStorage.getItem(checkKey) === "1";
       return `
-        <section class="event" style="animation-delay:${Math.min(index * 28, 280)}ms">
+        <section class="event ${completed ? "completed" : ""}" style="animation-delay:${Math.min(index * 28, 280)}ms">
           <div class="time">${time}</div>
           <div>
             <div class="event-title">
               <h3>${title}</h3>
-              ${duration ? `<span class="duration">${duration}</span>` : ""}
+              <div class="event-actions">
+                ${duration ? `<span class="duration">${duration}</span>` : ""}
+                <button class="event-done" type="button" data-event-check="${checkKey}" aria-pressed="${completed}">${completed ? "已完成" : "完成"}</button>
+              </div>
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
@@ -1719,6 +1836,17 @@
       scrollToDayPanel();
     });
 
+    panel.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-event-check]");
+      if (!button) return;
+      const completed = button.getAttribute("aria-pressed") !== "true";
+      localStorage.setItem(button.dataset.eventCheck, completed ? "1" : "0");
+      button.setAttribute("aria-pressed", String(completed));
+      button.textContent = completed ? "已完成" : "完成";
+      button.closest(".event").classList.toggle("completed", completed);
+      updateDayStatus();
+    });
+
     document.querySelector(".actions").addEventListener("click", (event) => {
       const button = event.target.closest("[data-view]");
       if (!button) return;
@@ -1785,7 +1913,7 @@
               <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
               <div class="sleep-badge">住宿：${day.stay}</div>
             </div>
-            <div class="timeline">${day.events.map(renderEvent).join("")}</div>
+            <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
           `;
         }).join("");
         activeDay = 0;
