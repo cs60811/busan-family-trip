@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026 釜山親子旅行手冊</title>
+  <style>
+    :root {
+      --ink: #23211d;
+      --muted: #746b5f;
+      --paper: #fffaf0;
+      --paper-2: #f7efd9;
+      --line: #d8c9ad;
+      --sea: #0f766e;
+      --sea-2: #164e63;
+      --coral: #d95f43;
+      --lemon: #f0c14b;
+      --leaf: #6b8f47;
+      --blue: #3c6e8f;
+      --shadow: 0 18px 40px rgba(49, 38, 22, .14);
+      --radius: 8px;
+      --mono: "Courier New", ui-monospace, monospace;
+      --serif: Georgia, "Times New Roman", "Noto Serif TC", serif;
+      --sans: "Trebuchet MS", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background:
+        radial-gradient(circle at top left, rgba(15,118,110,.18), transparent 26rem),
+        linear-gradient(135deg, rgba(240,193,75,.16), transparent 30rem),
+        var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255,250,240,.88);
+      border-bottom: 1px solid rgba(216,201,173,.9);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border: 2px solid var(--ink);
+      display: grid;
+      place-items: center;
+      background: var(--lemon);
+      box-shadow: 4px 4px 0 var(--ink);
+      flex: 0 0 auto;
+    }
+
+    .mark svg { width: 28px; height: 28px; }
+
+    .brand h1 {
+      font-family: var(--serif);
+      font-size: clamp(20px, 3vw, 34px);
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-btn, .chip, .tab, .toggle {
+      border: 1px solid var(--ink);
+      background: #fffdf6;
+      color: var(--ink);
+      min-height: 38px;
+      padding: 8px 11px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 rgba(35,33,29,.95);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .icon-btn:hover, .chip:hover, .tab:hover, .toggle:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 rgba(35,33,29,.95);
+    }
+
+    .icon-btn.active, .chip.active, .tab.active, .toggle.active {
+      background: var(--sea);
+      color: #fff;
+    }
+
+    .hero {
+      padding: 30px 0 20px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .intro {
+      border: 2px solid var(--ink);
+      background:
+        linear-gradient(90deg, rgba(15,118,110,.1), transparent),
+        var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 30px);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro:after {
+      content: "";
+      position: absolute;
+      inset: auto -30px -70px auto;
+      width: 260px;
+      height: 180px;
+      background: repeating-linear-gradient(135deg, rgba(35,33,29,.08) 0 6px, transparent 6px 14px);
+      transform: rotate(-7deg);
+    }
+
+    .kicker {
+      font-family: var(--mono);
+      color: var(--coral);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .intro h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 7vw, 72px);
+      line-height: .96;
+      margin: 10px 0 16px;
+      max-width: 760px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 680px;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      padding: 12px;
+      border-radius: var(--radius);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 22px;
+      font-family: var(--serif);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .map-card {
+      border: 2px solid var(--ink);
+      background: #fdf6e4;
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 330px;
+    }
+
+    .map-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .map-title h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 24px;
+    }
+
+    .route-map {
+      width: 100%;
+      min-height: 220px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, transparent 24px, rgba(35,33,29,.06) 25px),
+        linear-gradient(transparent 24px, rgba(35,33,29,.06) 25px),
+        #fffdf7;
+      background-size: 25px 25px;
+      overflow: hidden;
+    }
+
+    .route-map text {
+      font-family: var(--sans);
+      font-size: 12px;
+      fill: var(--ink);
+      font-weight: 700;
+    }
+
+    .map-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+      margin: 18px 0;
+      align-items: center;
+    }
+
+    .search {
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      min-height: 46px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 0 14px 0 42px;
+      background: #fffdf7;
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .search svg {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .day-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0 14px;
+      scrollbar-width: thin;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      min-width: 104px;
+      text-align: left;
+    }
+
+    .tab small {
+      display: block;
+      opacity: .72;
+      font-family: var(--mono);
+      margin-bottom: 4px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      align-items: start;
+      padding-bottom: 48px;
+    }
+
+    .panel, .side-card {
+      border: 2px solid var(--ink);
+      background: rgba(255,253,247,.92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .day-panel {
+      overflow: hidden;
+    }
+
+    .day-head {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      background:
+        linear-gradient(100deg, rgba(15,118,110,.16), transparent 70%),
+        #fffdf7;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .day-head h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(26px, 4vw, 44px);
+    }
+
+    .day-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .sleep-badge {
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      background: var(--lemon);
+      box-shadow: 2px 2px 0 var(--ink);
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .timeline {
+      padding: 18px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px dashed var(--line);
+      animation: rise .34s ease both;
+    }
+
+    .event:last-child { border-bottom: 0; }
+
+    .time {
+      font-family: var(--mono);
+      color: var(--sea-2);
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .event-title {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .event h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .duration {
+      font-family: var(--mono);
+      font-size: 12px;
+      border: 1px solid var(--line);
+      background: var(--paper-2);
+      border-radius: 999px;
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    .note {
+      color: var(--muted);
+      margin: 7px 0 0;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      color: #fff;
+      background: var(--blue);
+      padding: 4px 7px;
+      border-radius: 999px;
+    }
+
+    .tag.rest { background: var(--leaf); }
+    .tag.food { background: var(--coral); }
+    .tag.transport { background: var(--sea-2); }
+    .tag.luggage { background: #7c4a2d; }
+    .tag.ticket { background: #875a9f; }
+
+    aside {
+      position: sticky;
+      top: 82px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-card {
+      padding: 16px;
+    }
+
+    .side-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      font-size: 23px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      border: 1px solid var(--line);
+      background: #fffdf7;
+      border-radius: var(--radius);
+      padding: 9px 10px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .phrase-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .phrase {
+      display: grid;
+      grid-template-columns: 1fr 38px;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #fffdf7;
+      border-radius: var(--radius);
+      padding: 9px;
+    }
+
+    .phrase strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .phrase span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    .speak {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--lemon);
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .speak:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .speak svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 8px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: start;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: #fffdf7;
+      padding: 9px;
+      border-radius: var(--radius);
+      line-height: 1.35;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--sea);
+      margin-top: 1px;
+    }
+
+    .progress-wrap {
+      border: 1px solid var(--ink);
+      height: 12px;
+      background: #fffdf7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 4px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--sea), var(--lemon));
+      transition: width .25s ease;
+    }
+
+    .quick-notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .quick {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      padding: 15px;
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .quick h3 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 22px;
+    }
+
+    .quick p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .stay-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0 0 24px;
+    }
+
+    .stay-card {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 14px;
+    }
+
+    .stay-card small {
+      display: block;
+      font-family: var(--mono);
+      color: var(--coral);
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .stay-card h3 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.12;
+    }
+
+    .stay-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .empty {
+      padding: 30px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chips {
+        justify-content: flex-start;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 18px, 1180px);
+      }
+
+      .brand h1 {
+        white-space: normal;
+      }
+
+      .event {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .time {
+        font-size: 13px;
+      }
+
+      .day-head {
+        grid-template-columns: 1fr;
+      }
+
+      .sleep-badge {
+        white-space: normal;
+      }
+
+      .intro, .map-card, .panel, .side-card, .quick {
+        box-shadow: 4px 4px 0 rgba(35,33,29,.95);
+      }
+    }
+
+    @media print {
+      html, body { background: #fff; }
+      .topbar, .controls, .day-tabs, aside, .quick-notes, .map-card { display: none !important; }
+      .shell { width: 100%; }
+      .hero { padding: 0; }
+      .intro, .panel {
+        border: 0;
+        box-shadow: none;
+      }
+      .intro:after { display: none; }
+      .main-grid { display: block; }
+      .event { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <path d="M8 43c9-2 13-12 23-10 8 1 11 9 25 6" stroke="#23211d" stroke-width="5" stroke-linecap="round"/>
+            <path d="M16 45h33l-5 9H21l-5-9Z" fill="#0f766e" stroke="#23211d" stroke-width="4"/>
+            <path d="M30 12v21" stroke="#23211d" stroke-width="5" stroke-linecap="round"/>
+            <path d="M30 15c10 2 15 7 18 15H30V15Z" fill="#d95f43" stroke="#23211d" stroke-width="4"/>
+          </svg>
+        </div>
+        <div>
+          <h1>2026 釜山親子旅行手冊</h1>
+          <p>9/13 - 9/20｜2 大 + 2 歲幼童｜少拖行李版</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="icon-btn" id="expandAll" type="button">展開全部</button>
+        <button class="icon-btn" id="todayBtn" type="button">回到 Day 1</button>
+        <button class="icon-btn" type="button" onclick="window.print()">列印</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="intro">
+          <span class="kicker">Busan family field guide</span>
+          <h2>把釜山排成好走、好睡、好吃的一週。</h2>
+          <p>這份互動手冊把每日行程、行李寄放、交通選擇與幼童緩衝整合在同一頁。用上方日期切換，或直接搜尋景點、飯店、餐廳。</p>
+          <div class="stats">
+            <div class="stat"><b>8</b><span>天行程</span></div>
+            <div class="stat"><b>4</b><span>住宿地點含地址</span></div>
+            <div class="stat"><b>3</b><span>重點換宿日</span></div>
+            <div class="stat"><b>21:00</b><span>多數日回飯店</span></div>
+          </div>
+        </div>
+
+        <div class="map-card">
+          <div class="map-title">
+            <h3>移動路線</h3>
+            <span class="duration">西面 → 海雲台 → 松島 → 沙上</span>
+          </div>
+          <svg class="route-map" viewBox="0 0 520 280" role="img" aria-label="釜山住宿移動路線示意圖">
+            <path d="M65 198 C125 112, 190 93, 254 128 S366 207, 452 79" fill="none" stroke="#23211d" stroke-width="9" stroke-linecap="round"/>
+            <path d="M65 198 C125 112, 190 93, 254 128 S366 207, 452 79" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 12"/>
+            <circle cx="65" cy="198" r="18" fill="#f0c14b" stroke="#23211d" stroke-width="5"/>
+            <circle cx="196" cy="103" r="18" fill="#d95f43" stroke="#23211d" stroke-width="5"/>
+            <circle cx="330" cy="199" r="18" fill="#3c6e8f" stroke="#23211d" stroke-width="5"/>
+            <circle cx="452" cy="79" r="18" fill="#6b8f47" stroke="#23211d" stroke-width="5"/>
+            <text x="35" y="238">西面</text>
+            <text x="160" y="74">海雲台</text>
+            <text x="302" y="238">松島</text>
+            <text x="424" y="48">沙上</text>
+            <path d="M31 52h92v33H31z" fill="#fffaf0" stroke="#23211d" stroke-width="3"/>
+            <text x="43" y="73">親子慢速模式</text>
+          </svg>
+          <p class="map-note">換飯店日先處理行李；松島到 Hotel Andrest 建議計程車；沙上到金海機場搭輕軌。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-notes" aria-label="旅行重點">
+      <div class="quick">
+        <h3>行李策略</h3>
+        <p>9/15 先寄 UH Continental；9/17 札嘎其站置物櫃；9/19 抵達 Hotel Andrest 先寄放或入住。</p>
+      </div>
+      <div class="quick">
+        <h3>親子節奏</h3>
+        <p>上午戶外，下午保留室內或午睡。甘川洞與龍宮寺階梯多，必要時改背巾。</p>
+      </div>
+      <div class="quick">
+        <h3>必確認</h3>
+        <p>藍線膠囊列車時段、Luge 幼童規定、飯店寄放行李、航班與推車托運。</p>
+      </div>
+    </section>
+
+    <section class="stay-grid" aria-label="住宿與地址">
+      <div class="stay-card">
+        <small>9/13 - 9/14</small>
+        <h3>Hotel Kyungsung</h3>
+        <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
+      </div>
+      <div class="stay-card">
+        <small>9/15 - 9/16</small>
+        <h3>UH Continental CenterPoint</h3>
+        <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
+      </div>
+      <div class="stay-card">
+        <small>9/17 - 9/18</small>
+        <h3>Elmomento Songdo</h3>
+        <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
+      </div>
+      <div class="stay-card">
+        <small>9/19</small>
+        <h3>Hotel Andrest</h3>
+        <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="搜尋與篩選">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 5.96-2.94l4.24 4.24-1.4 1.4-4.24-4.24A7.47 7.47 0 0 1 10.5 18Z" fill="currentColor"/></svg>
+        <input id="searchInput" type="search" placeholder="搜尋：水族館、行李、午休、釜山塔...">
+      </label>
+      <div class="chips">
+        <button class="chip active" data-filter="all" type="button">全部</button>
+        <button class="chip" data-filter="transport" type="button">交通</button>
+        <button class="chip" data-filter="food" type="button">餐食</button>
+        <button class="chip" data-filter="rest" type="button">休息</button>
+        <button class="chip" data-filter="luggage" type="button">行李</button>
+        <button class="chip" data-filter="ticket" type="button">訂票</button>
+      </div>
+    </section>
+
+    <nav class="day-tabs" id="dayTabs" aria-label="日期切換"></nav>
+
+    <section class="main-grid">
+      <article class="panel day-panel" id="dayPanel"></article>
+
+      <aside>
+        <div class="side-card">
+          <h3>每日檢查</h3>
+          <div class="progress-wrap" aria-hidden="true"><div class="progress" id="progress"></div></div>
+          <p class="map-note" id="progressText">0 / 8 完成</p>
+          <div class="checklist" id="checklist"></div>
+        </div>
+
+        <div class="side-card">
+          <h3>常用韓文</h3>
+          <div class="phrase-list" id="phraseList"></div>
+          <p class="map-note" id="speechNote">點播放可用瀏覽器朗讀韓文；若手機瀏覽器不支援，請看羅馬拼音。</p>
+        </div>
+
+        <div class="side-card">
+          <h3>備案提醒</h3>
+          <ul class="mini-list" id="backupList"></ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const days = [
+      {
+        id: "d1",
+        label: "Day 1",
+        date: "9/13（日）",
+        title: "出發與抵達釜山",
+        stay: "Hotel Kyungsung",
+        focus: "穩穩抵達、入住、吃晚餐，不排景點。",
+        backup: ["若小孩太累，橋村炸雞直接外帶回飯店。", "機場到西面行李多可改計程車。"],
+        events: [
+          ["10:00", "家裡出發搭車", "60 分", "2 大 + 2 歲幼童，提早一點", ["transport"]],
+          ["11:00", "抵達機場 / Check in", "90 分", "托運行李、劃位、整理推車", ["luggage"]],
+          ["12:30", "機場午餐 / 換尿布 / 登機準備", "60 分", "不要排太緊", ["food"]],
+          ["13:30", "搭乘飛機 / 登機", "215 分", "飛機時間固定", ["transport", "ticket"]],
+          ["17:05", "落地 / 領行李", "70 分", "飛機時間固定", ["luggage"]],
+          ["18:15", "出關 / 簡單補給", "30 分", "買水、交通卡、整理行李", ["luggage"]],
+          ["18:45", "搭車到 Hotel Kyungsung", "60 分", "輕軌+地鐵或行李多搭計程車", ["transport"]],
+          ["19:45", "Hotel Kyungsung Check in", "30 分", "放行李、休息一下", ["rest", "luggage"]],
+          ["20:15", "橋村炸雞西面店 / 晚餐宵夜", "75 分", "可外帶回飯店", ["food"]],
+          ["21:30", "回飯店整理 / 洗澡", "30 分", "", ["rest"]],
+          ["22:00", "睡覺", "", "", ["rest"]]
+        ]
+      },
+      {
+        id: "d2",
+        label: "Day 2",
+        date: "9/14（一）",
+        title: "西面與田浦輕鬆日",
+        stay: "Hotel Kyungsung",
+        focus: "市民公園放電、田浦吃喝、西面室內逛街。",
+        backup: ["下雨時縮短市民公園，改樂天百貨與西面地下街。", "下午務必保留午睡，不然晚餐容易崩。"],
+        events: [
+          ["09:00", "晨喚 / 早餐", "60 分", "飯店附近簡單吃", ["food"]],
+          ["10:00", "釜山市民公園", "120 分", "適合幼童放電、散步", []],
+          ["12:00", "搭車到田浦咖啡街", "30 分", "從公園往田浦移動", ["transport"]],
+          ["12:30", "田浦咖啡街 / 午餐 / 下午茶", "120 分", "找親子友善咖啡廳或簡餐", ["food"]],
+          ["14:30", "回飯店午休", "90 分", "小孩午睡，爸媽也回血", ["rest"]],
+          ["16:00", "樂天百貨 / 西面地下街", "90 分", "室內逛街，雨天也 OK", []],
+          ["17:30", "ARTBOX / BUTTER", "60 分", "買小物、文具、玩具", []],
+          ["18:30", "松亭3代豬肉湯飯", "90 分", "晚餐", ["food"]],
+          ["20:00", "回飯店 Hotel Kyungsung", "", "早點休息", ["rest"]]
+        ]
+      },
+      {
+        id: "d3",
+        label: "Day 3",
+        date: "9/15（二）",
+        title: "換飯店、龍宮寺、Luge、Museum 1",
+        stay: "UH Continental 中心點酒店",
+        focus: "先寄行李，再往機張/海雲台方向玩。",
+        backup: ["Luge 若 2 歲幼童不適合搭，改樂天 Outlet 或飯店休息。", "龍宮寺階梯多，推車不一定好走。"],
+        events: [
+          ["08:30", "晨喚 / 整理行李", "60 分", "Hotel Kyungsung 退房準備", ["luggage"]],
+          ["09:30", "搭車到 UH Continental", "40 分", "先去海雲台寄放行李", ["transport", "luggage"]],
+          ["10:10", "UH Continental 寄放行李", "20 分", "若不能 check-in，先寄放", ["luggage"]],
+          ["10:30", "搭車到海東龍宮寺", "45 分", "建議計程車", ["transport"]],
+          ["11:15", "海東龍宮寺", "90 分", "樓梯多，慢慢走", []],
+          ["12:45", "午餐 / 前往 Osiria 周邊", "75 分", "可在龍宮寺或樂天 Outlet 周邊吃", ["food"]],
+          ["14:00", "Skyline Luge 斜坡滑車", "120 分", "確認 2 歲幼童搭乘規定", ["ticket"]],
+          ["16:00", "搭車到 Museum 1", "40 分", "往 Centum City 方向", ["transport"]],
+          ["16:40", "Museum 1 現代美術館", "90 分", "最後入場為關門前 1 小時", ["ticket"]],
+          ["18:10", "搭車回 UH Continental", "30 分", "", ["transport"]],
+          ["18:40", "UH Continental Check in / 休息", "60 分", "先讓小孩休息", ["rest", "luggage"]],
+          ["19:40", "海雲台附近晚餐", "80 分", "不建議再拉遠", ["food"]],
+          ["21:00", "回飯店休息", "", "UH Continental", ["rest"]]
+        ]
+      },
+      {
+        id: "d4",
+        label: "Day 4",
+        date: "9/16（三）",
+        title: "海雲台慢玩、膠囊列車、夜景",
+        stay: "UH Continental 中心點酒店",
+        focus: "上午水族館，下午午睡，傍晚藍線與夜景。",
+        backup: ["膠囊列車建議預約 15:00-16:00。", "小孩午睡太久就刪 THE BAY 101，保留 X the SKY。"],
+        events: [
+          ["09:00", "晨喚 / 早餐", "60 分", "UH Continental 附近簡單吃", ["food"]],
+          ["10:00", "海雲台沙灘", "60 分", "散步、玩沙，不要曬太久", []],
+          ["11:00", "釜山自然島鹽麵包", "30 分", "順路買麵包 / 小點", ["food"]],
+          ["11:30", "Sea Life 釜山水族館", "120 分", "適合幼童，室內可休息", ["ticket"]],
+          ["13:30", "午餐 / 回飯店休息", "120 分", "保留午睡或放空時間", ["food", "rest"]],
+          ["15:30", "海雲台膠囊列車", "90 分", "建議預約 15:30 左右", ["ticket", "transport"]],
+          ["17:00", "BUSAN X the SKY", "90 分", "看夕陽接夜景", ["ticket"]],
+          ["18:30", "THE BAY 101", "60 分", "夜景散步、拍照", []],
+          ["19:30", "Outdark Chicken House 炸雞", "90 分", "晚餐 / 宵夜", ["food"]],
+          ["21:00", "回飯店 UH Continental", "", "休息", ["rest"]]
+        ]
+      },
+      {
+        id: "d5",
+        label: "Day 5",
+        date: "9/17（四）",
+        title: "甘川洞與松島入住",
+        stay: "El Momento Songdo",
+        focus: "札嘎其站置物櫃寄行李，輕裝去甘川洞。",
+        backup: ["若札嘎其站大型櫃滿了，先到 El Momento Songdo 寄放行李。", "甘川洞坡多，推車可視狀況少推一段。"],
+        events: [
+          ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
+          ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
+          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "找大型置物櫃", ["luggage"]],
+          ["11:20", "搭車到甘川洞文化村", "30 分", "輕裝上山", ["transport"]],
+          ["11:50", "甘川洞文化村", "150 分", "拍照、逛小店、可順便吃小點", []],
+          ["14:20", "搭車回札嘎其 / BIFF 廣場", "30 分", "", ["transport"]],
+          ["14:50", "札嘎其市場 / BIFF 廣場午餐", "90 分", "午餐偏晚，甘川洞可先墊胃", ["food"]],
+          ["16:20", "取行李", "20 分", "回札嘎其站", ["luggage"]],
+          ["16:40", "搭車到 El Momento Songdo", "25 分", "建議計程車", ["transport", "luggage"]],
+          ["17:10", "Check in / 休息", "80 分", "放空、整理行李", ["rest", "luggage"]],
+          ["18:30", "松島附近晚餐 / 海邊散步", "90 分", "不再拉回南浦", ["food"]],
+          ["21:00", "回飯店休息", "", "El Momento Songdo", ["rest"]]
+        ]
+      },
+      {
+        id: "d6",
+        label: "Day 6",
+        date: "9/18（五）",
+        title: "松島與南浦洞",
+        stay: "El Momento Songdo",
+        focus: "上午松島海邊，下午南浦洞逛買，晚上釜山塔。",
+        backup: ["若纜車排隊太久，縮短南浦逛街或改搭單程。", "下午逛街多，安排咖啡廳休息。"],
+        events: [
+          ["09:00", "晨喚", "60 分", "", ["rest"]],
+          ["10:00", "松島沙灘 / 挖沙 / 海邊散步", "90 分", "早上比較不熱", []],
+          ["11:30", "松島纜車", "90 分", "可接松島龍宮天空步道", ["ticket"]],
+          ["13:00", "松島龍宮天空步道", "60 分", "", []],
+          ["14:00", "豚笑南浦店", "90 分", "從松島移動到南浦吃午餐", ["food", "transport"]],
+          ["15:30", "國際市場 - 재미완구 玩具店", "90 分", "玩具、雜貨", []],
+          ["17:00", "南浦洞商圈 / 光復路", "90 分", "藥妝、伴手禮、零食", []],
+          ["18:30", "海豚豆腐鍋", "60 分", "晚餐", ["food"]],
+          ["19:30", "龍頭山公園 & 釜山塔", "90 分", "看夜景", ["ticket"]],
+          ["21:00", "回 El Momento Songdo", "", "", ["transport", "rest"]]
+        ]
+      },
+      {
+        id: "d7",
+        label: "Day 7",
+        date: "9/19（六）",
+        title: "沙上休息與採買日",
+        stay: "Hotel Andrest",
+        focus: "移動到沙上、午睡、採買、早點休息。",
+        backup: ["松島到 Hotel Andrest 建議計程車，少拖行李。", "如果小孩累，下午採買縮短，早點回飯店。"],
+        events: [
+          ["09:00", "晨喚 / 慢慢整理行李", "75 分", "小孩出門前多留緩衝", ["luggage"]],
+          ["10:15", "計程車前往 Hotel Andrest", "45 分", "地址：2, Gwangjang-ro 86beon-gil, Sasang-gu", ["transport", "luggage"]],
+          ["11:00", "飯店寄放行李 / Check in", "30 分", "不能入住就先寄放", ["luggage"]],
+          ["11:30", "陝川一流豬肉湯飯", "70 分", "午餐", ["food"]],
+          ["12:40", "回飯店 / 午休", "120 分", "讓小孩睡一下", ["rest"]],
+          ["14:40", "沙上附近超市 / 商圈採買", "90 分", "買隔天早餐、零食、伴手禮", []],
+          ["16:10", "咖啡廳或回飯店休息", "80 分", "看小孩狀態彈性", ["rest", "food"]],
+          ["17:30", "崔脊骨醒酒湯", "70 分", "晚餐早點吃", ["food"]],
+          ["19:00", "回飯店整理行李", "60 分", "隔天機場用品先準備", ["luggage", "rest"]],
+          ["20:30", "休息 / 睡覺", "", "隔天早起", ["rest"]]
+        ]
+      },
+      {
+        id: "d8",
+        label: "Day 8",
+        date: "9/20（日）",
+        title: "回程日",
+        stay: "回家",
+        focus: "沙上搭釜山-金海輕軌到機場，保留幼童緩衝。",
+        backup: ["若想更安心，整體往前 15 分鐘出門。", "若下雨或行李太多，沙上到機場可改短程計程車。"],
+        events: [
+          ["06:30", "晨喚", "45 分", "大人先整理，小孩慢慢醒", ["rest"]],
+          ["07:15", "簡單早餐 / 便利商店補給", "35 分", "水、麵包、小孩點心", ["food"]],
+          ["07:50", "退房 / 整理行李", "20 分", "護照、登機資料、推車", ["luggage"]],
+          ["08:10", "步行到沙上站", "15 分", "看飯店位置調整", ["transport"]],
+          ["08:25", "搭釜山-金海輕軌到機場站", "15 分", "沙上到機場很近", ["transport"]],
+          ["08:40", "抵達金海機場 / Check in", "85 分", "國際線 + 幼童，時間夠", ["luggage"]],
+          ["10:05", "安檢 / 出境 / 登機口", "30 分", "換尿布、上廁所", ["ticket"]],
+          ["10:35", "登機準備", "15 分", "", ["ticket"]],
+          ["10:50", "搭乘飛機", "105 分", "飛機時間固定", ["transport", "ticket"]],
+          ["12:35", "落地 / 領行李", "60-90 分", "飛機時間固定", ["luggage"]]
+        ]
+      }
+    ];
+
+    const checks = [
+      "手機與行動電源",
+      "交通卡 / 現金 / 信用卡",
+      "護照或護照影本",
+      "小孩水與點心",
+      "尿布與濕紙巾",
+      "當日票券截圖",
+      "雨具或防曬",
+      "推車或背巾"
+    ];
+
+    const tagNames = {
+      transport: "交通",
+      food: "餐食",
+      rest: "休息",
+      luggage: "行李",
+      ticket: "訂票"
+    };
+
+    const phrases = [
+      { zh: "置物櫃", ko: "물품보관함", rom: "mul-pum-bo-gwan-ham" },
+      { zh: "廁所", ko: "화장실", rom: "hwa-jang-shil" },
+      { zh: "計程車", ko: "택시", rom: "taek-si" },
+      { zh: "機場", ko: "공항", rom: "gong-hang" },
+      { zh: "小孩", ko: "아이", rom: "a-i" },
+      { zh: "水", ko: "물", rom: "mul" },
+      { zh: "請不要辣", ko: "안 맵게 해주세요", rom: "an maep-ge hae-ju-se-yo" },
+      { zh: "請幫忙", ko: "도와주세요", rom: "do-wa-ju-se-yo" }
+    ];
+
+    let activeDay = 0;
+    let activeFilter = "all";
+    let query = "";
+    let allExpanded = false;
+
+    const tabs = document.getElementById("dayTabs");
+    const panel = document.getElementById("dayPanel");
+    const searchInput = document.getElementById("searchInput");
+    const backupList = document.getElementById("backupList");
+
+    function renderTabs() {
+      tabs.innerHTML = days.map((day, index) => `
+        <button class="tab ${index === activeDay ? "active" : ""}" type="button" data-index="${index}">
+          <small>${day.date}</small>${day.label}
+        </button>
+      `).join("");
+    }
+
+    function eventMatches(event) {
+      const haystack = event.join(" ").toLowerCase();
+      const filterOk = activeFilter === "all" || event[4].includes(activeFilter);
+      const queryOk = !query || haystack.includes(query.toLowerCase());
+      return filterOk && queryOk;
+    }
+
+    function renderDay() {
+      const day = days[activeDay];
+      const events = day.events.filter(eventMatches);
+      panel.innerHTML = `
+        <div class="day-head">
+          <div>
+            <span class="kicker">${day.label} · ${day.date}</span>
+            <h2>${day.title}</h2>
+            <p>${day.focus}</p>
+          </div>
+          <div class="sleep-badge">住宿：${day.stay}</div>
+        </div>
+        <div class="timeline">
+          ${events.length ? events.map((event, i) => renderEvent(event, i)).join("") : `<div class="empty">沒有符合搜尋或篩選的行程。</div>`}
+        </div>
+      `;
+      backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
+      renderTabs();
+    }
+
+    function renderEvent(event, index) {
+      const [time, title, duration, note, tags] = event;
+      const tagHtml = tags.map(tag => `<span class="tag ${tag}">${tagNames[tag]}</span>`).join("");
+      return `
+        <section class="event" style="animation-delay:${Math.min(index * 28, 280)}ms">
+          <div class="time">${time}</div>
+          <div>
+            <div class="event-title">
+              <h3>${title}</h3>
+              ${duration ? `<span class="duration">${duration}</span>` : ""}
+            </div>
+            ${note ? `<p class="note">${note}</p>` : ""}
+            ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderChecklist() {
+      const box = document.getElementById("checklist");
+      box.innerHTML = checks.map((item, index) => {
+        const id = `busan-check-${index}`;
+        const checked = localStorage.getItem(id) === "1" ? "checked" : "";
+        return `<label class="check"><input type="checkbox" data-check="${id}" ${checked}><span>${item}</span></label>`;
+      }).join("");
+      updateProgress();
+    }
+
+    function renderPhrases() {
+      const box = document.getElementById("phraseList");
+      box.innerHTML = phrases.map((phrase, index) => `
+        <div class="phrase">
+          <div>
+            <strong>${phrase.ko}</strong>
+            <span>${phrase.zh} · ${phrase.rom}</span>
+          </div>
+          <button class="speak" type="button" data-phrase="${index}" aria-label="播放 ${phrase.zh} 的韓文發音">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+              <path d="M16 8.5a4.5 4.5 0 0 1 0 7M18.5 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function speakKorean(text) {
+      if (!("speechSynthesis" in window)) {
+        document.getElementById("speechNote").textContent = "這個瀏覽器不支援語音朗讀，請看羅馬拼音。";
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "ko-KR";
+      utterance.rate = 0.78;
+      utterance.pitch = 1;
+      const voices = window.speechSynthesis.getVoices();
+      const koreanVoice = voices.find(voice => voice.lang && voice.lang.toLowerCase().startsWith("ko"));
+      if (koreanVoice) utterance.voice = koreanVoice;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function updateProgress() {
+      const inputs = [...document.querySelectorAll("[data-check]")];
+      const done = inputs.filter(input => input.checked).length;
+      const pct = inputs.length ? Math.round(done / inputs.length * 100) : 0;
+      document.getElementById("progress").style.width = `${pct}%`;
+      document.getElementById("progressText").textContent = `${done} / ${inputs.length} 完成`;
+    }
+
+    tabs.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-index]");
+      if (!button) return;
+      activeDay = Number(button.dataset.index);
+      renderDay();
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.querySelector(".chips").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-filter]");
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.toggle("active", btn === button));
+      renderDay();
+    });
+
+    searchInput.addEventListener("input", () => {
+      query = searchInput.value.trim();
+      renderDay();
+    });
+
+    document.getElementById("checklist").addEventListener("change", (event) => {
+      const input = event.target.closest("[data-check]");
+      if (!input) return;
+      localStorage.setItem(input.dataset.check, input.checked ? "1" : "0");
+      updateProgress();
+    });
+
+    document.getElementById("phraseList").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-phrase]");
+      if (!button) return;
+      speakKorean(phrases[Number(button.dataset.phrase)].ko);
+    });
+
+    document.getElementById("todayBtn").addEventListener("click", () => {
+      activeDay = 0;
+      renderDay();
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("expandAll").addEventListener("click", (event) => {
+      allExpanded = !allExpanded;
+      if (allExpanded) {
+        activeFilter = "all";
+        query = "";
+        searchInput.value = "";
+        document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.toggle("active", btn.dataset.filter === "all"));
+        panel.innerHTML = days.map((_, index) => {
+          activeDay = index;
+          const day = days[index];
+          return `
+            <div class="day-head">
+              <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
+              <div class="sleep-badge">住宿：${day.stay}</div>
+            </div>
+            <div class="timeline">${day.events.map(renderEvent).join("")}</div>
+          `;
+        }).join("");
+        activeDay = 0;
+        event.currentTarget.textContent = "只看單日";
+      } else {
+        event.currentTarget.textContent = "展開全部";
+        renderDay();
+      }
+    });
+
+    renderTabs();
+    renderDay();
+    renderChecklist();
+    renderPhrases();
+  </script>
+</body>
+</html>
