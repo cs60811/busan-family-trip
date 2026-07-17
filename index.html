@@ -624,11 +624,66 @@
       font-size: 14px;
     }
 
+    .stay-details {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: rgba(255,253,247,.92);
+      box-shadow: var(--shadow);
+      margin: 0 0 24px;
+      overflow: hidden;
+    }
+
+    .stay-details summary {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      font-family: var(--serif);
+      font-size: 20px;
+      list-style: none;
+    }
+
+    .stay-details summary::-webkit-details-marker { display: none; }
+
+    .stay-details summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 20px;
+      line-height: 1;
+      color: #fff;
+      background: var(--sea);
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .stay-details[open] summary {
+      border-bottom: 2px solid var(--ink);
+      background: linear-gradient(90deg, rgba(15,118,110,.14), transparent 74%), #fffdf7;
+    }
+
+    .stay-details[open] summary::after { content: "-"; }
+
+    .stay-details summary small {
+      margin-left: auto;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
     .stay-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
-      margin: 0 0 24px;
+      margin: 14px;
     }
 
     .stay-card {
@@ -888,28 +943,31 @@
       </div>
     </section>
 
-    <section class="stay-grid" aria-label="住宿與地址">
-      <div class="stay-card">
-        <small>9/13 - 9/14</small>
-        <h3>Hotel Kyungsung</h3>
-        <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
-      </div>
-      <div class="stay-card">
-        <small>9/15 - 9/16</small>
-        <h3>UH Continental CenterPoint</h3>
-        <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
-      </div>
-      <div class="stay-card">
-        <small>9/17 - 9/18</small>
-        <h3>Elmomento Songdo</h3>
-        <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
-      </div>
-      <div class="stay-card">
-        <small>9/19</small>
-        <h3>Hotel Andrest</h3>
-        <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
-      </div>
-    </section>
+    <details class="stay-details">
+      <summary><span>住宿與叫車地址</span><small>4 間飯店</small></summary>
+      <section class="stay-grid" aria-label="住宿與地址">
+        <div class="stay-card">
+          <small>9/13 - 9/14</small>
+          <h3>Hotel Kyungsung</h3>
+          <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
+        </div>
+        <div class="stay-card">
+          <small>9/15 - 9/16</small>
+          <h3>UH Continental CenterPoint</h3>
+          <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
+        </div>
+        <div class="stay-card">
+          <small>9/17 - 9/18</small>
+          <h3>Elmomento Songdo</h3>
+          <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
+        </div>
+        <div class="stay-card">
+          <small>9/19</small>
+          <h3>Hotel Andrest</h3>
+          <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
+        </div>
+      </section>
+    </details>
 
     <section class="controls" aria-label="搜尋與篩選">
       <label class="search">
