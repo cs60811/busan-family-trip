@@ -22,6 +22,7 @@
       --mono: "Courier New", ui-monospace, monospace;
       --serif: Georgia, "Times New Roman", "Noto Serif TC", serif;
       --sans: "Trebuchet MS", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      --sticky-offset: 92px;
     }
 
     * { box-sizing: border-box; }
@@ -313,6 +314,11 @@
       overflow-x: auto;
       padding: 4px 0 14px;
       scrollbar-width: thin;
+      position: sticky;
+      top: var(--topbar-height, 64px);
+      z-index: 15;
+      background: var(--paper);
+      scroll-padding-inline: 9px;
     }
 
     .tab {
@@ -345,6 +351,7 @@
 
     .day-panel {
       overflow: hidden;
+      scroll-margin-top: var(--sticky-offset);
     }
 
     .day-head {
@@ -701,16 +708,33 @@
 
       .brand h1 {
         white-space: normal;
+        font-size: 21px;
       }
 
       .event {
-        grid-template-columns: 1fr;
-        gap: 5px;
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 10px;
+        padding: 15px 0;
       }
 
+      .event > div:last-child { min-width: 0; }
+
       .time {
-        font-size: 13px;
+        font-size: 12px;
+        line-height: 1.2;
+        text-align: center;
+        padding: 7px 4px;
+        color: #fff;
+        background: var(--sea-2);
+        border-radius: 4px;
+        height: fit-content;
       }
+
+      .event h3 { font-size: 16px; }
+
+      .event-title { gap: 6px; }
+
+      .duration { padding: 3px 6px; }
 
       .day-head {
         grid-template-columns: 1fr;
@@ -723,6 +747,51 @@
       .intro, .map-card, .panel, .side-card, .quick {
         box-shadow: 4px 4px 0 rgba(35,33,29,.95);
       }
+
+      .topbar-inner {
+        gap: 8px;
+        padding: 8px 0;
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        box-shadow: 3px 3px 0 var(--ink);
+      }
+
+      .mark svg { width: 22px; height: 22px; }
+
+      .brand p { display: none; }
+
+      .actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+
+      .actions .icon-btn {
+        min-height: 34px;
+        padding: 6px 8px;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .day-tabs {
+        margin-inline: -9px;
+        padding: 8px 9px 12px;
+      }
+
+      .tab {
+        min-width: 82px;
+        min-height: 54px;
+        padding: 7px 8px;
+        font-size: 13px;
+      }
+
+      .tab small { font-size: 11px; }
+
+      .timeline { padding: 12px; }
     }
 
     @media print {
@@ -1101,6 +1170,22 @@
     const searchInput = document.getElementById("searchInput");
     const backupList = document.getElementById("backupList");
 
+    function updateStickyOffsets() {
+      const topbarHeight = document.querySelector(".topbar").getBoundingClientRect().height;
+      const tabsHeight = tabs.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--topbar-height", `${Math.ceil(topbarHeight)}px`);
+      document.documentElement.style.setProperty("--sticky-offset", `${Math.ceil(topbarHeight + tabsHeight + 12)}px`);
+    }
+
+    function scrollToDayPanel() {
+      updateStickyOffsets();
+      window.requestAnimationFrame(() => {
+        const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset")) || 92;
+        const destination = panel.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(0, destination), behavior: "smooth" });
+      });
+    }
+
     function renderTabs() {
       tabs.innerHTML = days.map((day, index) => `
         <button class="tab ${index === activeDay ? "active" : ""}" type="button" data-index="${index}">
@@ -1134,6 +1219,7 @@
       `;
       backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
       renderTabs();
+      updateStickyOffsets();
     }
 
     function renderEvent(event, index) {
@@ -1211,7 +1297,7 @@
       if (!button) return;
       activeDay = Number(button.dataset.index);
       renderDay();
-      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToDayPanel();
     });
 
     document.querySelector(".chips").addEventListener("click", (event) => {
@@ -1243,7 +1329,7 @@
     document.getElementById("todayBtn").addEventListener("click", () => {
       activeDay = 0;
       renderDay();
-      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToDayPanel();
     });
 
     document.getElementById("expandAll").addEventListener("click", (event) => {
@@ -1276,6 +1362,7 @@
     renderDay();
     renderChecklist();
     renderPhrases();
+    window.addEventListener("resize", updateStickyOffsets);
   </script>
 </body>
 </html>
