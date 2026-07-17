@@ -3,7 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026/9/13-9/20 釜山親子旅行互動手冊：每日行程、行李寄放、交通與幼童備案。">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fffaf0">
   <title>2026 釜山親子旅行手冊</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f0c14b'/%3E%3Cpath d='M8 43c9-2 13-12 23-10 8 1 11 9 25 6' stroke='%2323211d' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 45h33l-5 9H21l-5-9Z' fill='%230f766e' stroke='%2323211d' stroke-width='4'/%3E%3Cpath d='M30 12v21' stroke='%2323211d' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M30 15c10 2 15 7 18 15H30V15Z' fill='%23d95f43' stroke='%2323211d' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <style>
     :root {
       --ink: #23211d;
@@ -968,6 +974,39 @@
       font-size: 23px;
     }
 
+    .side-card-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .reset-checks {
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: var(--paper-2);
+      color: var(--ink);
+      min-height: 30px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .16s ease;
+    }
+
+    .reset-checks:hover { background: var(--lemon); }
+
+    .search-day-head {
+      margin: 4px 0 6px;
+      padding: 7px 10px;
+      border: 1px solid var(--ink);
+      background: var(--paper-2);
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .mini-list {
       display: grid;
       gap: 8px;
@@ -1204,6 +1243,15 @@
       font-size: 13px;
       line-height: 1.45;
       overflow-wrap: anywhere;
+    }
+
+    .stay-card p + p { margin-top: 6px; }
+
+    .stay-card a {
+      color: var(--sea-2);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px dashed var(--sea-2);
     }
 
     .stay-card .local-address {
@@ -1476,7 +1524,7 @@
           <span class="kicker">Busan family field guide</span>
           <h2>把釜山排成好走、好睡、好吃的一週。</h2>
           <p>這份互動手冊把每日行程、行李寄放、交通選擇與幼童緩衝整合在同一頁。用上方日期切換，或直接搜尋景點、飯店、餐廳。</p>
-          <section class="countdown" aria-live="polite" aria-label="出發倒數">
+          <section class="countdown" aria-label="出發倒數">
             <div class="countdown-copy"><b id="countdownTitle">距離出發</b><span id="countdownNote">9/13 10:00 台灣時間</span></div>
             <div class="countdown-numbers">
               <div class="countdown-unit"><strong id="countDays">--</strong><span>天</span></div>
@@ -1528,7 +1576,7 @@
       </div>
       <div class="quick">
         <h3>必確認</h3>
-        <p>藍線膠囊列車時段、Luge 幼童規定、飯店寄放行李、航班與推車托運。</p>
+        <p>藍線膠囊列車時段、飯店寄放行李、航班與推車托運；出發前量小孩身高（Luge 滿 85cm 才能共乘）。</p>
       </div>
     </section>
 
@@ -1582,6 +1630,37 @@
       </section>
     </details>
 
+    <details class="stay-details">
+      <summary><span>緊急聯絡</span><small>出發前先存進手機</small></summary>
+      <section class="stay-grid" aria-label="緊急聯絡資訊">
+        <div class="stay-card">
+          <small>韓國當地</small>
+          <h3>緊急電話</h3>
+          <p>救護／消防 <a href="tel:119">119</a>・警察 <a href="tel:112">112</a></p>
+          <p class="local-address"><span>24H</span>手機沒訊號時仍可撥緊急電話</p>
+        </div>
+        <div class="stay-card">
+          <small>24 小時中文</small>
+          <h3>觀光公社熱線 1330</h3>
+          <p>當地電話直撥 <a href="tel:1330">1330</a>；台灣門號漫遊撥 <a href="tel:+8221330">+82-2-1330</a></p>
+          <p class="local-address"><span>用途</span>旅遊諮詢、客訴、即時翻譯協助</p>
+        </div>
+        <div class="stay-card">
+          <small>台灣人在釜山</small>
+          <h3>駐釜山台北代表處</h3>
+          <p>辦公室 <a href="tel:+82514637965">+82-51-463-7965</a>（上班時間）</p>
+          <p>急難專線 <a href="tel:+821090802761">+82-10-9080-2761</a>（限車禍、搶劫等急難）</p>
+          <p class="local-address"><span>地址</span>釜山中區中央大路 70・東遠大樓 9 樓</p>
+        </div>
+        <div class="stay-card">
+          <small>外交部</small>
+          <h3>旅外急難救助</h3>
+          <p>在韓國撥 <a href="tel:00180008850885">001-800-0885-0885</a>（免付費）</p>
+          <p class="local-address"><span>台灣家人</span>0800-085-095 外交部緊急聯絡中心</p>
+        </div>
+      </section>
+    </details>
+
     <section class="controls" aria-label="搜尋與篩選">
       <label class="search">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 5.96-2.94l4.24 4.24-1.4 1.4-4.24-4.24A7.47 7.47 0 0 1 10.5 18Z" fill="currentColor"/></svg>
@@ -1605,7 +1684,10 @@
 
       <aside>
         <div class="side-card">
-          <h3>每日檢查</h3>
+          <div class="side-card-head">
+            <h3>每日檢查</h3>
+            <button class="reset-checks" id="resetChecks" type="button">重設</button>
+          </div>
           <div class="progress-wrap" aria-hidden="true"><div class="progress" id="progress"></div></div>
           <p class="map-note" id="progressText">0 / 8 完成</p>
           <div class="checklist" id="checklist"></div>
@@ -1712,10 +1794,10 @@
         id: "d3",
         label: "Day 3",
         date: "9/15（二）",
-        title: "換飯店、龍宮寺、Luge、Museum 1",
+        title: "換飯店、龍宮寺、Luge",
         stay: "UH Continental 中心點酒店",
-        focus: "先寄行李，再往機張/海雲台方向玩。",
-        backup: ["Luge 若 2 歲幼童不適合搭，改樂天 Outlet 或飯店休息。", "龍宮寺階梯多，推車不一定好走。"],
+        focus: "先寄行李再往機張玩，傍晚回飯店午休。",
+        backup: ["Luge 需身高滿 85cm 才能與大人共乘；未滿 85cm 改樂天 Outlet 或飯店休息。", "龍宮寺階梯多，推車不一定好走。", "體力有餘可加 Museum 1（Centum City，檔期至 2026/10/11，最後入場為閉館前 1 小時）。"],
         events: [
           ["08:30", "晨喚 / 整理行李", "60 分", "Hotel Kyungsung 退房準備", ["luggage"]],
           ["09:30", "搭車到 UH Continental", "40 分", "先去海雲台寄放行李", ["transport", "luggage"]],
@@ -1723,13 +1805,11 @@
           ["10:30", "搭車到海東龍宮寺", "45 分", "建議計程車", ["transport"]],
           ["11:15", "海東龍宮寺", "90 分", "樓梯多，慢慢走", []],
           ["12:45", "午餐 / 前往 Osiria 周邊", "75 分", "可在龍宮寺或樂天 Outlet 周邊吃", ["food"]],
-          ["14:00", "Skyline Luge 斜坡滑車", "120 分", "確認 2 歲幼童搭乘規定", ["ticket", "pass"]],
-          ["16:00", "搭車到 Museum 1", "40 分", "往 Centum City 方向", ["transport"]],
-          ["16:40", "Museum 1 現代美術館", "90 分", "最後入場為關門前 1 小時", ["ticket", "pass"]],
-          ["18:10", "搭車回 UH Continental", "30 分", "", ["transport"]],
-          ["18:40", "UH Continental Check in / 休息", "60 分", "先讓小孩休息", ["rest", "luggage"]],
-          ["19:40", "海雲台附近晚餐", "80 分", "不建議再拉遠", ["food"]],
-          ["21:00", "回飯店休息", "", "UH Continental", ["rest"]]
+          ["14:00", "Skyline Luge 斜坡滑車", "120 分", "滿 85cm 可與大人共乘（另購 doubling ticket）；未滿 85cm 不能搭", ["ticket", "pass"]],
+          ["16:00", "搭車回 UH Continental", "40 分", "Osiria 回海雲台，小孩常在車上先睡著", ["transport"]],
+          ["16:40", "Check in / 午休補眠", "100 分", "當安靜休息時段，爸媽輪流整理行李", ["rest", "luggage"]],
+          ["18:20", "海雲台附近晚餐", "90 分", "不建議再拉遠", ["food"]],
+          ["19:50", "回飯店休息", "", "UH Continental", ["rest"]]
         ]
       },
       {
@@ -1764,7 +1844,7 @@
         events: [
           ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
           ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
-          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "站內找「물품보관함」與大型置物櫃", ["luggage"]],
+          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "行李箱直接找特大型櫃（특대，45 格）；基本 3 小時 6,000 韓元", ["luggage"]],
           ["11:20", "搭車到甘川洞文化村", "30 分", "輕裝上山", ["transport"]],
           ["11:50", "甘川洞文化村", "150 分", "拍照、逛小店、可順便吃小點", []],
           ["14:20", "搭車回札嘎其 / BIFF 廣場", "30 分", "", ["transport"]],
@@ -1902,7 +1982,7 @@
       { name: "BUSAN X the SKY", region: "海雲台", scheduled: "Day 4" },
       { name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", scheduled: "Day 3" },
       { name: "Brick Campus 釜山", region: "機張" },
-      { name: "Museum 1", region: "Centum City", scheduled: "Day 3" },
+      { name: "Museum 1", region: "Centum City", alternative: "體力備案（檔期至 2026/10/11）" },
       { name: "阿九山森林", region: "機張" },
       { name: "大榮跆拳道", region: "南浦／舊城區" },
       { name: "太宗台 Danubi 列車", region: "影島" },
@@ -1938,7 +2018,7 @@
       { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；可用 Danubi 列車減少步行", alternative: "可替換 Day 6 半日" },
       { category: "outdoor", name: "五六島天空步道", region: "南區", note: "免費海景步道；雨天或強風可能限制開放", alternative: "天氣好時半日備案" },
 
-      { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術，平日下午適合躲熱與休息", scheduled: "Day 3" },
+      { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術；檔期至 2026/10/11，最後入場為閉館前 1 小時", alternative: "可替換 Day 3 或 Day 6 下午" },
       { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案", scheduled: "Day 4" },
       { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4" },
       { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天" },
@@ -2082,6 +2162,8 @@
           <small>${day.date}</small>${day.label}
         </button>
       `).join("");
+      const activeTab = tabs.querySelector(".tab.active");
+      if (activeTab) activeTab.scrollIntoView({ inline: "nearest", block: "nearest" });
     }
 
     function eventMatches(event) {
@@ -2136,8 +2218,44 @@
       if (progress) progress.textContent = `${getCompletedEventCount(day)} / ${day.events.length} 完成`;
     }
 
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[ch]));
+    }
+
+    function renderSearchResults() {
+      const matchedDays = days
+        .map(day => ({
+          day,
+          events: day.events.map((event, index) => ({ event, index })).filter(({ event }) => eventMatches(event))
+        }))
+        .filter(item => item.events.length);
+      const total = matchedDays.reduce((sum, item) => sum + item.events.length, 0);
+      panel.innerHTML = `
+        <div class="day-head">
+          <div>
+            <span class="kicker">全行程搜尋</span>
+            <h2>「${escapeHtml(query)}」</h2>
+            <p>在 8 天行程中找到 ${total} 個項目；清空搜尋即可回到單日檢視。</p>
+          </div>
+        </div>
+        ${matchedDays.length ? matchedDays.map(({ day, events }) => `
+          <div class="timeline">
+            <p class="search-day-head">${day.label} · ${day.date} · ${day.title}</p>
+            ${events.map(({ event, index }) => renderEvent(event, index, day.id)).join("")}
+          </div>
+        `).join("") : `<div class="empty">沒有符合搜尋或篩選的行程。</div>`}
+      `;
+    }
+
     function renderDay() {
       const day = days[activeDay];
+      if (query) {
+        renderSearchResults();
+        backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
+        renderTabs();
+        updateStickyOffsets();
+        return;
+      }
       const events = day.events.map((event, index) => ({ event, index })).filter(({ event }) => eventMatches(event));
       const completed = getCompletedEventCount(day);
       panel.innerHTML = `
@@ -2174,14 +2292,15 @@
           <div class="locker-sketch-body">
             <div class="locker-handmap">
               <figure class="locker-cutaway" aria-label="札嘎其站 B1 大廳與 B2 月台的手繪立體剖面圖，紅圈標示觀光資訊台旁的置物櫃">
-                <img src="assets/jagalchi-locker-station-cutaway.png" alt="手繪水彩風格的札嘎其站立體剖面圖，B1 大廳內的置物櫃以紅色手繪圈標示，旁邊是觀光資訊台，B2 為月台層。" loading="lazy" width="864" height="1792">
+                <img src="assets/jagalchi-locker-station-cutaway.jpg" alt="手繪水彩風格的札嘎其站立體剖面圖，B1 大廳內的置物櫃以紅色手繪圈標示，旁邊是觀光資訊台，B2 為月台層。" loading="lazy" width="864" height="1821">
                 <div class="cutaway-title">札嘎其站・置物櫃導航圖<small>B1 CONCOURSE / B2 PLATFORM</small></div>
-                <div class="cutaway-locker-label">置物櫃<small>물품보관함</small></div>
+                <div class="cutaway-locker-label">置物櫃<small lang="ko">물품보관함</small></div>
               </figure>
               <p class="cutaway-caption">紅圈處就是目標：在 B1 大廳找到觀光資訊台，置物櫃就在旁邊。</p>
             </div>
-            <p class="locker-sketch-note">直接以 NAVER Map 導航到札嘎其站；進入 B1 大廳後，不必先找特定出口，找「관광안내데스크」最快。</p>
-            <p class="locker-sketch-source">重建依據：<a href="https://www2.humetro.busan.kr/homepage/cht/page/subLocation.do?menu_no=1001020804" target="_blank" rel="noreferrer">釜山交通公社札嘎其站大廳實景</a>、<a href="https://dargo.tistory.com/380" target="_blank" rel="noreferrer">公開設施位置資料</a>。</p>
+            <p class="locker-sketch-note">直接以 NAVER Map 導航到札嘎其站；進入 B1 大廳後，不必先找特定出口，找「<span lang="ko">관광안내데스크</span>」最快。</p>
+            <p class="locker-sketch-note">櫃位（官方資料）：特大（<span lang="ko">특대</span>）45 格、大 2 格、中 28 格、小 11 格——行李箱直接找特大型。基本 3 小時：小 2,000／中 3,000／大 4,000／特大 6,000 韓元，超時加收以機台標示為準；可用信用卡、交通卡或現金（紙鈔限 1,000／5,000／10,000）。營運商 <span lang="ko">위드락커</span> 051-441-2100。</p>
+            <p class="locker-sketch-source">重建依據：<a href="https://www2.humetro.busan.kr/homepage/cht/page/subLocation.do?menu_no=1001020804" target="_blank" rel="noreferrer">釜山交通公社札嘎其站大廳實景</a>、<a href="https://data.humetro.busan.kr/homepage/default/facilities/list02.do?gubun=4&amp;menu_no=1001010804" target="_blank" rel="noreferrer">官方置物櫃列表</a>、<a href="https://dargo.tistory.com/380" target="_blank" rel="noreferrer">公開設施位置資料</a>、<a href="https://m.blog.naver.com/durldi99/223224414433" target="_blank" rel="noreferrer">實地寄物遊記</a>。</p>
           </div>
         </details>` : "";
       return `
@@ -2196,7 +2315,7 @@
               </div>
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
-            ${location ? `<a class="event-map-link" href="nmap://search?query=${encodeURIComponent(location.query)}&appname=https://cs60811.github.io/busan-family-trip/" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
+            ${location ? `<a class="event-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
             ${lockerSketch}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
@@ -2219,7 +2338,7 @@
       box.innerHTML = phrases.map((phrase, index) => `
         <div class="phrase">
           <div>
-            <strong>${phrase.ko}</strong>
+            <strong lang="ko">${phrase.ko}</strong>
             <span>${phrase.zh} · ${phrase.rom}</span>
           </div>
           <button class="speak" type="button" data-phrase="${index}" aria-label="播放 ${phrase.zh} 的韓文發音">
@@ -2280,7 +2399,9 @@
       document.querySelectorAll(".map-link").forEach(link => {
         const address = link.closest(".stay-card").querySelector(".copy-address").dataset.address;
         if (link.dataset.map === "naver") {
-          link.href = `nmap://search?query=${encodeURIComponent(address)}&appname=https://cs60811.github.io/busan-family-trip/`;
+          link.href = `https://map.naver.com/p/search/${encodeURIComponent(address)}`;
+          link.target = "_blank";
+          link.rel = "noreferrer";
         } else {
           link.href = `https://map.kakao.com/link/search/${encodeURIComponent(address)}`;
         }
@@ -2298,6 +2419,7 @@
     tabs.addEventListener("click", (event) => {
       const button = event.target.closest("[data-index]");
       if (!button) return;
+      exitExpandedMode();
       activeDay = Number(button.dataset.index);
       renderDay();
       scrollToDayPanel();
@@ -2344,14 +2466,21 @@
     document.querySelector(".chips").addEventListener("click", (event) => {
       const button = event.target.closest("[data-filter]");
       if (!button) return;
+      exitExpandedMode();
       activeFilter = button.dataset.filter;
       document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.toggle("active", btn === button));
       renderDay();
     });
 
     searchInput.addEventListener("input", () => {
+      exitExpandedMode();
       query = searchInput.value.trim();
       renderDay();
+    });
+
+    document.getElementById("resetChecks").addEventListener("click", () => {
+      checks.forEach((_, index) => localStorage.removeItem(`busan-check-${index}`));
+      renderChecklist();
     });
 
     document.getElementById("checklist").addEventListener("change", (event) => {
@@ -2373,30 +2502,55 @@
       copyAddress(button.dataset.address, button);
     });
 
-    document.getElementById("expandAll").addEventListener("click", (event) => {
-      allExpanded = !allExpanded;
-      if (allExpanded) {
+    function renderAllDays() {
+      panel.innerHTML = days.map(day => `
+        <div class="day-head">
+          <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
+          <div class="sleep-badge">住宿：${day.stay}</div>
+        </div>
+        <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
+      `).join("");
+    }
+
+    function setExpanded(expanded) {
+      allExpanded = expanded;
+      document.getElementById("expandAll").textContent = expanded ? "只看單日" : "展開全部";
+    }
+
+    function exitExpandedMode() {
+      if (allExpanded) setExpanded(false);
+    }
+
+    document.getElementById("expandAll").addEventListener("click", () => {
+      if (!allExpanded) {
         activeFilter = "all";
         query = "";
         searchInput.value = "";
         document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.toggle("active", btn.dataset.filter === "all"));
-        panel.innerHTML = days.map((_, index) => {
-          activeDay = index;
-          const day = days[index];
-          return `
-            <div class="day-head">
-              <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
-              <div class="sleep-badge">住宿：${day.stay}</div>
-            </div>
-            <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
-          `;
-        }).join("");
-        activeDay = 0;
-        event.currentTarget.textContent = "只看單日";
+        setExpanded(true);
+        renderAllDays();
       } else {
-        event.currentTarget.textContent = "展開全部";
+        setExpanded(false);
         renderDay();
       }
+    });
+
+    let printRestore = null;
+
+    window.addEventListener("beforeprint", () => {
+      printRestore = {
+        expanded: allExpanded,
+        openDetails: [...document.querySelectorAll("details")].filter(detail => detail.open)
+      };
+      if (!allExpanded) renderAllDays();
+      document.querySelectorAll("details").forEach(detail => { detail.open = true; });
+    });
+
+    window.addEventListener("afterprint", () => {
+      if (!printRestore) return;
+      document.querySelectorAll("details").forEach(detail => { detail.open = printRestore.openDetails.includes(detail); });
+      if (!printRestore.expanded) renderDay();
+      printRestore = null;
     });
 
     renderTabs();
@@ -2409,6 +2563,10 @@
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
     window.addEventListener("resize", updateStickyOffsets);
+
+    if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
   </script>
 </body>
 </html>
