@@ -189,6 +189,63 @@
       margin: 0;
     }
 
+    .countdown {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      max-width: 680px;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border: 1px solid var(--ink);
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown-copy {
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      white-space: nowrap;
+    }
+
+    .countdown-copy b {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+    }
+
+    .countdown-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .countdown-unit {
+      min-width: 0;
+      padding: 5px 3px;
+      text-align: center;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+    }
+
+    .countdown-unit strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 20px;
+      line-height: 1.05;
+    }
+
+    .countdown-unit span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
     .stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -867,6 +924,13 @@
 
       .tab small { font-size: 11px; }
 
+      .countdown {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .countdown-copy { white-space: normal; }
+
       .timeline { padding: 12px; }
     }
 
@@ -917,6 +981,15 @@
           <span class="kicker">Busan family field guide</span>
           <h2>把釜山排成好走、好睡、好吃的一週。</h2>
           <p>這份互動手冊把每日行程、行李寄放、交通選擇與幼童緩衝整合在同一頁。用上方日期切換，或直接搜尋景點、飯店、餐廳。</p>
+          <section class="countdown" aria-live="polite" aria-label="出發倒數">
+            <div class="countdown-copy"><b id="countdownTitle">距離出發</b><span id="countdownNote">9/13 10:00 台灣時間</span></div>
+            <div class="countdown-numbers">
+              <div class="countdown-unit"><strong id="countDays">--</strong><span>天</span></div>
+              <div class="countdown-unit"><strong id="countHours">--</strong><span>時</span></div>
+              <div class="countdown-unit"><strong id="countMinutes">--</strong><span>分</span></div>
+              <div class="countdown-unit"><strong id="countSeconds">--</strong><span>秒</span></div>
+            </div>
+          </section>
           <div class="stats">
             <div class="stat"><b>8</b><span>天行程</span></div>
             <div class="stat"><b>4</b><span>住宿地點含地址</span></div>
@@ -1243,15 +1316,62 @@
       { zh: "請幫忙", ko: "도와주세요", rom: "do-wa-ju-se-yo" }
     ];
 
+    const departureAt = new Date("2026-09-13T10:00:00+08:00");
+    const tripDateKeys = ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20"];
+
     let activeDay = 0;
     let activeFilter = "all";
     let query = "";
     let allExpanded = false;
+    let autoSelectedDate = "";
 
     const tabs = document.getElementById("dayTabs");
     const panel = document.getElementById("dayPanel");
     const searchInput = document.getElementById("searchInput");
     const backupList = document.getElementById("backupList");
+
+    function getBusanDateKey(date = new Date()) {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Seoul",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(date);
+      const values = Object.fromEntries(parts.filter(part => part.type !== "literal").map(part => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
+    }
+
+    function getTripDayIndex() {
+      return tripDateKeys.indexOf(getBusanDateKey());
+    }
+
+    function updateCountdown() {
+      const remaining = Math.max(0, departureAt.getTime() - Date.now());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const daysLeft = Math.floor(totalSeconds / 86400);
+      const hoursLeft = Math.floor(totalSeconds % 86400 / 3600);
+      const minutesLeft = Math.floor(totalSeconds % 3600 / 60);
+      const secondsLeft = totalSeconds % 60;
+      document.getElementById("countDays").textContent = String(daysLeft).padStart(2, "0");
+      document.getElementById("countHours").textContent = String(hoursLeft).padStart(2, "0");
+      document.getElementById("countMinutes").textContent = String(minutesLeft).padStart(2, "0");
+      document.getElementById("countSeconds").textContent = String(secondsLeft).padStart(2, "0");
+
+      if (remaining === 0) {
+        document.getElementById("countdownTitle").textContent = "旅程進行中";
+        document.getElementById("countdownNote").textContent = "依釜山當地日期自動顯示今日行程";
+      }
+
+      const todayIndex = getTripDayIndex();
+      const todayKey = todayIndex === -1 ? "" : tripDateKeys[todayIndex];
+      document.getElementById("todayBtn").textContent = todayIndex === -1 ? "回到 Day 1" : "今日行程";
+      if (todayIndex !== -1 && autoSelectedDate !== todayKey) {
+        activeDay = todayIndex;
+        autoSelectedDate = todayKey;
+        renderDay();
+        scrollToDayPanel();
+      }
+    }
 
     function updateStickyOffsets() {
       const topbarHeight = document.querySelector(".topbar").getBoundingClientRect().height;
@@ -1444,7 +1564,7 @@
     });
 
     document.getElementById("todayBtn").addEventListener("click", () => {
-      activeDay = 0;
+      activeDay = Math.max(0, getTripDayIndex());
       renderDay();
       scrollToDayPanel();
     });
@@ -1479,6 +1599,8 @@
     renderDay();
     renderChecklist();
     renderPhrases();
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
     window.addEventListener("resize", updateStickyOffsets);
   </script>
 </body>
