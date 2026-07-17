@@ -664,6 +664,68 @@
 
     .event-map-link:hover { transform: translateY(-1px); }
 
+    .locker-sketch {
+      margin-top: 10px;
+      border: 2px dashed var(--ink);
+      border-radius: 6px;
+      background: #fff7d9;
+      overflow: hidden;
+    }
+
+    .locker-sketch summary {
+      padding: 9px 11px;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .locker-sketch summary::marker { color: var(--coral); }
+
+    .locker-sketch-body {
+      padding: 12px;
+      border-top: 1px dashed var(--ink);
+    }
+
+    .locker-sketch-title {
+      margin: 0 0 10px;
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .locker-sketch-route {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr);
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sketch-stop {
+      min-height: 76px;
+      padding: 8px 6px;
+      border: 2px solid var(--ink);
+      border-radius: 8px 4px 7px 5px;
+      background: #fffdf7;
+      box-shadow: 2px 2px 0 rgba(25, 57, 74, .22);
+      text-align: center;
+    }
+
+    .sketch-stop strong,
+    .sketch-stop small { display: block; }
+    .sketch-stop strong { font-size: 13px; }
+    .sketch-stop small { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.25; }
+    .sketch-stop.locker { background: #dff3e6; transform: rotate(-1deg); }
+    .sketch-arrow { color: var(--coral); font-family: var(--mono); font-size: 20px; font-weight: 800; text-align: center; }
+
+    .locker-sketch-note {
+      margin: 11px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -1075,6 +1137,15 @@
       .event-actions { width: 100%; justify-content: flex-end; }
 
       .duration { padding: 3px 6px; }
+
+      .locker-sketch-route {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .sketch-arrow { line-height: 15px; transform: rotate(90deg); }
+
+      .sketch-stop { min-height: 0; }
 
       .day-head {
         grid-template-columns: 1fr;
@@ -1566,7 +1637,7 @@
     };
 
     const eventLocations = {
-      "d5-2": { query: "자갈치역", label: "札嘎其站（置物櫃）" },
+      "d5-2": { query: "자갈치역", label: "札嘎其站（置物櫃）", sketch: true },
       "d5-7": { query: "자갈치역", label: "札嘎其站（取回行李）" }
     };
 
@@ -1811,6 +1882,21 @@
       const checkKey = `busan-event-${dayId}-${index}`;
       const completed = localStorage.getItem(checkKey) === "1";
       const location = eventLocations[`${dayId}-${index}`];
+      const lockerSketch = location && location.sketch ? `
+        <details class="locker-sketch">
+          <summary>手繪站內找櫃圖</summary>
+          <div class="locker-sketch-body">
+            <p class="locker-sketch-title">JAGALCHI STATION · 자갈치역</p>
+            <div class="locker-sketch-route" aria-label="札嘎其站內找置物櫃步驟示意">
+              <div class="sketch-stop"><strong>到札嘎其站</strong><small>跟著站內指標入站</small></div>
+              <div class="sketch-arrow" aria-hidden="true">→</div>
+              <div class="sketch-stop"><strong>大廳／閘門層</strong><small>先別急著出站</small></div>
+              <div class="sketch-arrow" aria-hidden="true">→</div>
+              <div class="sketch-stop locker"><strong>물품보관함</strong><small>找大型置物櫃</small></div>
+            </div>
+            <p class="locker-sketch-note">這是找櫃動線示意，不標示特定出口；站內設備位置與空櫃狀況請以現場的「물품보관함」指標為準。</p>
+          </div>
+        </details>` : "";
       return `
         <section class="event ${completed ? "completed" : ""}" style="animation-delay:${Math.min(index * 28, 280)}ms">
           <div class="time">${time}</div>
@@ -1824,6 +1910,7 @@
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
             ${location ? `<a class="event-map-link" href="nmap://search?query=${encodeURIComponent(location.query)}&appname=https://cs60811.github.io/busan-family-trip/" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
+            ${lockerSketch}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
         </section>
