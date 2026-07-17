@@ -731,77 +731,6 @@
       background: #fff2c9;
     }
 
-    .locker-cutaway {
-      position: relative;
-      margin: 0;
-      overflow: hidden;
-      border: 2px solid var(--ink);
-      border-radius: 8px 5px 7px 6px;
-      background: #fffdf7;
-      box-shadow: 3px 3px 0 rgba(25, 57, 74, .2);
-    }
-
-    .locker-cutaway img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .cutaway-title,
-    .cutaway-locker-label {
-      position: absolute;
-      border: 2px solid var(--ink);
-      background: rgba(255, 253, 247, .94);
-      box-shadow: 2px 2px 0 rgba(25, 57, 74, .2);
-      font-weight: 800;
-    }
-
-    .cutaway-title {
-      top: 5%;
-      left: 50%;
-      width: min(78%, 310px);
-      padding: 7px 9px;
-      border-radius: 5px 8px 5px 7px;
-      color: var(--sea-2);
-      font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.25;
-      text-align: center;
-      transform: translateX(-50%) rotate(-1deg);
-    }
-
-    .cutaway-title small {
-      display: block;
-      margin-top: 3px;
-      color: var(--coral);
-      font-family: var(--mono);
-      font-size: 10px;
-    }
-
-    .cutaway-locker-label {
-      top: 25%;
-      left: 7%;
-      padding: 5px 7px;
-      border-radius: 4px 7px 5px 6px;
-      background: var(--coral);
-      color: #fff;
-      font-size: 12px;
-      line-height: 1.2;
-      text-align: center;
-      transform: rotate(-3deg);
-    }
-
-    .cutaway-locker-label small { display: block; margin-top: 2px; font-size: 10px; }
-
-    .cutaway-caption {
-      margin: 9px 0 0;
-      color: var(--sea-2);
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.5;
-      text-align: center;
-    }
-
     .handmap-kicker {
       margin: 0 0 10px;
       color: var(--coral);
@@ -811,110 +740,22 @@
       text-align: center;
     }
 
-    .handmap-route {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1.2fr);
-      align-items: center;
-      gap: 3px;
+    .locker-map {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
-    .handmap-stop {
-      min-height: 122px;
-      padding: 9px 6px 8px;
-      border: 2px solid var(--ink);
-      border-radius: 9px 4px 8px 5px;
-      background: #fffdf7;
-      box-shadow: 3px 3px 0 rgba(25, 57, 74, .2);
-      text-align: center;
+    .locker-map text {
+      font-family: var(--sans);
+      fill: var(--ink);
     }
 
-    .handmap-stop.station { transform: rotate(1deg); }
-    .handmap-stop.desk { background: #e8eef7; transform: rotate(-1deg); }
-    .handmap-stop.locker { background: #dff3e6; transform: rotate(1deg); }
-    .handmap-stop strong,
-    .handmap-stop small { display: block; }
-    .handmap-stop strong { margin-top: 6px; font-size: 12px; line-height: 1.25; }
-    .handmap-stop small { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.25; }
-
-    .handmap-arrow {
-      color: var(--coral);
-      font-family: var(--mono);
-      font-size: 27px;
-      font-weight: 800;
-      text-align: center;
-      transform: rotate(-3deg);
-    }
-
-    .train-icon,
-    .info-icon,
-    .locker-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-    }
-
-    .train-icon {
-      position: relative;
-      width: 42px;
-      height: 28px;
-      border: 2px solid var(--ink);
-      border-radius: 9px 9px 5px 5px;
-      background: #f7e4dc;
-    }
-
-    .train-icon::before,
-    .train-icon::after {
-      position: absolute;
-      bottom: -6px;
-      width: 7px;
-      height: 7px;
-      border: 2px solid var(--ink);
-      border-radius: 50%;
-      background: var(--ink);
-      content: "";
-    }
-
-    .train-icon::before { left: 6px; }
-    .train-icon::after { right: 6px; }
-
-    .info-icon {
-      width: 34px;
-      height: 34px;
-      border: 2px solid var(--ink);
-      border-radius: 50%;
-      background: #fffdf7;
-      color: var(--sea-2);
-      font-family: var(--serif);
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .locker-icon {
-      display: grid;
-      grid-template-columns: repeat(3, 10px);
-      grid-template-rows: repeat(2, 14px);
-      gap: 3px;
-    }
-
-    .locker-icon span {
-      border: 2px solid var(--ink);
-      border-radius: 2px;
-      background: #c4dfd0;
-    }
-
-    .handmap-target {
-      display: inline-block;
-      margin-top: 7px;
-      padding: 2px 5px;
-      border: 1px solid var(--ink);
-      border-radius: 4px;
-      background: var(--coral);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 800;
-      transform: rotate(-2deg);
-    }
+    .locker-map .stop-label { font-weight: 800; }
+    .locker-map .stop-sub { fill: var(--muted); font-weight: 700; }
+    .locker-map .stop-letter { fill: #fff; font-family: var(--serif); font-weight: 800; }
+    .locker-map .mid-label { font-weight: 800; }
+    .locker-map .side-note { fill: var(--sea-2); font-weight: 700; }
 
     .handmap-caption {
       margin: 11px 0 0;
@@ -1389,19 +1230,6 @@
 
       .duration { padding: 3px 6px; }
 
-      .handmap-route {
-        grid-template-columns: 1fr;
-        gap: 7px;
-      }
-
-      .handmap-arrow {
-        height: 16px;
-        line-height: 16px;
-        transform: rotate(90deg);
-      }
-
-      .handmap-stop { min-height: 0; }
-
       .day-head {
         grid-template-columns: 1fr;
       }
@@ -1844,12 +1672,12 @@
         events: [
           ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
           ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
-          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "行李箱直接找特大型櫃（특대，45 格）；基本 3 小時 6,000 韓元", ["luggage"]],
+          ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "站內兩處置物櫃在長廊兩端；回程走地下街那頭的 A 區較順路，行李箱優先選特大型", ["luggage"]],
           ["11:20", "搭車到甘川洞文化村", "30 分", "輕裝上山", ["transport"]],
           ["11:50", "甘川洞文化村", "150 分", "拍照、逛小店、可順便吃小點", []],
           ["14:20", "搭車回札嘎其 / BIFF 廣場", "30 分", "", ["transport"]],
           ["14:50", "札嘎其市場 / BIFF 廣場午餐", "90 分", "午餐偏晚，甘川洞可先墊胃", ["food"]],
-          ["16:20", "取行李", "20 分", "回札嘎其站內取回行李", ["luggage"]],
+          ["16:20", "取行李", "20 分", "回札嘎其站取行李——用地下街那頭的 A 區置物櫃", ["luggage"]],
           ["16:40", "搭車到 El Momento Songdo", "25 分", "建議計程車", ["transport", "luggage"]],
           ["17:10", "Check in / 休息", "80 分", "放空、整理行李", ["rest", "luggage"]],
           ["18:30", "松島附近晚餐 / 海邊散步", "90 分", "不再拉回南浦", ["food"]],
@@ -2290,17 +2118,29 @@
         <details class="locker-sketch" open>
           <summary>札嘎其站內：手繪找櫃圖</summary>
           <div class="locker-sketch-body">
-            <div class="locker-handmap">
-              <figure class="locker-cutaway" aria-label="札嘎其站 B1 大廳與 B2 月台的手繪立體剖面圖，紅圈標示觀光資訊台旁的置物櫃">
-                <img src="assets/jagalchi-locker-station-cutaway.jpg" alt="手繪水彩風格的札嘎其站立體剖面圖，B1 大廳內的置物櫃以紅色手繪圈標示，旁邊是觀光資訊台，B2 為月台層。" loading="lazy" width="864" height="1821">
-                <div class="cutaway-title">札嘎其站・置物櫃導航圖<small>B1 CONCOURSE / B2 PLATFORM</small></div>
-                <div class="cutaway-locker-label">置物櫃<small lang="ko">물품보관함</small></div>
-              </figure>
-              <p class="cutaway-caption">紅圈處就是目標：在 B1 大廳找到觀光資訊台，置物櫃就在旁邊。</p>
-            </div>
-            <p class="locker-sketch-note">直接以 NAVER Map 導航到札嘎其站；進入 B1 大廳後，不必先找特定出口，找「<span lang="ko">관광안내데스크</span>」最快。</p>
-            <p class="locker-sketch-note">櫃位（官方資料）：特大（<span lang="ko">특대</span>）45 格、大 2 格、中 28 格、小 11 格——行李箱直接找特大型。基本 3 小時：小 2,000／中 3,000／大 4,000／特大 6,000 韓元，超時加收以機台標示為準；可用信用卡、交通卡或現金（紙鈔限 1,000／5,000／10,000）。營運商 <span lang="ko">위드락커</span> 051-441-2100。</p>
-            <p class="locker-sketch-source">重建依據：<a href="https://www2.humetro.busan.kr/homepage/cht/page/subLocation.do?menu_no=1001020804" target="_blank" rel="noreferrer">釜山交通公社札嘎其站大廳實景</a>、<a href="https://data.humetro.busan.kr/homepage/default/facilities/list02.do?gubun=4&amp;menu_no=1001010804" target="_blank" rel="noreferrer">官方置物櫃列表</a>、<a href="https://dargo.tistory.com/380" target="_blank" rel="noreferrer">公開設施位置資料</a>、<a href="https://m.blog.naver.com/durldi99/223224414433" target="_blank" rel="noreferrer">實地寄物遊記</a>。</p>
+            <figure class="locker-handmap" aria-label="依店內實拍導覽牌重繪的札嘎其站置物櫃地圖：兩處置物櫃分別位於長廊兩端，中間約 30 公尺，站務室在旁">
+              <p class="handmap-kicker">站內導覽牌重繪 · 非比例尺</p>
+              <svg class="locker-map" viewBox="0 0 600 240" role="img" aria-hidden="true">
+                <path d="M95 150 H505" fill="none" stroke="#23211d" stroke-width="9" stroke-linecap="round"/>
+                <path d="M95 150 H505" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 12"/>
+                <path d="M300 93 V145" fill="none" stroke="#23211d" stroke-width="3" stroke-dasharray="4 6"/>
+                <rect x="205" y="45" width="190" height="48" rx="8" fill="#fffaf0" stroke="#23211d" stroke-width="3" transform="rotate(-1 300 69)"/>
+                <text x="300" y="65" text-anchor="middle" font-size="13" class="mid-label" transform="rotate(-1 300 69)" lang="ko">역무실</text>
+                <text x="300" y="83" text-anchor="middle" font-size="11" class="stop-sub" transform="rotate(-1 300 69)">約 30 公尺通道</text>
+                <circle cx="95" cy="150" r="34" fill="#6b8f47" stroke="#23211d" stroke-width="5"/>
+                <circle cx="505" cy="150" r="34" fill="#d95f43" stroke="#23211d" stroke-width="5"/>
+                <text x="95" y="159" text-anchor="middle" font-size="24" class="stop-letter">B</text>
+                <text x="505" y="159" text-anchor="middle" font-size="24" class="stop-letter">A</text>
+                <text x="95" y="201" text-anchor="middle" font-size="14" class="stop-label"><tspan lang="ko">201</tspan>~號 보관함</text>
+                <text x="95" y="219" text-anchor="middle" font-size="12" class="stop-sub">靠<tspan lang="ko">토성</tspan>方向</text>
+                <text x="505" y="201" text-anchor="middle" font-size="14" class="stop-label"><tspan lang="ko">101</tspan>~號 보관함</text>
+                <text x="505" y="219" text-anchor="middle" font-size="12" class="stop-sub">靠<tspan lang="ko">자갈치</tspan>地下街</text>
+              </svg>
+              <figcaption class="handmap-caption">站內共兩處置物櫃，中間隔著約 30 公尺的長廊，站務室（<span lang="ko">역무실</span>）就在通道旁。從甘川洞回程走地下街那頭的 A 區最順路；若從토성／충무동方向出站，改用另一頭的 B 區。每區置物櫃中段都有黑色觸控機台，螢幕會顯示即時空位（藍色可用、灰色使用中）。</figcaption>
+            </figure>
+            <p class="locker-sketch-note">機台實際步驟與費率（依店內實拍機台畫面）：選「<span lang="ko">보관</span>」存放 → 選櫃號 → 設定密碼（輸入兩次）→ 選付款方式 → 投現金或刷卡 → 取收據 → 櫃門開啟，放好行李記得關門。基本 4 小時：小 2,000／中 3,000／大 4,000／特大 5,000 韓元；超過 4～12 小時每小時加收 300／400／500／600 韓元；超過 12 小時後每 12 小時再加收 2,000／3,000／4,000／5,000 韓元。實際費率可能已調整，請以現場機台顯示為準。</p>
+            <p class="locker-sketch-note">官方統計全站合計約特大（<span lang="ko">특대</span>）45、大 2、中 28、小 11 格——行李箱優先選特大型，大型格數很少。營運商 <span lang="ko">위드락커</span> 051-441-2100。</p>
+            <p class="locker-sketch-source">資料來源：<a href="https://m.blog.naver.com/durldi99/223224414433" target="_blank" rel="noreferrer">實地置物櫃踏查與機台實拍</a>、<a href="https://data.humetro.busan.kr/homepage/default/facilities/list02.do?gubun=4&amp;menu_no=1001010804" target="_blank" rel="noreferrer">釜山交通公社置物櫃統計</a>。</p>
           </div>
         </details>` : "";
       return `
