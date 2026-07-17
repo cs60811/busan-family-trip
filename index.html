@@ -927,7 +927,6 @@
     .copy-address {
       width: 100%;
       min-height: 36px;
-      margin-top: 12px;
       border: 1px solid var(--ink);
       border-radius: 5px;
       background: var(--paper-2);
@@ -937,6 +936,32 @@
       font-weight: 700;
       transition: background .16s ease, color .16s ease, transform .16s ease;
     }
+
+    .stay-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .map-link {
+      display: grid;
+      place-items: center;
+      min-height: 36px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: #fffdf7;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .map-link.naver { color: #fff; background: #03c75a; }
+    .map-link.kakao { background: #fee500; }
+    .map-link:hover { transform: translateY(-1px); }
+
+    .stay-actions .copy-address { grid-column: 1 / -1; }
 
     .copy-address:hover { transform: translateY(-1px); background: var(--lemon); }
 
@@ -1207,25 +1232,41 @@
           <small>9/13 - 9/14</small>
           <h3>Hotel Kyungsung</h3>
           <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
-          <button class="copy-address" type="button" data-address="26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256">複製地址</button>
+          <div class="stay-actions">
+            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Kyungsung 地址">NAVER Map</a>
+            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Kyungsung 地址">KakaoMap</a>
+            <button class="copy-address" type="button" data-address="26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256">複製地址</button>
+          </div>
         </div>
         <div class="stay-card">
           <small>9/15 - 9/16</small>
           <h3>UH Continental CenterPoint</h3>
           <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
-          <button class="copy-address" type="button" data-address="2-21, Dalmaji-gil, Haeundae-gu, Busan 48099">複製地址</button>
+          <div class="stay-actions">
+            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址">NAVER Map</a>
+            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 UH Continental CenterPoint 地址">KakaoMap</a>
+            <button class="copy-address" type="button" data-address="2-21, Dalmaji-gil, Haeundae-gu, Busan 48099">複製地址</button>
+          </div>
         </div>
         <div class="stay-card">
           <small>9/17 - 9/18</small>
           <h3>Elmomento Songdo</h3>
           <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
-          <button class="copy-address" type="button" data-address="9, Deungdae-ro, Seo-gu, Busan 49263">複製地址</button>
+          <div class="stay-actions">
+            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Songdo 地址">NAVER Map</a>
+            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Songdo 地址">KakaoMap</a>
+            <button class="copy-address" type="button" data-address="9, Deungdae-ro, Seo-gu, Busan 49263">複製地址</button>
+          </div>
         </div>
         <div class="stay-card">
           <small>9/19</small>
           <h3>Hotel Andrest</h3>
           <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
-          <button class="copy-address" type="button" data-address="2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975">複製地址</button>
+          <div class="stay-actions">
+            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Andrest 地址">NAVER Map</a>
+            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Andrest 地址">KakaoMap</a>
+            <button class="copy-address" type="button" data-address="2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975">複製地址</button>
+          </div>
         </div>
       </section>
     </details>
@@ -1820,6 +1861,17 @@
       }
     }
 
+    function setupMapLinks() {
+      document.querySelectorAll(".map-link").forEach(link => {
+        const address = link.closest(".stay-card").querySelector(".copy-address").dataset.address;
+        if (link.dataset.map === "naver") {
+          link.href = `nmap://search?query=${encodeURIComponent(address)}&appname=https://cs60811.github.io/busan-family-trip/`;
+        } else {
+          link.href = `https://map.kakao.com/link/search/${encodeURIComponent(address)}`;
+        }
+      });
+    }
+
     function updateProgress() {
       const inputs = [...document.querySelectorAll("[data-check]")];
       const done = inputs.filter(input => input.checked).length;
@@ -1928,6 +1980,7 @@
     renderDay();
     renderChecklist();
     renderPhrases();
+    setupMapLinks();
     renderPassDirectory();
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
