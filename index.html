@@ -717,6 +717,27 @@
       overflow-wrap: anywhere;
     }
 
+    .copy-address {
+      width: 100%;
+      min-height: 36px;
+      margin-top: 12px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: var(--paper-2);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .16s ease, color .16s ease, transform .16s ease;
+    }
+
+    .copy-address:hover { transform: translateY(-1px); background: var(--lemon); }
+
+    .copy-address.copied {
+      color: #fff;
+      background: var(--sea);
+    }
+
     .empty {
       padding: 30px;
       color: var(--muted);
@@ -950,21 +971,25 @@
           <small>9/13 - 9/14</small>
           <h3>Hotel Kyungsung</h3>
           <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
+          <button class="copy-address" type="button" data-address="26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256">複製地址</button>
         </div>
         <div class="stay-card">
           <small>9/15 - 9/16</small>
           <h3>UH Continental CenterPoint</h3>
           <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
+          <button class="copy-address" type="button" data-address="2-21, Dalmaji-gil, Haeundae-gu, Busan 48099">複製地址</button>
         </div>
         <div class="stay-card">
           <small>9/17 - 9/18</small>
           <h3>Elmomento Songdo</h3>
           <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
+          <button class="copy-address" type="button" data-address="9, Deungdae-ro, Seo-gu, Busan 49263">複製地址</button>
         </div>
         <div class="stay-card">
           <small>9/19</small>
           <h3>Hotel Andrest</h3>
           <p>2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975</p>
+          <button class="copy-address" type="button" data-address="2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975">複製地址</button>
         </div>
       </section>
     </details>
@@ -1342,6 +1367,34 @@
       window.speechSynthesis.speak(utterance);
     }
 
+    async function copyAddress(address, button) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(address);
+        } else {
+          const field = document.createElement("textarea");
+          field.value = address;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          const copied = document.execCommand("copy");
+          field.remove();
+          if (!copied) throw new Error("Copy command was rejected");
+        }
+        button.textContent = "已複製";
+        button.classList.add("copied");
+        window.setTimeout(() => {
+          button.textContent = "複製地址";
+          button.classList.remove("copied");
+        }, 1600);
+      } catch {
+        button.textContent = "請長按複製";
+        window.setTimeout(() => { button.textContent = "複製地址"; }, 2200);
+      }
+    }
+
     function updateProgress() {
       const inputs = [...document.querySelectorAll("[data-check]")];
       const done = inputs.filter(input => input.checked).length;
@@ -1382,6 +1435,12 @@
       const button = event.target.closest("[data-phrase]");
       if (!button) return;
       speakKorean(phrases[Number(button.dataset.phrase)].ko);
+    });
+
+    document.querySelector(".stay-grid").addEventListener("click", (event) => {
+      const button = event.target.closest(".copy-address");
+      if (!button) return;
+      copyAddress(button.dataset.address, button);
     });
 
     document.getElementById("todayBtn").addEventListener("click", () => {
