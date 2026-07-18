@@ -731,38 +731,87 @@
       background: #fff2c9;
     }
 
-    .handmap-kicker {
-      margin: 0 0 10px;
-      color: var(--coral);
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 800;
-      text-align: center;
+    .locker-cutaway {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 8px 5px 7px 6px;
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 rgba(25, 57, 74, .2);
     }
 
-    .locker-map {
+    .locker-cutaway img {
       display: block;
       width: 100%;
       height: auto;
     }
 
-    .locker-map text {
-      font-family: var(--sans);
-      fill: var(--ink);
+    .cutaway-title {
+      position: absolute;
+      top: 2%;
+      left: 50%;
+      width: min(80%, 320px);
+      padding: 7px 9px;
+      border: 2px solid var(--ink);
+      border-radius: 5px 8px 5px 7px;
+      background: rgba(255, 253, 247, .94);
+      box-shadow: 2px 2px 0 rgba(25, 57, 74, .2);
+      color: var(--sea-2);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.25;
+      text-align: center;
+      font-weight: 800;
+      transform: translateX(-50%) rotate(-1deg);
     }
 
-    .locker-map .stop-label { font-weight: 800; }
-    .locker-map .stop-sub { fill: var(--muted); font-weight: 700; }
-    .locker-map .stop-letter { fill: #fff; font-family: var(--serif); font-weight: 800; }
-    .locker-map .mid-label { font-weight: 800; }
-    .locker-map .side-note { fill: var(--sea-2); font-weight: 700; }
+    .cutaway-title small {
+      display: block;
+      margin-top: 3px;
+      color: var(--coral);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
 
-    .handmap-caption {
-      margin: 11px 0 0;
+    .cutaway-locker-label {
+      position: absolute;
+      border: 2px solid var(--ink);
+      border-radius: 4px 7px 5px 6px;
+      background: var(--coral);
+      color: #fff;
+      padding: 5px 8px;
+      font-size: 12px;
+      line-height: 1.25;
+      text-align: center;
+      box-shadow: 2px 2px 0 rgba(25, 57, 74, .2);
+      font-weight: 800;
+    }
+
+    .cutaway-locker-label small { display: block; margin-top: 2px; font-size: 10px; font-weight: 700; }
+
+    .cutaway-locker-label.left {
+      top: 19%;
+      left: 2%;
+      width: 33%;
+      transform: rotate(-2deg);
+    }
+
+    .cutaway-locker-label.right {
+      top: 24%;
+      right: 2%;
+      width: 33%;
+      transform: rotate(2deg);
+      background: var(--sea);
+    }
+
+    .cutaway-caption {
+      margin: 9px 0 0;
       color: var(--sea-2);
       font-size: 12px;
       font-weight: 700;
-      line-height: 1.45;
+      line-height: 1.5;
       text-align: center;
     }
 
@@ -2118,29 +2167,18 @@
         <details class="locker-sketch" open>
           <summary>札嘎其站內：手繪找櫃圖</summary>
           <div class="locker-sketch-body">
-            <figure class="locker-handmap" aria-label="依店內實拍導覽牌重繪的札嘎其站置物櫃地圖：兩處置物櫃分別位於長廊兩端，中間約 30 公尺，站務室在旁">
-              <p class="handmap-kicker">站內導覽牌重繪 · 非比例尺</p>
-              <svg class="locker-map" viewBox="0 0 600 240" role="img" aria-hidden="true">
-                <path d="M95 150 H505" fill="none" stroke="#23211d" stroke-width="9" stroke-linecap="round"/>
-                <path d="M95 150 H505" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 12"/>
-                <path d="M300 93 V145" fill="none" stroke="#23211d" stroke-width="3" stroke-dasharray="4 6"/>
-                <rect x="205" y="45" width="190" height="48" rx="8" fill="#fffaf0" stroke="#23211d" stroke-width="3" transform="rotate(-1 300 69)"/>
-                <text x="300" y="65" text-anchor="middle" font-size="13" class="mid-label" transform="rotate(-1 300 69)" lang="ko">역무실</text>
-                <text x="300" y="83" text-anchor="middle" font-size="11" class="stop-sub" transform="rotate(-1 300 69)">約 30 公尺通道</text>
-                <circle cx="95" cy="150" r="34" fill="#6b8f47" stroke="#23211d" stroke-width="5"/>
-                <circle cx="505" cy="150" r="34" fill="#d95f43" stroke="#23211d" stroke-width="5"/>
-                <text x="95" y="159" text-anchor="middle" font-size="24" class="stop-letter">B</text>
-                <text x="505" y="159" text-anchor="middle" font-size="24" class="stop-letter">A</text>
-                <text x="95" y="201" text-anchor="middle" font-size="14" class="stop-label"><tspan lang="ko">201</tspan>~號 보관함</text>
-                <text x="95" y="219" text-anchor="middle" font-size="12" class="stop-sub">靠<tspan lang="ko">토성</tspan>方向</text>
-                <text x="505" y="201" text-anchor="middle" font-size="14" class="stop-label"><tspan lang="ko">101</tspan>~號 보관함</text>
-                <text x="505" y="219" text-anchor="middle" font-size="12" class="stop-sub">靠<tspan lang="ko">자갈치</tspan>地下街</text>
-              </svg>
-              <figcaption class="handmap-caption">站內共兩處置物櫃，中間隔著約 30 公尺的長廊，站務室（<span lang="ko">역무실</span>）就在通道旁。從甘川洞回程走地下街那頭的 A 區最順路；若從토성／충무동方向出站，改用另一頭的 B 區。每區置物櫃中段都有黑色觸控機台，螢幕會顯示即時空位（藍色可用、灰色使用中）。</figcaption>
-            </figure>
+            <div class="locker-handmap">
+              <figure class="locker-cutaway" aria-label="札嘎其站置物櫃等角剖面插畫：紅圈標示大廳兩端的置物櫃，上層為 B1 大廳，下層為 B2 月台">
+                <img src="assets/jagalchi-locker-station-cutaway.jpg" alt="等角剖面水彩插畫，上層是札嘎其站 B1 大廳，兩端各有一排置物櫃並以紅圈與箭頭標示，中間是驗票閘門與手扶梯；下層透過剖面連接 B2 月台，可見兩線軌道與列車。" loading="lazy" width="941" height="1672">
+                <div class="cutaway-title">札嘎其站・置物櫃導航圖<small>B1 CONCOURSE / B2 PLATFORM</small></div>
+                <div class="cutaway-locker-label left">B 區置物櫃<small><span lang="ko">201</span>~號 · 靠토성方向</small></div>
+                <div class="cutaway-locker-label right">A 區置物櫃<small><span lang="ko">101</span>~號 · 靠자갈치地下街</small></div>
+              </figure>
+              <p class="cutaway-caption">紅圈處就是目標：大廳兩端各有一整排置物櫃。從甘川洞回程走地下街那頭的 A 區最順路；若從토성／충무동方向出站，改用另一頭的 B 區。每區置物櫃中段都有黑色觸控機台，螢幕會顯示即時空位（藍色可用、灰色使用中）。</p>
+            </div>
             <p class="locker-sketch-note">機台實際步驟與費率（依店內實拍機台畫面）：選「<span lang="ko">보관</span>」存放 → 選櫃號 → 設定密碼（輸入兩次）→ 選付款方式 → 投現金或刷卡 → 取收據 → 櫃門開啟，放好行李記得關門。基本 4 小時：小 2,000／中 3,000／大 4,000／特大 5,000 韓元；超過 4～12 小時每小時加收 300／400／500／600 韓元；超過 12 小時後每 12 小時再加收 2,000／3,000／4,000／5,000 韓元。實際費率可能已調整，請以現場機台顯示為準。</p>
             <p class="locker-sketch-note">官方統計全站合計約特大（<span lang="ko">특대</span>）45、大 2、中 28、小 11 格——行李箱優先選特大型，大型格數很少。營運商 <span lang="ko">위드락커</span> 051-441-2100。</p>
-            <p class="locker-sketch-source">資料來源：<a href="https://m.blog.naver.com/durldi99/223224414433" target="_blank" rel="noreferrer">實地置物櫃踏查與機台實拍</a>、<a href="https://data.humetro.busan.kr/homepage/default/facilities/list02.do?gubun=4&amp;menu_no=1001010804" target="_blank" rel="noreferrer">釜山交通公社置物櫃統計</a>。</p>
+            <p class="locker-sketch-source">插畫為 AI 生成示意圖，依<a href="https://m.blog.naver.com/durldi99/223224414433" target="_blank" rel="noreferrer">實地置物櫃踏查與機台實拍</a>重繪兩處置物櫃位置；費率與格數另參考<a href="https://data.humetro.busan.kr/homepage/default/facilities/list02.do?gubun=4&amp;menu_no=1001010804" target="_blank" rel="noreferrer">釜山交通公社置物櫃統計</a>。實際內裝與動線請以現場為準。</p>
           </div>
         </details>` : "";
       return `

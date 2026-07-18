@@ -1,10 +1,11 @@
 // 更新 index.html 內容後，請把版本號 +1，離線快取才會換新。
-const CACHE_VERSION = "busan-handbook-v2";
+const CACHE_VERSION = "busan-handbook-v3";
 
 const PRECACHE_URLS = [
   "./",
   "index.html",
   "manifest.webmanifest",
+  "assets/jagalchi-locker-station-cutaway.jpg",
   "assets/icon-192.png",
   "assets/icon-512.png",
   "assets/apple-touch-icon.png"
