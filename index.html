@@ -1742,7 +1742,7 @@
         </div>
 
         <div class="side-card">
-          <h3>備案提醒</h3>
+          <h3>今日注意</h3>
           <ul class="mini-list" id="backupList"></ul>
         </div>
       </aside>
@@ -2621,18 +2621,59 @@
       "d8-9": ["一人等行李，一人先帶孩子找座位", "推車延遲：先到行李服務櫃檯登記"]
     };
 
+    const eventVenuePools = {
+      d1: {
+        food: ["西面市場（서면시장）・小吃街", "田浦咖啡街・咖啡店／早午餐"],
+        indoor: ["樂天百貨釜山本店・餐飲樓層", "Samjung Tower・親子室內商場"],
+        outdoor: ["釜山市民公園・兒童遊戲區", "田浦咖啡街・街區散步"]
+      },
+      d2: {
+        food: ["田浦咖啡街・親子咖啡店", "釜山鎮市場（부산진시장）・小吃"],
+        indoor: ["Samjung Tower・親子室內商場", "樂天百貨釜山本店・地下街"],
+        outdoor: ["釜山市民公園・兒童遊戲區", "Bujeon Market Town・市場散步"]
+      },
+      d3: {
+        food: ["樂天 Outlet 東釜山・餐飲區", "機張市場（기장시장）・海鮮小吃"],
+        indoor: ["釜山國立科學館・親子展區", "樂天 Outlet 東釜山・室內商場"],
+        outdoor: ["海東龍宮寺・海景平台", "機張竹城教堂・海邊拍照點"]
+      },
+      d4: {
+        food: ["海雲台傳統市場・小吃街", "青沙浦烤貝街・海景餐廳"],
+        indoor: ["釜山美術館・室內展覽", "Goeun Museum of Photography・攝影展"],
+        outdoor: ["冬柏島海岸步道・散步", "青沙浦 Daritdol Skywalk・海景步道"]
+      },
+      d5: {
+        food: ["札嘎其市場・海鮮餐廳", "BIFF 廣場・街頭小吃"],
+        indoor: ["國立海洋博物館・兒童體驗館", "釜山近代歷史館・室內展覽"],
+        outdoor: ["白淺文化村・海景散步", "松島海灘・沙灘散步"]
+      },
+      d6: {
+        food: ["富平罐頭夜市・街頭小吃", "國際市場・小吃與餐廳"],
+        indoor: ["國立海洋博物館・兒童體驗館", "釜山電影體驗博物館・互動展覽"],
+        outdoor: ["太宗台・Danubi 遊園車", "五六島天空步道・海景"]
+      },
+      d7: {
+        food: ["沙上西部巴士客運站・餐飲街", "Gupo Market・市場小吃"],
+        indoor: ["Renecite・購物商場", "樂天百貨釜山本店・室內商場"],
+        outdoor: ["三樂生態公園・河畔散步", "Sasang Museum of Everyday Life・生活史展館"]
+      },
+      d8: {
+        food: ["金海機場國際線餐飲區", "金海機場咖啡店／便利商店"],
+        indoor: ["金海機場免稅店", "金海機場國際線休息區"],
+        outdoor: ["金海機場觀景休息區", "沙上站周邊市場"]
+      }
+    };
+
     function getSelectedEventBackup(dayId, index) {
       return localStorage.getItem(`busan-event-backup-${dayId}-${index}`) || "";
     }
 
     function getEventBackupChoices(dayId, index, event) {
-      const custom = eventBackupChoices[`${dayId}-${index}`];
-      if (custom) return custom;
+      const pool = eventVenuePools[dayId] || eventVenuePools.d1;
       const tags = event[4] || [];
-      if (tags.includes("transport")) return ["改搭計程車，減少轉乘與候車", "時間不足：直接前往下一個重點，刪除此段緩衝"];
-      if (tags.includes("food")) return ["改附近便利商店或外帶，節省用餐時間", "孩子累了：簡化餐食，回飯店休息"];
-      if (tags.includes("rest")) return ["延長休息 30 分鐘，刪除下一個非必要段", "孩子睡不著：改安靜室內活動，不硬排景點"];
-      return ["下雨或太累：改附近室內景點／商場", "時間不足：縮短停留，保留下一個重點行程"];
+      if (tags.includes("food")) return pool.food;
+      if (tags.includes("rest") || tags.includes("transport") || tags.includes("luggage")) return pool.indoor;
+      return pool.outdoor;
     }
 
     function renderEventAlternatives(dayId, index, event) {
@@ -2640,7 +2681,7 @@
       const selected = getSelectedEventBackup(dayId, index);
       return `
         <details class="event-alternatives">
-          <summary>備案 <span>${selected ? `已選：${selected}` : "可選"}</span></summary>
+          <summary>替代店家／景點 <span>${selected ? `已選：${selected}` : "可選"}</span></summary>
           <div class="event-alternative-list" role="group" aria-label="此行程的備案">
             ${choices.map((choice, choiceIndex) => {
               const isSelected = selected === choice;
