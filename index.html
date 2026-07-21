@@ -588,6 +588,48 @@
 
     .day-live strong { display: block; margin-top: 2px; font-size: 15px; }
 
+    .day-alternatives {
+      grid-column: 1 / -1;
+      padding: 10px 12px;
+      border: 1px dashed var(--ink);
+      background: #fff9e4;
+    }
+
+    .day-alternatives-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .day-alternatives-head small { color: var(--coral); font-family: var(--mono); font-size: 11px; font-weight: 800; }
+    .backup-choice-status { color: var(--muted); font-size: 12px; }
+
+    .backup-choice-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .backup-choice {
+      min-height: 32px;
+      padding: 5px 9px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: #fffdf7;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .backup-choice:hover,
+    .backup-choice.selected { background: var(--lemon); box-shadow: 2px 2px 0 var(--ink); }
+
+    .backup-choice.selected::before { content: "✓ "; color: var(--sea-2); }
+
     .day-weather {
       grid-column: 1 / -1;
       display: grid;
@@ -1362,6 +1404,8 @@
       .day-live { align-items: flex-start; }
 
       .day-live strong { font-size: 14px; }
+
+      .day-alternatives-head { align-items: flex-start; flex-direction: column; gap: 3px; }
 
       .forecast-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -2448,6 +2492,41 @@
       `;
     }
 
+    const dayBackupChoices = {
+      d1: ["橋村炸雞直接外帶回飯店", "行李較多：機場到西面改搭計程車"],
+      d2: ["下雨：改成樂天百貨＋西面地下街", "下午先回飯店午休，刪減逛街"],
+      d3: ["Luge 不適合幼童：改逛樂天 Outlet", "下雨：改國立釜山科學館或室內景點"],
+      d4: ["膠囊列車排隊久：改搭海灘列車", "小孩累了：取消 THE BAY 101，直接回飯店"],
+      d5: ["置物櫃滿：先到 El Momento Songdo 寄放", "甘川洞坡多：縮短拍照，提早前往松島"],
+      d6: ["纜車排隊久：縮短南浦逛街時間", "天氣好且體力足：改太宗台半日遊"],
+      d7: ["採買縮短：提早回 Hotel Andrest 整理行李", "晚餐提早外帶，讓幼童早點睡"],
+      d8: ["全程提前 15 分鐘出門", "行李較多：沙上到機場改搭短程計程車"]
+    };
+
+    function getSelectedBackup(dayId) {
+      return localStorage.getItem(`busan-backup-choice-${dayId}`) || "";
+    }
+
+    function renderDayAlternatives(day) {
+      const choices = dayBackupChoices[day.id] || [];
+      if (!choices.length) return "";
+      const selected = getSelectedBackup(day.id);
+      return `
+        <section class="day-alternatives" aria-label="${day.label} 可選備案">
+          <div class="day-alternatives-head">
+            <small>本日可選備案</small>
+            <span class="backup-choice-status">${selected ? `已選：${selected}` : "尚未選擇，正式行程不變"}</span>
+          </div>
+          <div class="backup-choice-list" role="group" aria-label="選擇本日備案">
+            ${choices.map((choice, index) => {
+              const isSelected = selected === choice;
+              return `<button class="backup-choice${isSelected ? " selected" : ""}" type="button" data-backup-choice="${day.id}:${index}" aria-pressed="${isSelected}">${choice}</button>`;
+            }).join("")}
+          </div>
+        </section>
+      `;
+    }
+
     function renderDay() {
       const day = days[activeDay];
       if (query) {
@@ -2472,6 +2551,7 @@
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
             <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
           </div>
+          ${renderDayAlternatives(day)}
           ${weatherCard}
         </div>
         <div class="timeline">
@@ -2634,6 +2714,18 @@
     });
 
     panel.addEventListener("click", (event) => {
+      const backupButton = event.target.closest("[data-backup-choice]");
+      if (backupButton) {
+        const [dayId, choiceIndex] = backupButton.dataset.backupChoice.split(":");
+        const choice = (dayBackupChoices[dayId] || [])[Number(choiceIndex)];
+        if (!choice) return;
+        const key = `busan-backup-choice-${dayId}`;
+        if (getSelectedBackup(dayId) === choice) localStorage.removeItem(key);
+        else localStorage.setItem(key, choice);
+        if (allExpanded) renderAllDays();
+        else renderDay();
+        return;
+      }
       const button = event.target.closest("[data-event-check]");
       if (!button) return;
       const completed = button.getAttribute("aria-pressed") !== "true";
@@ -2718,6 +2810,7 @@
         <div class="day-head">
           <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
           <div class="sleep-badge">住宿：${day.stay}</div>
+          ${renderDayAlternatives(day)}
         </div>
         <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
       `).join("");
