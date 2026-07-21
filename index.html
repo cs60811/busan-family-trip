@@ -620,6 +620,50 @@
 
     .day-weather.loading { background: var(--paper-2); }
 
+    .weather-view { padding: 30px 0 48px; }
+
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .forecast-card {
+      min-height: 190px;
+      padding: 15px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .forecast-card.today { background: #e8f2ed; }
+    .forecast-card.pending { background: var(--paper-2); }
+    .forecast-card small { color: var(--coral); font-family: var(--mono); font-size: 11px; font-weight: 800; }
+    .forecast-card h3 { margin: 8px 0 5px; font-family: var(--serif); font-size: 21px; line-height: 1.15; }
+    .forecast-place { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 11px; }
+    .forecast-temp { margin: 17px 0 5px; color: var(--sea-2); font-family: var(--mono); font-size: 25px; font-weight: 800; }
+    .forecast-desc { margin: 0; font-weight: 700; }
+    .forecast-rain { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .forecast-note { margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+    .event-weather {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      padding: 3px 7px;
+      border: 1px solid var(--sea-2);
+      border-radius: 999px;
+      background: #e8f2ed;
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .event-weather[hidden] { display: none; }
+
     .day-progress {
       flex: 0 0 auto;
       padding: 5px 7px;
@@ -1319,6 +1363,8 @@
 
       .day-live strong { font-size: 14px; }
 
+      .forecast-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
       .day-weather { grid-template-columns: auto minmax(0, 1fr); gap: 9px; }
 
       .weather-meta { grid-column: 2; text-align: left; white-space: normal; }
@@ -1359,6 +1405,8 @@
         font-size: 13px;
         text-align: center;
       }
+
+      .actions .icon-btn[data-view="weather"] { grid-column: 1 / -1; }
 
       .day-tabs {
         margin-inline: -9px;
@@ -1425,6 +1473,7 @@
         <button class="icon-btn active" type="button" data-view="itinerary">行程列表</button>
         <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
         <button class="icon-btn" type="button" data-view="backup">備用景點</button>
+        <button class="icon-btn" type="button" data-view="weather">天氣預報</button>
       </div>
     </div>
   </header>
@@ -1656,6 +1705,23 @@
         </div>
       </div>
       <div id="backupDirectory"></div>
+    </section>
+
+    <section class="weather-view" id="weatherView" hidden aria-labelledby="weatherTitle">
+      <div class="pass-heading">
+        <div>
+          <span class="kicker">BUSAN WEATHER · HOTEL-BASED FORECAST</span>
+          <h2 id="weatherTitle">天氣預報</h2>
+          <p>依每天住宿地點顯示預報。預報資料進入可預測範圍後，行程中的各時間點也會同步顯示預期氣溫。</p>
+        </div>
+        <a class="pass-link" href="https://open-meteo.com/en/docs" target="_blank" rel="noreferrer">資料來源 Open-Meteo ↗</a>
+      </div>
+      <div class="pass-toolbar">
+        <span class="pass-count" id="weatherStatus">正在準備預報</span>
+        <button class="toggle" id="weatherRefresh" type="button">重新整理預報</button>
+      </div>
+      <div class="forecast-grid" id="forecastGrid"></div>
+      <p class="forecast-note">預報通常只在出發前約 16 天內可用；尚未進入範圍的日期會保留住宿位置，但不會用歷史平均氣溫代替預報。</p>
     </section>
   </main>
 
@@ -1982,6 +2048,8 @@
     let activeView = "itinerary";
     let passFilter = "all";
     let backupFilter = "all";
+    let weatherForecastByDay = {};
+    let forecastLoading = false;
 
     const tabs = document.getElementById("dayTabs");
     const panel = document.getElementById("dayPanel");
@@ -1992,12 +2060,15 @@
     const passGrid = document.getElementById("passGrid");
     const backupView = document.getElementById("backupView");
     const backupDirectory = document.getElementById("backupDirectory");
+    const weatherView = document.getElementById("weatherView");
+    const forecastGrid = document.getElementById("forecastGrid");
 
     function setView(view, shouldScroll = true) {
       activeView = view;
       itineraryView.hidden = view !== "itinerary";
       passView.hidden = view !== "pass";
       backupView.hidden = view !== "backup";
+      weatherView.hidden = view !== "weather";
       document.querySelectorAll("[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === view));
       if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -2059,7 +2130,7 @@
             latitude: String(location.latitude),
             longitude: String(location.longitude),
             current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m",
-            hourly: "precipitation_probability",
+            hourly: "temperature_2m,precipitation_probability,weather_code",
             daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
             timezone: "Asia/Seoul",
             forecast_days: "1"
@@ -2069,6 +2140,9 @@
           data = await response.json();
           sessionStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data }));
         }
+
+        weatherForecastByDay[day.id] = { data, location };
+        updateEventWeatherBadges();
 
         const target = document.getElementById("todayWeather");
         if (!target || target.dataset.weatherKey !== key) return;
@@ -2088,6 +2162,113 @@
         if (!target || target.dataset.weatherKey !== key) return;
         target.classList.remove("loading");
         target.innerHTML = `<span class="weather-status">天氣</span><div class="weather-copy"><small>今日天氣 · ${location.label}</small><strong>暫時無法取得天氣，請稍後重新整理</strong></div><span class="weather-meta">Open-Meteo</span>`;
+      }
+    }
+
+    function getDayDate(dayId) {
+      const index = days.findIndex(day => day.id === dayId);
+      return index === -1 ? "" : tripDateKeys[index];
+    }
+
+    function getEventWeather(dayId, time) {
+      const forecast = weatherForecastByDay[dayId];
+      if (!forecast || !/^\d{2}:\d{2}$/.test(time)) return null;
+      const date = getDayDate(dayId);
+      const hourly = forecast.data.hourly;
+      const daily = forecast.data.daily;
+      const hourKey = `${date}T${time}`;
+      let hourlyIndex = hourly?.time?.indexOf(hourKey);
+      if (hourlyIndex === -1 || hourlyIndex === undefined) hourlyIndex = -1;
+      const dailyIndex = daily?.time?.indexOf(date) ?? -1;
+      const temperature = hourlyIndex >= 0 ? hourly.temperature_2m?.[hourlyIndex] : null;
+      if (temperature === null || temperature === undefined) return dailyIndex >= 0 ? {
+        temperature: (daily.temperature_2m_max[dailyIndex] + daily.temperature_2m_min[dailyIndex]) / 2,
+        description: getWeatherDescription(daily.weather_code[dailyIndex])
+      } : null;
+      return { temperature, description: getWeatherDescription(hourly.weather_code?.[hourlyIndex] ?? daily.weather_code?.[dailyIndex]) };
+    }
+
+    function updateEventWeatherBadges() {
+      document.querySelectorAll("[data-event-weather]").forEach(badge => {
+        const [dayId, eventIndex] = badge.dataset.eventWeather.split(":");
+        const event = days.find(day => day.id === dayId)?.events[Number(eventIndex)];
+        const weather = event ? getEventWeather(dayId, event[0]) : null;
+        if (!weather) {
+          badge.hidden = true;
+          return;
+        }
+        badge.hidden = false;
+        badge.textContent = `約 ${Math.round(weather.temperature)}°`;
+        badge.title = `${weather.description} · 預估 ${Math.round(weather.temperature)}°C`;
+      });
+    }
+
+    function renderForecastDirectory() {
+      const todayIndex = getTripDayIndex();
+      forecastGrid.innerHTML = days.map((day, index) => {
+        const location = getWeatherLocation(day);
+        const forecast = weatherForecastByDay[day.id];
+        const dailyIndex = forecast?.data.daily?.time?.indexOf(tripDateKeys[index]) ?? -1;
+        const daily = dailyIndex >= 0 ? forecast.data.daily : null;
+        if (!daily) return `
+          <article class="forecast-card pending">
+            <small>${day.label} · ${day.date}</small>
+            <h3>${day.title}</h3>
+            <p class="forecast-place">住宿：${location.label}</p>
+            <p class="forecast-temp">尚未開放</p>
+            <p class="forecast-desc">出發前約 16 天內更新</p>
+            <p class="forecast-rain">目前沒有這一天的即時預報。</p>
+          </article>`;
+        const code = daily.weather_code[dailyIndex];
+        const rain = daily.precipitation_probability_max?.[dailyIndex];
+        return `
+          <article class="forecast-card ${todayIndex === index ? "today" : ""}">
+            <small>${day.label} · ${day.date}${todayIndex === index ? " · 今天" : ""}</small>
+            <h3>${day.title}</h3>
+            <p class="forecast-place">住宿：${location.label}</p>
+            <p class="forecast-temp">${Math.round(daily.temperature_2m_min[dailyIndex])}–${Math.round(daily.temperature_2m_max[dailyIndex])}°C</p>
+            <p class="forecast-desc">${getWeatherDescription(code)}</p>
+            <p class="forecast-rain">降雨機率 ${rain ?? "-"}%</p>
+          </article>`;
+      }).join("");
+    }
+
+    async function loadForecastDirectory(forceRefresh = false) {
+      if (forecastLoading) return;
+      if (!forceRefresh && Object.keys(weatherForecastByDay).length >= days.length) {
+        renderForecastDirectory();
+        return;
+      }
+      forecastLoading = true;
+      document.getElementById("weatherStatus").textContent = "正在更新預報";
+      const locations = Object.values(hotelWeatherLocations);
+      try {
+        const params = new URLSearchParams({
+          latitude: locations.map(location => location.latitude).join(","),
+          longitude: locations.map(location => location.longitude).join(","),
+          hourly: "temperature_2m,precipitation_probability,weather_code",
+          daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+          timezone: "Asia/Seoul",
+          forecast_days: "16"
+        });
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+        if (!response.ok) throw new Error("Forecast service unavailable");
+        const payload = await response.json();
+        const results = Array.isArray(payload) ? payload : [payload];
+        locations.forEach((location, index) => {
+          const data = results[index];
+          if (!data) return;
+          days.forEach(day => {
+            if (getWeatherLocation(day).id === location.id) weatherForecastByDay[day.id] = { data, location };
+          });
+        });
+        document.getElementById("weatherStatus").textContent = "預報已更新";
+      } catch {
+        document.getElementById("weatherStatus").textContent = "目前無法更新，請稍後重試";
+      } finally {
+        forecastLoading = false;
+        renderForecastDirectory();
+        updateEventWeatherBadges();
       }
     }
 
@@ -2300,6 +2481,7 @@
       backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
       renderTabs();
       updateStickyOffsets();
+      updateEventWeatherBadges();
       if (weatherCard) loadTodayWeather(day);
     }
 
@@ -2309,6 +2491,7 @@
       const checkKey = `busan-event-${dayId}-${index}`;
       const completed = localStorage.getItem(checkKey) === "1";
       const location = eventLocations[`${dayId}-${index}`];
+      const weatherBadge = `<span class="event-weather" data-event-weather="${dayId}:${index}" hidden></span>`;
       const lockerSketch = location && location.sketch ? `
         <details class="locker-sketch" open>
           <summary>札嘎其站內：手繪找櫃圖</summary>
@@ -2335,6 +2518,7 @@
               <h3>${title}</h3>
               <div class="event-actions">
                 ${duration ? `<span class="duration">${duration}</span>` : ""}
+                ${weatherBadge}
                 <button class="event-done" type="button" data-event-check="${checkKey}" aria-pressed="${completed}">${completed ? "已完成" : "完成"}</button>
               </div>
             </div>
@@ -2463,13 +2647,16 @@
     document.querySelector(".actions").addEventListener("click", (event) => {
       const button = event.target.closest("[data-view]");
       if (!button) return;
-      if (button.dataset.view === "itinerary") {
+          if (button.dataset.view === "itinerary") {
         setView("itinerary", false);
         window.requestAnimationFrame(scrollToDayPanel);
         return;
       }
       setView(button.dataset.view);
+      if (button.dataset.view === "weather") loadForecastDirectory();
     });
+
+    document.getElementById("weatherRefresh").addEventListener("click", () => loadForecastDirectory(true));
 
     document.querySelector(".pass-toggle").addEventListener("click", (event) => {
       const button = event.target.closest("[data-pass-filter]");
