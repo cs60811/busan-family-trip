@@ -2509,7 +2509,7 @@
         .filter(({ event, index }) => localStorage.getItem(`busan-event-${day.id}-${index}`) !== "1" && /^\d{2}:\d{2}$/.test(event[0]));
       if (tripDayIndex !== activeDay) {
         const firstRemaining = remainingEvents[0]?.event || firstEvent;
-        return `首站 ${firstRemaining[0]} · ${firstRemaining[1]}`;
+        return completed ? `下一個 ${firstRemaining[0]} · ${firstRemaining[1]}` : `首站 ${firstRemaining[0]} · ${firstRemaining[1]}`;
       }
 
       const now = getBusanClockMinutes();
