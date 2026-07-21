@@ -588,6 +588,38 @@
 
     .day-live strong { display: block; margin-top: 2px; font-size: 15px; }
 
+    .day-weather {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 12px;
+      border: 1px solid var(--ink);
+      background: #e8f2ed;
+    }
+
+    .weather-status {
+      min-width: 48px;
+      padding: 5px 7px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: var(--lemon);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .weather-copy small,
+    .weather-copy strong { display: block; }
+    .weather-copy small { color: var(--sea-2); font-family: var(--mono); font-size: 11px; font-weight: 700; }
+    .weather-copy strong { margin-top: 2px; font-size: 14px; line-height: 1.35; }
+    .weather-meta { color: var(--muted); font-family: var(--mono); font-size: 12px; text-align: right; white-space: nowrap; }
+
+    .day-weather.loading { background: var(--paper-2); }
+
     .day-progress {
       flex: 0 0 auto;
       padding: 5px 7px;
@@ -1287,6 +1319,10 @@
 
       .day-live strong { font-size: 14px; }
 
+      .day-weather { grid-template-columns: auto minmax(0, 1fr); gap: 9px; }
+
+      .weather-meta { grid-column: 2; text-align: left; white-space: normal; }
+
       .sleep-badge {
         white-space: normal;
       }
@@ -1823,6 +1859,37 @@
       "d5-7": { query: "자갈치역", label: "札嘎其站（取回行李）" }
     };
 
+    const hotelWeatherLocations = {
+      "Hotel Kyungsung": { id: "seomyeon", label: "西面／Hotel Kyungsung", latitude: 35.1574, longitude: 129.0589 },
+      "UH Continental 中心點酒店": { id: "haeundae", label: "海雲台／UH Continental", latitude: 35.1601, longitude: 129.1804 },
+      "El Momento Songdo": { id: "songdo", label: "松島／El Momento", latitude: 35.0783, longitude: 129.0204 },
+      "Hotel Andrest": { id: "sasang", label: "沙上／Hotel Andrest", latitude: 35.1637, longitude: 128.9846 }
+    };
+
+    const weatherLabels = {
+      0: "晴",
+      1: "大致晴朗",
+      2: "局部多雲",
+      3: "陰",
+      45: "有霧",
+      48: "霧淞",
+      51: "毛毛雨",
+      53: "毛毛雨",
+      55: "毛毛雨",
+      61: "小雨",
+      63: "中雨",
+      65: "大雨",
+      71: "小雪",
+      73: "中雪",
+      75: "大雪",
+      80: "陣雨",
+      81: "陣雨",
+      82: "強陣雨",
+      95: "雷雨",
+      96: "雷雨伴冰雹",
+      99: "強雷雨"
+    };
+
     const phrases = [
       { zh: "置物櫃", ko: "물품보관함", rom: "mul-pum-bo-gwan-ham" },
       { zh: "廁所", ko: "화장실", rom: "hwa-jang-shil" },
@@ -1946,6 +2013,82 @@
           <p class="pass-place">${item.region}</p>
         </article>
       `).join("") : `<div class="pass-empty">目前沒有符合的景點。</div>`;
+    }
+
+    function getWeatherLocation(day) {
+      return hotelWeatherLocations[day.stay] || hotelWeatherLocations["Hotel Andrest"];
+    }
+
+    function getWeatherCard(day) {
+      if (getTripDayIndex() !== activeDay) return "";
+      const location = getWeatherLocation(day);
+      return `
+        <section class="day-weather loading" id="todayWeather" data-weather-key="${day.id}-${location.id}" aria-live="polite">
+          <span class="weather-status">讀取中</span>
+          <div class="weather-copy"><small>今日天氣 · ${location.label}</small><strong>正在依住宿地點取得釜山即時天氣</strong></div>
+          <span class="weather-meta">資料更新中</span>
+        </section>`;
+    }
+
+    function getWeatherDescription(code) {
+      return weatherLabels[code] || "天氣資訊";
+    }
+
+    function getHourlyRainChance(hourly, currentTime) {
+      if (!hourly || !hourly.time || !hourly.precipitation_probability) return null;
+      const hourKey = `${currentTime.slice(0, 13)}:00`;
+      let index = hourly.time.indexOf(hourKey);
+      if (index === -1) index = hourly.time.findIndex(time => time > currentTime);
+      return index === -1 ? null : hourly.precipitation_probability[index];
+    }
+
+    async function loadTodayWeather(day) {
+      const location = getWeatherLocation(day);
+      const key = `${day.id}-${location.id}`;
+      const card = document.getElementById("todayWeather");
+      if (!card || card.dataset.weatherKey !== key) return;
+
+      const cacheKey = `busan-weather-${getBusanDateKey()}-${location.id}`;
+      let data;
+      try {
+        const cached = JSON.parse(sessionStorage.getItem(cacheKey) || "null");
+        if (cached && Date.now() - cached.savedAt < 20 * 60 * 1000) {
+          data = cached.data;
+        } else {
+          const params = new URLSearchParams({
+            latitude: String(location.latitude),
+            longitude: String(location.longitude),
+            current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m",
+            hourly: "precipitation_probability",
+            daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+            timezone: "Asia/Seoul",
+            forecast_days: "1"
+          });
+          const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+          if (!response.ok) throw new Error("Weather service unavailable");
+          data = await response.json();
+          sessionStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data }));
+        }
+
+        const target = document.getElementById("todayWeather");
+        if (!target || target.dataset.weatherKey !== key) return;
+        const current = data.current;
+        const daily = data.daily;
+        const weather = getWeatherDescription(current.weather_code);
+        const rainChance = getHourlyRainChance(data.hourly, current.time) ?? daily.precipitation_probability_max?.[0];
+        const max = Math.round(daily.temperature_2m_max?.[0]);
+        const min = Math.round(daily.temperature_2m_min?.[0]);
+        target.classList.remove("loading");
+        target.innerHTML = `
+          <span class="weather-status">${weather}</span>
+          <div class="weather-copy"><small>今日天氣 · ${location.label}</small><strong>現在 ${Math.round(current.temperature_2m)}°C · 體感 ${Math.round(current.apparent_temperature)}°C</strong></div>
+          <span class="weather-meta">${min}–${max}°C · 降雨 ${rainChance ?? "-"}% · 風 ${Math.round(current.wind_speed_10m)} km/h</span>`;
+      } catch {
+        const target = document.getElementById("todayWeather");
+        if (!target || target.dataset.weatherKey !== key) return;
+        target.classList.remove("loading");
+        target.innerHTML = `<span class="weather-status">天氣</span><div class="weather-copy"><small>今日天氣 · ${location.label}</small><strong>暫時無法取得天氣，請稍後重新整理</strong></div><span class="weather-meta">Open-Meteo</span>`;
+      }
     }
 
     function renderBackupDirectory() {
@@ -2135,6 +2278,7 @@
       }
       const events = day.events.map((event, index) => ({ event, index })).filter(({ event }) => eventMatches(event));
       const completed = getCompletedEventCount(day);
+      const weatherCard = getWeatherCard(day);
       panel.innerHTML = `
         <div class="day-head">
           <div>
@@ -2147,6 +2291,7 @@
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
             <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
           </div>
+          ${weatherCard}
         </div>
         <div class="timeline">
           ${events.length ? events.map(({ event, index }) => renderEvent(event, index, day.id)).join("") : `<div class="empty">沒有符合搜尋或篩選的行程。</div>`}
@@ -2155,6 +2300,7 @@
       backupList.innerHTML = day.backup.map(item => `<li>${item}</li>`).join("");
       renderTabs();
       updateStickyOffsets();
+      if (weatherCard) loadTodayWeather(day);
     }
 
     function renderEvent(event, index, dayId) {
