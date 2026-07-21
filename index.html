@@ -2504,24 +2504,28 @@
       const firstEvent = day.events[0];
       const completed = getCompletedEventCount(day);
       if (completed === day.events.length) return "今日行程完成，回飯店休息";
-      const progressPrefix = completed ? `已完成 ${completed} 項 · ` : "";
-      if (tripDayIndex !== activeDay) return `${progressPrefix}首站 ${firstEvent[0]} · ${firstEvent[1]}`;
+      const remainingEvents = day.events
+        .map((event, index) => ({ event, index }))
+        .filter(({ event, index }) => localStorage.getItem(`busan-event-${day.id}-${index}`) !== "1" && /^\d{2}:\d{2}$/.test(event[0]));
+      if (tripDayIndex !== activeDay) {
+        const firstRemaining = remainingEvents[0]?.event || firstEvent;
+        return `首站 ${firstRemaining[0]} · ${firstRemaining[1]}`;
+      }
 
       const now = getBusanClockMinutes();
-      const timedEvents = day.events.filter(event => /^\d{2}:\d{2}$/.test(event[0]));
-      const current = timedEvents.find(event => {
+      const current = remainingEvents.find(({ event }) => {
         const [hours, minutes] = event[0].split(":").map(Number);
         const start = hours * 60 + minutes;
         const duration = Number.parseInt(event[2], 10) || 30;
         return now >= start && now < start + duration;
-      });
-      if (current) return `${progressPrefix}現在 · ${current[1]}`;
+      })?.event;
+      if (current) return `現在 · ${current[1]}`;
 
-      const next = timedEvents.find(event => {
+      const next = remainingEvents.find(({ event }) => {
         const [hours, minutes] = event[0].split(":").map(Number);
         return hours * 60 + minutes > now;
-      });
-      return next ? `${progressPrefix}下一個 ${next[0]} · ${next[1]}` : `${progressPrefix}今日剩餘行程完成後休息`;
+      })?.event || remainingEvents[0]?.event;
+      return next ? `下一個 ${next[0]} · ${next[1]}` : "今日行程完成，回飯店休息";
     }
 
     function updateDayStatus() {
