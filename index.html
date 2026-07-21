@@ -2714,6 +2714,7 @@
     }
 
     function renderEventAlternatives(dayId, index, event) {
+      if (/搭乘飛機|落地/.test(event[1])) return "";
       const choices = getEventBackupChoices(dayId, index, event);
       const selected = getSelectedEventBackup(dayId, index);
       return `
