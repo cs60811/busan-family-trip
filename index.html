@@ -630,6 +630,42 @@
 
     .backup-choice.selected::before { content: "✓ "; color: var(--sea-2); }
 
+    .event-alternatives {
+      margin-top: 9px;
+      border-top: 1px solid rgba(35,33,29,.16);
+      padding-top: 7px;
+    }
+
+    .event-alternatives summary {
+      cursor: pointer;
+      color: var(--coral);
+      font-size: 12px;
+      font-weight: 800;
+      list-style-position: inside;
+    }
+
+    .event-alternatives summary span { color: var(--muted); font-weight: 500; margin-left: 5px; }
+
+    .event-alternative-list { display: grid; gap: 6px; margin-top: 7px; }
+
+    .event-alternative {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid rgba(35,33,29,.24);
+      background: #fffdf5;
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .event-alternative:hover,
+    .event-alternative.selected { border-color: var(--sea-2); background: #e7f4ef; }
+
+    .event-alternative.selected::before { content: "✓ "; color: var(--sea-2); font-weight: 900; }
+
     .day-weather {
       grid-column: 1 / -1;
       display: grid;
@@ -2492,38 +2528,126 @@
       `;
     }
 
-    const dayBackupChoices = {
-      d1: ["橋村炸雞直接外帶回飯店", "行李較多：機場到西面改搭計程車"],
-      d2: ["下雨：改成樂天百貨＋西面地下街", "下午先回飯店午休，刪減逛街"],
-      d3: ["Luge 不適合幼童：改逛樂天 Outlet", "下雨：改國立釜山科學館或室內景點"],
-      d4: ["膠囊列車排隊久：改搭海灘列車", "小孩累了：取消 THE BAY 101，直接回飯店"],
-      d5: ["置物櫃滿：先到 El Momento Songdo 寄放", "甘川洞坡多：縮短拍照，提早前往松島"],
-      d6: ["纜車排隊久：縮短南浦逛街時間", "天氣好且體力足：改太宗台半日遊"],
-      d7: ["採買縮短：提早回 Hotel Andrest 整理行李", "晚餐提早外帶，讓幼童早點睡"],
-      d8: ["全程提前 15 分鐘出門", "行李較多：沙上到機場改搭短程計程車"]
+    const eventBackupChoices = {
+      "d1-0": ["改搭計程車，減少幼童候車時間", "若出發前已疲累，延後 15 分鐘並縮短機場停留"],
+      "d1-1": ["先辦理托運，再由一位大人帶孩子找座位", "推車改成登機口托運，減少航廈內搬運"],
+      "d1-2": ["改吃機場便利商店，留時間換尿布", "孩子已吃飽：只買水與小點心，不另排餐廳"],
+      "d1-3": ["孩子坐不住：準備貼紙書、耳罩與熟悉點心", "需要走動時：利用登機前最後一段時間活動"],
+      "d1-4": ["行李轉盤久：一人等行李，一人先帶孩子到旁邊休息", "推車未出現：先向航空公司行李櫃檯登記，再搭車"],
+      "d1-5": ["先買水、尿布與小點心，再開始進市區", "出關排隊久：取消晚餐內用，改外帶回飯店"],
+      "d1-6": ["行李較多：機場到西面改搭計程車", "幼童在車上睡著：直接到飯店，不另外繞路"],
+      "d1-7": ["尚未能入住：只寄放行李，先讓孩子在附近休息", "房間整理需等待：改先外帶晚餐回飯店"],
+      "d1-8": ["改成外帶回飯店吃，避免晚間再出門", "孩子已睡著：一位大人取餐，另一位留在房內"],
+      "d1-9": ["提早洗澡上床，保留隔天體力", "只整理隔天用品，其餘行李隔天再收"],
+      "d1-10": ["提前入睡，隔天照原定時間起床", "孩子睡不著：保留安靜陪睡，不再安排外出"],
+
+      "d2-0": ["改飯店附近早餐，省下移動時間", "孩子晚起：早餐改外帶到市民公園附近吃"],
+      "d2-1": ["下雨：改樂天百貨與西面地下街", "太熱：縮短為 60 分鐘，回田浦室內休息"],
+      "d2-2": ["改搭計程車，直接到田浦咖啡街", "孩子睡著：先留在公園附近休息再移動"],
+      "d2-3": ["改成親子友善咖啡廳，延長室內休息", "胃口不好：午餐簡化成麵包、湯或外帶"],
+      "d2-4": ["午睡延長 30 分鐘，刪減 ARTBOX／BUTTER", "孩子不睡：改在飯店安靜看書、玩玩具"],
+      "d2-5": ["下雨時保留百貨與地下街，取消戶外散步", "孩子精神好：增加西面市場小吃段"],
+      "d2-6": ["只選一家文具店，省下 30 分鐘休息", "孩子想玩：改買小玩具回飯店休息"],
+      "d2-7": ["改吃西面市場或飯店附近湯飯", "孩子累了：晚餐改外帶，提早回飯店"],
+      "d2-8": ["晚餐後直接回飯店，不再追加逛街", "下雨：搭計程車回飯店，避免拖傘帶孩子"],
+
+      "d3-0": ["一位大人先整理，另一位陪孩子吃早餐", "行李尚未收好：刪除早晨逛街，直接退房"],
+      "d3-1": ["行李多：直接計程車到 UH Continental", "飯店尚未能寄放：先寄放在車站或改帶到下一站"],
+      "d3-2": ["不能入住也可先寄放，立刻輕裝出發", "孩子需要休息：在飯店附近先停留 20 分鐘"],
+      "d3-3": ["改搭計程車直達海東龍宮寺，少一次轉乘", "下雨或風大：改釜山國立科學館（週一休館）"],
+      "d3-4": ["階梯太多：只走入口與海景平台，縮短停留", "下雨：改釜山國立科學館，適合親子室內活動"],
+      "d3-5": ["改在樂天 Outlet 吃飯，順便避雨休息", "孩子睡著：先吃簡餐，再取消下一個非必要段"],
+      "d3-6": ["未滿 85cm：改樂天 Outlet 或釜山國立科學館", "排隊太久：取消 Luge，提早回海雲台午休"],
+      "d3-7": ["孩子在車上睡著：直接回飯店，不再加停靠", "塞車：改搭地鐵到海雲台，抵達後直接休息"],
+      "d3-8": ["把休息延長到晚餐前，取消 Museum 1", "孩子精神好：改安排 Museum 1 室內看展"],
+      "d3-9": ["改飯店附近簡餐，不再拉遠吃飯", "孩子累了：晚餐外帶，提早洗澡睡覺"],
+      "d3-10": ["晚餐後直接回房，保留隔天海雲台體力", "孩子已睡著：大人輪流簡單整理即可"],
+
+      "d4-0": ["改飯店附近便利商店早餐，省下 30 分鐘", "孩子晚起：海灘行程順延並縮短"],
+      "d4-1": ["太熱：改海雲台水族館提早入場", "下雨：取消玩沙，直接進室內景點"],
+      "d4-2": ["改買麵包回飯店或水族館入口吃", "排隊太久：取消購買，保留水族館時間"],
+      "d4-3": ["孩子已疲累：縮短為 90 分鐘，回飯店午睡", "若下雨：把水族館延長為主要行程"],
+      "d4-4": ["午睡延長 30 分鐘，取消 THE BAY 101", "不回飯店：改在海雲台室內咖啡廳休息"],
+      "d4-5": ["膠囊列車排隊久：改搭海灘列車（釜山 PASS 可用）", "下雨或風大：取消戶外列車，改 Museum 1"],
+      "d4-6": ["看不到夕陽：仍保留室內夜景，改看城市燈景", "孩子累了：取消 THE BAY 101，直接回飯店"],
+      "d4-7": ["改海雲台傳統市場吃小吃，縮短移動", "拍照後直接回飯店，晚餐改外帶"],
+      "d4-8": ["改外帶回飯店，讓孩子提早休息", "改吃海雲台傳統市場，選擇更多"],
+      "d4-9": ["取消夜景段，直接回飯店洗澡", "若孩子還有精神：保留 15 分鐘海邊散步"],
+
+      "d5-0": ["一人整理行李，一人先帶孩子吃早餐", "行李太多：刪除非必要採買，直接寄放"],
+      "d5-1": ["札嘎其站置物櫃滿：先到 El Momento Songdo 寄放", "改搭計程車，直接到飯店放行李再出發"],
+      "d5-2": ["改到 El Momento Songdo 寄放，省下找櫃時間", "只留必要行李，先將大件交給飯店"],
+      "d5-3": ["改搭計程車上山，少走一段轉乘路", "下雨：取消甘川洞，改國立海洋博物館"],
+      "d5-4": ["坡度太累：縮短為主要拍照點與小店", "下雨：改國立海洋博物館兒童體驗空間"],
+      "d5-5": ["直接搭計程車回札嘎其，避免轉乘", "孩子睡著：一人取餐／行李，另一人留車上陪睡"],
+      "d5-6": ["改成市場小吃外帶，提早前往松島", "下雨：改南浦室內商場或釜山電影體驗博物館"],
+      "d5-7": ["回程順路取行李，不再增加逛街行程", "置物櫃找不到：向站務人員出示櫃號與收據"],
+      "d5-8": ["行李多：札嘎其到松島直接搭計程車", "塞車：改搭地鐵到南浦再轉計程車"],
+      "d5-9": ["孩子需要休息：延長房內休息，取消海邊散步", "不能入住：寄放行李後到松島海邊短暫散步"],
+      "d5-10": ["改飯店附近外帶，避免再移動", "下雨：選室內餐廳，取消海邊散步"],
+      "d5-11": ["晚餐後直接回房，提早準備隔天用品", "孩子還有精神：只在飯店附近散步 15 分鐘"],
+
+      "d6-0": ["孩子晚起：早餐改便利商店外帶", "先整理玩沙用品，再開始戶外行程"],
+      "d6-1": ["天氣太熱：改松島附近室內咖啡廳", "風浪大：取消玩沙，提早搭纜車"],
+      "d6-2": ["排隊太久：改搭單程或直接前往南浦", "天氣惡化：取消纜車，改國立海洋博物館"],
+      "d6-3": ["風大：縮短天空步道，回纜車站休息", "孩子累了：跳過天空步道，直接去南浦午餐"],
+      "d6-4": ["改市場小吃，縮短正式用餐時間", "孩子睡著：延後逛街，先在餐廳休息"],
+      "d6-5": ["只逛玩具店，保留 30 分鐘親子休息", "孩子需要放電：改室內遊戲／體驗型景點"],
+      "d6-6": ["雨天改地下街或百貨，取消戶外逛街", "採買完成就回飯店，不必逛滿 90 分鐘"],
+      "d6-7": ["改富平罐頭夜市小吃，彈性較高", "孩子累了：外帶回松島吃，提早回飯店"],
+      "d6-8": ["下雨：取消公園，改釜山塔室內觀景", "排隊太久：只逛龍頭山公園，不登塔"],
+      "d6-9": ["直接搭計程車回松島，減少轉乘", "孩子在車上睡著：回房後直接休息"],
+
+      "d7-0": ["大人輪流整理，孩子醒來再出門", "前一晚先收好機場包，早上只處理盥洗用品"],
+      "d7-1": ["行李多：直接計程車到 Hotel Andrest 門口", "塞車：請司機走高速道路並預留轉乘緩衝"],
+      "d7-2": ["不能入住就先寄放，直接進入午餐安排", "房間已準備好：先放行李再休息 20 分鐘"],
+      "d7-3": ["改飯店附近豬肉湯飯，少一次移動", "孩子不舒服：改粥、麵包或便利商店清淡餐"],
+      "d7-4": ["午睡延長 30 分鐘，刪除咖啡廳段", "孩子睡不著：大人輪流休息，避免硬排景點"],
+      "d7-5": ["改大型超市一次買齊，縮短為 60 分鐘", "孩子累了：只買早餐與機場點心，伴手禮放棄"],
+      "d7-6": ["直接回飯店休息，不另外找咖啡廳", "孩子醒著：選有座位的咖啡廳短暫停留"],
+      "d7-7": ["改飯店附近外帶，提早回房整理", "改吃清淡湯飯，避免太晚太油"],
+      "d7-8": ["只準備護照、登機資料與推車，其他隔天再整理", "提前完成退房用品分裝，早上多睡 15 分鐘"],
+      "d7-9": ["提早 30 分鐘上床，隔天保留幼童緩衝", "孩子睡不著：關燈休息，不再使用手機刺激"],
+
+      "d8-0": ["大人先整理，孩子醒來再吃早餐", "提前 15 分鐘起床，保留換尿布時間"],
+      "d8-1": ["改便利商店買水、麵包與小孩點心", "孩子不餓：只補水與登機後點心"],
+      "d8-2": ["一人顧孩子，一人確認護照與登機資料", "前晚已整理好：縮短退房，直接往車站"],
+      "d8-3": ["下雨或行李多：改搭計程車到沙上站／機場", "推車不便：大人分工搬行李與牽孩子"],
+      "d8-4": ["若下雨：沙上到機場改計程車", "輕軌人多：等下一班，避免推車硬擠"],
+      "d8-5": ["提早到機場先處理托運與推車", "孩子坐不住：一人先找座位與飲水處"],
+      "d8-6": ["先找家庭廁所與育嬰室，再前往登機口", "安檢排隊久：分工排隊與照顧孩子"],
+      "d8-7": ["提早到登機口，先換尿布與補水", "孩子累了：使用推車休息，不再逛免稅店"],
+      "d8-8": ["準備熟悉玩具與小點心，分段給予", "孩子需要走動：登機前先在候機區活動"],
+      "d8-9": ["一人等行李，一人先帶孩子找座位", "推車延遲：先到行李服務櫃檯登記"]
     };
 
-    function getSelectedBackup(dayId) {
-      return localStorage.getItem(`busan-backup-choice-${dayId}`) || "";
+    function getSelectedEventBackup(dayId, index) {
+      return localStorage.getItem(`busan-event-backup-${dayId}-${index}`) || "";
     }
 
-    function renderDayAlternatives(day) {
-      const choices = dayBackupChoices[day.id] || [];
-      if (!choices.length) return "";
-      const selected = getSelectedBackup(day.id);
+    function getEventBackupChoices(dayId, index, event) {
+      const custom = eventBackupChoices[`${dayId}-${index}`];
+      if (custom) return custom;
+      const tags = event[4] || [];
+      if (tags.includes("transport")) return ["改搭計程車，減少轉乘與候車", "時間不足：直接前往下一個重點，刪除此段緩衝"];
+      if (tags.includes("food")) return ["改附近便利商店或外帶，節省用餐時間", "孩子累了：簡化餐食，回飯店休息"];
+      if (tags.includes("rest")) return ["延長休息 30 分鐘，刪除下一個非必要段", "孩子睡不著：改安靜室內活動，不硬排景點"];
+      return ["下雨或太累：改附近室內景點／商場", "時間不足：縮短停留，保留下一個重點行程"];
+    }
+
+    function renderEventAlternatives(dayId, index, event) {
+      const choices = getEventBackupChoices(dayId, index, event);
+      const selected = getSelectedEventBackup(dayId, index);
       return `
-        <section class="day-alternatives" aria-label="${day.label} 可選備案">
-          <div class="day-alternatives-head">
-            <small>本日可選備案</small>
-            <span class="backup-choice-status">${selected ? `已選：${selected}` : "尚未選擇，正式行程不變"}</span>
-          </div>
-          <div class="backup-choice-list" role="group" aria-label="選擇本日備案">
-            ${choices.map((choice, index) => {
+        <details class="event-alternatives">
+          <summary>備案 <span>${selected ? `已選：${selected}` : "可選"}</span></summary>
+          <div class="event-alternative-list" role="group" aria-label="此行程的備案">
+            ${choices.map((choice, choiceIndex) => {
               const isSelected = selected === choice;
-              return `<button class="backup-choice${isSelected ? " selected" : ""}" type="button" data-backup-choice="${day.id}:${index}" aria-pressed="${isSelected}">${choice}</button>`;
+              return `<button class="event-alternative${isSelected ? " selected" : ""}" type="button" data-event-backup="${dayId}:${index}:${choiceIndex}" aria-pressed="${isSelected}">${choice}</button>`;
             }).join("")}
           </div>
-        </section>
+        </details>
       `;
     }
 
@@ -2551,7 +2675,6 @@
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
             <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
           </div>
-          ${renderDayAlternatives(day)}
           ${weatherCard}
         </div>
         <div class="timeline">
@@ -2604,6 +2727,7 @@
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
             ${location ? `<a class="event-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
+            ${renderEventAlternatives(dayId, index, event)}
             ${lockerSketch}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
@@ -2714,13 +2838,14 @@
     });
 
     panel.addEventListener("click", (event) => {
-      const backupButton = event.target.closest("[data-backup-choice]");
+      const backupButton = event.target.closest("[data-event-backup]");
       if (backupButton) {
-        const [dayId, choiceIndex] = backupButton.dataset.backupChoice.split(":");
-        const choice = (dayBackupChoices[dayId] || [])[Number(choiceIndex)];
+        const [dayId, eventIndex, choiceIndex] = backupButton.dataset.eventBackup.split(":");
+        const event = days.find(day => day.id === dayId)?.events[Number(eventIndex)];
+        const choice = getEventBackupChoices(dayId, Number(eventIndex), event || ["", "", "", "", []])[Number(choiceIndex)];
         if (!choice) return;
-        const key = `busan-backup-choice-${dayId}`;
-        if (getSelectedBackup(dayId) === choice) localStorage.removeItem(key);
+        const key = `busan-event-backup-${dayId}-${eventIndex}`;
+        if (getSelectedEventBackup(dayId, Number(eventIndex)) === choice) localStorage.removeItem(key);
         else localStorage.setItem(key, choice);
         if (allExpanded) renderAllDays();
         else renderDay();
@@ -2810,7 +2935,6 @@
         <div class="day-head">
           <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
           <div class="sleep-badge">住宿：${day.stay}</div>
-          ${renderDayAlternatives(day)}
         </div>
         <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
       `).join("");
