@@ -721,6 +721,17 @@
       cursor: pointer;
     }
 
+    .event-alternative-name { display: block; font-weight: 800; }
+
+    .event-alternative-route {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
     .event-alternative:hover,
     .event-alternative.selected { border-color: var(--sea-2); background: #e7f4ef; }
 
@@ -2218,6 +2229,7 @@
       { category: "food", name: "河蓮庭嫩豆腐鍋", region: "西面／釜山鎮", note: "影片推薦的嫩豆腐鍋，適合想吃熱食；幼童餐點請確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐" },
       { category: "food", name: "Vintage 38", region: "西面／田浦", note: "影片推薦的大型咖啡與甜點空間，可替換田浦咖啡街中的咖啡店", alternative: "影片推薦／可替換 Day 2 午餐／下午茶" },
       { category: "food", name: "烤肉的男子（西面店）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；適合當作西面晚餐備案", alternative: "影片推薦／可替換 Day 2 晚餐" },
+      { category: "food", name: "尾浦家 海雲台本店", region: "海雲台／尾浦", note: "醬蟹與海鮮鍋飯；需留意 15:00-17:00 午休與熱門時段候位", alternative: "可替換 Day 4 晚餐" },
       { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐" },
       { category: "food", name: "青沙浦烤貝", region: "青沙浦", note: "海景晚餐選項；膠囊列車周邊可順接", alternative: "可替換 Day 4 晚餐" },
       { category: "food", name: "札嘎其市場／BIFF 廣場", region: "南浦／舊城區", note: "市場小吃、種子糖餅與午餐選擇集中", scheduled: "Day 5" },
@@ -2284,6 +2296,7 @@
       "河蓮庭嫩豆腐鍋": "부산광역시 부산진구 서면로68번길 35 2층",
       "Vintage 38": "부산광역시 부산진구 전포대로199번길 38",
       "烤肉的男子（西面店）": "부산광역시 부산진구 동천로95번길 13",
+      "尾浦家 海雲台本店": "부산광역시 해운대구 달맞이길62번길 3 1층",
       "海雲台傳統市場": "부산광역시 해운대구 구남로41번길 22-1",
       "青沙浦烤貝": "부산광역시 해운대구 청사포로128번길 일대",
       "札嘎其市場／BIFF 廣場": "부산광역시 중구 자갈치해안로 52",
@@ -2768,7 +2781,7 @@
       `;
     }
 
-    const eventBackupChoices = {
+    const eventScenarioNotes = {
       "d1-0": ["改搭計程車，減少幼童候車時間", "若出發前已疲累，延後 15 分鐘並縮短機場停留"],
       "d1-1": ["先辦理托運，再由一位大人帶孩子找座位", "推車改成登機口托運，減少航廈內搬運"],
       "d1-2": ["改吃機場便利商店，留時間換尿布", "孩子已吃飽：只買水與小點心，不另排餐廳"],
@@ -2861,84 +2874,112 @@
       "d8-9": ["一人等行李，一人先帶孩子找座位", "推車延遲：先到行李服務櫃檯登記"]
     };
 
-    const eventVenuePools = {
-      d1: {
-        food: ["西面市場", "田浦咖啡街"],
-        indoor: ["樂天百貨釜山本店", "Samjung Tower"],
-        outdoor: ["釜山市民公園", "田浦咖啡街"]
-      },
-      d2: {
-        food: ["田浦咖啡街", "釜山鎮市場"],
-        indoor: ["Samjung Tower", "樂天百貨釜山本店"],
-        outdoor: ["釜山市民公園", "Bujeon Market Town"]
-      },
-      d3: {
-        food: ["樂天 Outlet 東釜山", "機張市場"],
-        indoor: ["釜山國立科學館", "樂天 Outlet 東釜山"],
-        outdoor: ["海東龍宮寺", "機張竹城教堂"]
-      },
-      d4: {
-        food: ["海雲台傳統市場", "青沙浦烤貝"],
-        indoor: ["釜山美術館", "Goeun Museum of Photography"],
-        outdoor: ["冬柏島海岸步道", "青沙浦 Daritdol Skywalk"]
-      },
-      d5: {
-        food: ["札嘎其市場／BIFF 廣場", "豚笑南浦店"],
-        indoor: ["國立海洋博物館", "釜山近代歷史館"],
-        outdoor: ["白淺文化村", "松島海灘／龍宮雲橋"]
-      },
-      d6: {
-        food: ["富平罐頭夜市", "國際市場"],
-        indoor: ["國立海洋博物館", "釜山電影體驗博物館"],
-        outdoor: ["太宗台", "五六島天空步道"]
-      },
-      d7: {
-        food: ["沙上西部巴士客運站", "Gupo Market"],
-        indoor: ["Renecite", "樂天百貨釜山本店"],
-        outdoor: ["三樂生態公園", "Sasang Museum of Everyday Life"]
-      },
-      d8: {
-        food: ["金海機場國際線餐飲區", "金海機場咖啡店／便利商店"],
-        indoor: ["金海機場免稅店", "金海機場國際線休息區"],
-        outdoor: ["金海機場觀景休息區", "沙上站周邊市場"]
-      }
+    // Each fallback is tied to one stop, so a choice never sends the family back and forth across town.
+    const eventBackupChoices = {
+      "d1-8": [
+        { name: "螞蟻家（西面店）", route: "飯店出發計程車約 5 分；晚到也較有彈性" },
+        { name: "河蓮庭嫩豆腐鍋", route: "飯店出發步行約 10 分；想吃熱食時適合" }
+      ],
+      "d2-0": [
+        { name: "西面市場", route: "飯店出發步行約 6 分；吃完往市民公園計程車約 10 分" }
+      ],
+      "d2-1": [
+        { name: "Bujeon Market Town", route: "市民公園計程車約 7 分；再往田浦約 8 分" }
+      ],
+      "d2-3": [
+        { name: "Vintage 38", route: "田浦咖啡街內步行約 3 分；不需另外拉車" }
+      ],
+      "d2-5": [
+        { name: "Samjung Tower", route: "樂天百貨步行約 8 分；可直接接西面晚餐區" }
+      ],
+      "d2-6": [
+        { name: "釜山鎮市場", route: "西面地下街計程車約 7 分；逛完到晚餐區約 6 分" }
+      ],
+      "d2-7": [
+        { name: "河蓮庭嫩豆腐鍋", route: "松亭3代步行約 5 分；幼童想吃熱食時替換" },
+        { name: "83獬豸（83 해치）", route: "松亭3代計程車約 6 分；想改吃烤肉時替換" },
+        { name: "烤肉的男子（西面店）", route: "松亭3代計程車約 7 分；晚餐後回飯店約 6 分" }
+      ],
+      "d3-4": [
+        { name: "機張竹城教堂", route: "龍宮寺計程車約 12 分；同在機張海岸線，不繞回市區" }
+      ],
+      "d3-6": [
+        { name: "樂天 Outlet 東釜山", route: "Luge 園區步行約 5 分；身高不足或下雨最順路" }
+      ],
+      "d3-9": [
+        { name: "海雲台傳統市場", route: "飯店步行約 8 分；不必再搭車，適合第一晚海雲台" }
+      ],
+      "d4-2": [
+        { name: "海雲台廣場", route: "海灘西端步行約 5 分；平坦好推車，可直接接水族館" }
+      ],
+      "d4-4": [
+        { name: "海雲台傳統市場", route: "水族館步行約 5 分；買午餐後直接回飯店午睡" }
+      ],
+      "d4-5": [
+        { name: "海雲台海灘列車", route: "尾浦站同一園區；可使用 PASS，改搭後仍能順接 X the SKY" }
+      ],
+      "d4-7": [
+        { name: "冬柏島海岸步道", route: "X the SKY 步行約 12 分；若不想上觀景台，改走海岸夜景" }
+      ],
+      "d4-8": [
+        { name: "尾浦家 海雲台本店", route: "THE BAY 101 計程車約 8 分；吃完回飯店約 8 分，建議先看候位" }
+      ],
+      "d5-4": [
+        { name: "Flipbook Studio", route: "甘川洞文化村內步行約 5 分；下雨或太熱時的室內替換" }
+      ],
+      "d5-6": [
+        { name: "海豚豆腐鍋", route: "BIFF 廣場步行約 8 分；仍在南浦，吃完可直接取行李" }
+      ],
+      "d6-4": [
+        { name: "札嘎其市場／BIFF 廣場", route: "松島纜車站計程車約 12 分；到南浦後步行可接玩具店" }
+      ],
+      "d6-5": [
+        { name: "釜山電影體驗博物館", route: "國際市場步行約 7 分；下雨或孩子想進室內時替換" }
+      ],
+      "d6-6": [
+        { name: "釜山近代歷史館", route: "光復路步行約 7 分；室內停留後仍能接豆腐鍋與釜山塔" }
+      ],
+      "d6-7": [
+        { name: "富平罐頭夜市", route: "海豚豆腐鍋步行約 7 分；19:30 後開始熱鬧，可替換晚餐" }
+      ],
+      "d7-3": [
+        { name: "Gupo Market", route: "飯店計程車約 12 分；市場餐食後回飯店約 12 分，適合慢午餐" }
+      ],
+      "d7-5": [
+        { name: "Renecite", route: "Hotel Andrest 計程車約 5 分；室內採買後回飯店也近" }
+      ],
+      "d7-6": [
+        { name: "Sasang Museum of Everyday Life", route: "沙上商圈計程車約 6 分；安靜室內備案，避免跨區移動" }
+      ],
+      "d7-7": [
+        { name: "沙上西部巴士客運站", route: "飯店步行約 8 分；餐食選擇集中，吃完可直接回房整理" }
+      ]
     };
 
     function getSelectedEventBackup(dayId, index) {
       return localStorage.getItem(`busan-event-backup-${dayId}-${index}`) || "";
     }
 
-    function getEventBackupChoices(dayId, index, event) {
-      const pool = eventVenuePools[dayId] || eventVenuePools.d1;
-      const tags = event[4] || [];
-      if (tags.includes("food")) return pool.food;
-      if (tags.includes("rest") || tags.includes("transport") || tags.includes("luggage")) return pool.indoor;
-      return pool.outdoor;
+    function getEventBackupChoices(dayId, index) {
+      return eventBackupChoices[`${dayId}-${index}`] || [];
     }
 
-    function hasVenueAlternative(event) {
-      const title = event[1];
-      const venueTerms = [
-        "橋村炸雞", "釜山市民公園", "田浦咖啡街", "樂天百貨", "ARTBOX", "BUTTER", "松亭3代",
-        "海東龍宮寺", "Skyline Luge", "海雲台沙灘", "自然島鹽麵包", "Sea Life", "膠囊列車",
-        "BUSAN X the SKY", "THE BAY 101", "Outdark Chicken", "甘川洞文化村", "札嘎其市場", "BIFF 廣場",
-        "松島沙灘", "松島纜車", "松島龍宮天空步道", "豚笑", "國際市場", "南浦洞商圈",
-        "海豚豆腐鍋", "龍頭山公園", "釜山塔", "陝川一流", "崔脊骨"
-      ];
-      return venueTerms.some(term => title.includes(term));
+    function hasVenueAlternative(dayId, index) {
+      return getEventBackupChoices(dayId, index).length > 0;
     }
 
     function renderEventAlternatives(dayId, index, event) {
-      if (!hasVenueAlternative(event)) return "";
-      const choices = getEventBackupChoices(dayId, index, event);
-      const selected = getSelectedEventBackup(dayId, index);
+      if (!hasVenueAlternative(dayId, index)) return "";
+      const choices = getEventBackupChoices(dayId, index);
+      const storedSelection = getSelectedEventBackup(dayId, index);
+      const selected = choices.some(choice => choice.name === storedSelection) ? storedSelection : "";
       return `
         <details class="event-alternatives">
-          <summary>替代店家／景點 <span>${selected ? `已選：${selected}` : "可選"}</span></summary>
+          <summary>順路備案 <span>${selected ? `已選：${selected}` : `${choices.length} 個可選`}</span></summary>
           <div class="event-alternative-list" role="group" aria-label="此行程的備案">
             ${choices.map((choice, choiceIndex) => {
-              const isSelected = selected === choice;
-              return `<button class="event-alternative${isSelected ? " selected" : ""}" type="button" data-event-backup="${dayId}:${index}:${choiceIndex}" aria-pressed="${isSelected}">${choice}</button>`;
+              const isSelected = selected === choice.name;
+              return `<button class="event-alternative${isSelected ? " selected" : ""}" type="button" data-event-backup="${dayId}:${index}:${choiceIndex}" aria-pressed="${isSelected}"><span class="event-alternative-name">${choice.name}</span><span class="event-alternative-route">${choice.route}</span></button>`;
             }).join("")}
           </div>
         </details>
@@ -3135,12 +3176,11 @@
       const backupButton = event.target.closest("[data-event-backup]");
       if (backupButton) {
         const [dayId, eventIndex, choiceIndex] = backupButton.dataset.eventBackup.split(":");
-        const event = days.find(day => day.id === dayId)?.events[Number(eventIndex)];
-        const choice = getEventBackupChoices(dayId, Number(eventIndex), event || ["", "", "", "", []])[Number(choiceIndex)];
+        const choice = getEventBackupChoices(dayId, Number(eventIndex))[Number(choiceIndex)];
         if (!choice) return;
         const key = `busan-event-backup-${dayId}-${eventIndex}`;
-        if (getSelectedEventBackup(dayId, Number(eventIndex)) === choice) localStorage.removeItem(key);
-        else localStorage.setItem(key, choice);
+        if (getSelectedEventBackup(dayId, Number(eventIndex)) === choice.name) localStorage.removeItem(key);
+        else localStorage.setItem(key, choice.name);
         if (allExpanded) renderAllDays();
         else renderDay();
         return;
