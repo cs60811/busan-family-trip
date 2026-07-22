@@ -2802,8 +2802,20 @@
       return pool.outdoor;
     }
 
+    function hasVenueAlternative(event) {
+      const title = event[1];
+      const venueTerms = [
+        "橋村炸雞", "釜山市民公園", "田浦咖啡街", "樂天百貨", "ARTBOX", "BUTTER", "松亭3代",
+        "海東龍宮寺", "Skyline Luge", "海雲台沙灘", "自然島鹽麵包", "Sea Life", "膠囊列車",
+        "BUSAN X the SKY", "THE BAY 101", "Outdark Chicken", "甘川洞文化村", "札嘎其市場", "BIFF 廣場",
+        "松島沙灘", "松島纜車", "松島龍宮天空步道", "豚笑", "國際市場", "南浦洞商圈",
+        "海豚豆腐鍋", "龍頭山公園", "釜山塔", "陝川一流", "崔脊骨"
+      ];
+      return venueTerms.some(term => title.includes(term));
+    }
+
     function renderEventAlternatives(dayId, index, event) {
-      if (/搭乘飛機|落地/.test(event[1])) return "";
+      if (!hasVenueAlternative(event)) return "";
       const choices = getEventBackupChoices(dayId, index, event);
       const selected = getSelectedEventBackup(dayId, index);
       return `
