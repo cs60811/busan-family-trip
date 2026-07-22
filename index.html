@@ -236,6 +236,31 @@
       text-align: center;
     }
 
+    .pass-area-section {
+      grid-column: 1 / -1;
+    }
+
+    .pass-area-section + .pass-area-section { margin-top: 18px; }
+
+    .pass-area-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 10px;
+      padding: 9px 11px;
+      border-left: 5px solid var(--sea);
+      background: #e9f2ed;
+    }
+
+    .pass-area-head h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 24px;
+    }
+
+    .pass-area-head span { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+
     .backup-section + .backup-section { margin-top: 30px; }
 
     .backup-section-head {
@@ -1789,7 +1814,7 @@
         <div>
           <span class="kicker">VISIT BUSAN PASS · FREE ATTRACTIONS</span>
           <h2 id="passTitle">釜山 PASS 免費景點</h2>
-          <p>依官方目前列出的 34 個免費入場景點整理。已排進本次行程的項目會以黃色背景與「已排入」標示；折扣合作店家未列入此頁。</p>
+          <p>依你提供的 VISIT BUSAN PASS A／B 景點清單整理，並按釜山地區分組。已排進本次行程的項目會以黃色背景與「已排入」標示；合作內容可能調整，出發前請以官方清單為準。</p>
         </div>
         <a class="pass-link" href="https://www.visitbusanpass.com/attractions/?attrtp=free" target="_blank" rel="noreferrer">開啟官方清單 ↗</a>
       </div>
@@ -2091,13 +2116,14 @@
       { name: "哲洙與英熙", region: "松島／西區" },
       { name: "松島海上纜車", region: "松島／西區", scheduled: "Day 6" },
       { name: "甘川浪漫韓服租借", region: "甘川洞" },
-      { name: "會動的照片商店", region: "松島／西區" },
+      { name: "Flipbook Studio", region: "甘川洞" },
       { name: "小王子屋", region: "甘川洞" },
       { name: "雷射競技場 三井塔", region: "西面" },
       { name: "Diamond Egg 密室逃脫", region: "西面" },
       { name: "Running Man 釜山", region: "西面" },
       { name: "樂天世界釜山", region: "機張／Osiria" },
       { name: "Club D Oasis", region: "海雲台" },
+      { name: "Hotel Aqua Palace Spa & Sauna", region: "廣安里／水營" },
       { name: "Surfholic 松亭", region: "松亭" },
       { name: "Hill Spa", region: "海雲台" },
       { name: "Spa Land Centum City", region: "Centum City" },
@@ -2114,10 +2140,69 @@
       { name: "Arte Museum 釜山", region: "影島" },
       { name: "釜山塔", region: "南浦／舊城區", scheduled: "Day 6" },
       { name: "釜山 Diamond Bay 遊艇", region: "南浦／舊城區" },
-      { name: "國立海洋博物館", region: "影島" },
+      { name: "國立海洋博物館 4D 影像館", region: "影島" },
       { name: "釜山市區觀光巴士", region: "釜山站／多路線" },
       { name: "釜山電影體驗博物館", region: "南浦／舊城區" }
     ];
+
+    const passAreaByName = {
+      "雷射競技場 松島": "松島／西區",
+      "松島龍宮雲橋": "松島／西區",
+      "松島海上纜車": "松島／西區",
+      "哲洙與英熙": "松島／西區",
+      "Surfholic 多大浦": "多大浦／西區",
+      "入庫家韓服租借": "甘川／西區",
+      "甘川浪漫韓服租借": "甘川／西區",
+      "Flipbook Studio": "甘川／西區",
+      "小王子屋": "甘川／西區",
+      "洛東江生態探訪船": "沙上／洛東江",
+      "雷射競技場 三井塔": "西面／釜山鎮",
+      "Diamond Egg 密室逃脫": "西面／釜山鎮",
+      "Running Man 釜山": "西面／釜山鎮",
+      "Samjung Tower 雷射槍競技場": "西面／釜山鎮",
+      "樂天世界釜山": "機張／Osiria",
+      "Skyline Luge 斜坡滑車": "機張／Osiria",
+      "Brick Campus 釜山": "機張／Osiria",
+      "國立釜山科學館": "機張／Osiria",
+      "阿九山森林": "機張／Osiria",
+      "Club D Oasis": "海雲台／Centum",
+      "Surfholic 松亭": "海雲台／松亭",
+      "海雲台 Haeeon 韓服租借": "海雲台／松亭",
+      "海雲台海灘列車": "海雲台／松亭",
+      "BUSAN X the SKY": "海雲台／松亭",
+      "Hill Spa": "海雲台／松亭",
+      "Hotel Aqua Palace Spa & Sauna": "廣安里／水營",
+      "Spa Land Centum City": "海雲台／Centum",
+      "Museum 1": "海雲台／Centum",
+      "大榮跆拳道": "南浦／舊城區",
+      "釜山塔": "南浦／舊城區",
+      "釜山 Diamond Bay 遊艇": "南區／五六島",
+      "釜山電影體驗博物館": "南浦／舊城區",
+      "太宗台 Danubi 列車": "影島",
+      "Arte Museum 釜山": "影島",
+      "國立海洋博物館 4D 影像館": "影島",
+      "釜山市區觀光巴士": "全市／釜山站"
+    };
+
+    const passAreaOrder = [
+      "西面／釜山鎮",
+      "海雲台／Centum",
+      "海雲台／松亭",
+      "機張／Osiria",
+      "廣安里／水營",
+      "松島／西區",
+      "甘川／西區",
+      "多大浦／西區",
+      "南浦／舊城區",
+      "南區／五六島",
+      "影島",
+      "沙上／洛東江",
+      "全市／釜山站"
+    ];
+
+    function getPassArea(item) {
+      return passAreaByName[item.name] || item.region || "其他地區";
+    }
 
     const backupCategories = [
       { id: "food", label: "美食", hint: "臨時換餐、加點心" },
@@ -2274,13 +2359,24 @@
       const visible = passFilter === "scheduled" ? passAttractions.filter(item => item.scheduled) : passAttractions;
       const scheduledCount = passAttractions.filter(item => item.scheduled).length;
       document.getElementById("passCount").textContent = `${visible.length} 個景點 · 已排入 ${scheduledCount} 個`;
-      passGrid.innerHTML = visible.length ? visible.map(item => `
+      const renderCard = item => `
         <article class="pass-card ${item.scheduled ? "scheduled" : ""}">
           <span class="pass-status ${item.scheduled ? "" : "available"}">${item.scheduled ? `已排入 ${item.scheduled}` : item.alternative || "尚未安排"}</span>
           <h3>${item.name}</h3>
           <p class="pass-place">${item.region}</p>
         </article>
-      `).join("") : `<div class="pass-empty">目前沒有符合的景點。</div>`;
+      `;
+      const sections = passAreaOrder.map(area => {
+        const items = visible.filter(item => getPassArea(item) === area);
+        if (!items.length) return "";
+        return `
+          <section class="pass-area-section" aria-labelledby="pass-area-${area}">
+            <div class="pass-area-head"><h3 id="pass-area-${area}">${area}</h3><span>${items.length} 個景點</span></div>
+            <div class="pass-grid">${items.map(renderCard).join("")}</div>
+          </section>
+        `;
+      }).join("");
+      passGrid.innerHTML = visible.length ? sections : `<div class="pass-empty">目前沒有符合的景點。</div>`;
     }
 
     function getWeatherLocation(day) {
