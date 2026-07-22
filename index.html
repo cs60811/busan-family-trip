@@ -258,6 +258,41 @@
 
     .backup-card .backup-note { margin-top: 8px; line-height: 1.45; }
 
+    .backup-card .backup-address {
+      margin-top: 9px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .backup-address span {
+      display: inline-block;
+      margin-right: 5px;
+      color: var(--sea-2);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .backup-map-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: #03c75a;
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .backup-map-link:hover { transform: translateY(-1px); }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
@@ -2147,6 +2182,58 @@
       { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案" }
     ];
 
+    const backupAddressBook = {
+      "田浦咖啡街": "부산광역시 부산진구 전포대로199번길 일대",
+      "松亭3代豬肉湯飯": "부산광역시 부산진구 서면로68번길 33",
+      "海雲台傳統市場": "부산광역시 해운대구 구남로41번길 22-1",
+      "青沙浦烤貝": "부산광역시 해운대구 청사포로128번길 일대",
+      "札嘎其市場／BIFF 廣場": "부산광역시 중구 자갈치해안로 52",
+      "富平罐頭夜市": "부산광역시 중구 부평1길 39",
+      "豚笑南浦店": "부산광역시 중구 남포동 일대 · 지도에서 돈심 남포점 검색",
+      "海東龍宮寺": "부산광역시 기장군 기장읍 용궁길 86",
+      "Skyline Luge 斜坡滑車": "부산광역시 기장군 기장읍 기장해안로 205",
+      "海雲台沙灘": "부산광역시 해운대구 해운대해변로 264",
+      "青沙浦港 & Daritdol Skywalk": "부산광역시 해운대구 청사포로 167",
+      "甘川洞文化村": "부산광역시 사하구 감내2로 203",
+      "松島海灘／龍宮雲橋": "부산광역시 서구 송도해변로 100",
+      "太宗台": "부산광역시 영도구 전망로 24",
+      "五六島天空步道": "부산광역시 남구 오륙도로 137",
+      "Museum 1": "부산광역시 해운대구 센텀서로 20",
+      "SEA LIFE 釜山水族館": "부산광역시 해운대구 해운대해변로 266",
+      "BUSAN X the SKY": "부산광역시 해운대구 달맞이길 30",
+      "釜山電影體驗博物館": "부산광역시 중구 대청로126번길 12",
+      "國立海洋博物館": "부산광역시 영도구 해양로301번길 45",
+      "國立釜山科學館": "부산광역시 기장군 기장읍 동부산관광6로 59",
+      "Arte Museum 釜山": "부산광역시 영도구 해양로247번길 29",
+      "西面市場": "부산광역시 부산진구 서면로 56",
+      "釜山鎮市場": "부산광역시 동구 진시장로 24",
+      "機張市場": "부산광역시 기장군 기장읍 읍내로104번길 16",
+      "沙上西部巴士客運站": "부산광역시 사상구 사상로 201",
+      "Gupo Market": "부산광역시 북구 구포시장1길 17",
+      "國際市場": "부산광역시 중구 광복로39번길 30",
+      "金海機場國際線餐飲區": "부산광역시 강서구 공항진입로 108",
+      "金海機場咖啡店／便利商店": "부산광역시 강서구 공항진입로 108",
+      "機張竹城教堂": "부산광역시 기장군 기장읍 죽성리 134-7",
+      "釜山市民公園": "부산광역시 부산진구 시민공원로 73",
+      "Bujeon Market Town": "부산광역시 부산진구 중앙대로783번길 23",
+      "冬柏島海岸步道": "부산광역시 해운대구 우동 710-1",
+      "青沙浦 Daritdol Skywalk": "부산광역시 해운대구 청사포로 167",
+      "白淺文化村": "부산광역시 영도구 흰여울길 379",
+      "三樂生態公園": "부산광역시 사상구 삼락동 29-59",
+      "金海機場觀景休息區": "부산광역시 강서구 공항진입로 108",
+      "沙上站周邊市場": "부산광역시 사상구 광장로 일대",
+      "樂天百貨釜山本店": "부산광역시 부산진구 가야대로 772",
+      "Samjung Tower": "부산광역시 부산진구 가야대로 672",
+      "樂天 Outlet 東釜山": "부산광역시 기장군 기장읍 기장해안로 147",
+      "釜山美術館": "부산광역시 해운대구 APEC로 58",
+      "Goeun Museum of Photography": "부산광역시 해운대구 해운대로452번길 16",
+      "釜山近代歷史館": "부산광역시 중구 대청로 104",
+      "Renecite": "부산광역시 사상구 광장로 7",
+      "Sasang Museum of Everyday Life": "부산광역시 사상구 낙동대로1258번길 36",
+      "金海機場免稅店": "부산광역시 강서구 공항진입로 108",
+      "金海機場國際線休息區": "부산광역시 강서구 공항진입로 108"
+    };
+
     const departureAt = new Date("2026-09-13T10:00:00+08:00");
     const tripDateKeys = ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20"];
 
@@ -2399,6 +2486,8 @@
                   <h3>${item.name}</h3>
                   <p class="pass-place">${item.region}</p>
                   <p class="backup-note">${item.note}</p>
+                  <p class="backup-address"><span>${backupAddressBook[item.name].includes("일대") ? "代表定位" : "MAP / TAXI"}</span>${backupAddressBook[item.name]}</p>
+                  <a class="backup-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(backupAddressBook[item.name])}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">NAVER Map</a>
                 </article>
               `).join("")}
             </div>
