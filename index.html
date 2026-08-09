@@ -261,50 +261,227 @@
 
     .pass-area-head span { color: var(--muted); font-family: var(--mono); font-size: 12px; }
 
-    .backup-section + .backup-section { margin-top: 30px; }
+    .backup-filters {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      margin: 18px 0;
+      display: grid;
+      gap: 11px;
+    }
 
-    .backup-section-head {
+    .backup-filter-row {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 11px;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed var(--line);
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
     }
 
-    .backup-section-head h3 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 26px;
-    }
+    .backup-filter-row .chips { justify-content: flex-start; }
 
-    .backup-section-head span { color: var(--muted); font-family: var(--mono); font-size: 12px; }
-
-    .backup-card .backup-note { margin-top: 8px; line-height: 1.45; }
-
-    .backup-card .backup-address {
-      margin-top: 9px;
-      color: var(--ink);
+    .backup-filter-label {
       font-family: var(--mono);
       font-size: 11px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--muted);
+      flex-basis: 100%;
     }
 
-    .backup-address span {
-      display: inline-block;
-      margin-right: 5px;
+    .backup-filter-foot { justify-content: space-between; }
+
+    .backup-reset {
+      border: none;
+      background: none;
       color: var(--sea-2);
-      font-size: 10px;
-      font-weight: 800;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
     }
+
+    .cat-chip.active.cat-food { background: var(--coral); border-color: var(--coral); }
+    .cat-chip.active.cat-outdoor { background: var(--leaf); border-color: var(--leaf); }
+    .cat-chip.active.cat-indoor { background: var(--blue); border-color: var(--blue); }
+
+    .backup-district {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .backup-district[open] { background: #fffdf7; }
+
+    .backup-district summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .backup-district summary::-webkit-details-marker { display: none; }
+
+    .backup-district-name {
+      font-family: var(--serif);
+      font-size: 19px;
+    }
+
+    .backup-district-name::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--coral);
+      transition: transform .15s ease;
+    }
+
+    .backup-district[open] .backup-district-name::before { transform: rotate(90deg); }
+
+    .backup-district-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .backup-district-total { font-weight: 700; }
+
+    .cat-count {
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+    }
+
+    .cat-count.cat-food { color: var(--coral); border-color: var(--coral); }
+    .cat-count.cat-outdoor { color: var(--leaf); border-color: var(--leaf); }
+    .cat-count.cat-indoor { color: var(--blue); border-color: var(--blue); }
+
+    .backup-district-body {
+      padding: 4px 16px 14px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .backup-cat-group + .backup-cat-group { margin-top: 14px; }
+
+    .backup-cat-kicker {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin: 14px 0 6px;
+    }
+
+    .cat-kicker-food { color: var(--coral); }
+    .cat-kicker-outdoor { color: var(--leaf); }
+    .cat-kicker-indoor { color: var(--blue); }
+
+    .backup-item-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .backup-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 10px 12px;
+      border-left: 4px solid var(--line);
+    }
+
+    .backup-item-scheduled {
+      border-left-color: var(--lemon);
+      background: linear-gradient(90deg, rgba(240,193,75,.16), #fffdf7 40%);
+    }
+
+    .backup-item-top {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .backup-item-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+      margin-bottom: 1px;
+    }
+
+    .backup-item-dot.cat-food { background: var(--coral); }
+    .backup-item-dot.cat-outdoor { background: var(--leaf); }
+    .backup-item-dot.cat-indoor { background: var(--blue); }
+
+    .backup-item-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .backup-item-time {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--sea-2);
+      white-space: nowrap;
+    }
+
+    .backup-est-flag {
+      font-style: normal;
+      margin-left: 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--coral);
+      border: 1px solid var(--coral);
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+
+    .backup-item-meta {
+      margin-top: 3px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .backup-item-sub { font-weight: 700; color: var(--ink); }
+    .backup-item-sub::after { content: " · "; color: var(--line); font-weight: 400; }
+
+    .backup-item-foot {
+      margin-top: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .backup-item-status { font-size: 11.5px; font-weight: 700; }
+    .backup-item-status.status-scheduled { color: var(--sea-2); }
+    .backup-item-status.status-alt { color: var(--muted); font-weight: 400; }
+    .backup-item-status.status-open { color: var(--muted); font-weight: 400; font-style: italic; }
 
     .backup-map-link {
       display: inline-flex;
       align-items: center;
-      min-height: 30px;
-      margin-top: 8px;
+      min-height: 28px;
       padding: 4px 8px;
       border: 1px solid var(--ink);
       border-radius: 5px;
@@ -1844,16 +2021,28 @@
         <div>
           <span class="kicker">BUSAN BACKUP DIRECTORY · FAMILY FRIENDLY</span>
           <h2 id="backupTitle">備用景點冊</h2>
-          <p>需要換景點時可快速依美食、室外、室內查看；行程卡上的替代店家／景點也會同步列在這裡。已排進本次行程的項目會以黃色背景與「已排入」標示，其餘為可替換選項。</p>
+          <p>依區域分組，點區域名稱展開查看，每區內再依美食／室外／室內分類；每個景點都附預估停留時間。已排進本次行程的項目會標示「已排入」，其餘為可替換選項。</p>
         </div>
         <a class="pass-link" href="https://www.visitbusan.net/" target="_blank" rel="noreferrer">開啟 Visit Busan ↗</a>
       </div>
-      <div class="pass-toolbar">
-        <span class="pass-count" id="backupCount"></span>
-        <div class="pass-toggle" id="backupToggle">
-          <button class="toggle active" type="button" data-backup-filter="all">全部推薦</button>
-          <button class="toggle" type="button" data-backup-filter="scheduled">已排入行程</button>
+      <div class="backup-filters">
+        <div class="backup-filter-row">
+          <span class="backup-filter-label">區域</span>
+          <div class="chips" id="backupDistrictChips"></div>
         </div>
+        <div class="backup-filter-row">
+          <span class="backup-filter-label">類型</span>
+          <div class="chips" id="backupCategoryChips"></div>
+        </div>
+        <div class="backup-filter-row backup-filter-foot">
+          <div class="pass-toggle" id="backupStatusToggle">
+            <button class="toggle active" type="button" data-backup-status="all">全部</button>
+            <button class="toggle" type="button" data-backup-status="scheduled">已排入行程</button>
+            <button class="toggle" type="button" data-backup-status="open">尚未安排</button>
+          </div>
+          <button class="backup-reset" type="button" id="backupReset">清除篩選</button>
+        </div>
+        <span class="pass-count" id="backupCount"></span>
       </div>
       <div id="backupDirectory"></div>
     </section>
@@ -2224,71 +2413,88 @@
     ];
 
     const backupAttractions = [
-      { category: "food", name: "田浦咖啡街", region: "西面／田浦", note: "咖啡、早午餐與親子休息點集中", scheduled: "Day 2" },
-      { category: "food", name: "松亭3代豬肉湯飯", region: "西面", note: "行程中的晚餐；想吃暖胃湯飯可直接保留", scheduled: "Day 2" },
-      { category: "food", name: "螞蟻家（西面店）", region: "西面／釜山鎮", note: "影片推薦的 낙곱새（章魚、牛腸、蝦）餐廳；幼童可先確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐" },
-      { category: "food", name: "83獬豸（83 해치）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；晚餐時段可能需要等候", alternative: "影片推薦／可替換 Day 2 晚餐" },
-      { category: "food", name: "河蓮庭嫩豆腐鍋", region: "西面／釜山鎮", note: "影片推薦的嫩豆腐鍋，適合想吃熱食；幼童餐點請確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐" },
-      { category: "food", name: "Vintage 38", region: "西面／田浦", note: "影片推薦的大型咖啡與甜點空間，可替換田浦咖啡街中的咖啡店", alternative: "影片推薦／可替換 Day 2 午餐／下午茶" },
-      { category: "food", name: "烤肉的男子（西面店）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；適合當作西面晚餐備案", alternative: "影片推薦／可替換 Day 2 晚餐" },
-      { category: "food", name: "尾浦家 海雲台本店", region: "海雲台／尾浦", note: "醬蟹與海鮮鍋飯；需留意 15:00-17:00 午休與熱門時段候位", alternative: "可替換 Day 4 晚餐" },
-      { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐" },
-      { category: "food", name: "青沙浦烤貝", region: "青沙浦", note: "海景晚餐選項；膠囊列車周邊可順接", alternative: "可替換 Day 4 晚餐" },
-      { category: "food", name: "札嘎其市場／BIFF 廣場", region: "南浦／舊城區", note: "市場小吃、種子糖餅與午餐選擇集中", scheduled: "Day 5" },
-      { category: "food", name: "富平罐頭夜市", region: "南浦／富平市場", note: "19:30 後開市；人潮多，幼童累時不必勉強", alternative: "可替換 Day 6 晚餐" },
-      { category: "food", name: "豚笑南浦店", region: "南浦／舊城區", note: "松島行程後移動到南浦的午餐選項", scheduled: "Day 6" },
+      { category: "food", name: "田浦咖啡街", region: "西面／田浦", note: "咖啡、早午餐與親子休息點集中", scheduled: "Day 2", time: 120, timeSource: "confirmed" },
+      { category: "food", name: "松亭3代豬肉湯飯", region: "西面", note: "行程中的晚餐；想吃暖胃湯飯可直接保留", scheduled: "Day 2", time: 90, timeSource: "confirmed" },
+      { category: "food", name: "螞蟻家（西面店）", region: "西面／釜山鎮", note: "影片推薦的 낙곱새（章魚、牛腸、蝦）餐廳；幼童可先確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐", time: 70, timeSource: "estimate" },
+      { category: "food", name: "83獬豸（83 해치）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；晚餐時段可能需要等候", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
+      { category: "food", name: "河蓮庭嫩豆腐鍋", region: "西面／釜山鎮", note: "影片推薦的嫩豆腐鍋，適合想吃熱食；幼童餐點請確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "Vintage 38", region: "西面／田浦", note: "影片推薦的大型咖啡與甜點空間，可替換田浦咖啡街中的咖啡店", alternative: "影片推薦／可替換 Day 2 午餐／下午茶", time: 60, timeSource: "estimate" },
+      { category: "food", name: "烤肉的男子（西面店）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；適合當作西面晚餐備案", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
+      { category: "food", name: "尾浦家 海雲台本店", region: "海雲台／尾浦", note: "醬蟹與海鮮鍋飯；需留意 15:00-17:00 午休與熱門時段候位", alternative: "可替換 Day 4 晚餐", time: 70, timeSource: "estimate" },
+      { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "青沙浦烤貝", region: "青沙浦", note: "海景晚餐選項；膠囊列車周邊可順接", alternative: "可替換 Day 4 晚餐", time: 70, timeSource: "estimate" },
+      { category: "food", name: "札嘎其市場／BIFF 廣場", region: "南浦／舊城區", note: "市場小吃、種子糖餅與午餐選擇集中", scheduled: "Day 5", time: 90, timeSource: "confirmed" },
+      { category: "food", name: "富平罐頭夜市", region: "南浦／富平市場", note: "19:30 後開市；人潮多，幼童累時不必勉強", alternative: "可替換 Day 6 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "豚笑南浦店", region: "南浦／舊城區", note: "松島行程後移動到南浦的午餐選項", scheduled: "Day 6", time: 90, timeSource: "confirmed" },
 
-      { category: "outdoor", name: "海東龍宮寺", region: "機張", note: "海邊寺廟與步道；階梯多，推車不易", scheduled: "Day 3" },
-      { category: "outdoor", name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", note: "幼童搭乘規定請先確認；不適合可改 Outlet", scheduled: "Day 3" },
-      { category: "outdoor", name: "海雲台沙灘", region: "海雲台", note: "晨間玩沙最輕鬆，避開正午曝曬", scheduled: "Day 4" },
-      { category: "outdoor", name: "尾浦港／Mipo", region: "海雲台／尾浦", note: "影片路線起點周邊的海景散步與拍照點；可和藍線公園擇一安排", alternative: "影片推薦／可替換 Day 4 下午" },
-      { category: "outdoor", name: "海雲台海岸散步路", region: "海雲台／尾浦至廣場", note: "影片主線的海邊步道，適合推車慢走；可依幼童狀態隨時折返", alternative: "影片推薦／可替換 Day 4 下午" },
-      { category: "outdoor", name: "達月路／月見路", region: "海雲台／達月", note: "海景咖啡與拍照景觀路；坡度較明顯，推車建議短段體驗", alternative: "影片推薦／可替換 Day 4 下午" },
-      { category: "outdoor", name: "海雲台廣場", region: "海雲台／市區", note: "影片終點周邊的開放式散步與街景區，可接市場或晚餐", alternative: "影片推薦／可替換 Day 4 晚餐前" },
-      { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；可接膠囊列車", alternative: "可替換 Day 4 下午" },
-      { category: "outdoor", name: "甘川洞文化村", region: "甘川洞", note: "坡度與階梯多，帶背巾比推車輕鬆", scheduled: "Day 5" },
-      { category: "outdoor", name: "松島海灘／龍宮雲橋", region: "松島", note: "纜車後順接海邊散步；強風或下雨時縮短", scheduled: "Day 6" },
-      { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；可用 Danubi 列車減少步行", alternative: "可替換 Day 6 半日" },
-      { category: "outdoor", name: "五六島天空步道", region: "南區", note: "免費海景步道；雨天或強風可能限制開放", alternative: "天氣好時半日備案" },
+      { category: "outdoor", name: "海東龍宮寺", region: "機張", note: "海邊寺廟與步道；階梯多，推車不易", scheduled: "Day 3", time: 90, timeSource: "confirmed" },
+      { category: "outdoor", name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", note: "幼童搭乘規定請先確認；不適合可改 Outlet", scheduled: "Day 3", time: 120, timeSource: "confirmed" },
+      { category: "outdoor", name: "海雲台沙灘", region: "海雲台", note: "晨間玩沙最輕鬆，避開正午曝曬", scheduled: "Day 4", time: 90, timeSource: "confirmed" },
+      { category: "outdoor", name: "尾浦港／Mipo", region: "海雲台／尾浦", note: "影片路線起點周邊的海景散步與拍照點；可和藍線公園擇一安排", alternative: "影片推薦／可替換 Day 4 下午", time: 30, timeSource: "estimate" },
+      { category: "outdoor", name: "海雲台海岸散步路", region: "海雲台／尾浦至廣場", note: "影片主線的海邊步道，適合推車慢走；可依幼童狀態隨時折返", alternative: "影片推薦／可替換 Day 4 下午", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "達月路／月見路", region: "海雲台／達月", note: "海景咖啡與拍照景觀路；坡度較明顯，推車建議短段體驗", alternative: "影片推薦／可替換 Day 4 下午", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "海雲台廣場", region: "海雲台／市區", note: "影片終點周邊的開放式散步與街景區，可接市場或晚餐", alternative: "影片推薦／可替換 Day 4 晚餐前", time: 30, timeSource: "estimate" },
+      { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；可接膠囊列車", alternative: "可替換 Day 4 下午", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "甘川洞文化村", region: "甘川洞", note: "坡度與階梯多，帶背巾比推車輕鬆", scheduled: "Day 5", time: 150, timeSource: "confirmed" },
+      { category: "outdoor", name: "松島海灘／龍宮雲橋", region: "松島", note: "纜車後順接海邊散步；強風或下雨時縮短", scheduled: "Day 6", time: 90, timeSource: "confirmed" },
+      { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；可用 Danubi 列車減少步行", alternative: "可替換 Day 6 半日", time: 90, timeSource: "estimate" },
+      { category: "outdoor", name: "五六島天空步道", region: "南區", note: "免費海景步道；雨天或強風可能限制開放", alternative: "天氣好時半日備案", time: 30, timeSource: "estimate" },
 
-      { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術；檔期至 2026/10/11，最後入場為閉館前 1 小時", alternative: "可替換 Day 3 或 Day 6 下午" },
-      { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案", scheduled: "Day 4" },
-      { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4" },
-      { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天" },
-      { category: "indoor", name: "國立海洋博物館", region: "影島", note: "海洋主題常設展，適合親子放慢腳步", alternative: "可替換 Day 6 雨天" },
-      { category: "indoor", name: "國立釜山科學館", region: "機張", note: "適合親子；若 Luge 不適合或下雨可改這裡", alternative: "可替換 Day 3 雨天" },
-      { category: "indoor", name: "Arte Museum 釜山", region: "影島", note: "沉浸式展覽；可和影島／南浦行程擇一搭配", alternative: "可替換 Day 6 下午" },
+      { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術；檔期至 2026/10/11，最後入場為閉館前 1 小時", alternative: "可替換 Day 3 或 Day 6 下午", time: 90, timeSource: "confirmed" },
+      { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案", scheduled: "Day 4", time: 120, timeSource: "confirmed" },
+      { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4", time: 80, timeSource: "confirmed" },
+      { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "國立海洋博物館", region: "影島", note: "海洋主題常設展，適合親子放慢腳步", alternative: "可替換 Day 6 雨天", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "國立釜山科學館", region: "機張", note: "適合親子；若 Luge 不適合或下雨可改這裡", alternative: "可替換 Day 3 雨天", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "Arte Museum 釜山", region: "影島", note: "沉浸式展覽；可和影島／南浦行程擇一搭配", alternative: "可替換 Day 6 下午", time: 75, timeSource: "estimate" },
 
-      { category: "food", name: "西面市場", region: "西面", note: "西面住宿期間可替代早餐、晚餐或宵夜", alternative: "行程卡可選備案" },
-      { category: "food", name: "釜山鎮市場", region: "西面／釜山鎮", note: "傳統市場與小吃，適合替換西面餐食", alternative: "行程卡可選備案" },
-      { category: "food", name: "機張市場", region: "機張", note: "海鮮與市場餐食，可接 Osiria 行程", alternative: "行程卡可選備案" },
-      { category: "food", name: "沙上西部巴士客運站", region: "沙上", note: "返程前可在站區找餐食與便利商店", alternative: "行程卡可選備案" },
-      { category: "food", name: "Gupo Market", region: "沙上／龜浦", note: "市場小吃與採買選項，適合替換沙上餐食", alternative: "行程卡可選備案" },
-      { category: "food", name: "國際市場", region: "南浦／舊城區", note: "小吃、餐廳與雜貨集中，南浦行程彈性高", alternative: "行程卡可選備案" },
-      { category: "food", name: "金海機場國際線餐飲區", region: "金海機場", note: "回程報到後可直接用餐，適合替代機場早餐", alternative: "行程卡可選備案" },
-      { category: "food", name: "金海機場咖啡店／便利商店", region: "金海機場", note: "補水、麵包與幼童點心的簡單選項", alternative: "行程卡可選備案" },
+      { category: "food", name: "西面市場", region: "西面", note: "西面住宿期間可替代早餐、晚餐或宵夜", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "food", name: "釜山鎮市場", region: "西面／釜山鎮", note: "傳統市場與小吃，適合替換西面餐食", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "food", name: "機張市場", region: "機張", note: "海鮮與市場餐食，可接 Osiria 行程", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "food", name: "沙上西部巴士客運站", region: "沙上", note: "返程前可在站區找餐食與便利商店", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
+      { category: "food", name: "Gupo Market", region: "沙上／龜浦", note: "市場小吃與採買選項，適合替換沙上餐食", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "food", name: "國際市場", region: "南浦／舊城區", note: "小吃、餐廳與雜貨集中，南浦行程彈性高", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "food", name: "金海機場國際線餐飲區", region: "金海機場", note: "回程報到後可直接用餐，適合替代機場早餐", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "food", name: "金海機場咖啡店／便利商店", region: "金海機場", note: "補水、麵包與幼童點心的簡單選項", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
 
-      { category: "outdoor", name: "機張竹城教堂", region: "機張／竹城里", note: "海邊拍照點，可替代部分龍宮寺戶外段", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "釜山市民公園", region: "西面／釜山鎮", note: "親子遊戲區與綠地，適合西面住宿期間放電", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "Bujeon Market Town", region: "西面／釜山鎮", note: "市場街區散步與小吃，可替代公園或咖啡街", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "冬柏島海岸步道", region: "海雲台", note: "平緩海岸散步，適合替換部分海灘或列車行程", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "青沙浦 Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景天空步道，可與藍線公園周邊互換", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "白淺文化村", region: "影島", note: "海景街區，可替換甘川洞或松島部分散步段", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "三樂生態公園", region: "沙上／洛東江", note: "河畔戶外空間，適合沙上休息日短暫散步", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "金海機場觀景休息區", region: "金海機場", note: "回程候機時可作為短暫休息與看飛機的地點", alternative: "行程卡可選備案" },
-      { category: "outdoor", name: "沙上站周邊市場", region: "沙上", note: "住宿與輕軌站附近的短程採買散步選項", alternative: "行程卡可選備案" },
+      { category: "outdoor", name: "機張竹城教堂", region: "機張／竹城里", note: "海邊拍照點，可替代部分龍宮寺戶外段", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
+      { category: "outdoor", name: "釜山市民公園", region: "西面／釜山鎮", note: "親子遊戲區與綠地，適合西面住宿期間放電", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "outdoor", name: "Bujeon Market Town", region: "西面／釜山鎮", note: "市場街區散步與小吃，可替代公園或咖啡街", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "冬柏島海岸步道", region: "海雲台", note: "平緩海岸散步，適合替換部分海灘或列車行程", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "青沙浦 Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景天空步道，可與藍線公園周邊互換", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "白淺文化村", region: "影島", note: "海景街區，可替換甘川洞或松島部分散步段", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "outdoor", name: "三樂生態公園", region: "沙上／洛東江", note: "河畔戶外空間，適合沙上休息日短暫散步", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "金海機場觀景休息區", region: "金海機場", note: "回程候機時可作為短暫休息與看飛機的地點", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
+      { category: "outdoor", name: "沙上站周邊市場", region: "沙上", note: "住宿與輕軌站附近的短程採買散步選項", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
 
-      { category: "indoor", name: "樂天百貨釜山本店", region: "西面", note: "百貨、餐飲與室內休息空間，適合雨天替換戶外行程", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "Samjung Tower", region: "西面", note: "購物、餐廳、親子娛樂與室內活動集中", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "樂天 Outlet 東釜山", region: "機張／Osiria", note: "可替換 Luge，並與機張午餐順接", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "釜山美術館", region: "海雲台／BEXCO", note: "海雲台與 Centum City 的室內展覽選項", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "Goeun Museum of Photography", region: "海雲台／冬柏", note: "攝影展覽，適合替換海邊或列車行程", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "釜山近代歷史館", region: "南浦／舊城區", note: "南浦室內歷史展覽，可替換市場逛街段", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "Renecite", region: "沙上／槐法", note: "沙上購物商場，可替換超市採買或咖啡廳段", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "Sasang Museum of Everyday Life", region: "沙上", note: "地方生活史展館，適合沙上休息日的室內選項", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "金海機場免稅店", region: "金海機場", note: "完成報到後可安排採買與候機", alternative: "行程卡可選備案" },
-      { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案" }
+      { category: "indoor", name: "樂天百貨釜山本店", region: "西面", note: "百貨、餐飲與室內休息空間，適合雨天替換戶外行程", alternative: "行程卡可選備案", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "Samjung Tower", region: "西面", note: "購物、餐廳、親子娛樂與室內活動集中", alternative: "行程卡可選備案", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "樂天 Outlet 東釜山", region: "機張／Osiria", note: "可替換 Luge，並與機張午餐順接", alternative: "行程卡可選備案", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "釜山美術館", region: "海雲台／BEXCO", note: "海雲台與 Centum City 的室內展覽選項", alternative: "行程卡可選備案", time: 75, timeSource: "estimate" },
+      { category: "indoor", name: "Goeun Museum of Photography", region: "海雲台／冬柏", note: "攝影展覽，適合替換海邊或列車行程", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "indoor", name: "釜山近代歷史館", region: "南浦／舊城區", note: "南浦室內歷史展覽，可替換市場逛街段", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
+      { category: "indoor", name: "Renecite", region: "沙上／槐法", note: "沙上購物商場，可替換超市採買或咖啡廳段", alternative: "行程卡可選備案", time: 75, timeSource: "estimate" },
+      { category: "indoor", name: "Sasang Museum of Everyday Life", region: "沙上", note: "地方生活史展館，適合沙上休息日的室內選項", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
+      { category: "indoor", name: "金海機場免稅店", region: "金海機場", note: "完成報到後可安排採買與候機", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
+      { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" }
     ];
+
+    const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "沙上", "金海機場"];
+
+    function backupPrimaryDistrict(region) { return region.split("／")[0]; }
+    function backupSubArea(region) { const parts = region.split("／"); return parts.length > 1 ? parts.slice(1).join("／") : ""; }
+
+    function backupTimeLabel(minutes) {
+      if (minutes < 60) return `${minutes} 分`;
+      return minutes % 60 === 0 ? `${minutes / 60} 小時` : `${Math.floor(minutes / 60)} 小時 ${minutes % 60} 分`;
+    }
+
+    function backupStatusInfo(item) {
+      const hasRealAlternative = item.alternative && item.alternative !== "行程卡可選備案";
+      if (item.scheduled) return { kind: "scheduled", text: `已排入 ${item.scheduled}` };
+      if (hasRealAlternative) return { kind: "alt", text: item.alternative };
+      return { kind: "open", text: "尚未安排" };
+    }
 
     const backupAddressBook = {
       "田浦咖啡街": "부산광역시 부산진구 전포대로199번길 일대",
@@ -2362,7 +2568,9 @@
     let autoSelectedDate = "";
     let activeView = "itinerary";
     let passFilter = "all";
-    let backupFilter = "all";
+    const backupDistrictFilter = new Set();
+    const backupCategoryFilter = new Set();
+    let backupStatusFilter = "all";
     let weatherForecastByDay = {};
     let forecastLoading = false;
 
@@ -2598,30 +2806,83 @@
       }
     }
 
+    function renderBackupFilterChips() {
+      const districtBox = document.getElementById("backupDistrictChips");
+      districtBox.innerHTML = backupDistrictOrder
+        .filter(d => backupAttractions.some(item => backupPrimaryDistrict(item.region) === d))
+        .map(d => `<button class="chip${backupDistrictFilter.has(d) ? " active" : ""}" type="button" data-backup-district="${d}">${d}</button>`)
+        .join("");
+      const categoryBox = document.getElementById("backupCategoryChips");
+      categoryBox.innerHTML = backupCategories
+        .map(c => `<button class="chip cat-chip cat-${c.id}${backupCategoryFilter.has(c.id) ? " active" : ""}" type="button" data-backup-category="${c.id}">${c.label}</button>`)
+        .join("");
+    }
+
     function renderBackupDirectory() {
+      const filtered = backupAttractions.filter(item => {
+        const districtOk = backupDistrictFilter.size === 0 || backupDistrictFilter.has(backupPrimaryDistrict(item.region));
+        const categoryOk = backupCategoryFilter.size === 0 || backupCategoryFilter.has(item.category);
+        const statusOk = backupStatusFilter === "all" || backupStatusInfo(item).kind === backupStatusFilter;
+        return districtOk && categoryOk && statusOk;
+      });
+
       const scheduledCount = backupAttractions.filter(item => item.scheduled).length;
-      const visibleCount = backupAttractions.filter(item => backupFilter === "all" || item.scheduled).length;
-      document.getElementById("backupCount").textContent = `${visibleCount} 個推薦 · 已排入 ${scheduledCount} 個`;
-      const sections = backupCategories.map(category => {
-        const items = backupAttractions.filter(item => item.category === category.id && (backupFilter === "all" || item.scheduled));
-        if (!items.length) return "";
+      document.getElementById("backupCount").textContent = `符合條件 ${filtered.length} 個 · 全部 ${backupAttractions.length} 個 · 已排入 ${scheduledCount} 個`;
+
+      const grouped = {};
+      filtered.forEach(item => {
+        const d = backupPrimaryDistrict(item.region);
+        (grouped[d] ??= {});
+        (grouped[d][item.category] ??= []).push(item);
+      });
+
+      const sections = backupDistrictOrder.map(district => {
+        const cats = grouped[district];
+        if (!cats) return "";
+        const total = Object.values(cats).reduce((s, arr) => s + arr.length, 0);
+        const breakdown = backupCategories.filter(c => cats[c.id]?.length)
+          .map(c => `<span class="cat-count cat-${c.id}">${cats[c.id].length} ${c.label}</span>`).join("");
+        const groupsHtml = backupCategories.map(category => {
+          const items = cats[category.id];
+          if (!items || !items.length) return "";
+          const itemsSorted = [...items].sort((a, b) => a.name.localeCompare(b.name, "zh-Hant"));
+          const itemsHtml = itemsSorted.map(item => {
+            const status = backupStatusInfo(item);
+            const sub = backupSubArea(item.region);
+            const address = backupAddressBook[item.name];
+            return `
+              <li class="backup-item backup-item-${status.kind}">
+                <div class="backup-item-top">
+                  <span class="backup-item-dot cat-${item.category}" aria-hidden="true"></span>
+                  <span class="backup-item-name">${item.name}</span>
+                  <span class="backup-item-time">${backupTimeLabel(item.time)}${item.timeSource === "estimate" ? '<i class="backup-est-flag" title="推估值，非實際排定時間">推估</i>' : ""}</span>
+                </div>
+                <div class="backup-item-meta">
+                  ${sub ? `<span class="backup-item-sub">${sub}</span>` : ""}
+                  <span class="backup-item-note">${item.note}</span>
+                </div>
+                <div class="backup-item-foot">
+                  <span class="backup-item-status status-${status.kind}">${status.text}</span>
+                  <a class="backup-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">NAVER Map</a>
+                </div>
+              </li>`;
+          }).join("");
+          return `
+            <div class="backup-cat-group">
+              <p class="backup-cat-kicker cat-kicker-${category.id}">${category.label}</p>
+              <ul class="backup-item-list">${itemsHtml}</ul>
+            </div>`;
+        }).join("");
         return `
-          <section class="backup-section" aria-labelledby="backup-${category.id}">
-            <div class="backup-section-head"><h3 id="backup-${category.id}">${category.label}</h3><span>${category.hint} · ${items.length} 個</span></div>
-            <div class="pass-grid">
-              ${items.map(item => `
-                <article class="pass-card backup-card ${item.scheduled ? "scheduled" : ""}">
-                  <span class="pass-status ${item.scheduled ? "" : "available"}">${item.scheduled ? `已排入 ${item.scheduled}` : item.alternative || "尚未安排"}</span>
-                  <h3>${item.name}</h3>
-                  <p class="pass-place">${item.region}</p>
-                  <p class="backup-note">${item.note}</p>
-                  <p class="backup-address"><span>${backupAddressBook[item.name].includes("일대") ? "代表定位" : "MAP / TAXI"}</span>${backupAddressBook[item.name]}</p>
-                  <a class="backup-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(backupAddressBook[item.name])}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">NAVER Map</a>
-                </article>
-              `).join("")}
-            </div>
-          </section>`;
+          <details class="backup-district" open>
+            <summary>
+              <span class="backup-district-name">${district}</span>
+              <span class="backup-district-meta"><span class="backup-district-total">${total} 個景點</span>${breakdown}</span>
+            </summary>
+            <div class="backup-district-body">${groupsHtml}</div>
+          </details>`;
       }).join("");
+
       backupDirectory.innerHTML = sections || `<div class="pass-empty">目前沒有符合的景點。</div>`;
     }
 
@@ -3218,11 +3479,38 @@
       renderPassDirectory();
     });
 
-    document.getElementById("backupToggle").addEventListener("click", (event) => {
-      const button = event.target.closest("[data-backup-filter]");
+    document.getElementById("backupDistrictChips").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-backup-district]");
       if (!button) return;
-      backupFilter = button.dataset.backupFilter;
-      document.querySelectorAll("[data-backup-filter]").forEach(item => item.classList.toggle("active", item === button));
+      const d = button.dataset.backupDistrict;
+      if (backupDistrictFilter.has(d)) backupDistrictFilter.delete(d); else backupDistrictFilter.add(d);
+      renderBackupFilterChips();
+      renderBackupDirectory();
+    });
+
+    document.getElementById("backupCategoryChips").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-backup-category]");
+      if (!button) return;
+      const c = button.dataset.backupCategory;
+      if (backupCategoryFilter.has(c)) backupCategoryFilter.delete(c); else backupCategoryFilter.add(c);
+      renderBackupFilterChips();
+      renderBackupDirectory();
+    });
+
+    document.getElementById("backupStatusToggle").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-backup-status]");
+      if (!button) return;
+      backupStatusFilter = button.dataset.backupStatus;
+      document.querySelectorAll("[data-backup-status]").forEach(item => item.classList.toggle("active", item === button));
+      renderBackupDirectory();
+    });
+
+    document.getElementById("backupReset").addEventListener("click", () => {
+      backupDistrictFilter.clear();
+      backupCategoryFilter.clear();
+      backupStatusFilter = "all";
+      document.querySelectorAll("[data-backup-status]").forEach(item => item.classList.toggle("active", item.dataset.backupStatus === "all"));
+      renderBackupFilterChips();
       renderBackupDirectory();
     });
 
@@ -3322,6 +3610,7 @@
     renderPhrases();
     setupMapLinks();
     renderPassDirectory();
+    renderBackupFilterChips();
     renderBackupDirectory();
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
