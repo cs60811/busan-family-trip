@@ -564,6 +564,7 @@
     }
 
     .map-card {
+      position: relative;
       border: 2px solid var(--ink);
       background: #fdf6e4;
       border-radius: var(--radius);
@@ -572,14 +573,29 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       min-height: 330px;
+      overflow: hidden;
     }
 
     .map-title {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-title-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-title svg.map-icon {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
     }
 
     .map-title h3 {
@@ -588,17 +604,32 @@
       font-size: 24px;
     }
 
+    .map-title .duration {
+      display: block;
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--sea-2);
+      font-weight: 700;
+      background: rgba(255,253,247,.85);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      white-space: nowrap;
+    }
+
     .route-map {
       width: 100%;
       min-height: 220px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background:
-        linear-gradient(90deg, transparent 24px, rgba(35,33,29,.06) 25px),
-        linear-gradient(transparent 24px, rgba(35,33,29,.06) 25px),
+        radial-gradient(circle at 12% 18%, rgba(15,118,110,.14), transparent 55%),
+        radial-gradient(circle at 88% 82%, rgba(240,193,75,.20), transparent 55%),
+        radial-gradient(rgba(35,33,29,.14) 1px, transparent 1.4px) 0 0/22px 22px,
         #fffdf7;
-      background-size: 25px 25px;
       overflow: hidden;
+      position: relative;
     }
 
     .route-map text {
@@ -608,11 +639,41 @@
       font-weight: 700;
     }
 
+    .route-map .route-stop-name {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .route-map .route-flag-text {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      fill: #fff;
+      font-weight: 800;
+    }
+
+    .route-map .route-chip-text {
+      font-size: 11px;
+    }
+
+    .route-map .route-chip-sub {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      fill: var(--coral);
+      font-weight: 800;
+    }
+
     .map-note {
       margin: 12px 0 0;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+      position: relative;
+      z-index: 1;
+      padding: 8px 10px 8px 12px;
+      border-left: 3px dashed var(--coral);
+      background: rgba(255,253,247,.6);
+      border-radius: 0 6px 6px 0;
     }
 
     .controls {
@@ -1764,31 +1825,92 @@
 
         <div class="map-card">
           <div class="map-title">
-            <h3>移動路線</h3>
-            <span class="duration">西面 → 海雲台 → 松島 → 沙上</span>
+            <div class="map-title-heading">
+              <svg class="map-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6.5 9 4l6 2.5 5-2.5v14l-5 2.5-6-2.5-5 2.5Z" stroke="#23211d" stroke-width="1.6" stroke-linejoin="round" fill="#f0c14b"/>
+                <path d="M9 4v14M15 6.5V20" stroke="#23211d" stroke-width="1.4"/>
+              </svg>
+              <h3>移動路線</h3>
+            </div>
+            <span class="duration">全程移動約 2.5-3 小時</span>
           </div>
-          <svg class="route-map" viewBox="0 0 520 280" role="img" aria-label="釜山住宿移動路線示意圖，含各段實際轉乘時間">
-            <path d="M60 220 L200 100 L340 220 L470 100" fill="none" stroke="#23211d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M60 220 L200 100 L340 220 L470 100" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 12"/>
+          <svg class="route-map" viewBox="0 0 560 300" role="img" aria-label="釜山住宿移動路線示意圖：西面到海雲台到松島到沙上，含各段實際轉乘時間">
+            <g opacity=".55">
+              <circle cx="47" cy="47" r="17" fill="none" stroke="#23211d" stroke-width="1.2"/>
+              <path d="M47 32 L54 47 L47 47 L40 47 Z" fill="#23211d"/>
+              <path d="M47 62 L54 47 L47 47 L40 47 Z" fill="#fffdf7" stroke="#23211d" stroke-width="1"/>
+              <text x="47" y="24" text-anchor="middle" font-size="9" font-weight="800">N</text>
+            </g>
 
-            <rect x="99" y="132" width="62" height="25" rx="6" fill="#fffaf0" stroke="#23211d" stroke-width="2.5"/>
-            <text x="130" y="149" text-anchor="middle" font-size="11">約 40 分</text>
+            <path d="M80 250 Q150 165 220 100" fill="none" stroke="#23211d" stroke-width="10" stroke-linecap="round"/>
+            <path d="M220 100 Q290 165 360 250" fill="none" stroke="#23211d" stroke-width="10" stroke-linecap="round"/>
+            <path d="M360 250 Q430 165 500 100" fill="none" stroke="#23211d" stroke-width="10" stroke-linecap="round"/>
 
-            <rect x="227" y="132" width="86" height="25" rx="6" fill="#fffaf0" stroke="#23211d" stroke-width="2.5"/>
-            <text x="270" y="149" text-anchor="middle" font-size="11">約 60-90 分</text>
+            <path d="M80 250 Q150 165 220 100" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-dasharray="13 11"/>
+            <path d="M220 100 Q290 165 360 250" fill="none" stroke="#d95f43" stroke-width="5" stroke-linecap="round" stroke-dasharray="7 9"/>
+            <path d="M360 250 Q430 165 500 100" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round" stroke-dasharray="13 11"/>
 
-            <rect x="374" y="132" width="62" height="25" rx="6" fill="#fffaf0" stroke="#23211d" stroke-width="2.5"/>
-            <text x="405" y="149" text-anchor="middle" font-size="11">約 45 分</text>
+            <g transform="translate(128,150) rotate(-4)">
+              <rect x="-40" y="-16" width="80" height="30" rx="7" fill="#fffaf0" stroke="#23211d" stroke-width="2.5"/>
+              <path d="M-30 -3h4l2 -4h6l2 4h4v7h-18Z" fill="none" stroke="#23211d" stroke-width="1.3"/>
+              <circle cx="-27.5" cy="4" r="1.6" fill="#23211d"/><circle cx="-16.5" cy="4" r="1.6" fill="#23211d"/>
+              <text x="6" y="4" text-anchor="middle" class="route-chip-text" font-weight="700">約 40 分</text>
+            </g>
 
-            <circle cx="60" cy="220" r="18" fill="#f0c14b" stroke="#23211d" stroke-width="5"/>
-            <circle cx="200" cy="100" r="18" fill="#d95f43" stroke="#23211d" stroke-width="5"/>
-            <circle cx="340" cy="220" r="18" fill="#3c6e8f" stroke="#23211d" stroke-width="5"/>
-            <circle cx="470" cy="100" r="18" fill="#6b8f47" stroke="#23211d" stroke-width="5"/>
+            <g transform="translate(290,150) rotate(3)">
+              <rect x="-48" y="-21" width="96" height="40" rx="7" fill="#fdece5" stroke="#d95f43" stroke-width="2.5"/>
+              <path d="M-38 -3h4l2 -4h6l2 4h4v7h-18Z" fill="none" stroke="#d95f43" stroke-width="1.3"/>
+              <circle cx="-35.5" cy="4" r="1.6" fill="#d95f43"/><circle cx="-24.5" cy="4" r="1.6" fill="#d95f43"/>
+              <text x="8" y="1" text-anchor="middle" class="route-chip-text" font-weight="700">約 60-90 分</text>
+              <text x="8" y="14" text-anchor="middle" class="route-chip-sub">非直達・繞札嘎其＋甘川洞</text>
+            </g>
 
-            <text x="60" y="260" text-anchor="middle">西面</text>
-            <text x="200" y="72" text-anchor="middle">海雲台</text>
-            <text x="340" y="260" text-anchor="middle">松島</text>
-            <text x="470" y="72" text-anchor="middle">沙上</text>
+            <g transform="translate(430,150) rotate(-3)">
+              <rect x="-40" y="-16" width="80" height="30" rx="7" fill="#fffaf0" stroke="#23211d" stroke-width="2.5"/>
+              <path d="M-30 -3h4l2 -4h6l2 4h4v7h-18Z" fill="none" stroke="#23211d" stroke-width="1.3"/>
+              <circle cx="-27.5" cy="4" r="1.6" fill="#23211d"/><circle cx="-16.5" cy="4" r="1.6" fill="#23211d"/>
+              <text x="6" y="4" text-anchor="middle" class="route-chip-text" font-weight="700">約 45 分</text>
+            </g>
+
+            <g>
+              <circle cx="80" cy="250" r="19" fill="#f0c14b" stroke="#23211d" stroke-width="5"/>
+              <circle cx="80" cy="250" r="7" fill="#fffdf7" stroke="#23211d" stroke-width="2"/>
+              <g transform="translate(97,229) rotate(-6)">
+                <rect x="0" y="0" width="52" height="20" rx="4" fill="#6b8f47" stroke="#23211d" stroke-width="2"/>
+                <text x="26" y="14" text-anchor="middle" class="route-flag-text">Day 1-2</text>
+              </g>
+              <text x="80" y="283" text-anchor="middle" class="route-stop-name">西面</text>
+            </g>
+
+            <g>
+              <circle cx="220" cy="100" r="19" fill="#d95f43" stroke="#23211d" stroke-width="5"/>
+              <circle cx="220" cy="100" r="7" fill="#fffdf7" stroke="#23211d" stroke-width="2"/>
+              <g transform="translate(237,79) rotate(-6)">
+                <rect x="0" y="0" width="52" height="20" rx="4" fill="#6b8f47" stroke="#23211d" stroke-width="2"/>
+                <text x="26" y="14" text-anchor="middle" class="route-flag-text">Day 3-4</text>
+              </g>
+              <text x="220" y="65" text-anchor="middle" class="route-stop-name">海雲台</text>
+            </g>
+
+            <g>
+              <circle cx="360" cy="250" r="19" fill="#3c6e8f" stroke="#23211d" stroke-width="5"/>
+              <circle cx="360" cy="250" r="7" fill="#fffdf7" stroke="#23211d" stroke-width="2"/>
+              <g transform="translate(377,229) rotate(-6)">
+                <rect x="0" y="0" width="52" height="20" rx="4" fill="#6b8f47" stroke="#23211d" stroke-width="2"/>
+                <text x="26" y="14" text-anchor="middle" class="route-flag-text">Day 5-6</text>
+              </g>
+              <text x="360" y="283" text-anchor="middle" class="route-stop-name">松島</text>
+            </g>
+
+            <g>
+              <circle cx="500" cy="100" r="19" fill="#6b8f47" stroke="#23211d" stroke-width="5"/>
+              <circle cx="500" cy="100" r="7" fill="#fffdf7" stroke="#23211d" stroke-width="2"/>
+              <g transform="translate(445,79) rotate(6)">
+                <rect x="0" y="0" width="52" height="20" rx="4" fill="#6b8f47" stroke="#23211d" stroke-width="2"/>
+                <text x="26" y="14" text-anchor="middle" class="route-flag-text">Day 7-8</text>
+              </g>
+              <text x="500" y="65" text-anchor="middle" class="route-stop-name">沙上</text>
+            </g>
           </svg>
           <p class="map-note">換飯店日先處理行李。海雲台到松島不是直達，中間繞去札嘎其站置物櫃與甘川洞；松島到 Hotel Andrest、沙上到金海機場都建議直接叫車或搭輕軌。</p>
         </div>
