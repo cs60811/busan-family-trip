@@ -185,81 +185,12 @@
 
     .pass-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
 
-    .pass-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .pass-card {
-      position: relative;
-      min-height: 152px;
-      padding: 16px;
-      border: 2px solid var(--ink);
-      border-radius: var(--radius);
-      background: #fffdf7;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-
-    .pass-card.scheduled { background: linear-gradient(130deg, rgba(240,193,75,.42), rgba(255,253,247,.94) 65%); }
-
-    .pass-card h3 {
-      margin: 11px 0 7px;
-      font-family: var(--serif);
-      font-size: 23px;
-      line-height: 1.12;
-    }
-
-    .pass-card p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    .pass-card .pass-place { font-family: var(--mono); font-size: 12px; }
-
-    .pass-status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 25px;
-      padding: 3px 7px;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      background: var(--sea);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .pass-status.available { color: var(--ink); background: var(--paper-2); }
-
     .pass-empty {
       padding: 36px;
       border: 2px dashed var(--line);
       color: var(--muted);
       text-align: center;
     }
-
-    .pass-area-section {
-      grid-column: 1 / -1;
-    }
-
-    .pass-area-section + .pass-area-section { margin-top: 18px; }
-
-    .pass-area-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 0 0 10px;
-      padding: 9px 11px;
-      border-left: 5px solid var(--sea);
-      background: #e9f2ed;
-    }
-
-    .pass-area-head h3 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 24px;
-    }
-
-    .pass-area-head span { color: var(--muted); font-family: var(--mono); font-size: 12px; }
 
     .backup-filters {
       border: 2px solid var(--ink);
@@ -1617,7 +1548,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid, .pass-grid {
+      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2002,18 +1933,26 @@
         <div>
           <span class="kicker">VISIT BUSAN PASS · FREE ATTRACTIONS</span>
           <h2 id="passTitle">釜山 PASS 免費景點</h2>
-          <p>依你提供的 VISIT BUSAN PASS A／B 景點清單整理，並按釜山地區分組。已排進本次行程的項目會以黃色背景與「已排入」標示；合作內容可能調整，出發前請以官方清單為準。</p>
+          <p>依你提供的 VISIT BUSAN PASS A／B 景點清單整理，點地區名稱展開查看。已排進本次行程的項目會標示「已排入」；合作內容可能調整，出發前請以官方清單為準。</p>
         </div>
         <a class="pass-link" href="https://www.visitbusanpass.com/attractions/?attrtp=free" target="_blank" rel="noreferrer">開啟官方清單 ↗</a>
       </div>
-      <div class="pass-toolbar">
-        <span class="pass-count" id="passCount"></span>
-        <div class="pass-toggle">
-          <button class="toggle active" type="button" data-pass-filter="all">全部景點</button>
-          <button class="toggle" type="button" data-pass-filter="scheduled">已排入行程</button>
+      <div class="backup-filters">
+        <div class="backup-filter-row">
+          <span class="backup-filter-label">地區</span>
+          <div class="chips" id="passAreaChips"></div>
         </div>
+        <div class="backup-filter-row backup-filter-foot">
+          <div class="pass-toggle" id="passStatusToggle">
+            <button class="toggle active" type="button" data-pass-filter="all">全部</button>
+            <button class="toggle" type="button" data-pass-filter="scheduled">已排入行程</button>
+            <button class="toggle" type="button" data-pass-filter="open">尚未安排</button>
+          </div>
+          <button class="backup-reset" type="button" id="passReset">清除篩選</button>
+        </div>
+        <span class="pass-count" id="passCount"></span>
       </div>
-      <div class="pass-grid" id="passGrid"></div>
+      <div id="passGrid"></div>
     </section>
 
     <section class="pass-view" id="backupView" hidden aria-labelledby="backupTitle">
@@ -2406,6 +2345,12 @@
       return passAreaByName[item.name] || item.region || "其他地區";
     }
 
+    function passStatusInfo(item) {
+      if (item.scheduled) return { kind: "scheduled", text: `已排入 ${item.scheduled}` };
+      if (item.alternative) return { kind: "alt", text: item.alternative };
+      return { kind: "open", text: "尚未安排" };
+    }
+
     const backupCategories = [
       { id: "food", label: "美食", hint: "臨時換餐、加點心" },
       { id: "outdoor", label: "室外景點", hint: "天氣舒服時優先" },
@@ -2568,6 +2513,7 @@
     let autoSelectedDate = "";
     let activeView = "itinerary";
     let passFilter = "all";
+    const passAreaFilter = new Set();
     const backupDistrictFilter = new Set();
     const backupCategoryFilter = new Set();
     let backupStatusFilter = "all";
@@ -2596,28 +2542,51 @@
       if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
+    function renderPassFilterChips() {
+      const areaBox = document.getElementById("passAreaChips");
+      areaBox.innerHTML = passAreaOrder
+        .filter(area => passAttractions.some(item => getPassArea(item) === area))
+        .map(area => `<button class="chip${passAreaFilter.has(area) ? " active" : ""}" type="button" data-pass-area="${area}">${area}</button>`)
+        .join("");
+    }
+
     function renderPassDirectory() {
-      const visible = passFilter === "scheduled" ? passAttractions.filter(item => item.scheduled) : passAttractions;
+      const filtered = passAttractions.filter(item => {
+        const areaOk = passAreaFilter.size === 0 || passAreaFilter.has(getPassArea(item));
+        const statusOk = passFilter === "all" || passStatusInfo(item).kind === passFilter;
+        return areaOk && statusOk;
+      });
       const scheduledCount = passAttractions.filter(item => item.scheduled).length;
-      document.getElementById("passCount").textContent = `${visible.length} 個景點 · 已排入 ${scheduledCount} 個`;
-      const renderCard = item => `
-        <article class="pass-card ${item.scheduled ? "scheduled" : ""}">
-          <span class="pass-status ${item.scheduled ? "" : "available"}">${item.scheduled ? `已排入 ${item.scheduled}` : item.alternative || "尚未安排"}</span>
-          <h3>${item.name}</h3>
-          <p class="pass-place">${item.region}</p>
-        </article>
-      `;
+      document.getElementById("passCount").textContent = `符合條件 ${filtered.length} 個 · 全部 ${passAttractions.length} 個 · 已排入 ${scheduledCount} 個`;
+
+      const renderItem = item => {
+        const status = passStatusInfo(item);
+        return `
+          <li class="backup-item backup-item-${status.kind}">
+            <div class="backup-item-top">
+              <span class="backup-item-name">${item.name}</span>
+            </div>
+            <div class="backup-item-foot">
+              <span class="backup-item-status status-${status.kind}">${status.text}</span>
+            </div>
+          </li>`;
+      };
+
       const sections = passAreaOrder.map(area => {
-        const items = visible.filter(item => getPassArea(item) === area);
+        const items = filtered.filter(item => getPassArea(item) === area);
         if (!items.length) return "";
         return `
-          <section class="pass-area-section" aria-labelledby="pass-area-${area}">
-            <div class="pass-area-head"><h3 id="pass-area-${area}">${area}</h3><span>${items.length} 個景點</span></div>
-            <div class="pass-grid">${items.map(renderCard).join("")}</div>
-          </section>
-        `;
+          <details class="backup-district" open>
+            <summary>
+              <span class="backup-district-name">${area}</span>
+              <span class="backup-district-meta"><span class="backup-district-total">${items.length} 個景點</span></span>
+            </summary>
+            <div class="backup-district-body">
+              <ul class="backup-item-list">${items.map(renderItem).join("")}</ul>
+            </div>
+          </details>`;
       }).join("");
-      passGrid.innerHTML = visible.length ? sections : `<div class="pass-empty">目前沒有符合的景點。</div>`;
+      passGrid.innerHTML = filtered.length ? sections : `<div class="pass-empty">目前沒有符合的景點。</div>`;
     }
 
     function getWeatherLocation(day) {
@@ -3471,11 +3440,28 @@
 
     document.getElementById("weatherRefresh").addEventListener("click", () => loadForecastDirectory(true));
 
-    document.querySelector(".pass-toggle").addEventListener("click", (event) => {
+    document.getElementById("passStatusToggle").addEventListener("click", (event) => {
       const button = event.target.closest("[data-pass-filter]");
       if (!button) return;
       passFilter = button.dataset.passFilter;
       document.querySelectorAll("[data-pass-filter]").forEach(item => item.classList.toggle("active", item === button));
+      renderPassDirectory();
+    });
+
+    document.getElementById("passAreaChips").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-pass-area]");
+      if (!button) return;
+      const area = button.dataset.passArea;
+      if (passAreaFilter.has(area)) passAreaFilter.delete(area); else passAreaFilter.add(area);
+      renderPassFilterChips();
+      renderPassDirectory();
+    });
+
+    document.getElementById("passReset").addEventListener("click", () => {
+      passAreaFilter.clear();
+      passFilter = "all";
+      document.querySelectorAll("[data-pass-filter]").forEach(item => item.classList.toggle("active", item.dataset.passFilter === "all"));
+      renderPassFilterChips();
       renderPassDirectory();
     });
 
@@ -3609,6 +3595,7 @@
     renderChecklist();
     renderPhrases();
     setupMapLinks();
+    renderPassFilterChips();
     renderPassDirectory();
     renderBackupFilterChips();
     renderBackupDirectory();
