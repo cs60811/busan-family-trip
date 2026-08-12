@@ -22,7 +22,7 @@
 | 9/13-9/14 | Hotel Kyungsung | 26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256 |
 | 9/15-9/16 | UH Continental CenterPoint | 2-21, Dalmaji-gil, Haeundae-gu, Busan 48099 |
 | 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 |
-| 9/19 | Hotel Andrest | 2, Gwangjang-ro 86beon-gil, Sasang-gu, Busan 46975 |
+| 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） |
 
 ## 親子旅行原則
 
@@ -175,13 +175,13 @@
 
 # Day 7 - 9/19（六）沙上休息與採買日
 
-**住宿**：Hotel Andrest  
+**住宿**：Elmomento Sasang Residence  
 **重點**：移動到沙上、午睡、採買、早點休息。
 
 | 時間 | 行程 | 停留 | 備註 |
 |---|---|---:|---|
 | 09:00 | 晨喚 / 慢慢整理行李 | 75 分 | 小孩出門前多留緩衝 |
-| 10:15 | 計程車前往 Hotel Andrest | 45 分 | 地址：2, Gwangjang-ro 86beon-gil, Sasang-gu |
+| 10:15 | 計程車前往 Elmomento Sasang Residence | 45 分 | 地址：20, Saebyeok-ro 223beon-gil, Sasang-gu |
 | 11:00 | 飯店寄放行李 / Check in | 30 分 | 不能入住就先寄放 |
 | 11:30 | 陝川一流豬肉湯飯 | 70 分 | 午餐 |
 | 12:40 | 回飯店 / 午休 | 120 分 | 讓小孩睡一下 |
@@ -191,7 +191,7 @@
 | 19:00 | 回飯店整理行李 | 60 分 | 隔天機場用品先準備 |
 | 20:30 | 休息 / 睡覺 |  | 隔天早起 |
 
-**交通建議**：松島到 Hotel Andrest 有行李與幼童，計程車最省力。
+**交通建議**：松島到 Elmomento Sasang Residence 有行李與幼童，計程車最省力。
 
 ---
 
@@ -222,14 +222,14 @@
 - 西面到海雲台換飯店：先到 UH Continental 寄行李，再去景點。
 - 海雲台到札嘎其站：預留 60 分鐘，含行李與轉乘緩衝。
 - 札嘎其到松島：取行李後建議計程車。
-- 松島到 Hotel Andrest：建議計程車。
+- 松島到 Elmomento Sasang Residence：建議計程車。
 - 沙上到金海機場：釜山-金海輕軌最順。
 
 ## 行李與寄放策略
 
 - 9/15：Hotel Kyungsung 退房後，先到 UH Continental 寄放行李。
 - 9/17：札嘎其站置物櫃寄行李，輕裝去甘川洞。站內有 A（101~號，靠地下街）、B（201~號，靠토성方向）兩處置物櫃，回程走地下街那頭的 A 區較順路。基本 4 小時：小 2,000／中 3,000／大 4,000／特大 5,000 韓元（實際費率請以現場機台為準）；官方統計全站合計特大 45／大 2／中 28／小 11 格，行李箱優先選特大型。
-- 9/19：抵達 Hotel Andrest 後先寄行李或 check-in。
+- 9/19：抵達 Elmomento Sasang Residence 後先寄行李或 check-in。
 - 9/20：前一晚先把機場用品集中：護照、登機資料、推車、尿布、濕紙巾、點心。
 
 ## 幼童用品清單
@@ -302,7 +302,7 @@
   - 距離：車程約 10 分鐘內（암남동與松島同屬西區，地緣相鄰）
   - 來源：[醫院官網-應急診療安內](https://kosinmed.or.kr/02medical/medical06.htm)、[醫療資訊網彙整](https://mobile.hidoc.co.kr/find/result/view/H0000152244)
 
-**沙上（Hotel Andrest，9/19）**
+**沙上（Elmomento Sasang Residence，9/19）**
 - **좋은삼선병원 Good Samseon Hospital**（종합병원，急診 20 床）
   - 地址：부산광역시 사상구 가야대로 326（주례동）
   - 代表電話：051-322-0900；急診室直線：051-310-9109
