@@ -17,12 +17,14 @@
 
 ## 住宿安排
 
-| 日期 | 住宿 | 地址 / 叫車定位用 |
-|---|---|---|
-| 9/13-9/14 | Hotel Kyungsung | 26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256 |
-| 9/15-9/16 | UH Continental CenterPoint | 2-21, Dalmaji-gil, Haeundae-gu, Busan 48099 |
-| 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 |
-| 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） |
+| 日期 | 住宿 | 地址 / 叫車定位用 | 訂房平台 | 早餐 | 入住 / 退房 |
+|---|---|---|---|---|---|
+| 9/13-9/14 | Hotel Kyungsung | 26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256 | Booking.com | 無 | 16:00～24:00／11:00 前 |
+| 9/15-9/16 | UH Continental CenterPoint | 2-21, Dalmaji-gil, Haeundae-gu, Busan 48099 | 易遊網 | 含早餐（9/16、9/17 早上） | 15:00 後／11:00 前 |
+| 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 | Agoda | 無 | 16:00 後／11:00 前 |
+| 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） | Agoda | 無 | 16:00 後／11:00 前 |
+
+- 入住/退房日期以住宿平台顯示的訂單為準：Hotel Kyungsung 9/13 入住、9/15 退房；UH Continental 9/15 入住、9/17 退房；Elmomento Songdo 9/17 入住、9/19 退房；Elmomento Sasang Residence 9/19 入住、9/20 退房。四間退房時間都是 11:00 前。
 
 ## 親子旅行原則
 
@@ -123,6 +125,8 @@
 
 **訂票提醒**：藍線膠囊列車 9:30 是首發場次，9 月旺季建議先訂，人潮最少。膠囊列車不含釜山 PASS；想用 PASS 可改搭海灘列車。
 
+**早餐提醒**：UH Continental 這兩晚（9/16、9/17 早上）含早餐，時間夠可以先在飯店吃，自然島鹽麵包當路上點心備案就好，不用當正餐買。
+
 **動線提醒**：自然島鹽麵包在달맞이길山坡上、緊鄰膠囊列車美浦站，飯店也在同一條路，早上搭首發場次前先買剛好順路。沙灘改到傍晚玩（比中午涼爽），就在飯店旁不用額外移動；水族館在해운대해변로，跟美浦站中間隔著整條海灘，已排計程車轉場。BUSAN X the SKY（LCT）到 THE BAY 101（東白島）中間隔著整個海雲台，已補上約 20 分計程車轉場時間。
 
 ---
@@ -148,6 +152,8 @@
 | 21:00 | 回飯店休息 |  | El Momento Songdo |
 
 **行李策略**：若札嘎其站特大型櫃滿了，改先寄 El Momento Songdo 飯店，再去甘川洞。
+
+**早餐提醒**：這天是 UH Continental 最後一天含早餐，11:00 前退房，退房前記得先吃。
 
 ---
 

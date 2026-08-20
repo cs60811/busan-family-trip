@@ -1531,6 +1531,43 @@
 
     .stay-card p + p { margin-top: 6px; }
 
+    .stay-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 8px;
+    }
+
+    .stay-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px 3px 6px;
+      border: 1.4px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .stay-badge svg { flex: 0 0 auto; }
+
+    .stay-badge.badge-booking { background: #f3ecf9; color: #5b3a7a; }
+    .stay-badge.badge-breakfast { background: #fff2c9; color: #7a5b12; }
+
+    .stay-hours {
+      margin-top: 8px;
+      color: var(--leaf);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .stay-hours b { color: var(--ink); font-weight: 800; }
+
     .stay-card a {
       color: var(--sea-2);
       font-weight: 700;
@@ -1938,8 +1975,12 @@
         <div class="stay-card">
           <small>9/13 - 9/14</small>
           <h3>Hotel Kyungsung</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-booking"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Booking.com 訂房</span>
+          </div>
           <p>26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 부산진구 서면문화로 26</p>
+          <p class="stay-hours">入住 <b>16:00～24:00</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Kyungsung 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Kyungsung 地址">KakaoMap</a>
@@ -1949,8 +1990,13 @@
         <div class="stay-card">
           <small>9/15 - 9/16</small>
           <h3>UH Continental CenterPoint</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-booking"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>易遊網 訂房</span>
+            <span class="stay-badge badge-breakfast"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><path d="M3 6.2h8v3A2.8 2.8 0 0 1 8.2 12H5.8A2.8 2.8 0 0 1 3 9.2v-3Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M11 6.8h1a1.5 1.5 0 0 1 0 3h-1" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 3.4c.35.45-.35.75 0 1.3M8 3.4c.35.45-.35.75 0 1.3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>含早餐（9/16、9/17）</span>
+          </div>
           <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 해운대구 달맞이길 2-21</p>
+          <p class="stay-hours">入住 <b>15:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 UH Continental CenterPoint 地址">KakaoMap</a>
@@ -1960,8 +2006,12 @@
         <div class="stay-card">
           <small>9/17 - 9/18</small>
           <h3>Elmomento Songdo</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-booking"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Agoda 訂房</span>
+          </div>
           <p>9, Deungdae-ro, Seo-gu, Busan 49263</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 서구 등대로 9</p>
+          <p class="stay-hours">入住 <b>16:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Songdo 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Songdo 地址">KakaoMap</a>
@@ -1971,8 +2021,12 @@
         <div class="stay-card">
           <small>9/19</small>
           <h3>Elmomento Sasang Residence</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-booking"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Agoda 訂房</span>
+          </div>
           <p>20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan）</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 사상구 새벽로223번길 20</p>
+          <p class="stay-hours">入住 <b>16:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
             <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Sasang Residence 地址">NAVER Map</a>
             <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Sasang Residence 地址">KakaoMap</a>
@@ -2279,7 +2333,7 @@
         title: "海雲台慢玩、膠囊列車、夜景",
         stay: "UH Continental 中心點酒店",
         focus: "早上膠囊列車首發場次，上午水族館，下午午睡，傍晚沙灘接夕陽夜景。",
-        backup: ["膠囊列車 9:30 首發場次人最少，建議先預約。", "小孩午睡太久就刪 THE BAY 101，保留 X the SKY。", "沙灘改傍晚玩，比中午涼爽；就在飯店旁，不用額外移動。"],
+        backup: ["膠囊列車 9:30 首發場次人最少，建議先預約。", "小孩午睡太久就刪 THE BAY 101，保留 X the SKY。", "沙灘改傍晚玩，比中午涼爽；就在飯店旁，不用額外移動。", "UH Continental 這兩晚含早餐（9/16、9/17），時間夠可以先在飯店吃，鹽麵包當路上點心備案。"],
         events: [
           ["08:30", "晨喚 / 準備出門", "40 分", "抓 9:30 首發場次，出門前備好推車與尿布", []],
           ["09:10", "移動到美浦站 / 自然島鹽麵包早餐", "20 分", "飯店在달맞이길上，走到美浦站不遠；買麵包當早餐剛好順路", ["transport", "food"]],
@@ -2302,7 +2356,7 @@
         title: "甘川洞與松島入住",
         stay: "El Momento Songdo",
         focus: "札嘎其站置物櫃寄行李，輕裝去甘川洞。",
-        backup: ["若札嘎其站大型櫃滿了，先到 El Momento Songdo 寄放行李。", "甘川洞坡多，推車可視狀況少推一段。"],
+        backup: ["若札嘎其站大型櫃滿了，先到 El Momento Songdo 寄放行李。", "甘川洞坡多，推車可視狀況少推一段。", "退房前記得吃 UH Continental 早餐（最後一天含早餐，11:00 前退房）。"],
         events: [
           ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
           ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
