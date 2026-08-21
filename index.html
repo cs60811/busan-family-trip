@@ -2330,17 +2330,22 @@
         id: "d4",
         label: "Day 4",
         date: "9/16（三）",
-        title: "海雲台慢玩、膠囊列車、夜景",
+        title: "松亭海岸列車、膠囊列車、夜景",
         stay: "UH Continental 中心點酒店",
-        focus: "早上膠囊列車首發場次，上午水族館，下午午睡，傍晚沙灘接夕陽夜景。",
-        backup: ["膠囊列車 9:30 首發場次人最少，建議先預約。", "小孩午睡太久就刪 THE BAY 101，保留 X the SKY。", "沙灘改傍晚玩，比中午涼爽；就在飯店旁，不用額外移動。", "UH Continental 這兩晚含早餐（9/16、9/17），時間夠可以先在飯店吃，鹽麵包當路上點心備案。"],
+        focus: "上午搭海岸列車去松亭玩沙吃飯，中午折返清沙浦搭 14:00 膠囊列車回美浦，傍晚沙灘接夕陽夜景。",
+        backup: ["只搶到清沙浦 14:00 這班膠囊列車，提早到月台排隊才能搶到面海第一排長椅。", "小孩海鮮過敏，松亭選擇多、清沙浦幾乎全是海鮮店，午餐已避開清沙浦。", "小孩午睡太累就刪 THE BAY 101，保留 X the SKY。", "沙灘改傍晚玩，比中午涼爽；就在飯店旁，不用額外移動。"],
         events: [
-          ["08:30", "晨喚 / 準備出門", "40 分", "抓 9:30 首發場次，出門前備好推車與尿布", []],
-          ["09:10", "移動到美浦站 / 自然島鹽麵包早餐", "20 分", "飯店在달맞이길上，走到美浦站不遠；買麵包當早餐剛好順路", ["transport", "food"]],
-          ["09:30", "海雲台膠囊列車", "75 分", "9:30 首發場次人最少；不含 Pass，可改海灘列車使用 Pass", ["ticket", "transport"]],
-          ["10:45", "移動到 Sea Life 水族館", "15 分", "美浦到水族館建議計程車，沿海灘走也行但較久", ["transport"]],
-          ["11:00", "Sea Life 釜山水族館", "120 分", "適合幼童，室內可避開中午曝曬", ["ticket"]],
-          ["13:00", "午餐 / 回飯店休息", "135 分", "水族館周邊吃午餐，再搭車回飯店午睡", ["food", "rest"]],
+          ["08:00", "晨喚", "30 分", "今天不用趕特定場次，可以放慢", []],
+          ["08:30", "飯店早餐", "45 分", "UH Continental 這天含早餐", ["food"]],
+          ["09:15", "走到尾浦站", "20 分", "飯店在달맞이길上，走到美浦站不遠", ["transport"]],
+          ["09:35", "搭海岸列車到松亭", "25 分", "用釜山 PASS 搭乘不用另外付費", ["transport", "pass"]],
+          ["10:00", "松亭海水浴場 / 玩沙散步", "60 分", "長 1.2km 大沙灘，坡緩水淺，適合小孩玩沙", []],
+          ["11:00", "송정밥집본점午餐", "75 分", "韓式家常套餐，安靜好坐；非海鮮選項多，適合海鮮過敏", ["food"]],
+          ["12:15", "搭海岸列車回清沙浦", "15 分", "松亭到清沙浦比到美浦近", ["transport", "pass"]],
+          ["12:30", "청사포항 / 다릿돌전망대散步", "60 分", "免費天空步道，尾端玻璃地板可看海；純散步銜接下面的膠囊列車", []],
+          ["13:30", "清沙浦站月台排隊", "30 分", "自由座先搶先贏，面海長椅坐第一排視野最好；提早排隊小小孩才坐得住", ["transport"]],
+          ["14:00", "海雲台膠囊列車（清沙浦→美浦）", "30 分", "只搶到這班次的票，方向是清沙浦回美浦；膠囊列車不含 PASS", ["ticket", "transport"]],
+          ["14:30", "回飯店稍作休息", "45 分", "美浦到飯店很近，讓小孩緩一下再去沙灘", ["rest"]],
           ["15:15", "海雲台沙灘", "90 分", "傍晚玩沙比中午涼爽；飯店旁就是沙灘，不用移動", []],
           ["17:00", "BUSAN X the SKY", "80 分", "沙灘到 LCT 約 10 分路程；看夕陽接夜景", ["ticket", "pass"]],
           ["18:20", "移動到 THE BAY 101", "20 分", "從 LCT 跨到東白島，建議計程車", ["transport"]],
@@ -2503,7 +2508,8 @@
       { zh: "請不要辣", ko: "안 맵게 해주세요", rom: "an maep-ge hae-ju-se-yo" },
       { zh: "請幫忙", ko: "도와주세요", rom: "do-wa-ju-se-yo" },
       { zh: "含蛋或海鮮嗎？", ko: "계란이나 해산물 들어가나요?", rom: "gye-ran-i-na hae-san-mul deul-eo-ga-na-yo" },
-      { zh: "蛋過敏", ko: "계란 알레르기 있어요", rom: "gye-ran al-le-reu-gi i-sseo-yo" }
+      { zh: "蛋過敏", ko: "계란 알레르기 있어요", rom: "gye-ran al-le-reu-gi i-sseo-yo" },
+      { zh: "海鮮過敏", ko: "해산물 알레르기 있어요", rom: "hae-san-mul al-le-reu-gi i-sseo-yo" }
     ];
 
     const passAttractions = [
@@ -2590,14 +2596,15 @@
       { category: "outdoor", name: "海雲台海岸散步路", region: "海雲台／尾浦至廣場", note: "影片主線的海邊步道，適合推車慢走；可依幼童狀態隨時折返", alternative: "影片推薦／可替換 Day 4 下午", time: 45, timeSource: "estimate" },
       { category: "outdoor", name: "達月路／月見路", region: "海雲台／達月", note: "海景咖啡與拍照景觀路；坡度較明顯，推車建議短段體驗", alternative: "影片推薦／可替換 Day 4 下午", time: 45, timeSource: "estimate" },
       { category: "outdoor", name: "海雲台廣場", region: "海雲台／市區", note: "影片終點周邊的開放式散步與街景區，可接市場或晚餐", alternative: "影片推薦／可替換 Day 4 晚餐前", time: 30, timeSource: "estimate" },
-      { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；可接膠囊列車", alternative: "可替換 Day 4 下午", time: 45, timeSource: "estimate" },
+      { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；免費入場，接續搭膠囊列車", scheduled: "Day 4", time: 60, timeSource: "confirmed" },
+      { category: "outdoor", name: "松亭海水浴場", region: "松亭", note: "長 1.2km 大沙灘，坡緩水淺，適合小孩玩沙", scheduled: "Day 4", time: 60, timeSource: "confirmed" },
       { category: "outdoor", name: "甘川洞文化村", region: "甘川洞", note: "坡度與階梯多，帶背巾比推車輕鬆；本次行程推車移動考量已跳過，改去太宗台", alternative: "行程卡可選備案", time: 150, timeSource: "confirmed" },
       { category: "outdoor", name: "松島海灘／龍宮雲橋", region: "松島", note: "纜車後順接海邊散步；強風或下雨時縮短", scheduled: "Day 6", time: 90, timeSource: "confirmed" },
       { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；搭다누비遊園列車環園，不用推車爬坡", scheduled: "Day 5", time: 90, timeSource: "confirmed" },
       { category: "outdoor", name: "五六島天空步道", region: "南區", note: "免費海景步道；雨天或強風可能限制開放", alternative: "天氣好時半日備案", time: 30, timeSource: "estimate" },
 
       { category: "indoor", name: "Museum 1", region: "Centum City", note: "沉浸式數位藝術；檔期至 2026/10/11，最後入場為閉館前 1 小時", alternative: "可替換 Day 3 或 Day 6 下午", time: 90, timeSource: "confirmed" },
-      { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案", scheduled: "Day 4", time: 120, timeSource: "confirmed" },
+      { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案；本次行程 Day 4 改去松亭，改列為備案", alternative: "行程卡可選備案", time: 120, timeSource: "confirmed" },
       { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4", time: 80, timeSource: "confirmed" },
       { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天", time: 90, timeSource: "estimate" },
       { category: "indoor", name: "國立海洋博物館", region: "影島", note: "海洋主題常設展＋兒童體驗空間，適合放慢腳步；4D 影像廳未滿 4 歲不可入場，跳過即可", alternative: "行程卡可選備案", time: 100, timeSource: "estimate" },
@@ -2607,6 +2614,7 @@
       { category: "food", name: "西面市場", region: "西面", note: "西面住宿期間可替代早餐、晚餐或宵夜", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
       { category: "food", name: "釜山鎮市場", region: "西面／釜山鎮", note: "傳統市場與小吃，適合替換西面餐食", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
       { category: "food", name: "고슬고슬가마솥밥 기장본점", region: "機張", note: "釜飯，有包廂＋海景，適合帶小孩安靜吃飯", scheduled: "Day 3", time: 75, timeSource: "confirmed" },
+      { category: "food", name: "송정밥집본점", region: "松亭", note: "韓式家常套餐，安靜好坐；非海鮮選項多，適合海鮮過敏", scheduled: "Day 4", time: 75, timeSource: "confirmed" },
       { category: "food", name: "機張市場", region: "機張", note: "海鮮與市場餐食，可接 Osiria 行程", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
       { category: "food", name: "沙上西部巴士客運站", region: "沙上", note: "返程前可在站區找餐食與便利商店", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
       { category: "food", name: "Gupo Market", region: "沙上／龜浦", note: "市場小吃與採買選項，適合替換沙上餐食", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
@@ -2636,7 +2644,7 @@
       { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" }
     ];
 
-    const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "沙上", "金海機場"];
+    const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "松亭", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "沙上", "金海機場"];
 
     function backupPrimaryDistrict(region) { return region.split("／")[0]; }
     function backupSubArea(region) { const parts = region.split("／"); return parts.length > 1 ? parts.slice(1).join("／") : ""; }
@@ -2689,6 +2697,8 @@
       "西面市場": "부산광역시 부산진구 서면로 56",
       "釜山鎮市場": "부산광역시 동구 진시장로 24",
       "고슬고슬가마솥밥 기장본점": "부산광역시 기장군 기장읍 기장해안로 236",
+      "송정밥집본점": "부산광역시 해운대구 송정중앙로 41",
+      "松亭海水浴場": "부산광역시 해운대구 송정해변로 62",
       "機張市場": "부산광역시 기장군 기장읍 읍내로104번길 16",
       "沙上西部巴士客運站": "부산광역시 사상구 사상로 201",
       "Gupo Market": "부산광역시 북구 구포시장1길 17",
@@ -3262,18 +3272,23 @@
       "d3-9": ["改飯店附近簡餐，不再拉遠吃飯", "孩子累了：晚餐外帶，提早洗澡睡覺"],
       "d3-10": ["晚餐後直接回房，保留隔天海雲台體力", "孩子已睡著：大人輪流簡單整理即可"],
 
-      "d4-0": ["孩子還沒醒：晚一點出門，改搭 10 點後場次", "行李還沒收好：簡化早晨動作，先出門再回來拿"],
-      "d4-1": ["排隊太久：改在膠囊列車車上或回飯店吃", "沒買到：美浦站周邊便利商店買點心代替"],
-      "d4-2": ["膠囊列車排隊久：改搭海灘列車（釜山 PASS 可用）", "下雨或風大：取消戶外列車，改 Museum 1"],
-      "d4-3": ["塞車：改搭地鐵到海雲台站再轉計程車", "孩子想走走：沿海灘散步過去，約 20-25 分"],
-      "d4-4": ["孩子已疲累：縮短為 90 分鐘，回飯店午睡", "若下雨：把水族館延長為主要行程"],
-      "d4-5": ["午睡延長 30 分鐘，取消 THE BAY 101", "不回飯店：改在海雲台室內咖啡廳休息"],
-      "d4-6": ["風大或起浪：改在飯店周邊散步，不玩沙", "孩子想多玩：可壓縮 X the SKY，不影響回飯店時間"],
-      "d4-7": ["看不到夕陽：仍保留室內夜景，改看城市燈景", "孩子累了：取消 THE BAY 101，直接回飯店"],
-      "d4-8": ["塞車：預留緩衝，不必準時抵達", "孩子在車上睡著：直接回飯店，取消 THE BAY 101"],
-      "d4-9": ["改海雲台傳統市場吃小吃，縮短移動", "拍照後直接回飯店，晚餐改外帶"],
-      "d4-10": ["改外帶回飯店，讓孩子提早休息", "改吃海雲台傳統市場，選擇更多"],
-      "d4-11": ["取消夜景段，直接回飯店洗澡", "若孩子還有精神：保留 15 分鐘海邊散步"],
+      "d4-0": ["不趕特定場次，晚一點出門也沒關係", "小孩想多睡：早餐往後延，中午前到松亭就好"],
+      "d4-1": ["小孩不想吃：帶點麵包路上吃", "想多睡一點：早餐可以晚一點，中午前到松亭就好"],
+      "d4-2": ["推車不好走：改叫計程車，車程約 5 分", "小孩想被抱：這段路不長，背巾也方便"],
+      "d4-3": ["列車客滿：等下一班，班距約 10-15 分", "小孩坐不住：這段最短，很快就到"],
+      "d4-4": ["風浪大或太熱：改在竹島公園樹蔭下走走", "小孩想多玩沙：可壓縮午餐時間，不影響回程"],
+      "d4-5": ["小孩海鮮過敏，這裡選擇多，跟店員確認食材即可", "候位：先在旁邊沙灘散步等叫號"],
+      "d4-6": ["列車客滿：等下一班，這段車程短", "行李輕便，這段也可以走走看海邊"],
+      "d4-7": ["風大：改在附近咖啡廳待，不用勉強走天空步道", "小孩怕高：不用走到玻璃地板段，旁邊看海景就好"],
+      "d4-8": ["排隊人多：一位大人先佔位，一位帶小孩在旁邊等", "沒搶到面海位也沒關係，車程只有 30 分鐘"],
+      "d4-9": ["班次取消或天候不佳：改搭海岸列車回美浦，釜山 PASS 可用", "沒搶到面海位：後段車廂視野也不差"],
+      "d4-10": ["午睡延長 30 分鐘，取消 THE BAY 101", "不回飯店：改在海雲台室內咖啡廳休息"],
+      "d4-11": ["風大或起浪：改在飯店周邊散步，不玩沙", "孩子想多玩：可壓縮 X the SKY，不影響回飯店時間"],
+      "d4-12": ["看不到夕陽：仍保留室內夜景，改看城市燈景", "孩子累了：取消 THE BAY 101，直接回飯店"],
+      "d4-13": ["塞車：預留緩衝，不必準時抵達", "孩子在車上睡著：直接回飯店，取消 THE BAY 101"],
+      "d4-14": ["改海雲台傳統市場吃小吃，縮短移動", "拍照後直接回飯店，晚餐改外帶"],
+      "d4-15": ["改外帶回飯店，讓孩子提早休息", "改吃海雲台傳統市場，選擇更多"],
+      "d4-16": ["取消夜景段，直接回飯店洗澡", "若孩子還有精神：保留 15 分鐘海邊散步"],
 
       "d5-0": ["一人整理行李，一人先帶孩子吃早餐", "行李太多：刪除非必要採買，直接寄放"],
       "d5-1": ["札嘎其站置物櫃滿：先到 El Momento Songdo 寄放", "改搭計程車，直接到飯店放行李再出發"],
@@ -3357,16 +3372,10 @@
       "d3-9": [
         { name: "海雲台傳統市場", route: "飯店步行約 8 分；不必再搭車，適合第一晚海雲台" }
       ],
-      "d4-2": [
-        { name: "海雲台海灘列車", route: "尾浦站同一園區；可使用 PASS，改搭後仍能順接 X the SKY" }
-      ],
-      "d4-5": [
-        { name: "海雲台傳統市場", route: "水族館步行約 5 分；買午餐後直接回飯店午睡" }
-      ],
-      "d4-8": [
+      "d4-13": [
         { name: "冬柏島海岸步道", route: "X the SKY 步行約 12 分；若不想搭計程車，改走海岸步道到東白島看夜景" }
       ],
-      "d4-10": [
+      "d4-15": [
         { name: "尾浦家 海雲台本店", route: "THE BAY 101 計程車約 8 分；吃完回飯店約 8 分，建議先看候位" }
       ],
       "d5-6": [
