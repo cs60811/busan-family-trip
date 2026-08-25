@@ -1298,6 +1298,28 @@
       line-height: 1.35;
     }
 
+    .shopping-item-body {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .shopping-thumb {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 4px;
+      flex: 0 0 auto;
+    }
+
+    .shopping-item-text {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
     .shopping-item-head {
       display: flex;
       align-items: center;
@@ -2654,24 +2676,24 @@
     const allOliveYoungBranches = ["seomyeon", "haeundae", "nampo", "sasang"];
 
     const shoppingList = [
-      { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트", branches: allOliveYoungBranches },
-      { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名", branches: allOliveYoungBranches },
-      { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드", branches: allOliveYoungBranches },
-      { category: "skincare", brand: "MEDIHEAL", zh: "N.M.F面膜", ko: "메디힐 더 엔엠에프 앰플 마스크", branches: allOliveYoungBranches },
-      { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶", branches: allOliveYoungBranches },
-      { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼", branches: allOliveYoungBranches },
-      { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches },
-      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches },
-      { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店" },
-      { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣" },
-      { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"] },
-      { category: "food", brand: "好麗友", zh: "陽光波浪玉米脆片", ko: "오리온 태양의 맛 썬", branches: ["emart_sasang"] },
-      { category: "food", brand: "好麗友", zh: "生洋芋片", ko: "오리온 포카칩", branches: ["emart_sasang"] },
-      { category: "food", brand: "No Brand", zh: "紫薯洋芋片", ko: "노브랜드 자색고구마칩", note: "이마트自有品牌，只有이마트／No Brand賣，一般超商買不到", branches: ["emart_sasang"] },
-      { category: "food", brand: "好麗友", zh: "鯛魚燒蛋糕", ko: "오리온 참붕어빵", branches: ["emart_sasang"] },
-      { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", branches: ["emart_sasang"] },
-      { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"] },
-      { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"] }
+      { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1916/b4dc2d60-4328-44b4-9096-137552353b87.png" },
+      { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1655/8ed2f8a5-cb08-4060-81c1-e8af85de4918.jpg" },
+      { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1180/d648d0d7-14b8-4d3d-a0d0-5a4c7bafc466.jpg" },
+      { category: "skincare", brand: "MEDIHEAL", zh: "N.M.F面膜", ko: "메디힐 더 엔엠에프 앰플 마스크", branches: allOliveYoungBranches, image: "https://mediheal.com/cdn/shop/files/thumbnail_The-N.M.F-Ampoule-Mask_shadow_2.png?v=1787242462" },
+      { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1321/8e95c097-fd6a-4a4f-a1a4-1f07f18828b4.jpg?RS=1500x1500&AR=0&SF=webp&QT=80" },
+      { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼", branches: allOliveYoungBranches, image: "https://cfront.isoi.co.kr/com/common/main/m_01serum_260303.jpg" },
+      { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1449/62d16f37-7f7d-4390-bfb8-ae4f57ace622.jpg" },
+      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches, image: "https://cdn-image.oliveyoung.com/prdtImg/1748/0122e4f8-86b1-49b6-978e-88a6da54d4f1.png" },
+      { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店", image: "https://tqklhszfkvzk6518638.edge.naverncp.com/product/8801121288764.png" },
+      { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣", image: "https://img.danuri.io/catalog-image/643/972/123/3849d215f59e4642856a375db5de06fe.jpg?shrink=300:300" },
+      { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"], image: "https://product-image.kurly.com/product/image/0ff66a58-8335-4127-850b-67776ad9e1fc.jpg" },
+      { category: "food", brand: "好麗友", zh: "陽光波浪玉米脆片", ko: "오리온 태양의 맛 썬", note: "現在架上常見的是辣味版，原味單獨包裝的版本較少見，現場找不到可請店員確認", branches: ["emart_sasang"], image: "https://img-cf.kurly.com/shop/data/goods/1655958507332z0.jpg" },
+      { category: "food", brand: "好麗友", zh: "生洋芋片", ko: "오리온 포카칩", branches: ["emart_sasang"], image: "https://product-image.kurly.com/product/image/71006634-bf43-435b-ae27-41cb35b390fb.jpg" },
+      { category: "food", brand: "No Brand", zh: "紫薯洋芋片", ko: "노브랜드 자색고구마칩", note: "이마트自有品牌，只有이마트／No Brand賣，一般超商買不到", branches: ["emart_sasang"], image: "https://img.danuri.io/catalog-image/197/024/030/68b2cb4671804149859cb82c6e1564fe.jpg?shrink=300:300" },
+      { category: "food", brand: "好麗友", zh: "鯛魚燒蛋糕", ko: "오리온 참붕어빵", branches: ["emart_sasang"], image: "https://img-cf.kurly.com/shop/data/goods/1613625172485z0.jpg" },
+      { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", note: "CROWN官方品名是「버터와플」（奶油鬆餅），常俗稱생크림와플，是同一款", branches: ["emart_sasang"], image: "https://www.crown.co.kr/upload/system/product/34cbf559249b4dd994757fe8d16fa4d7_%E1%84%87%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%AA%E1%84%91%E1%85%B3%E1%86%AF.jpg" },
+      { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"], image: "https://img-cf.kurly.com/shop/data/goods/1626836342923z0.jpg" },
+      { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"], image: "https://product-image.kurly.com/product/image/a59a035a-bfa6-473e-a42e-27486c816b16.jpg" }
     ];
 
     const tagNames = {
@@ -3792,10 +3814,15 @@
           <div class="check-row">
             <input type="checkbox" id="${id}" data-shop-check="${id}" ${checked}>
             <label for="${id}">
-              <div class="shopping-item-head"><span class="shopping-brand">${item.brand}</span></div>
-              <div>${item.zh}</div>
-              <div class="shopping-ko" lang="ko">${item.ko}</div>
-              ${item.note ? `<div class="shopping-note">${item.note}</div>` : ""}
+              <div class="shopping-item-body">
+                ${item.image ? `<img class="shopping-thumb" src="${item.image}" alt="${item.brand} ${item.zh}" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ""}
+                <div class="shopping-item-text">
+                  <div class="shopping-item-head"><span class="shopping-brand">${item.brand}</span></div>
+                  <div>${item.zh}</div>
+                  <div class="shopping-ko" lang="ko">${item.ko}</div>
+                  ${item.note ? `<div class="shopping-note">${item.note}</div>` : ""}
+                </div>
+              </div>
             </label>
           </div>
           ${branches.length ? `

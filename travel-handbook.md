@@ -368,16 +368,16 @@
 
 依類別分組：彩妝／保養／髮品／食品伴手禮。彩妝、保養、髮品**全部在 OLIVE YOUNG 買得到**，不用特地找專門店；Fwee、Torriden、UNOVE、Longtake 這幾個小眾品牌建議挑大一點的分店才貨齊（見下方「行程沿路的大型分店」，這 4 間都已經是規模較大的）。
 
-| 類別 | 品牌 | 品項 | 韓文品名（可直接給店員看） | 備註 |
-|---|---|---|---|---|
-| 彩妝 | BANILA CO | 控油定妝蜜粉餅 | 바닐라코 프라임 프라이머 피니쉬 파우더 팩트 | |
-| 彩妝 | Fwee | 唇頰兩用布丁膏 | 퓌 립앤치크 블러리 푸딩팟 | 2025 올리브영 어워즈 컨투어링部門第一名 |
-| 保養 | MEDIHEAL | 集中護理舒緩棉片 | 메디힐 마데카소사이드 패드 | |
-| 保養 | MEDIHEAL | N.M.F面膜 | 메디힐 더 엔엠에프 앰플 마스크 | |
-| 保養 | Torriden | 玻尿酸精華 | 토리든 다이브인 세럼 | 올리브영長銷冠軍款，累積賣破 1300 萬瓶 |
-| 保養 | ISOI | 保加利亞玫瑰護理精華 | 이소이 불가리안 로즈 블레미쉬 케어 세럼 | |
-| 髮品 | UNOVE | 深層受損修護髮膜 | 어노브 딥 데미지 리페어 헤어 마스크 | 連續 4 年올리브영髮膜銷售冠軍 |
-| 髮品 | Longtake | 檀香強效護髮油 | 롱테이크 샌달우드 인텐시브 헤어오일 | |
+| 圖片 | 類別 | 品牌 | 品項 | 韓文品名（可直接給店員看） | 備註 |
+|---|---|---|---|---|---|
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1916/b4dc2d60-4328-44b4-9096-137552353b87.png) | 彩妝 | BANILA CO | 控油定妝蜜粉餅 | 바닐라코 프라임 프라이머 피니쉬 파우더 팩트 | |
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1655/8ed2f8a5-cb08-4060-81c1-e8af85de4918.jpg) | 彩妝 | Fwee | 唇頰兩用布丁膏 | 퓌 립앤치크 블러리 푸딩팟 | 2025 올리브영 어워즈 컨투어링部門第一名 |
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1180/d648d0d7-14b8-4d3d-a0d0-5a4c7bafc466.jpg) | 保養 | MEDIHEAL | 集中護理舒緩棉片 | 메디힐 마데카소사이드 패드 | |
+| ![](https://mediheal.com/cdn/shop/files/thumbnail_The-N.M.F-Ampoule-Mask_shadow_2.png?v=1787242462) | 保養 | MEDIHEAL | N.M.F面膜 | 메디힐 더 엔엠에프 앰플 마스크 | |
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1321/8e95c097-fd6a-4a4f-a1a4-1f07f18828b4.jpg?RS=1500x1500&AR=0&SF=webp&QT=80) | 保養 | Torriden | 玻尿酸精華 | 토리든 다이브인 세럼 | 올리브영長銷冠軍款，累積賣破 1300 萬瓶 |
+| ![](https://cfront.isoi.co.kr/com/common/main/m_01serum_260303.jpg) | 保養 | ISOI | 保加利亞玫瑰護理精華 | 이소이 불가리안 로즈 블레미쉬 케어 세럼 | |
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1449/62d16f37-7f7d-4390-bfb8-ae4f57ace622.jpg) | 髮品 | UNOVE | 深層受損修護髮膜 | 어노브 딥 데미지 리페어 헤어 마스크 | 連續 4 年올리브영髮膜銷售冠軍 |
+| ![](https://cdn-image.oliveyoung.com/prdtImg/1748/0122e4f8-86b1-49b6-978e-88a6da54d4f1.png) | 髮品 | Longtake | 檀香強效護髮油 | 롱테이크 샌달우드 인텐시브 헤어오일 | |
 
 **行程沿路的大型 OLIVE YOUNG 分店**（規模較大，貨較齊，以上彩妝／保養／髮品都可以在下面任一間買齊）：
 
@@ -390,17 +390,17 @@
 
 ### 食品伴手禮
 
-| 品牌 | 品項 | 韓文品名 | 哪裡買 |
-|---|---|---|---|
-| CU | 杜拜巧克力Q餅 | 두바이 쫀득 찹쌀떡 | CU 超商限定新品（2025/10 上市後常缺貨，看到建議先買），沿路任何一家 CU 都有 |
-| IMINT | 咖啡糖 | 아이민트 에스프레소 자일리톨 커피캔디 | CU 超商限定，咖啡豆造型糖，含木糖醇，沿路任何一家 CU 都有 |
-| 農心 | 蝦味條 黑松露風味 | 농심 새우깡 블랙 | 이마트 사상店 |
-| 好麗友 | 陽光波浪玉米脆片 | 오리온 태양의 맛 썬 | 이마트 사상店 |
-| 好麗友 | 生洋芋片 | 오리온 포카칩 | 이마트 사상店 |
-| No Brand | 紫薯洋芋片 | 노브랜드 자색고구마칩 | 이마트 사상店（이마트自有品牌，一般超商買不到） |
-| 好麗友 | 鯛魚燒蛋糕 | 오리온 참붕어빵 | 이마트 사상店 |
-| CROWN | 鮮奶油鬆餅 | 크라운 생크림와플 | 이마트 사상店 |
-| Binch | 巧克力餅乾 | 롯데 빈츠 | 이마트 사상店 |
-| Market O | 布朗尼蛋糕 | 마켓오 리얼 브라우니 | 이마트 사상店 |
+| 圖片 | 品牌 | 品項 | 韓文品名 | 哪裡買 |
+|---|---|---|---|---|
+| ![](https://tqklhszfkvzk6518638.edge.naverncp.com/product/8801121288764.png) | CU | 杜拜巧克力Q餅 | 두바이 쫀득 찹쌀떡 | CU 超商限定新品（2025/10 上市後常缺貨，看到建議先買），沿路任何一家 CU 都有 |
+| ![](https://img.danuri.io/catalog-image/643/972/123/3849d215f59e4642856a375db5de06fe.jpg?shrink=300:300) | IMINT | 咖啡糖 | 아이민트 에스프레소 자일리톨 커피캔디 | CU 超商限定，咖啡豆造型糖，含木糖醇，沿路任何一家 CU 都有 |
+| ![](https://product-image.kurly.com/product/image/0ff66a58-8335-4127-850b-67776ad9e1fc.jpg) | 農心 | 蝦味條 黑松露風味 | 농심 새우깡 블랙 | 이마트 사상店 |
+| ![](https://img-cf.kurly.com/shop/data/goods/1655958507332z0.jpg) | 好麗友 | 陽光波浪玉米脆片 | 오리온 태양의 맛 썬 | 이마트 사상店（現在架上常見辣味版，原味單獨包裝較少見，可請店員確認） |
+| ![](https://product-image.kurly.com/product/image/71006634-bf43-435b-ae27-41cb35b390fb.jpg) | 好麗友 | 生洋芋片 | 오리온 포카칩 | 이마트 사상店 |
+| ![](https://img.danuri.io/catalog-image/197/024/030/68b2cb4671804149859cb82c6e1564fe.jpg?shrink=300:300) | No Brand | 紫薯洋芋片 | 노브랜드 자색고구마칩 | 이마트 사상店（이마트自有品牌，一般超商買不到） |
+| ![](https://img-cf.kurly.com/shop/data/goods/1613625172485z0.jpg) | 好麗友 | 鯛魚燒蛋糕 | 오리온 참붕어빵 | 이마트 사상店 |
+| ![](https://www.crown.co.kr/upload/system/product/34cbf559249b4dd994757fe8d16fa4d7_%E1%84%87%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%AA%E1%84%91%E1%85%B3%E1%86%AF.jpg) | CROWN | 鮮奶油鬆餅 | 크라운 생크림와플 | 이마트 사상店（官方品名是버터와플/奶油鬆餅，同一款） |
+| ![](https://img-cf.kurly.com/shop/data/goods/1626836342923z0.jpg) | Binch | 巧克力餅乾 | 롯데 빈츠 | 이마트 사상店 |
+| ![](https://product-image.kurly.com/product/image/a59a035a-bfa6-473e-a42e-27486c816b16.jpg) | Market O | 布朗尼蛋糕 | 마켓오 리얼 브라우니 | 이마트 사상店 |
 
 **이마트 사상店**：부산광역시 사상구 광장로 17（跟 Day7「沙上附近超市／商圈採買」同一區，也離 OLIVE YOUNG 沙上分店很近）。一般零食類（農心／好麗友／樂天／CROWN）跟 No Brand 自有品牌都找得到，一次買齊。
