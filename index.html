@@ -1313,6 +1313,52 @@
       background: #fff;
       padding: 4px;
       flex: 0 0 auto;
+      cursor: zoom-in;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .shopping-thumb:hover {
+      transform: translateY(-1px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(35, 33, 29, .85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      cursor: zoom-out;
+    }
+
+    .lightbox img {
+      max-width: min(90vw, 480px);
+      max-height: 82vh;
+      object-fit: contain;
+      background: #fffdf7;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, .35);
+      padding: 10px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--lemon);
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, .35);
     }
 
     .shopping-item-text {
@@ -2464,6 +2510,11 @@
       <div id="shoppingChecklist"></div>
     </section>
   </main>
+
+  <div class="lightbox" id="imageLightbox" hidden role="dialog" aria-modal="true" aria-label="商品圖片放大">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">✕</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
 
   <script>
     const days = [
@@ -4094,9 +4145,35 @@
     });
 
     document.getElementById("shoppingChecklist").addEventListener("click", (event) => {
+      const thumb = event.target.closest(".shopping-thumb");
+      if (thumb) {
+        event.preventDefault();
+        openLightbox(thumb.src, thumb.alt);
+        return;
+      }
       const button = event.target.closest(".copy-address");
       if (!button) return;
       copyAddress(button.dataset.address, button);
+    });
+
+    function openLightbox(src, alt) {
+      document.getElementById("lightboxImg").src = src;
+      document.getElementById("lightboxImg").alt = alt;
+      document.getElementById("imageLightbox").hidden = false;
+    }
+
+    function closeLightbox() {
+      document.getElementById("imageLightbox").hidden = true;
+      document.getElementById("lightboxImg").src = "";
+    }
+
+    document.getElementById("imageLightbox").addEventListener("click", closeLightbox);
+    document.getElementById("lightboxClose").addEventListener("click", (event) => {
+      event.stopPropagation();
+      closeLightbox();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !document.getElementById("imageLightbox").hidden) closeLightbox();
     });
 
     document.getElementById("phraseList").addEventListener("click", (event) => {
