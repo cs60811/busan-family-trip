@@ -1240,6 +1240,49 @@
     .tag.luggage { background: #7c4a2d; }
     .tag.ticket { background: #875a9f; }
     .tag.pass { background: #9a6a19; }
+    .tag.makeup { background: #b2557e; }
+    .tag.skincare { background: var(--sea); }
+    .tag.haircare { background: var(--leaf); }
+
+    .shopping-item-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .shopping-brand {
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .shopping-ko {
+      margin-top: 4px;
+      color: var(--sea-2);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .shopping-note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .shopping-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border: 1.4px solid var(--ink);
+      border-radius: 999px;
+      background: #eef3e6;
+      color: #45631f;
+    }
 
     aside {
       position: sticky;
@@ -1763,7 +1806,6 @@
         text-align: center;
       }
 
-      .actions .icon-btn[data-view="weather"] { grid-column: 1 / -1; }
 
       .day-tabs {
         margin-inline: -9px;
@@ -1831,6 +1873,7 @@
         <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
         <button class="icon-btn" type="button" data-view="backup">備用景點</button>
         <button class="icon-btn" type="button" data-view="weather">天氣預報</button>
+        <button class="icon-btn" type="button" data-view="shopping">購物清單</button>
       </div>
     </div>
   </header>
@@ -2259,6 +2302,26 @@
       <div class="forecast-grid" id="forecastGrid"></div>
       <p class="forecast-note">預報通常只在出發前約 16 天內可用；尚未進入範圍的日期會保留住宿位置，但不會用歷史平均氣溫代替預報。</p>
     </section>
+
+    <section class="pass-view" id="shoppingView" hidden aria-labelledby="shoppingTitle">
+      <div class="pass-heading">
+        <div>
+          <span class="kicker">SEOMYEON · HAEUNDAE · NAMPO · SASANG</span>
+          <h2 id="shoppingTitle">購物清單</h2>
+          <p>這 7 樣都查過了，<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>，不用特地找專門店；Fwee、Torriden、UNOVE、Longtake 這幾個小眾品牌建議挑大一點的分店才貨齊。下面整理了行程沿路會經過、規模較大的四間分店。</p>
+        </div>
+      </div>
+      <section class="stay-grid" id="shoppingBranches" aria-label="沿路 OLIVE YOUNG 分店"></section>
+      <div class="side-card" style="margin-top:20px">
+        <div class="side-card-head">
+          <h3>購物清單</h3>
+          <button class="reset-checks" id="resetShopping" type="button">重設</button>
+        </div>
+        <div class="progress-wrap" aria-hidden="true"><div class="progress" id="shopProgress"></div></div>
+        <p class="map-note" id="shopProgressText">0 / 7 已買</p>
+        <div class="checklist" id="shoppingChecklist"></div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -2452,6 +2515,29 @@
       "當日票券截圖",
       "雨具或防曬",
       "推車或背巾"
+    ];
+
+    const shoppingCategoryNames = {
+      makeup: "彩妝",
+      skincare: "保養",
+      haircare: "髮品"
+    };
+
+    const shoppingList = [
+      { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트" },
+      { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名" },
+      { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드" },
+      { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶" },
+      { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼" },
+      { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍" },
+      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일" }
+    ];
+
+    const shoppingBranches = [
+      { area: "西面", name: "OLIVE YOUNG 西面站前店", note: "西面站 10 號出口正對面，兩層樓，貨最齊全", address: "부산광역시 부산진구 중앙대로 686" },
+      { area: "海雲台", name: "OLIVE YOUNG 海雲台站店", note: "海雲台站附近", address: "부산광역시 해운대구 구남로8번길 7-5" },
+      { area: "南浦", name: "OLIVE YOUNG 釜山南浦店", note: "光復路商圈內，離 BIFF 廣場很近", address: "부산광역시 중구 광복로 64-1" },
+      { area: "沙上", name: "OLIVE YOUNG 沙上 Apple Outlet 店", note: "西部巴士客運站旁 Apple Outlet 地下 1 樓，兩層規模，貨最齊全", address: "부산광역시 사상구 사상로 201" }
     ];
 
     const tagNames = {
@@ -2755,6 +2841,7 @@
     const backupDirectory = document.getElementById("backupDirectory");
     const weatherView = document.getElementById("weatherView");
     const forecastGrid = document.getElementById("forecastGrid");
+    const shoppingView = document.getElementById("shoppingView");
 
     function setView(view, shouldScroll = true) {
       activeView = view;
@@ -2762,6 +2849,7 @@
       passView.hidden = view !== "pass";
       backupView.hidden = view !== "backup";
       weatherView.hidden = view !== "weather";
+      shoppingView.hidden = view !== "shopping";
       document.querySelectorAll("[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === view));
       if (shouldScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -3544,6 +3632,53 @@
       updateProgress();
     }
 
+    function renderShoppingBranches() {
+      const box = document.getElementById("shoppingBranches");
+      box.innerHTML = shoppingBranches.map(branch => `
+        <div class="stay-card">
+          <small>${branch.area}</small>
+          <h3>${branch.name}</h3>
+          <p>${branch.note}</p>
+          <p class="local-address"><span>MAP / TAXI</span>${branch.address}</p>
+          <div class="stay-actions">
+            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 ${branch.name} 地址">NAVER Map</a>
+            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 ${branch.name} 地址">KakaoMap</a>
+            <button class="copy-address" type="button" data-address="${branch.address}">複製韓文地址</button>
+          </div>
+        </div>
+      `).join("");
+      setupMapLinks();
+    }
+
+    function renderShoppingList() {
+      const box = document.getElementById("shoppingChecklist");
+      box.innerHTML = shoppingList.map((item, index) => {
+        const id = `busan-shop-${index}`;
+        const checked = localStorage.getItem(id) === "1" ? "checked" : "";
+        return `
+          <label class="check">
+            <input type="checkbox" data-shop-check="${id}" ${checked}>
+            <div>
+              <div class="shopping-item-head"><span class="shopping-brand">${item.brand}</span><span class="tag ${item.category}">${shoppingCategoryNames[item.category]}</span></div>
+              <div>${item.zh}</div>
+              <div class="shopping-ko" lang="ko">${item.ko}</div>
+              ${item.note ? `<div class="shopping-note">${item.note}</div>` : ""}
+            </div>
+          </label>
+        `;
+      }).join("");
+      renderShoppingBranches();
+      updateShopProgress();
+    }
+
+    function updateShopProgress() {
+      const inputs = [...document.querySelectorAll("[data-shop-check]")];
+      const done = inputs.filter(input => input.checked).length;
+      const pct = inputs.length ? Math.round(done / inputs.length * 100) : 0;
+      document.getElementById("shopProgress").style.width = `${pct}%`;
+      document.getElementById("shopProgressText").textContent = `${done} / ${inputs.length} 已買`;
+    }
+
     function renderPhrases() {
       const box = document.getElementById("phraseList");
       box.innerHTML = phrases.map((phrase, index) => `
@@ -3760,6 +3895,18 @@
       updateProgress();
     });
 
+    document.getElementById("resetShopping").addEventListener("click", () => {
+      shoppingList.forEach((_, index) => localStorage.removeItem(`busan-shop-${index}`));
+      renderShoppingList();
+    });
+
+    document.getElementById("shoppingChecklist").addEventListener("change", (event) => {
+      const input = event.target.closest("[data-shop-check]");
+      if (!input) return;
+      localStorage.setItem(input.dataset.shopCheck, input.checked ? "1" : "0");
+      updateShopProgress();
+    });
+
     document.getElementById("phraseList").addEventListener("click", (event) => {
       const button = event.target.closest("[data-phrase]");
       if (!button) return;
@@ -3826,6 +3973,7 @@
     renderTabs();
     renderDay();
     renderChecklist();
+    renderShoppingList();
     renderPhrases();
     setupMapLinks();
     renderPassFilterChips();
