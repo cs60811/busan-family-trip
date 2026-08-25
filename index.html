@@ -2428,7 +2428,7 @@
         <div>
           <span class="kicker">SHOPPING LIST</span>
           <h2 id="shoppingTitle">購物清單</h2>
-          <p>依類別分組，之後會加入食品類伴手禮。這幾樣目前<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；點每項的「哪裡買」看沿路分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。</p>
+          <p>依類別分組。彩妝／保養／髮品<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；食品伴手禮大多在沙上的이마트可以一次買齊，CU 超商限定的兩樣（杜拜巧克力Q餅、IMINT咖啡糖）沿路任何一家 CU 都有。點每項的「哪裡買」看分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。</p>
         </div>
       </div>
       <div class="side-card">
@@ -2437,7 +2437,7 @@
           <button class="reset-checks" id="resetShopping" type="button">重設</button>
         </div>
         <div class="progress-wrap" aria-hidden="true"><div class="progress" id="shopProgress"></div></div>
-        <p class="map-note" id="shopProgressText">0 / 7 已買</p>
+        <p class="map-note" id="shopProgressText">0 / 18 已買</p>
       </div>
       <div id="shoppingChecklist"></div>
     </section>
@@ -2639,14 +2639,16 @@
     const shoppingCategories = [
       { id: "makeup", label: "彩妝" },
       { id: "skincare", label: "保養" },
-      { id: "haircare", label: "髮品" }
+      { id: "haircare", label: "髮品" },
+      { id: "food", label: "食品伴手禮" }
     ];
 
     const shoppingBranches = {
       seomyeon: { area: "西面", name: "OLIVE YOUNG 西面站前店", note: "西面站 10 號出口正對面，兩層樓，貨最齊全", address: "부산광역시 부산진구 중앙대로 686" },
       haeundae: { area: "海雲台", name: "OLIVE YOUNG 海雲台站店", note: "海雲台站附近", address: "부산광역시 해운대구 구남로8번길 7-5" },
       nampo: { area: "南浦", name: "OLIVE YOUNG 釜山南浦店", note: "光復路商圈內，離 BIFF 廣場很近", address: "부산광역시 중구 광복로 64-1" },
-      sasang: { area: "沙上", name: "OLIVE YOUNG 沙上 Apple Outlet 店", note: "西部巴士客運站旁 Apple Outlet 地下 1 樓，兩層規模，貨最齊全", address: "부산광역시 사상구 사상로 201" }
+      sasang: { area: "沙上", name: "OLIVE YOUNG 沙上 Apple Outlet 店", note: "西部巴士客運站旁 Apple Outlet 地下 1 樓，兩層規模，貨最齊全", address: "부산광역시 사상구 사상로 201" },
+      emart_sasang: { area: "沙上", name: "이마트 사상店", note: "大型超市，農心／好麗友／樂天／CROWN 這類一般零食跟 No Brand 自有品牌都找得到；跟 Day7 沙上採買行程同一區", address: "부산광역시 사상구 광장로 17" }
     };
 
     const allOliveYoungBranches = ["seomyeon", "haeundae", "nampo", "sasang"];
@@ -2655,10 +2657,21 @@
       { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트", branches: allOliveYoungBranches },
       { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名", branches: allOliveYoungBranches },
       { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드", branches: allOliveYoungBranches },
+      { category: "skincare", brand: "MEDIHEAL", zh: "N.M.F面膜", ko: "메디힐 더 엔엠에프 앰플 마스크", branches: allOliveYoungBranches },
       { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶", branches: allOliveYoungBranches },
       { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼", branches: allOliveYoungBranches },
       { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches },
-      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches }
+      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches },
+      { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店" },
+      { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣" },
+      { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"] },
+      { category: "food", brand: "好麗友", zh: "陽光波浪玉米脆片", ko: "오리온 태양의 맛 썬", branches: ["emart_sasang"] },
+      { category: "food", brand: "好麗友", zh: "生洋芋片", ko: "오리온 포카칩", branches: ["emart_sasang"] },
+      { category: "food", brand: "No Brand", zh: "紫薯洋芋片", ko: "노브랜드 자색고구마칩", note: "이마트自有品牌，只有이마트／No Brand賣，一般超商買不到", branches: ["emart_sasang"] },
+      { category: "food", brand: "好麗友", zh: "鯛魚燒蛋糕", ko: "오리온 참붕어빵", branches: ["emart_sasang"] },
+      { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", branches: ["emart_sasang"] },
+      { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"] },
+      { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"] }
     ];
 
     const tagNames = {
