@@ -1,5 +1,5 @@
 // 更新 index.html 內容後，請把版本號 +1，離線快取才會換新。
-const CACHE_VERSION = "busan-handbook-v23";
+const CACHE_VERSION = "busan-handbook-v24";
 
 const PRECACHE_URLS = [
   "./",
@@ -8,7 +8,25 @@ const PRECACHE_URLS = [
   "assets/jagalchi-locker-station-cutaway.jpg",
   "assets/icon-192.png",
   "assets/icon-512.png",
-  "assets/apple-touch-icon.png"
+  "assets/apple-touch-icon.png",
+  "assets/shopping/01-banila-co.jpg",
+  "assets/shopping/02-fwee.jpg",
+  "assets/shopping/03-mediheal-pad.jpg",
+  "assets/shopping/04-mediheal-nmf.jpg",
+  "assets/shopping/05-torriden.jpg",
+  "assets/shopping/06-isoi.jpg",
+  "assets/shopping/07-unove.jpg",
+  "assets/shopping/08-longtake.jpg",
+  "assets/shopping/09-cu-dubai.jpg",
+  "assets/shopping/10-imint.jpg",
+  "assets/shopping/11-nongshim.jpg",
+  "assets/shopping/12-orion-sun.jpg",
+  "assets/shopping/13-orion-potato.jpg",
+  "assets/shopping/14-nobrand.jpg",
+  "assets/shopping/15-orion-taiyaki.jpg",
+  "assets/shopping/16-crown.jpg",
+  "assets/shopping/17-binch.jpg",
+  "assets/shopping/18-marketo.jpg"
 ];
 
 self.addEventListener("install", event => {
