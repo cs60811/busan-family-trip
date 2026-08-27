@@ -23,6 +23,7 @@
       --lemon: #f0c14b;
       --leaf: #6b8f47;
       --blue: #3c6e8f;
+      --plum: #7d5ba6;
       --shadow: 0 18px 40px rgba(49, 38, 22, .14);
       --radius: 8px;
       --mono: "Courier New", ui-monospace, monospace;
@@ -239,6 +240,7 @@
     .cat-chip.active.cat-food { background: var(--coral); border-color: var(--coral); }
     .cat-chip.active.cat-outdoor { background: var(--leaf); border-color: var(--leaf); }
     .cat-chip.active.cat-indoor { background: var(--blue); border-color: var(--blue); }
+    .cat-chip.active.cat-shopping { background: var(--plum); border-color: var(--plum); }
 
     .backup-district {
       border: 2px solid var(--ink);
@@ -299,6 +301,7 @@
     .cat-count.cat-food { color: var(--coral); border-color: var(--coral); }
     .cat-count.cat-outdoor { color: var(--leaf); border-color: var(--leaf); }
     .cat-count.cat-indoor { color: var(--blue); border-color: var(--blue); }
+    .cat-count.cat-shopping { color: var(--plum); border-color: var(--plum); }
 
     .backup-district-body {
       padding: 4px 16px 14px;
@@ -319,6 +322,7 @@
     .cat-kicker-food { color: var(--coral); }
     .cat-kicker-outdoor { color: var(--leaf); }
     .cat-kicker-indoor { color: var(--blue); }
+    .cat-kicker-shopping { color: var(--plum); }
 
     .backup-item-list {
       list-style: none;
@@ -359,6 +363,7 @@
     .backup-item-dot.cat-food { background: var(--coral); }
     .backup-item-dot.cat-outdoor { background: var(--leaf); }
     .backup-item-dot.cat-indoor { background: var(--blue); }
+    .backup-item-dot.cat-shopping { background: var(--plum); }
 
     .backup-item-name {
       font-family: var(--serif);
@@ -2554,7 +2559,7 @@
           ["09:00", "晨喚 / 早餐", "60 分", "飯店附近簡單吃", ["food"]],
           ["10:00", "釜山市民公園", "120 分", "適合幼童放電、散步", []],
           ["12:00", "搭車到田浦咖啡街", "30 分", "從公園往田浦移動", ["transport"]],
-          ["12:30", "田浦咖啡街 / 午餐 / 下午茶", "120 分", "找親子友善咖啡廳或簡餐", ["food"]],
+          ["12:30", "田浦咖啡街 / 午餐 / 下午茶", "120 分", "咖啡推薦 Pot of Busan（無花果汽水）／FRUTO FRUTA（水果冰沙），順路可逛 object、made by 等選物店，詳見備用景點「選物店」分類", ["food"]],
           ["14:30", "回飯店午休", "90 分", "小孩午睡，爸媽也回血", ["rest"]],
           ["16:00", "樂天百貨 / 西面地下街", "90 分", "室內逛街，雨天也 OK", []],
           ["17:30", "ARTBOX / BUTTER", "60 分", "買小物、文具、玩具", []],
@@ -2867,7 +2872,8 @@
     const backupCategories = [
       { id: "food", label: "美食", hint: "臨時換餐、加點心" },
       { id: "outdoor", label: "室外景點", hint: "天氣舒服時優先" },
-      { id: "indoor", label: "室內景點", hint: "下雨、午睡後備案" }
+      { id: "indoor", label: "室內景點", hint: "下雨、午睡後備案" },
+      { id: "shopping", label: "選物店", hint: "田浦文青選物、伴手禮" }
     ];
 
     const backupAttractions = [
@@ -2877,6 +2883,10 @@
       { category: "food", name: "83獬豸（83 해치）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；晚餐時段可能需要等候", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
       { category: "food", name: "河蓮庭嫩豆腐鍋", region: "西面／釜山鎮", note: "影片推薦的嫩豆腐鍋，適合想吃熱食；幼童餐點請確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "Vintage 38", region: "西面／田浦", note: "影片推薦的大型咖啡與甜點空間，可替換田浦咖啡街中的咖啡店", alternative: "影片推薦／可替換 Day 2 午餐／下午茶", time: 60, timeSource: "estimate" },
+      { category: "food", name: "Pot of Busan", region: "西面／田浦", note: "老宅咖啡廳，氣氛靜謐；必點無花果汽水（飲品類，天然無蛋），甜點選擇少以飲品為主", alternative: "可替換田浦咖啡街午茶", time: 60, timeSource: "estimate" },
+      { category: "food", name: "FRUTO FRUTA", region: "西面／田浦", note: "水果為主題的飲品咖啡廳，當季水蜜桃／芒果冰沙（飲品類，天然無蛋）", alternative: "可替換田浦咖啡街午茶", time: 45, timeSource: "estimate" },
+      { category: "food", name: "Strut Coffee", region: "西面／田浦", note: "2025 世界百大咖啡店，老屋改建、簡約歐式風；主打單品咖啡，甜點選項少", alternative: "可替換田浦咖啡街午茶", time: 45, timeSource: "estimate" },
+      { category: "food", name: "fm coffee", region: "西面／田浦", note: "水果派人氣店（草莓派／葡萄派）；派皮通常含蛋，網路未標示過敏原，建議現場先問店員", alternative: "可替換田浦咖啡街午茶", time: 60, timeSource: "estimate" },
       { category: "food", name: "烤肉的男子（西面店）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；適合當作西面晚餐備案", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
       { category: "food", name: "尾浦家 海雲台本店", region: "海雲台／尾浦", note: "醬蟹與海鮮鍋飯；需留意 15:00-17:00 午休與熱門時段候位", alternative: "可替換 Day 4 晚餐", time: 70, timeSource: "estimate" },
       { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
@@ -2937,7 +2947,13 @@
       { category: "indoor", name: "Renecite", region: "沙上／槐法", note: "沙上購物商場，可替換超市採買或咖啡廳段", alternative: "行程卡可選備案", time: 75, timeSource: "estimate" },
       { category: "indoor", name: "Sasang Museum of Everyday Life", region: "沙上", note: "地方生活史展館，適合沙上休息日的室內選項", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
       { category: "indoor", name: "金海機場免稅店", region: "金海機場", note: "完成報到後可安排採買與候機", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
-      { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" }
+      { category: "indoor", name: "金海機場國際線休息區", region: "金海機場", note: "幼童候機時的室內休息選項", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
+
+      { category: "shopping", name: "object西面店", region: "西面／田浦", note: "文創選物指標店，杯盤餐具、吊飾、DIY 鑰匙圈都有，店面大逛起來不擠", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
+      { category: "shopping", name: "made by 西面店", region: "西面／田浦", note: "文具貼紙控必逛，手帳本、紙膠帶款式多", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
+      { category: "shopping", name: "AVIVERE Company", region: "西面／田浦", note: "質感餐具、髮飾、鞋包選物，價格親民", alternative: "行程卡可選備案", time: 20, timeSource: "estimate" },
+      { category: "shopping", name: "Slow Museum", region: "西面／田浦", note: "日系質感髮圈與飾品，店內氣氛優雅", alternative: "行程卡可選備案", time: 15, timeSource: "estimate" },
+      { category: "shopping", name: "Stellaria（별꽃상점）", region: "西面／田浦", note: "色彩繽紛選物店，餐具、娃娃、襪子款式特別，重複性低", alternative: "行程卡可選備案", time: 15, timeSource: "estimate" }
     ];
 
     const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "松亭", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "沙上", "金海機場"];
@@ -2964,6 +2980,15 @@
       "83獬豸（83 해치）": "부산광역시 부산진구 서전로 11 1층",
       "河蓮庭嫩豆腐鍋": "부산광역시 부산진구 서면로68번길 35 2층",
       "Vintage 38": "부산광역시 부산진구 전포대로199번길 38",
+      "Pot of Busan": "부산광역시 부산진구 전포대로209번길 26",
+      "FRUTO FRUTA": "부산광역시 부산진구 전포대로224번길 28",
+      "Strut Coffee": "부산광역시 부산진구 동성로39번길 28",
+      "fm coffee": "부산광역시 부산진구 전포대로199번길 26 1층",
+      "object西面店": "부산광역시 부산진구 전포대로209번길 11",
+      "made by 西面店": "부산 부산진구 전포대로199번길 34",
+      "AVIVERE Company": "부산 부산진구 동천로 66 1층",
+      "Slow Museum": "부산 부산진구 서전로58번길 9 1층",
+      "Stellaria（별꽃상점）": "부산 부산진구 전포대로 207 1층",
       "烤肉的男子（西面店）": "부산광역시 부산진구 동천로95번길 13",
       "尾浦家 海雲台本店": "부산광역시 해운대구 달맞이길62번길 3 1층",
       "海雲台傳統市場": "부산광역시 해운대구 구남로41번길 22-1",
