@@ -1795,6 +1795,7 @@
 
     .stay-badge.badge-booking { background: #f3ecf9; color: #5b3a7a; }
     .stay-badge.badge-breakfast { background: #fff2c9; color: #7a5b12; }
+    .stay-badge.badge-flight { background: #e3eef7; color: #1d4e73; }
 
     .stay-hours {
       margin-top: 8px;
@@ -2275,6 +2276,32 @@
     </details>
 
     <details class="stay-details">
+      <summary><span>航班資訊</span><small>去程・回程</small></summary>
+      <section class="stay-grid" aria-label="航班資訊">
+        <div class="stay-card">
+          <small>去程・9/13（日）</small>
+          <h3>台北 → 釜山</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-flight"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><path d="M2 9.2l12-4.6-3.2 5.6M2 9.2l4 1 1.6 3.6M2 9.2l3.6 2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>BX794 釜山航空</span>
+          </div>
+          <p>TPE 桃園國際機場 T2 <b>13:30</b> 起飛 → PUS 釜山金海機場 <b>17:05</b> 抵達</p>
+          <p class="local-address"><span>機型 / 艙等</span>空中巴士 A321・經濟艙 H</p>
+          <p class="stay-hours">飛行時間 <b>2h35m</b></p>
+        </div>
+        <div class="stay-card">
+          <small>回程・9/20（日）</small>
+          <h3>釜山 → 台北</h3>
+          <div class="stay-badges">
+            <span class="stay-badge badge-flight"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><path d="M2 9.2l12-4.6-3.2 5.6M2 9.2l4 1 1.6 3.6M2 9.2l3.6 2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>BX793 釜山航空</span>
+          </div>
+          <p>PUS 釜山金海機場 <b>10:50</b> 起飛 → TPE 桃園國際機場 T2 <b>12:35</b> 抵達</p>
+          <p class="local-address"><span>機型 / 艙等</span>空中巴士 A321・經濟艙 U</p>
+          <p class="stay-hours">飛行時間 <b>2h45m</b></p>
+        </div>
+      </section>
+    </details>
+
+    <details class="stay-details">
       <summary><span>緊急聯絡</span><small>出發前先存進手機</small></summary>
       <section class="stay-grid" aria-label="緊急聯絡資訊">
         <div class="stay-card">
@@ -2537,8 +2564,8 @@
           ["10:00", "家裡出發搭車", "60 分", "2 大 + 2 歲幼童，提早一點", ["transport"]],
           ["11:00", "抵達機場 / Check in", "90 分", "托運行李、劃位、整理推車", ["luggage"]],
           ["12:30", "機場午餐 / 換尿布 / 登機準備", "60 分", "不要排太緊", ["food"]],
-          ["13:30", "搭乘飛機 / 登機", "215 分", "飛機時間固定", ["transport", "ticket"]],
-          ["17:05", "落地 / 領行李", "70 分", "飛機時間固定", ["luggage"]],
+          ["13:30", "搭乘飛機 / 登機", "215 分", "BX794 釜山航空・A321・經濟艙 H，TPE T2 起飛", ["transport", "ticket"]],
+          ["17:05", "落地 / 領行李", "70 分", "PUS 釜山金海機場抵達，飛行時間 2h35m", ["luggage"]],
           ["18:15", "出關 / 簡單補給", "30 分", "買水、交通卡、整理行李", ["luggage"]],
           ["18:45", "搭車到 Hotel Kyungsung", "60 分", "輕軌+地鐵或行李多搭計程車", ["transport"]],
           ["19:45", "Hotel Kyungsung Check in", "30 分", "放行李、休息一下", ["rest", "luggage"]],
@@ -2699,8 +2726,8 @@
           ["08:40", "抵達金海機場 / Check in", "85 分", "國際線 + 幼童，時間夠", ["luggage"]],
           ["10:05", "安檢 / 出境 / 登機口", "30 分", "換尿布、上廁所", ["ticket"]],
           ["10:35", "登機準備", "15 分", "", ["ticket"]],
-          ["10:50", "搭乘飛機", "105 分", "飛機時間固定", ["transport", "ticket"]],
-          ["12:35", "落地 / 領行李", "60-90 分", "飛機時間固定", ["luggage"]]
+          ["10:50", "搭乘飛機", "105 分", "BX793 釜山航空・A321・經濟艙 U，PUS 起飛", ["transport", "ticket"]],
+          ["12:35", "落地 / 領行李", "60-90 分", "TPE 桃園國際機場 T2 抵達，飛行時間 2h45m", ["luggage"]]
         ]
       }
     ];
