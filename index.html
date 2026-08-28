@@ -117,6 +117,33 @@
       justify-content: flex-end;
     }
 
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1;
+      color: #fff;
+      background: var(--sea);
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 2px 2px 0 var(--ink);
+      cursor: pointer;
+      transition: transform .22s ease, background .2s ease, box-shadow .16s ease;
+    }
+
+    .nav-toggle:hover { box-shadow: 3px 3px 0 var(--ink); }
+
+    .nav-toggle[aria-expanded="true"] {
+      background: var(--coral);
+      transform: rotate(135deg);
+    }
+
     .icon-btn, .chip, .tab, .toggle {
       border: 1px solid var(--ink);
       background: #fffdf6;
@@ -1935,10 +1962,13 @@
       }
 
       .topbar-inner {
-        align-items: flex-start;
+        align-items: center;
         padding: 12px 0;
-        flex-direction: column;
+        flex-wrap: wrap;
+        row-gap: 10px;
       }
+
+      .actions-collapse { flex-basis: 100%; }
 
       .actions {
         justify-content: flex-start;
@@ -2025,11 +2055,28 @@
 
       .brand p { display: none; }
 
+      .nav-toggle { display: flex; }
+
+      .actions-collapse {
+        display: grid;
+        grid-template-rows: 0fr;
+        width: 100%;
+        transition: grid-template-rows .32s ease;
+      }
+
+      .actions-collapse.open { grid-template-rows: 1fr; }
+
+      .actions-collapse > .actions {
+        overflow: hidden;
+        min-height: 0;
+      }
+
       .actions {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 7px;
+        padding-top: 7px;
       }
 
       .actions .icon-btn {
@@ -2100,14 +2147,17 @@
           <p>9/13 - 9/20｜2 大 + 2 歲幼童｜少拖行李版</p>
         </div>
       </div>
-      <div class="actions">
-        <button class="icon-btn" id="expandAll" type="button">展開全部</button>
-        <button class="icon-btn active" type="button" data-view="itinerary">行程列表</button>
-        <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
-        <button class="icon-btn" type="button" data-view="backup">備用景點</button>
-        <button class="icon-btn" type="button" data-view="weather">天氣預報</button>
-        <button class="icon-btn" type="button" data-view="shopping">購物清單</button>
-        <button class="icon-btn" type="button" data-view="currency">貨幣換算</button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="actionsCollapse" aria-label="展開功能選單">+</button>
+      <div class="actions-collapse" id="actionsCollapse">
+        <div class="actions">
+          <button class="icon-btn" id="expandAll" type="button">展開全部</button>
+          <button class="icon-btn active" type="button" data-view="itinerary">行程列表</button>
+          <button class="icon-btn" type="button" data-view="pass">釜山 PASS 景點</button>
+          <button class="icon-btn" type="button" data-view="backup">備用景點</button>
+          <button class="icon-btn" type="button" data-view="weather">天氣預報</button>
+          <button class="icon-btn" type="button" data-view="shopping">購物清單</button>
+          <button class="icon-btn" type="button" data-view="currency">貨幣換算</button>
+        </div>
       </div>
     </div>
   </header>
@@ -4223,6 +4273,22 @@
       setView(button.dataset.view);
       if (button.dataset.view === "weather") loadForecastDirectory();
       if (button.dataset.view === "currency") loadCurrencyRate();
+    });
+
+    const navToggle = document.getElementById("navToggle");
+    const actionsCollapse = document.getElementById("actionsCollapse");
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = actionsCollapse.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "收合功能選單" : "展開功能選單");
+    });
+
+    actionsCollapse.addEventListener("click", (event) => {
+      if (!event.target.closest(".icon-btn")) return;
+      actionsCollapse.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "展開功能選單");
     });
 
     document.getElementById("weatherRefresh").addEventListener("click", () => loadForecastDirectory(true));
