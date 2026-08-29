@@ -441,23 +441,6 @@
     .backup-item-status.status-alt { color: var(--muted); font-weight: 400; }
     .backup-item-status.status-open { color: var(--muted); font-weight: 400; font-style: italic; }
 
-    .backup-map-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 4px 8px;
-      border: 1px solid var(--ink);
-      border-radius: 5px;
-      background: #03c75a;
-      color: #fff;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .backup-map-link:hover { transform: translateY(-1px); }
-
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
@@ -1134,22 +1117,19 @@
       font-size: 14px;
     }
 
-    .event-map-link {
-      display: inline-flex;
+    .event-location {
+      display: flex;
       align-items: center;
-      min-height: 32px;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 9px;
-      padding: 5px 9px;
-      border: 1px solid var(--ink);
-      border-radius: 5px;
-      background: #03c75a;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
     }
 
-    .event-map-link:hover { transform: translateY(-1px); }
+    .event-location-label {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 700;
+    }
 
     .locker-sketch {
       margin-top: 10px;
@@ -1523,15 +1503,6 @@
       flex-wrap: wrap;
     }
 
-    .shopping-branch-actions .map-link {
-      flex: 1 1 auto;
-      min-width: 90px;
-      text-align: center;
-      font-size: 11px;
-      padding: 6px 8px;
-      min-height: 30px;
-    }
-
     .shopping-branch-actions .copy-address {
       flex: 1 1 100%;
       font-size: 11px;
@@ -1901,30 +1872,38 @@
     }
 
     .stay-actions {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: 12px;
     }
 
+    .stay-actions .copy-address { flex: 1 1 140px; width: auto; }
+
+    .map-links { display: flex; gap: 6px; flex: 0 0 auto; }
+
     .map-link {
       display: grid;
       place-items: center;
-      min-height: 36px;
+      width: 32px;
+      height: 32px;
+      min-height: 32px;
+      flex: 0 0 auto;
       border: 1px solid var(--ink);
-      border-radius: 5px;
+      border-radius: 6px;
       background: #fffdf7;
       color: var(--ink);
-      font-size: 12px;
-      font-weight: 700;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 800;
       text-decoration: none;
+      transition: transform .16s ease;
     }
 
     .map-link.naver { color: #fff; background: #03c75a; }
-    .map-link.kakao { background: #fee500; }
+    .map-link.kakao { color: #3c1e1e; background: #fee500; }
     .map-link:hover { transform: translateY(-1px); }
-
-    .stay-actions .copy-address { grid-column: 1 / -1; }
 
     .copy-address:hover { transform: translateY(-1px); background: var(--lemon); }
 
@@ -2309,8 +2288,10 @@
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 부산진구 서면문화로 26</p>
           <p class="stay-hours">入住 <b>16:00～24:00</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Kyungsung 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Kyungsung 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Hotel Kyungsung 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Hotel Kyungsung 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 부산진구 서면문화로 26">複製韓文地址</button>
           </div>
         </div>
@@ -2325,8 +2306,10 @@
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 해운대구 달맞이길 2-21</p>
           <p class="stay-hours">入住 <b>15:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 UH Continental CenterPoint 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 UH Continental CenterPoint 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 해운대구 달맞이길 2-21">複製韓文地址</button>
           </div>
         </div>
@@ -2340,8 +2323,10 @@
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 서구 등대로 9</p>
           <p class="stay-hours">入住 <b>16:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Songdo 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Songdo 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Songdo 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Songdo 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 서구 등대로 9">複製韓文地址</button>
           </div>
         </div>
@@ -2355,8 +2340,10 @@
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 사상구 새벽로223번길 20</p>
           <p class="stay-hours">入住 <b>16:00 後</b>・退房 <b>11:00 前</b></p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Sasang Residence 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Sasang Residence 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 Elmomento Sasang Residence 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 Elmomento Sasang Residence 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 사상구 새벽로223번길 20">複製韓文地址</button>
           </div>
         </div>
@@ -2430,8 +2417,10 @@
           <p>代表電話 <a href="tel:+82518906114">051-890-6114</a>・急診直線 <a href="tel:+82518905995">051-890-5995</a></p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 부산진구 복지로 75 (개금동)</p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 仁濟大學釜山白病院 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 仁濟大學釜山白病院 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 仁濟大學釜山白病院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 仁濟大學釜山白病院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 부산진구 복지로 75">複製韓文地址</button>
           </div>
           <p class="local-address"><span>車程</span>約 10 分鐘內</p>
@@ -2443,8 +2432,10 @@
           <p>代表電話 <a href="tel:+82517970100">051-797-0100</a>（無獨立急診分機，撥代表號會轉接）</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 해운대구 해운대로 875 (좌동)</p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 仁濟大學海雲台白病院 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 仁濟大學海雲台白病院 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 仁濟大學海雲台白病院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 仁濟大學海雲台白病院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 해운대구 해운대로 875">複製韓文地址</button>
           </div>
           <p class="local-address"><span>車程</span>約 10-15 分鐘（旺季海雲台易塞車）</p>
@@ -2456,8 +2447,10 @@
           <p>代表電話 <a href="tel:+82519906114">051-990-6114</a>・24H 急診中心 <a href="tel:+82519906200">051-990-6200</a></p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 서구 감천로 262 (암남동)</p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 高神大學校福音醫院 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 高神大學校福音醫院 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 高神大學校福音醫院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 高神大學校福音醫院 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 서구 감천로 262">複製韓文地址</button>
           </div>
           <p class="local-address"><span>車程</span>約 10 分鐘內（암남동與松島同屬西區）</p>
@@ -2469,8 +2462,10 @@
           <p>代表電話 <a href="tel:+82513220900">051-322-0900</a>・急診直線 <a href="tel:+82513109109">051-310-9109</a></p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 사상구 가야대로 326 (주례동)</p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 좋은삼선병원 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 좋은삼선병원 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 좋은삼선병원 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 좋은삼선병원 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 사상구 가야대로 326">複製韓文地址</button>
           </div>
           <p class="local-address"><span>車程</span>約 15-20 分鐘・完整綜合醫院</p>
@@ -2482,8 +2477,10 @@
           <p>代表電話 <a href="tel:16445530">1644-5530</a>・急診直線 <a href="tel:+82513293119">051-329-3119</a></p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 사상구 새벽로 226 (괘법동)</p>
           <div class="stay-actions">
-            <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 서부산센텀병원 地址">NAVER Map</a>
-            <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 서부산센텀병원 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 서부산센텀병원 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" data-map="kakao" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 서부산센텀병원 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="부산광역시 사상구 새벽로 226">複製韓文地址</button>
           </div>
           <p class="local-address"><span>車程</span>約 5 分鐘內（與飯店同一帶）・一般幼兒發燒腸胃炎建議優先좋은삼선병원</p>
@@ -3583,7 +3580,10 @@
                 </div>
                 <div class="backup-item-foot">
                   <span class="backup-item-status status-${status.kind}">${status.text}</span>
-                  <a class="backup-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">NAVER Map</a>
+                  <div class="map-links">
+                    <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+                    <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${item.name}"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+                  </div>
                 </div>
               </li>`;
           }).join("");
@@ -4051,7 +4051,14 @@
               </div>
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
-            ${location ? `<a class="event-map-link" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">NAVER Map · ${location.label}</a>` : ""}
+            ${location ? `
+              <div class="event-location">
+                <span class="event-location-label">${location.label}</span>
+                <div class="map-links">
+                  <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+                  <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${location.label}"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+                </div>
+              </div>` : ""}
             ${renderEventAlternatives(dayId, index, event)}
             ${lockerSketch}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
@@ -4079,8 +4086,10 @@
           ${branch.note ? `<p>${branch.note}</p>` : ""}
           <p class="local-address"><span>MAP / TAXI</span>${branch.address}</p>
           <div class="shopping-branch-actions">
-            <a class="map-link naver" href="${naverHref}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 搜尋 ${branch.name} 地址">NAVER Map</a>
-            <a class="map-link kakao" href="${kakaoHref}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 ${branch.name} 地址">KakaoMap</a>
+            <div class="map-links">
+              <a class="map-link naver" href="${naverHref}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 搜尋 ${branch.name} 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M5.2 14.5V5.5h3.1l6.4 8V5.5h3.1v9h-3.1l-6.4-8v8H5.2Z" fill="#fff"/></svg></a>
+              <a class="map-link kakao" href="${kakaoHref}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 ${branch.name} 地址"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true"><path d="M10 4.2c-3.9 0-7.1 2.5-7.1 5.6 0 2 1.4 3.7 3.4 4.7l-.9 3.1 3.4-2c.4.05.8.08 1.2.08 3.9 0 7.1-2.5 7.1-5.6s-3.2-5.6-7.1-5.6Z" fill="#3c1e1e"/></svg></a>
+            </div>
             <button class="copy-address" type="button" data-address="${branch.address}">複製韓文地址</button>
           </div>
         </div>
