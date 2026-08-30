@@ -892,6 +892,9 @@
 
     .event-alternative-list { display: grid; gap: 6px; margin-top: 7px; }
 
+    .event-alternative-item { display: flex; align-items: center; gap: 8px; }
+    .event-alternative-item .event-alternative { flex: 1 1 auto; }
+
     .event-alternative {
       width: 100%;
       padding: 8px 10px;
@@ -3028,6 +3031,39 @@
       { name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "電影主題互動館；部分展項為 4D 動感座椅，建議一位家長陪同挑靜態展區體驗" }
     ];
 
+    const gamcheonVillageAddress = "부산 사하구 감내2로 203";
+
+    const passAddressBook = {
+      "雷射競技場 松島": "부산시 서구 송도해변로 171",
+      "松島龍宮雲橋": "부산광역시 서구 송도해변로 100",
+      "Surfholic 多大浦": "부산광역시 사하구 다대로 704",
+      "入庫家韓服租借": gamcheonVillageAddress,
+      "哲洙與英熙韓服租借": gamcheonVillageAddress,
+      "松島海上纜車": "부산시 서구 송도해변로 171",
+      "甘川浪漫韓服租借": "부산 사하구 옥천로 121",
+      "Flipbook Studio": gamcheonVillageAddress,
+      "小王子屋": gamcheonVillageAddress,
+      "Running Man 釜山": "부산광역시 부산진구 중앙대로 672 삼정타워 10층",
+      "Club D Oasis": "부산광역시 해운대구 달맞이길 30",
+      "Hotel Aqua Palace Spa & Sauna": "부산광역시 수영구 광안해변로 225",
+      "Surfholic 松亭": "부산광역시 해운대구 송정해변로 62",
+      "Hill Spa": "부산 해운대구 달맞이길117번길 11",
+      "Spa Land Centum City": "부산광역시 해운대구 센텀남대로 35",
+      "國立釜山科學館": "부산광역시 기장군 기장읍 동부산관광6로 59",
+      "海雲台海灘列車": "부산광역시 해운대구 달맞이길62번길 13 일대",
+      "BUSAN X the SKY": "부산광역시 해운대구 달맞이길 30",
+      "Skyline Luge 斜坡滑車": "부산광역시 기장군 기장읍 기장해안로 205",
+      "Brick Campus 釜山": "부산 기장군 기장읍 동부산관광로 8 롯데몰 메종동부산 1층",
+      "Museum 1": "부산광역시 해운대구 센텀서로 20",
+      "阿九山森林": "부산 기장군 철마면 미동길 37-1",
+      "太宗台 Danubi 列車": "부산광역시 영도구 전망로 24",
+      "Arte Museum 釜山": "부산광역시 영도구 해양로247번길 29",
+      "釜山塔": "부산광역시 중구 용두산길 37-55",
+      "釜山 Diamond Bay 遊艇": "부산광역시 남구 분포로 101",
+      "國立海洋博物館 4D 影像館": "부산광역시 영도구 해양로301번길 45",
+      "釜山電影體驗博物館": "부산광역시 중구 대청로126번길 12"
+    };
+
     // 兩個景點的官方地址跟其他同名分類不一致，個別覆寫成實際所在區域（沿用 backupDistrictOrder 的區域顆粒度）。
     const passDistrictOverrides = {
       "入庫家韓服租借": "甘川洞",
@@ -3204,6 +3240,10 @@
       "金海機場國際線餐飲區": "부산광역시 강서구 공항진입로 108",
       "金海機場咖啡店／便利商店": "부산광역시 강서구 공항진입로 108",
       "機張竹城教堂": "부산광역시 기장군 기장읍 죽성리 134-7",
+      "일등가": "부산 기장군 기장읍 기장해안로 266 더이스트인부산 4층",
+      "竹島公園": "부산광역시 해운대구 송정해변로 1-23",
+      "수변최고 돼지국밥 송정점": "부산 해운대구 송정중앙로9번길 8",
+      "송도제일밀면": "부산광역시 서구 충무대로 8",
       "釜山市民公園": "부산광역시 부산진구 시민공원로 73",
       "Bujeon Market Town": "부산광역시 부산진구 중앙대로783번길 23",
       "冬柏島海岸步道": "부산광역시 해운대구 우동 710-1",
@@ -3286,6 +3326,7 @@
 
       const renderItem = item => {
         const status = passStatusInfo(item);
+        const address = passAddressBook[item.name];
         return `
           <li class="backup-item backup-item-${status.kind}">
             <div class="backup-item-top">
@@ -3294,6 +3335,11 @@
             ${item.note ? `<div class="backup-item-meta"><span class="backup-item-note">${item.note}</span></div>` : ""}
             <div class="backup-item-foot">
               <span class="backup-item-status status-${status.kind}">${status.text}</span>
+              ${address ? `
+                <div class="map-links">
+                  <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">N</a>
+                  <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${item.name}">K</a>
+                </div>` : ""}
             </div>
           </li>`;
       };
@@ -4008,7 +4054,16 @@
           <div class="event-alternative-list" role="group" aria-label="此行程的備案">
             ${choices.map((choice, choiceIndex) => {
               const isSelected = selected === choice.name;
-              return `<button class="event-alternative${isSelected ? " selected" : ""}" type="button" data-event-backup="${dayId}:${index}:${choiceIndex}" aria-pressed="${isSelected}"><span class="event-alternative-name">${choice.name}</span><span class="event-alternative-route">${choice.route}</span></button>`;
+              const address = backupAddressBook[choice.name];
+              return `
+                <div class="event-alternative-item">
+                  <button class="event-alternative${isSelected ? " selected" : ""}" type="button" data-event-backup="${dayId}:${index}:${choiceIndex}" aria-pressed="${isSelected}"><span class="event-alternative-name">${choice.name}</span><span class="event-alternative-route">${choice.route}</span></button>
+                  ${address ? `
+                    <div class="map-links">
+                      <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${choice.name}">N</a>
+                      <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${choice.name}">K</a>
+                    </div>` : ""}
+                </div>`;
             }).join("")}
           </div>
         </details>
