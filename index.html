@@ -816,10 +816,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 10px 12px;
       padding: 10px 12px;
       border: 1px solid var(--ink);
       background: rgba(255,255,255,.68);
+    }
+
+    .day-badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
     }
 
     .day-live small {
@@ -2018,6 +2027,8 @@
       .day-live { align-items: flex-start; }
 
       .day-live strong { font-size: 14px; }
+
+      .day-badges { width: 100%; margin-left: 0; justify-content: flex-start; }
 
       .day-alternatives-head { align-items: flex-start; flex-direction: column; gap: 3px; }
 
@@ -4162,8 +4173,10 @@
           <div class="sleep-badge">住宿：${day.stay}</div>
           <div class="day-live">
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
-            <span class="day-rain" id="dayRainBadge"${dayRain == null ? " hidden" : ""}>☔ 降雨機率 ${dayRain}%</span>
-            <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
+            <div class="day-badges">
+              <span class="day-rain" id="dayRainBadge"${dayRain == null ? " hidden" : ""}>☔ 降雨機率 ${dayRain}%</span>
+              <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
+            </div>
           </div>
           ${weatherCard}
         </div>
