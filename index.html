@@ -924,6 +924,11 @@
 
     .event-alternative.selected::before { content: "✓ "; color: var(--sea-2); font-weight: 900; }
 
+    .event-alternative.static { cursor: default; }
+    .event-alternative.static:hover { border-color: rgba(35,33,29,.24); background: #fffdf5; }
+
+    .event-rain-backup summary { color: var(--blue); }
+
     .day-weather {
       grid-column: 1 / -1;
       display: grid;
@@ -1041,6 +1046,18 @@
       color: var(--muted);
       font-family: var(--mono);
       font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .day-rain {
+      flex: 0 0 auto;
+      padding: 5px 7px;
+      border: 1px solid var(--blue);
+      background: #e8f0f5;
+      color: var(--blue);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -2950,7 +2967,7 @@
 
     const hotelWeatherLocations = {
       "Hotel Kyungsung": { id: "seomyeon", label: "西面／Hotel Kyungsung", latitude: 35.1574, longitude: 129.0589 },
-      "UH Continental 中心點酒店": { id: "haeundae", label: "海雲台／UH Continental", latitude: 35.1601, longitude: 129.1804 },
+      "UH Continental 中心點酒店": { id: "haeundae", label: "海雲台／UH Continental", latitude: 35.1601, longitude: 129.1681 },
       "El Momento Songdo": { id: "songdo", label: "松島／El Momento", latitude: 35.0783, longitude: 129.0204 },
       "Elmomento Sasang Residence": { id: "sasang", label: "沙上／Elmomento Sasang Residence", latitude: 35.1616, longitude: 128.9804 }
     };
@@ -3445,6 +3462,22 @@
       return index === -1 ? "" : tripDateKeys[index];
     }
 
+    function getDayRainChance(day, index) {
+      const forecast = weatherForecastByDay[day.id];
+      const dailyIndex = forecast?.data.daily?.time?.indexOf(tripDateKeys[index]) ?? -1;
+      if (dailyIndex < 0) return null;
+      const rain = forecast.data.daily.precipitation_probability_max?.[dailyIndex];
+      return rain == null ? null : rain;
+    }
+
+    function updateDayRainBadge() {
+      const badge = document.getElementById("dayRainBadge");
+      if (!badge) return;
+      const rain = getDayRainChance(days[activeDay], activeDay);
+      badge.hidden = rain == null;
+      if (rain != null) badge.textContent = `☔ 降雨機率 ${rain}%`;
+    }
+
     function getEventWeather(dayId, time) {
       const forecast = weatherForecastByDay[dayId];
       if (!forecast || !/^\d{2}:\d{2}$/.test(time)) return null;
@@ -3456,10 +3489,13 @@
       if (hourlyIndex === -1 || hourlyIndex === undefined) hourlyIndex = -1;
       const dailyIndex = daily?.time?.indexOf(date) ?? -1;
       const temperature = hourlyIndex >= 0 ? hourly.temperature_2m?.[hourlyIndex] : null;
-      if (temperature === null || temperature === undefined) return dailyIndex >= 0 ? {
-        temperature: (daily.temperature_2m_max[dailyIndex] + daily.temperature_2m_min[dailyIndex]) / 2,
-        description: getWeatherDescription(daily.weather_code[dailyIndex])
-      } : null;
+      if (temperature === null || temperature === undefined) {
+        const hasDaily = dailyIndex >= 0 && daily.temperature_2m_max[dailyIndex] != null && daily.temperature_2m_min[dailyIndex] != null;
+        return hasDaily ? {
+          temperature: (daily.temperature_2m_max[dailyIndex] + daily.temperature_2m_min[dailyIndex]) / 2,
+          description: getWeatherDescription(daily.weather_code[dailyIndex])
+        } : null;
+      }
       return { temperature, description: getWeatherDescription(hourly.weather_code?.[hourlyIndex] ?? daily.weather_code?.[dailyIndex]) };
     }
 
@@ -3484,7 +3520,8 @@
         const location = getWeatherLocation(day);
         const forecast = weatherForecastByDay[day.id];
         const dailyIndex = forecast?.data.daily?.time?.indexOf(tripDateKeys[index]) ?? -1;
-        const daily = dailyIndex >= 0 ? forecast.data.daily : null;
+        const hasData = dailyIndex >= 0 && forecast.data.daily.weather_code[dailyIndex] != null && forecast.data.daily.temperature_2m_max[dailyIndex] != null;
+        const daily = hasData ? forecast.data.daily : null;
         if (!daily) return `
           <article class="forecast-card pending">
             <small>${day.label} · ${day.date}</small>
@@ -3544,6 +3581,7 @@
         forecastLoading = false;
         renderForecastDirectory();
         updateEventWeatherBadges();
+        updateDayRainBadge();
       }
     }
 
@@ -4031,6 +4069,37 @@
       ]
     };
 
+    const eventRainBackup = {
+      "d3-4": { name: "國立釜山科學館", note: "機張室內親子景點；龍宮寺階梯濕滑，下雨時可整段替換" },
+      "d4-4": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；玩沙行程下雨可整段替換" },
+      "d4-7": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；전망대散步下雨可改這裡" },
+      "d4-11": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；沙灘下雨可改這裡" },
+      "d5-4": { name: "國立海洋博物館", note: "影島室內親子展覽，跟太宗台同一區，順路好接" },
+      "d6-1": { name: "釜山電影體驗博物館", note: "南浦室內互動館；沙灘挖沙下雨可改這裡" },
+      "d6-2": { name: "釜山電影體驗博物館", note: "南浦室內互動館；纜車強風雷雨停駛時可改這裡" },
+      "d6-3": { name: "釜山電影體驗博物館", note: "南浦室內互動館；雲橋濕滑下雨可改這裡" }
+    };
+
+    function renderEventRainBackup(dayId, index) {
+      const item = eventRainBackup[`${dayId}-${index}`];
+      if (!item) return "";
+      const address = backupAddressBook[item.name];
+      return `
+        <details class="event-alternatives event-rain-backup">
+          <summary>雨天備案 <span>推薦：${item.name}</span></summary>
+          <div class="event-alternative-list">
+            <div class="event-alternative-item">
+              <div class="event-alternative static"><span class="event-alternative-name">${item.name}</span><span class="event-alternative-route">${item.note}</span></div>
+              ${address ? `
+                <div class="map-links">
+                  <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">N</a>
+                  <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${item.name}">K</a>
+                </div>` : ""}
+            </div>
+          </div>
+        </details>`;
+    }
+
     function getSelectedEventBackup(dayId, index) {
       return localStorage.getItem(`busan-event-backup-${dayId}-${index}`) || "";
     }
@@ -4082,6 +4151,7 @@
       const events = day.events.map((event, index) => ({ event, index })).filter(({ event }) => eventMatches(event));
       const completed = getCompletedEventCount(day);
       const weatherCard = getWeatherCard(day);
+      const dayRain = getDayRainChance(day, activeDay);
       panel.innerHTML = `
         <div class="day-head">
           <div>
@@ -4092,6 +4162,7 @@
           <div class="sleep-badge">住宿：${day.stay}</div>
           <div class="day-live">
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
+            <span class="day-rain" id="dayRainBadge"${dayRain == null ? " hidden" : ""}>☔ 降雨機率 ${dayRain}%</span>
             <span class="day-progress" id="dayProgress">${completed} / ${day.events.length} 完成</span>
           </div>
           ${weatherCard}
@@ -4154,6 +4225,7 @@
                 </div>
               </div>` : ""}
             ${renderEventAlternatives(dayId, index, event)}
+            ${renderEventRainBackup(dayId, index)}
             ${lockerSketch}
             ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
@@ -4604,6 +4676,7 @@
     renderPassDirectory();
     renderBackupFilterChips();
     renderBackupDirectory();
+    loadForecastDirectory();
     updateCountdown();
     window.setInterval(updateCountdown, 1000);
     window.addEventListener("resize", updateStickyOffsets);

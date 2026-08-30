@@ -1,5 +1,5 @@
 // 更新 index.html 內容後，請把版本號 +1，離線快取才會換新。
-const CACHE_VERSION = "busan-handbook-v33";
+const CACHE_VERSION = "busan-handbook-v34";
 
 const PRECACHE_URLS = [
   "./",
