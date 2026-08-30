@@ -3495,7 +3495,7 @@
       const date = getDayDate(dayId);
       const hourly = forecast.data.hourly;
       const daily = forecast.data.daily;
-      const hourKey = `${date}T${time}`;
+      const hourKey = `${date}T${time.slice(0, 2)}:00`;
       let hourlyIndex = hourly?.time?.indexOf(hourKey);
       if (hourlyIndex === -1 || hourlyIndex === undefined) hourlyIndex = -1;
       const dailyIndex = daily?.time?.indexOf(date) ?? -1;
