@@ -3155,6 +3155,9 @@
       { category: "food", name: "Liberta（리베르타）", region: "海雲台／青沙浦", note: "청사포唯一自己烤麵包的烘焙咖啡廳，3層樓每層視野不同，招牌焦糖布蕾拿鐵；海景落地窗座位熱門，容易客滿", alternative: "可替換 Day 4 青沙浦段", time: 45, timeSource: "estimate" },
       { category: "food", name: "Working Holiday Brunch Cafe（워킹홀리데이 해운대）", region: "海雲台", note: "正對海雲台海水浴場的브런치咖啡廳，適合當早餐或下午茶", alternative: "可替換 Day 4 早餐或點心", time: 60, timeSource: "estimate" },
       { category: "food", name: "펜퍼센트커피（Pen Percent Coffee）", region: "西面", note: "西面站本店，大容量精品豆咖啡；分店多，找不到本店可改附近分店", alternative: "可替換田浦咖啡街或西面咖啡選項", time: 30, timeSource: "estimate" },
+      { category: "food", name: "熟成到 廣安里店（숙성도 광안리점）", region: "廣安里", note: "熟成肉燒烤；⚠️ 廣安里不在本次任何一天的行程路線上，需自行安排交通往返", alternative: "行程卡可選備案", time: 90, timeSource: "estimate" },
+      { category: "food", name: "Gelato Joy", region: "廣安里", note: "義式冰淇淋店；⚠️ 廣安里不在本次任何一天的行程路線上，需自行安排交通往返", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
+      { category: "food", name: "All Sunday 廣安店（올선데이 광안점）", region: "廣安里", note: "브런치咖啡廳；⚠️ 廣安里不在本次任何一天的行程路線上，需自行安排交通往返", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
 
       { category: "outdoor", name: "海東龍宮寺", region: "機張", note: "海邊寺廟與步道；階梯多，推車不易", scheduled: "Day 3", time: 90, timeSource: "confirmed" },
       { category: "outdoor", name: "Skyline Luge 斜坡滑車", region: "機張／Osiria", note: "幼童搭乘規定請先確認；不適合可改 Outlet", scheduled: "Day 3", time: 120, timeSource: "confirmed" },
@@ -3219,7 +3222,7 @@
       { category: "shopping", name: "JJANG藥局", region: "西面", note: "西面站 2 號出口對面藥局，韓國女生愛逛的藥妝購物點，PDRN 面霜等保養品選擇多", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" }
     ];
 
-    const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "松亭", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "沙上", "金海機場"];
+    const backupDistrictOrder = ["西面", "海雲台", "青沙浦", "松亭", "機張", "甘川洞", "松島", "南浦", "影島", "南區", "Centum City", "廣安里", "沙上", "金海機場"];
 
     function backupPrimaryDistrict(region) { return region.split("／")[0]; }
     function backupSubArea(region) { const parts = region.split("／"); return parts.length > 1 ? parts.slice(1).join("／") : ""; }
@@ -3252,6 +3255,9 @@
       "王大骨馬鈴薯豬骨湯（왕뼈감자탕）機張店": "부산광역시 기장군 기장읍 차성로 331",
       "河東南海烤盲鰻（남해바다장어）": "부산광역시 사상구 새벽로167번길 22",
       "스타벅스 영도대교점": "부산광역시 영도구 봉래나루로 82 일대",
+      "熟成到 廣安里店（숙성도 광안리점）": "부산광역시 수영구 광안해변로 289",
+      "Gelato Joy": "부산광역시 수영구 광안로 41",
+      "All Sunday 廣安店（올선데이 광안점）": "부산 수영구 광안로61번길 28",
       "P.ark 咖啡廳&西饼店": "부산광역시 영도구 동삼동 201-6",
       "老虎冰淇淋大福（호랑이젤라떡）": "부산광역시 해운대구 달맞이길62번길 38 1층 115호,116호",
       "DIART Coffee": "부산광역시 해운대구 청사포로128번길 12",
