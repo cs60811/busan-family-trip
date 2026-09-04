@@ -2795,7 +2795,7 @@
         focus: "札嘎其站置物櫃寄行李，搭 Uber 去太宗台。",
         backup: ["若札嘎其站大型櫃滿了，先到 El Momento Songdo 寄放行李。", "改成太宗台搭다누비遊園列車，全程坐車不用推車爬坡，省下的時間留給小孩多睡一點。", "出發前務必再次確認다누비遊園列車是否已恢復營運——曾因安全檢查暫停，改用免費接駁巴士替代；接駁巴士一樣不用推車爬坡，照原計畫走即可。", "退房前記得吃 UH Continental 早餐（最後一天含早餐，11:00 前退房）。", "雨天備案：다누비遊園列車／接駁巴士都有遮雨頂棚可正常搭乘，但下車在展望台、燈塔散步的段落會淋濕；建議改去國立海洋博物館（影島，室內親子展覽，跟太宗台同一區，順路好接）。札嘎其市場／BIFF廣場多為有頂棚拱廊，受雨天影響較小。"],
         events: [
-          ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房", ["luggage"]],
+          ["09:00", "晨喚 / 整理行李", "60 分", "UH Continental 退房；這天含早餐，退房前先吃", ["luggage", "food"]],
           ["10:00", "搭車到札嘎其站", "60 分", "含拖行李移動緩衝", ["transport", "luggage"]],
           ["11:00", "札嘎其站置物櫃寄放行李", "20 分", "站內兩處置物櫃在長廊兩端；回程走地下街那頭的 A 區較順路，行李箱優先選特大型", ["luggage"]],
           ["11:20", "搭 Uber 到太宗台", "25 分", "距離比原本的海洋博物館遠，實際時間建議上車前用 Uber 估算；行李已寄放，輕裝移動", ["transport"]],
@@ -2805,7 +2805,7 @@
           ["15:10", "取行李", "20 分", "回札嘎其站取行李——用地下街那頭的 A 區置物櫃", ["luggage"]],
           ["15:30", "搭車到 El Momento Songdo", "25 分", "建議計程車", ["transport", "luggage"]],
           ["15:55", "Check in / 午休補眠", "155 分", "把甘川洞省下的時間留給小孩多睡，行李放好後不用急著出門", ["rest", "luggage"]],
-          ["18:30", "松島附近晚餐 / 海邊散步", "90 分", "不再拉回南浦", ["food"]],
+          ["18:30", "松島附近晚餐 / 海邊散步", "150 分", "不再拉回南浦；吃完沿松島海邊慢慢散步回飯店", ["food"]],
           ["21:00", "回飯店休息", "", "El Momento Songdo", ["rest"]]
         ]
       },
@@ -2966,6 +2966,7 @@
       "d6-3": { query: "부산광역시 서구 송도해변로 100", label: "松島龍宮雲橋" },
       "d6-4": { query: "부산광역시 중구 남포동 일대 · 지도에서 돈심 남포점 검색", label: "豚笑南浦店" },
       "d6-5": { query: "부산광역시 중구 광복로39번길 30", label: "國際市場" },
+      "d6-7": { query: "부산광역시 중구 중구로40번길 15", label: "海豚豆腐鍋（돌고래순두부）" },
       "d6-8": { query: "부산광역시 중구 용두산길 37-55", label: "龍頭山公園 & 釜山塔" },
 
       "d7-2": { query: "부산광역시 사상구 새벽로223번길 20", label: "Elmomento Sasang Residence" },
@@ -3168,6 +3169,7 @@
       { category: "outdoor", name: "海雲台廣場", region: "海雲台／市區", note: "影片終點周邊的開放式散步與街景區，可接市場或晚餐", alternative: "影片推薦／可替換 Day 4 晚餐前", time: 30, timeSource: "estimate" },
       { category: "outdoor", name: "青沙浦港 & Daritdol Skywalk", region: "海雲台／青沙浦", note: "海景、鐵道與天空步道；免費入場，接續搭膠囊列車", scheduled: "Day 4", time: 60, timeSource: "confirmed" },
       { category: "outdoor", name: "松亭海水浴場", region: "松亭", note: "長 1.2km 大沙灘，坡緩水淺，適合小孩玩沙", scheduled: "Day 4", time: 60, timeSource: "confirmed" },
+      { category: "outdoor", name: "竹島公園", region: "松亭", note: "松亭海水浴場尾端的小半島公園，竹林步道與八角亭；風大或太熱時可到樹蔭下走走", alternative: "可替換 Day 4 松亭沙灘段", time: 30, timeSource: "estimate" },
       { category: "outdoor", name: "甘川洞文化村", region: "甘川洞", note: "坡度與階梯多，帶背巾比推車輕鬆；本次行程推車移動考量已跳過，改去太宗台", alternative: "行程卡可選備案", time: 150, timeSource: "confirmed" },
       { category: "outdoor", name: "松島海灘／龍宮雲橋", region: "松島", note: "纜車後順接海邊散步；強風或下雨時縮短", scheduled: "Day 6", time: 90, timeSource: "confirmed" },
       { category: "outdoor", name: "太宗台", region: "影島", note: "海岸崖景；搭다누비遊園列車環園，不用推車爬坡", scheduled: "Day 5", time: 90, timeSource: "confirmed" },
@@ -3186,6 +3188,9 @@
       { category: "food", name: "고슬고슬가마솥밥 기장본점", region: "機張", note: "釜飯，有包廂＋海景，適合帶小孩安靜吃飯", scheduled: "Day 3", time: 75, timeSource: "confirmed" },
       { category: "food", name: "一等家（일등가）", region: "機張", note: "鐵板烤鴨吃到飽，用餐時間100分鐘；空間寬敞有機張海景，適合親子；非海鮮，小學15,900／未就學7,900韓元；14:00-17:00午休；已是고슬고슬가마솥밥午餐的順路備案", alternative: "可替換 Day 3 午餐", time: 100, timeSource: "confirmed" },
       { category: "food", name: "송정밥집본점", region: "松亭", note: "韓式家常套餐，安靜好坐；非海鮮選項多，適合海鮮過敏", scheduled: "Day 4", time: 75, timeSource: "confirmed" },
+      { category: "food", name: "수변최고 돼지국밥 송정점", region: "松亭", note: "豬肉湯飯，송정밥집본점步行約 5 分；非海鮮，適合海鮮過敏，想吃熱湯時替換", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "송도제일밀면", region: "松島", note: "松島老字號小麥冷麵，El Momento Songdo 步行約 8 分；非海鮮，適合海鮮過敏", alternative: "可替換 Day 5 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "海豚豆腐鍋", region: "南浦／舊城區", note: "돌고래순두부，國際市場旁老店嫩豆腐鍋，07:00-22:00；非海鮮，適合海鮮過敏；也是 Day 5 札嘎其午餐的順路備案", scheduled: "Day 6", time: 60, timeSource: "confirmed" },
       { category: "food", name: "機張市場", region: "機張", note: "海鮮與市場餐食，可接 Osiria 行程", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
       { category: "food", name: "沙上西部巴士客運站", region: "沙上", note: "返程前可在站區找餐食與便利商店", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
       { category: "food", name: "Gupo Market", region: "沙上／龜浦", note: "市場小吃與採買選項，適合替換沙上餐食", alternative: "行程卡可選備案", time: 45, timeSource: "estimate" },
@@ -3317,7 +3322,8 @@
       "金海機場國際線餐飲區": "부산광역시 강서구 공항진입로 108",
       "金海機場咖啡店／便利商店": "부산광역시 강서구 공항진입로 108",
       "機張竹城教堂": "부산광역시 기장군 기장읍 죽성리 134-7",
-      "일등가": "부산 기장군 기장읍 기장해안로 266 더이스트인부산 4층",
+      "一等家（일등가）": "부산 기장군 기장읍 기장해안로 266 더이스트인부산 4층",
+      "海豚豆腐鍋": "부산광역시 중구 중구로40번길 15",
       "竹島公園": "부산광역시 해운대구 송정해변로 1-23",
       "수변최고 돼지국밥 송정점": "부산 해운대구 송정중앙로9번길 8",
       "송도제일밀면": "부산광역시 서구 충무대로 8",
@@ -4080,7 +4086,7 @@
         { name: "機張竹城教堂", route: "龍宮寺計程車約 12 分；同在機張海岸線，不繞回市區" }
       ],
       "d3-5": [
-        { name: "일등가", route: "고슬고슬가마솥밥同一條기장해안로，車程約 5 分；오리불고기吃到飽，有兒童價" },
+        { name: "一等家（일등가）", route: "고슬고슬가마솥밥同一條기장해안로，車程約 5 分；오리불고기吃到飽，有兒童價" },
         { name: "王大骨馬鈴薯豬骨湯（왕뼈감자탕）機張店", route: "고슬고슬가마솥밥計程車約 6 分；想吃熱湯而非釜飯時替換" }
       ],
       "d3-6": [
@@ -4150,6 +4156,7 @@
       "d4-4": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；玩沙行程下雨可整段替換" },
       "d4-7": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；전망대散步下雨可改這裡" },
       "d4-11": { name: "SEA LIFE 釜山水族館", note: "海雲台室內親子雨天主力備案；沙灘下雨可改這裡" },
+      "d4-14": { name: "BUSAN X the SKY", note: "下雨就留在 X the SKY 室內看夜景，跳過 THE BAY 101 戶外散步段，直接去晚餐" },
       "d5-4": { name: "國立海洋博物館", note: "影島室內親子展覽，跟太宗台同一區，順路好接" },
       "d6-1": { name: "釜山電影體驗博物館", note: "南浦室內互動館；沙灘挖沙下雨可改這裡" },
       "d6-2": { name: "釜山電影體驗博物館", note: "南浦室內互動館；纜車強風雷雨停駛時可改這裡" },
