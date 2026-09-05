@@ -456,6 +456,33 @@
       padding: 1px 4px;
     }
 
+    .backup-delivery-flag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--leaf);
+      border: 1px solid var(--leaf);
+      border-radius: 4px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+
+    .backup-delivery-note {
+      display: block;
+      margin-top: 2px;
+      color: var(--leaf);
+      font-size: 12.5px;
+    }
+
+    .toggle.toggle-delivery.active { background: var(--leaf); border-color: var(--leaf); color: #fff; }
+
+    .backup-delivery-howto {
+      font-size: 13.5px !important;
+      padding: 8px 10px;
+      border-left: 3px solid var(--leaf);
+      background: rgba(76, 140, 74, .07);
+      border-radius: 0 6px 6px 0;
+    }
+
     .backup-item-meta {
       margin-top: 3px;
       font-size: 13px;
@@ -2651,6 +2678,7 @@
           <span class="kicker">BUSAN BACKUP DIRECTORY · FAMILY FRIENDLY</span>
           <h2 id="backupTitle">備用景點冊</h2>
           <p>依區域分組，點區域名稱展開查看，每區內再依美食／室外／室內分類；每個景點都附預估停留時間。已排進本次行程的項目會標示「已排入」，其餘為可替換選項。</p>
+          <p class="backup-delivery-howto"><strong>🛵 可外送</strong>標記＝查證過店家有外送服務，小孩累了或下雨可以直接叫到飯店。外國人怎麼叫：<strong>배달의민족（Baemin）</strong>2026/8 起可用海外手機號碼收簡訊驗證註冊、海外信用卡或 Apple Pay 付款；地址貼「住宿」卡片的韓文地址＋房號，備註「호텔 로비에 놔주세요」（放大廳）最省事，或請櫃檯代叫。連鎖炸雞（橋村／PURADAK）在 쿠팡이츠 也有。</p>
         </div>
         <a class="pass-link" href="https://www.visitbusan.net/" target="_blank" rel="noreferrer">開啟 Visit Busan ↗</a>
       </div>
@@ -2668,6 +2696,7 @@
             <button class="toggle active" type="button" data-backup-status="all">全部</button>
             <button class="toggle" type="button" data-backup-status="scheduled">已排入行程</button>
             <button class="toggle" type="button" data-backup-status="open">尚未安排</button>
+            <button class="toggle toggle-delivery" type="button" id="backupDeliveryToggle" aria-pressed="false" title="只顯示查證過可叫外送到飯店的店家">🛵 可外送</button>
           </div>
           <button class="backup-reset" type="button" id="backupReset">清除篩選</button>
         </div>
@@ -3182,7 +3211,7 @@
     const backupAttractions = [
       { category: "food", name: "田浦咖啡街", region: "西面／田浦", note: "咖啡、早午餐與親子休息點集中", scheduled: "Day 2", time: 120, timeSource: "confirmed" },
       { category: "food", name: "松亭3代豬肉湯飯", region: "西面", note: "行程中的晚餐；想吃暖胃湯飯可直接保留", scheduled: "Day 2", time: 90, timeSource: "confirmed" },
-      { category: "food", name: "安木（안목）西面店", region: "西面", note: "2024/2025 米其林必比登豬肉湯飯，湯頭濃郁不腥；非海鮮，適合海鮮過敏；人氣店需 CatchTable 預約，開店常見候位", alternative: "可替換 Day 2 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "安木（안목）西面店", region: "西面", note: "2024/2025 米其林必比登豬肉湯飯，湯頭濃郁不腥；非海鮮，適合海鮮過敏；店內有兒童椅；人氣店需 CatchTable 預約，開店常見候位；不外送", alternative: "可替換 Day 2 晚餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "螞蟻家（西面店）", region: "西面／釜山鎮", note: "影片推薦的 낙곱새（章魚、牛腸、蝦）餐廳；幼童可先確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐", time: 70, timeSource: "estimate" },
       { category: "food", name: "83獬豸（83 해치）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；晚餐時段可能需要等候", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
       { category: "food", name: "河蓮庭嫩豆腐鍋", region: "西面／釜山鎮", note: "影片推薦的嫩豆腐鍋，適合想吃熱食；幼童餐點請確認辣度", alternative: "影片推薦／可替換 Day 2 晚餐", time: 60, timeSource: "estimate" },
@@ -3193,9 +3222,10 @@
       { category: "food", name: "Cor Pasta Bar", region: "西面／田浦", note: "2024/2025 連兩年米其林必比登義大利麵吧，田浦巷弄二樓，吧檯座位不到15席；主廚手工鮮麵，用餐時間可能需候位", alternative: "可替換田浦咖啡街午茶或 Day 2 晚餐", time: 70, timeSource: "estimate" },
       { category: "food", name: "fm coffee", region: "西面／田浦", note: "水果派人氣店（草莓派／葡萄派）；派皮通常含蛋，網路未標示過敏原，建議現場先問店員", alternative: "可替換田浦咖啡街午茶", time: 60, timeSource: "estimate" },
       { category: "food", name: "烤肉的男子（西面店）", region: "西面／釜山鎮", note: "影片推薦的韓式烤肉；適合當作西面晚餐備案", alternative: "影片推薦／可替換 Day 2 晚餐", time: 80, timeSource: "estimate" },
-      { category: "food", name: "PURADAK CHICKEN（푸라닭）西面전포점", region: "西面／釜山鎮", note: "人氣連鎖炸雞，招牌口味偏辣，幼童請確認辣度或改點原味；可替換 Day 1 晚餐宵夜", alternative: "可替換 Day 1 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "PURADAK CHICKEN（푸라닭）西面전포점", region: "西面／釜山鎮", delivery: "連鎖炸雞，배민／쿠팡이츠都有", note: "人氣連鎖炸雞，招牌口味偏辣，幼童請確認辣度或改點原味；可替換 Day 1 晚餐宵夜", alternative: "可替換 Day 1 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "橋村炸雞西面店（교촌치킨 서면점）", region: "西面", delivery: "連鎖炸雞，배민／쿠팡이츠都有；小孩累了直接叫到 Hotel Kyungsung", note: "Day 1 晚餐；蜂蜜／原味口味不辣，小孩可吃；可內用也可外帶或外送回飯店", scheduled: "Day 1", time: 75, timeSource: "confirmed" },
       { category: "food", name: "尾浦家 海雲台本店", region: "海雲台／尾浦", note: "醬蟹與海鮮鍋飯；需留意 15:00-17:00 午休與熱門時段候位；⚠️ 海鮮類，小孩海鮮過敏不可吃，僅供其他大人參考", alternative: "行程卡可選備案", time: 70, timeSource: "estimate" },
-      { category: "food", name: "PURADAK CHICKEN（푸라닭）海雲台店", region: "海雲台", note: "海雲台站旁的連鎖炸雞，12:00-24:00；招牌口味偏辣，幼童改點原味；Outdark 查無海雲台分店，Day 4 晚餐建議改這裡", alternative: "可替換 Day 4 晚餐", time: 90, timeSource: "estimate" },
+      { category: "food", name: "PURADAK CHICKEN（푸라닭）海雲台店", region: "海雲台", delivery: "連鎖炸雞，배민／쿠팡이츠都有；可直接叫到 UH Continental", note: "海雲台站旁的連鎖炸雞，12:00-24:00；招牌口味偏辣，幼童改點原味；Outdark 查無海雲台分店，Day 4 晚餐建議改這裡", alternative: "可替換 Day 4 晚餐", time: 90, timeSource: "estimate" },
       { category: "food", name: "앨리스도넛 사라다 청沙浦店", region: "海雲台／青沙浦", note: "청사포항正對面的沙拉麵包／甜甜圈店，等膠囊列車前買點心很順；非海鮮", alternative: "可替換 Day 4 青沙浦段點心", time: 20, timeSource: "estimate" },
       { category: "food", name: "브로니（Broni）", region: "海雲台／青沙浦", note: "清沙浦站步行 2 分的海景起司蛋糕咖啡廳，1-3 樓都面海；非海鮮", alternative: "可替換 Day 4 青沙浦段", time: 45, timeSource: "estimate" },
       { category: "food", name: "오션브리즈（Ocean Breeze）", region: "海雲台／青沙浦", note: "看得到海岸列車經過的海景咖啡廳，在달맞이길往청사포的坡上；非海鮮", alternative: "可替換 Day 4 青沙浦段", time: 45, timeSource: "estimate" },
@@ -3206,21 +3236,21 @@
       { category: "food", name: "소담가마솥돼지국밥", region: "影島", note: "太宗台附近的豬肉湯飯，在地人推薦；非海鮮，適合海鮮過敏，Day 5 想在影島吃午餐再回南浦可改這裡", alternative: "可替換 Day 5 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "대궐안집", region: "沙上", note: "沙上站 5／6 號出口步行 1 分，排骨湯與韓牛排骨，空間寬敞有分隔座位；非海鮮，適合帶小孩", alternative: "可替換 Day 7 午餐或晚餐", time: 70, timeSource: "estimate" },
       { category: "food", name: "사상초량밀면", region: "沙上", note: "跟陝川一流豬肉湯飯同一條광장로，小麥冷麵 10:00-22:00；非海鮮，適合海鮮過敏", alternative: "可替換 Day 7 午餐或晚餐", time: 45, timeSource: "estimate" },
-      { category: "food", name: "밀면촌", region: "沙上", note: "沙上站 1 號出口步行 7 分的老字號小麥冷麵，只開 10:30-15:00、週一公休；非海鮮", alternative: "可替換 Day 7 午餐", time: 45, timeSource: "estimate" },
+      { category: "food", name: "밀면촌", region: "沙上", delivery: "有外送（食客評論多次叫外送）；只到 15:00，午餐時段叫", note: "沙上站 1 號出口步行 7 分的老字號小麥冷麵，只開 10:30-15:00、週一公休；非海鮮", alternative: "可替換 Day 7 午餐", time: 45, timeSource: "estimate" },
       { category: "food", name: "海雲台傳統市場", region: "海雲台", note: "水族館或海邊後，找小吃與簡餐方便", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "青沙浦烤貝", region: "青沙浦", note: "海景晚餐選項；膠囊列車周邊可順接", alternative: "可替換 Day 4 晚餐", time: 70, timeSource: "estimate" },
       { category: "food", name: "札嘎其市場／BIFF 廣場", region: "南浦／舊城區", note: "市場小吃、種子糖餅與午餐選擇集中", scheduled: "Day 5", time: 90, timeSource: "confirmed" },
       { category: "food", name: "富平罐頭夜市", region: "南浦／富平市場", note: "19:30 後開市；人潮多，幼童累時不必勉強", alternative: "可替換 Day 6 晚餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "豚笑南浦店", region: "南浦／舊城區", note: "松島行程後移動到南浦的午餐選項", scheduled: "Day 6", time: 90, timeSource: "confirmed" },
-      { category: "food", name: "元祖冷麵1984（1984 이바구밀면）", region: "南浦／釜山站", note: "釜山站對面排隊名店，招牌小麥冷麵（물밀면不辣／비빔밀면辣）用72小時牛雞骨高湯；非海鮮，適合海鮮過敏；肉餅、蒸餃也推薦加點", alternative: "可替換 Day 5 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "元祖冷麵1984（1984 이바구밀면）", region: "南浦／釜山站", delivery: "有外送（食客評論提到叫外送，但一致說現場吃比較好）", note: "釜山站對面排隊名店，招牌小麥冷麵（물밀면不辣／비빔밀면辣）用72小時牛雞骨高湯；非海鮮，適合海鮮過敏；肉餅、蒸餃也推薦加點", alternative: "可替換 Day 5 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "味讚王鹽烤（맛찬들왕소금구이）富平店", region: "南浦／舊城區", note: "厚切熟成豬肉鹽烤；非海鮮，適合海鮮過敏；近富平罐頭夜市", alternative: "行程卡可選備案", time: 80, timeSource: "estimate" },
       { category: "food", name: "味讚王鹽烤（맛찬들왕소금구이）西面店", region: "西面／釜山鎮", note: "厚切熟成豬肉鹽烤，西面排隊名店；非海鮮，適合海鮮過敏；可替換 Day 1 晚餐", alternative: "可替換 Day 1 晚餐", time: 80, timeSource: "estimate" },
-      { category: "food", name: "極東豬肉湯飯（극동돼지국밥）海雲台店", region: "海雲台", note: "豬肉湯飯，跟尾浦港同一條달맞이길；非海鮮，適合海鮮過敏", alternative: "可替換 Day 3 晚餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "極東豬肉湯飯（극동돼지국밥）海雲台店", region: "海雲台", note: "豬肉湯飯，跟尾浦港同一條달맞이길，08:00-21:00；非海鮮，適合海鮮過敏；店內有兒童椅；可外帶回 UH Continental（不外送）", alternative: "可替換 Day 3 晚餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "城一家（성일집）盲鰻", region: "南浦／舊城區", note: "南浦老字號곰장어（盲鰻）名店；⚠️ 海鮮類，小孩海鮮過敏不可吃，僅供其他大人參考", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
-      { category: "food", name: "南浦雪濃湯（남포설렁탕）", region: "南浦／舊城區", note: "牛骨湯，24小時營業；非海鮮，適合海鮮過敏；可替換 Day 6 午餐", alternative: "可替換 Day 6 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "南浦雪濃湯（남포설렁탕）", region: "南浦／舊城區", delivery: "店家有外送服務（Diningcode 標「배달」）；24 小時，晚上小孩睡了也能叫", note: "牛骨湯，24小時營業；非海鮮，適合海鮮過敏；可替換 Day 6 午餐", alternative: "可替換 Day 6 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "PICK BAKE（픽베이크）釜山光復店", region: "南浦／舊城區", note: "葡式蛋塔專賣，原味4入約 NT$205；就在光復路商圈內，逛街途中可直接買來吃", alternative: "可替換 Day 6 逛街點心", time: 20, timeSource: "estimate" },
       { category: "food", name: "多鍋美食店（다솥）韓定食 松亭店", region: "松亭", note: "韓定食套餐，小菜精緻；適合一人也能好好吃飯；非海鮮，適合海鮮過敏", alternative: "可替換 Day 4 午餐", time: 70, timeSource: "estimate" },
-      { category: "food", name: "王大骨馬鈴薯豬骨湯（왕뼈감자탕）機張店", region: "機張", note: "馬鈴薯豬骨湯；非海鮮，適合海鮮過敏；可替換 Day 3 午餐", alternative: "可替換 Day 3 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "王大骨馬鈴薯豬骨湯（왕뼈감자탕）機張店", region: "機張", delivery: "店家有外送服務（Diningcode 標「배달」），營業到凌晨 4 點", note: "馬鈴薯豬骨湯；非海鮮，適合海鮮過敏；店內有兒童遊戲區（놀이방）跟坐式包廂，帶小孩好待；可替換 Day 3 午餐", alternative: "可替換 Day 3 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "河東南海烤盲鰻（남해바다장어）", region: "沙上", note: "沙上장어燒烤名店，跟 Elmomento Sasang Residence 同一條새벽로；⚠️ 海鮮類，小孩海鮮過敏不可吃，僅供其他大人參考", alternative: "行程卡可選備案", time: 70, timeSource: "estimate" },
       { category: "food", name: "스타벅스 영도대교점", region: "影島", note: "過影道大橋後右側，海景窗邊座位；近라발스호텔", alternative: "行程卡可選備案", time: 40, timeSource: "estimate" },
       { category: "food", name: "P.ark 咖啡廳&西饼店", region: "影島", note: "太宗台同一區的創意烘焙咖啡廳，招牌豬肉湯飯可頌用韓式砂鍋盛裝，砂鍋還能帶走當伴手禮；非海鮮，適合海鮮過敏", alternative: "可替換 Day 5 咖啡或下午茶", time: 45, timeSource: "estimate" },
@@ -3261,7 +3291,7 @@
       { category: "food", name: "고슬고슬가마솥밥 기장본점", region: "機張", note: "釜飯，有包廂＋海景，適合帶小孩安靜吃飯", scheduled: "Day 3", time: 75, timeSource: "confirmed" },
       { category: "food", name: "一等家（일등가）", region: "機張", note: "鐵板烤鴨吃到飽，用餐時間100分鐘；空間寬敞有機張海景，適合親子；非海鮮，小學15,900／未就學7,900韓元；14:00-17:00午休；已是고슬고슬가마솥밥午餐的順路備案", alternative: "可替換 Day 3 午餐", time: 100, timeSource: "confirmed" },
       { category: "food", name: "송정밥집본점", region: "松亭", note: "韓式家常套餐，安靜好坐；非海鮮選項多，適合海鮮過敏", scheduled: "Day 4", time: 75, timeSource: "confirmed" },
-      { category: "food", name: "수변최고 돼지국밥 송정점", region: "松亭", note: "豬肉湯飯，송정밥집본점步行約 5 分；非海鮮，適合海鮮過敏，想吃熱湯時替換", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
+      { category: "food", name: "수변최고 돼지국밥 송정점", region: "松亭", delivery: "有外送（Diningcode「송정 배달 맛집」榜上）", note: "豬肉湯飯，송정밥집본점步行約 5 分；非海鮮，適合海鮮過敏，想吃熱湯時替換", alternative: "可替換 Day 4 午餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "송도제일밀면", region: "松島", note: "松島老字號小麥冷麵，El Momento Songdo 步行約 8 分；非海鮮，適合海鮮過敏", alternative: "可替換 Day 5 晚餐", time: 60, timeSource: "estimate" },
       { category: "food", name: "海豚豆腐鍋", region: "南浦／舊城區", note: "돌고래순두부，國際市場旁老店嫩豆腐鍋，07:00-22:00；非海鮮，適合海鮮過敏；也是 Day 5 札嘎其午餐的順路備案", scheduled: "Day 6", time: 60, timeSource: "confirmed" },
       { category: "food", name: "機張市場", region: "機張", note: "海鮮與市場餐食，可接 Osiria 行程", alternative: "行程卡可選備案", time: 60, timeSource: "estimate" },
@@ -3321,6 +3351,7 @@
       "田浦咖啡街": "부산광역시 부산진구 전포대로199번길 일대",
       "松亭3代豬肉湯飯": "부산광역시 부산진구 서면로68번길 33",
       "安木（안목）西面店": "부산광역시 부산진구 서면로 10",
+      "橋村炸雞西面店（교촌치킨 서면점）": "부산광역시 부산진구 중앙대로 745-1",
       "PURADAK CHICKEN（푸라닭）西面전포점": "부산광역시 부산진구 동천로 34-1",
       "元祖冷麵1984（1984 이바구밀면）": "부산 동구 초량동 1207-8",
       "味讚王鹽烤（맛찬들왕소금구이）富平店": "부산 중구 광복로 3 1층",
@@ -3809,12 +3840,15 @@
         .join("");
     }
 
+    let backupDeliveryOnly = false;
+
     function renderBackupDirectory() {
       const filtered = backupAttractions.filter(item => {
         const districtOk = backupDistrictFilter.size === 0 || backupDistrictFilter.has(backupPrimaryDistrict(item.region));
         const categoryOk = backupCategoryFilter.size === 0 || backupCategoryFilter.has(item.category);
         const statusOk = backupStatusFilter === "all" || backupStatusInfo(item).kind === backupStatusFilter;
-        return districtOk && categoryOk && statusOk;
+        const deliveryOk = !backupDeliveryOnly || Boolean(item.delivery);
+        return districtOk && categoryOk && statusOk && deliveryOk;
       });
 
       const scheduledCount = backupAttractions.filter(item => item.scheduled).length;
@@ -3846,11 +3880,13 @@
                 <div class="backup-item-top">
                   <span class="backup-item-dot cat-${item.category}" aria-hidden="true"></span>
                   <span class="backup-item-name">${item.name}</span>
+                  ${item.delivery ? `<span class="backup-delivery-flag" title="${item.delivery}">🛵 可外送</span>` : ""}
                   <span class="backup-item-time">${backupTimeLabel(item.time)}${item.timeSource === "estimate" ? '<i class="backup-est-flag" title="推估值，非實際排定時間">推估</i>' : ""}</span>
                 </div>
                 <div class="backup-item-meta">
                   ${sub ? `<span class="backup-item-sub">${sub}</span>` : ""}
                   <span class="backup-item-note">${item.note}</span>
+                  ${item.delivery ? `<span class="backup-delivery-note">🛵 ${item.delivery}</span>` : ""}
                 </div>
                 <div class="backup-item-foot">
                   <span class="backup-item-status status-${status.kind}">${status.text}</span>
@@ -4699,11 +4735,22 @@
       renderBackupDirectory();
     });
 
+    document.getElementById("backupDeliveryToggle").addEventListener("click", (event) => {
+      backupDeliveryOnly = !backupDeliveryOnly;
+      event.currentTarget.classList.toggle("active", backupDeliveryOnly);
+      event.currentTarget.setAttribute("aria-pressed", String(backupDeliveryOnly));
+      renderBackupDirectory();
+    });
+
     document.getElementById("backupReset").addEventListener("click", () => {
       backupDistrictFilter.clear();
       backupCategoryFilter.clear();
       backupStatusFilter = "all";
+      backupDeliveryOnly = false;
       document.querySelectorAll("[data-backup-status]").forEach(item => item.classList.toggle("active", item.dataset.backupStatus === "all"));
+      const deliveryToggle = document.getElementById("backupDeliveryToggle");
+      deliveryToggle.classList.remove("active");
+      deliveryToggle.setAttribute("aria-pressed", "false");
       renderBackupFilterChips();
       renderBackupDirectory();
     });
