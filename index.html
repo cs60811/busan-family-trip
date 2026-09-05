@@ -1998,6 +1998,17 @@
 
     .map-link.naver { color: #fff; background: #03c75a; }
     .map-link.kakao { color: #3c1e1e; background: #fee500; }
+    .map-link.ig { color: #fff; background: #e1306c; font-size: 11px; letter-spacing: .02em; }
+
+    .shopping-ig {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #e1306c;
+      text-decoration: none;
+    }
+    .shopping-ig:hover { text-decoration: underline; }
     .map-link:hover { transform: translateY(-1px); }
 
     .copy-address:hover { transform: translateY(-1px); background: var(--lemon); }
@@ -2977,7 +2988,7 @@
     const shoppingBranches = {
       seomyeon: { area: "西面", name: "OLIVE YOUNG 西面站前店", note: "西面站 10 號出口正對面，兩層樓，貨最齊全", address: "부산광역시 부산진구 중앙대로 686" },
       haeundae: { area: "海雲台", name: "OLIVE YOUNG 海雲台站店", note: "海雲台站附近", address: "부산광역시 해운대구 구남로8번길 7-5" },
-      nampo: { area: "南浦", name: "OLIVE YOUNG 南浦 Town", note: "2026 新開幕釜山最大旗艦店，4 層樓約 900 坪，就在 BIFF 廣場旁，商品最齊全", address: "부산광역시 중구 비프광장로 40" },
+      nampo: { area: "南浦", name: "OLIVE YOUNG 南浦 Town", note: "2026 新開幕釜山最大旗艦店，4 層樓約 900 坪，就在 BIFF 廣場旁，商品最齊全", address: "부산광역시 중구 비프광장로 40", ig: "https://www.instagram.com/p/DcuwSb-CdR6/" },
       sasang: { area: "沙上", name: "OLIVE YOUNG 沙上 Apple Outlet 店", note: "西部巴士客運站旁 Apple Outlet 地下 1 樓，兩層規模，貨最齊全", address: "부산광역시 사상구 사상로 201" },
       emart_sasang: { area: "沙上", name: "이마트 사상店", note: "大型超市，農心／好麗友／樂天／CROWN 這類一般零食跟 No Brand 自有品牌都找得到；跟 Day7 沙上採買行程同一區", address: "부산광역시 사상구 광장로 17" },
       lovely_gangjeong: { area: "海雲台", name: "LOVELY GANGJUNG（러블리강정）海雲台店", note: "海理團路上的粉紅色手工江米條專賣店；Day 3－4 住 UH Continental 時順路，走到海雲台站約 5 分", address: "부산광역시 해운대구 우동1로38번길 10" }
@@ -3004,7 +3015,7 @@
       { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", note: "CROWN官方品名是「버터와플」（奶油鬆餅），常俗稱생크림와플，是同一款", branches: ["emart_sasang"], image: "assets/shopping/16-crown.jpg" },
       { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"], image: "assets/shopping/17-binch.jpg" },
       { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"], image: "assets/shopping/18-marketo.jpg" },
-      { category: "food", brand: "LOVELY GANGJUNG", zh: "手工江米條", ko: "러블리강정 강정", note: "釜山在地 10 年以上的手工甜點店，純米糖膠製、甜度低不黏牙；常溫可放不用冷藏，適合帶回台灣當伴手禮；只有海雲台這間實體店，不是超商／超市貨", branches: ["lovely_gangjeong"], image: "assets/shopping/19-lovely-gangjeong.jpg" }
+      { category: "food", brand: "LOVELY GANGJUNG", zh: "手工江米條", ko: "러블리강정 강정", note: "釜山在地 10 年以上的手工甜點店，純米糖膠製、甜度低不黏牙；常溫可放不用冷藏，適合帶回台灣當伴手禮；只有海雲台這間實體店，不是超商／超市貨", branches: ["lovely_gangjeong"], image: "assets/shopping/19-lovely-gangjeong.jpg", ig: "https://www.instagram.com/reel/DcvYVLFpy5d/" }
     ];
 
     const tagNames = {
@@ -3148,8 +3159,8 @@
     const gamcheonVillageAddress = "부산 사하구 감내2로 203";
 
     const passPickupLocations = [
-      { area: "金海機場・建議", name: "釜山 PASS 自助領卡機｜國際線 1F 4 號門旁", note: "24 小時。Day 1 17:05 落地、出關後順路領；同一層也有釜山觀光諮詢處的人工櫃檯可備援（有營業時間）", address: "부산광역시 강서구 공항진입로 108" },
-      { area: "釜山站・備援", name: "釜山 PASS 自助領卡機｜KTX 釜山站 2F 7 號出口旁", note: "24 小時，同層還有官方 VISIT BUSAN PASS 櫃檯。本次行程不經過釜山站，只在機場機台故障時當備案（Day 5 若改吃元祖冷麵1984，就在釜山站對面）", address: "부산광역시 동구 중앙대로 206" }
+      { area: "金海機場・建議", name: "釜山 PASS 自助領卡機｜國際線 1F 4 號門旁", note: "24 小時。Day 1 17:05 落地、出關後順路領；同一層也有釜山觀光諮詢處的人工櫃檯可備援（有營業時間）", address: "부산광역시 강서구 공항진입로 108", ig: "https://www.instagram.com/reel/Dc02_ndpNMc/" },
+      { area: "釜山站・備援", name: "釜山 PASS 自助領卡機｜KTX 釜山站 2F 7 號出口旁", note: "24 小時，同層還有官方 VISIT BUSAN PASS 櫃檯。本次行程不經過釜山站，只在機場機台故障時當備案（Day 5 若改吃元祖冷麵1984，就在釜山站對面）", address: "부산광역시 동구 중앙대로 206", ig: "https://www.instagram.com/reel/Dc02_ndpNMc/" }
     ];
 
     const passAddressBook = {
@@ -3258,6 +3269,7 @@
       { category: "food", name: "DIART Coffee", region: "海雲台／青沙浦", note: "海邊轉角咖啡廳，招牌卡伊馬克吐司（蜂蜜起司醬）；就在청사포항附近，散步後可坐下休息", alternative: "可替換 Day 4 青沙浦段", time: 45, timeSource: "estimate" },
       { category: "food", name: "Liberta（리베르타）", region: "海雲台／青沙浦", note: "청사포唯一自己烤麵包的烘焙咖啡廳，3層樓每層視野不同，招牌焦糖布蕾拿鐵；海景落地窗座位熱門，容易客滿", alternative: "可替換 Day 4 青沙浦段", time: 45, timeSource: "estimate" },
       { category: "food", name: "Working Holiday Brunch Cafe（워킹홀리데이 해운대）", region: "海雲台", note: "正對海雲台海水浴場的브런치咖啡廳，適合當早餐或下午茶", alternative: "可替換 Day 4 早餐或點心", time: 60, timeSource: "estimate" },
+      { category: "food", name: "Duplit classic（듀플릿 클래식）", region: "海雲台／海理團路", note: "海雲台新開的早午餐咖啡廳，無限時、無低消、有插座；招牌酪梨三明治份量大，雙人可點早午餐組合（蜜糖起司薯條、洋蔥濃湯、氣泡飲）；室內外座位都有；非海鮮，跟 LOVELY GANGJUNG 同在海理團路", alternative: "可替換 Day 4 早餐或 Day 3 下午茶", time: 60, timeSource: "estimate" },
       { category: "food", name: "펜퍼센트커피（Pen Percent Coffee）", region: "西面", note: "西面站本店，大容量精品豆咖啡；分店多，找不到本店可改附近分店", alternative: "可替換田浦咖啡街或西面咖啡選項", time: 30, timeSource: "estimate" },
       { category: "food", name: "熟成到 廣安里店（숙성도 광안리점）", region: "廣安里", note: "熟成肉燒烤；⚠️ 廣安里不在本次任何一天的行程路線上，需自行安排交通往返", alternative: "行程卡可選備案", time: 90, timeSource: "estimate" },
       { category: "food", name: "Gelato Joy", region: "廣安里", note: "義式冰淇淋店；⚠️ 廣安里不在本次任何一天的行程路線上，需自行安排交通往返", alternative: "行程卡可選備案", time: 30, timeSource: "estimate" },
@@ -3347,6 +3359,28 @@
       return { kind: "open", text: "尚未安排" };
     }
 
+    // 店家的 IG 介紹貼文（使用者提供的來源），有的才顯示 IG 連結
+    const backupIgLinks = {
+      "Duplit classic（듀플릿 클래식）": "https://www.instagram.com/reel/DbFzGsazW94/",
+      "P.ark 咖啡廳&西饼店": "https://www.instagram.com/reel/Db4rWr1JDAU/",
+      "JJANG藥局": "https://www.instagram.com/reel/DbYCpmiJ8Bw/",
+      "펜퍼센트커피（Pen Percent Coffee）": "https://www.instagram.com/reel/Db2pfMrSNTK/",
+      "PICK BAKE（픽베이크）釜山光復店": "https://www.instagram.com/reel/DaS6phPywts/",
+      "老虎冰淇淋大福（호랑이젤라떡）": "https://www.instagram.com/reel/DZnRfBMvbX0/",
+      "DIART Coffee": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "Working Holiday Brunch Cafe（워킹홀리데이 해운대）": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "Liberta（리베르타）": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "Cor Pasta Bar": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "熟成到 廣安里店（숙성도 광안리점）": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "Gelato Joy": "https://www.instagram.com/reel/DaQIOjiDXjx/",
+      "All Sunday 廣安店（올선데이 광안점）": "https://www.instagram.com/reel/DaQIOjiDXjx/"
+    };
+
+    function renderIgLink(name) {
+      const url = backupIgLinks[name];
+      return url ? `<a class="map-link ig" href="${url}" target="_blank" rel="noreferrer" aria-label="開啟 ${name} 的 IG 介紹" title="IG 介紹">IG</a>` : "";
+    }
+
     const backupAddressBook = {
       "田浦咖啡街": "부산광역시 부산진구 전포대로199번길 일대",
       "松亭3代豬肉湯飯": "부산광역시 부산진구 서면로68번길 33",
@@ -3372,6 +3406,7 @@
       "DIART Coffee": "부산광역시 해운대구 청사포로128번길 12",
       "Liberta（리베르타）": "부산광역시 해운대구 청사포로 137",
       "Working Holiday Brunch Cafe（워킹홀리데이 해운대）": "부산 해운대구 해운대해변로 277 5층",
+      "Duplit classic（듀플릿 클래식）": "부산광역시 해운대구 우동1로20번길 37 1층",
       "펜퍼센트커피（Pen Percent Coffee）": "부산광역시 부산진구 부전동 142-11",
       "JJANG藥局": "부산 부산진구 중앙대로 694 쥬디스태화 본관 1층",
       "螞蟻家（西面店）": "부산광역시 부산진구 신천대로62번길 73",
@@ -3893,6 +3928,7 @@
                   <div class="map-links">
                     <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">N</a>
                     <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${item.name}">K</a>
+                    ${renderIgLink(item.name)}
                   </div>
                 </div>
               </li>`;
@@ -4217,6 +4253,10 @@
         { name: "海雲台傳統市場", route: "飯店步行約 8 分；不必再搭車，適合第一晚海雲台" },
         { name: "極東豬肉湯飯（극동돼지국밥）海雲台店", route: "飯店步行約 5 分；跟尾浦港同一條달맞이길，想吃湯飯時替換" }
       ],
+      "d4-1": [
+        { name: "Duplit classic（듀플릿 클래식）", route: "UH Continental 計程車約 6 分（步行約 20 分），在海理團路；不想吃飯店早餐時改這裡吃酪梨三明治早午餐，吃完再回尾浦站搭列車" },
+        { name: "Working Holiday Brunch Cafe（워킹홀리데이 해운대）", route: "飯店步行約 10 分，正對海雲台沙灘；早餐 8:00 開，海景브런치" }
+      ],
       "d4-4": [
         { name: "竹島公園", route: "松亭海水浴場尾端步行約 10 分；竹林步道與八角亭，風大時可乘涼" }
       ],
@@ -4298,6 +4338,7 @@
                 <div class="map-links">
                   <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${item.name}">N</a>
                   <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${item.name}">K</a>
+                  ${renderIgLink(item.name)}
                 </div>` : ""}
             </div>
           </div>
@@ -4335,6 +4376,7 @@
                     <div class="map-links">
                       <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${choice.name}">N</a>
                       <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${choice.name}">K</a>
+                      ${renderIgLink(choice.name)}
                     </div>` : ""}
                 </div>`;
             }).join("")}
@@ -4461,6 +4503,7 @@
             <div class="map-links">
               <a class="map-link naver" href="${naverHref}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 搜尋 ${branch.name} 地址">N</a>
               <a class="map-link kakao" href="${kakaoHref}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 ${branch.name} 地址">K</a>
+              ${branch.ig ? `<a class="map-link ig" href="${branch.ig}" target="_blank" rel="noreferrer" aria-label="開啟 ${branch.name} 的 IG 介紹" title="IG 介紹">IG</a>` : ""}
             </div>
             <button class="copy-address" type="button" data-address="${branch.address}">複製韓文地址</button>
           </div>
@@ -4490,6 +4533,7 @@
                   <div>${item.zh}</div>
                   <div class="shopping-ko" lang="ko">${item.ko}</div>
                   ${item.note ? `<div class="shopping-note">${item.note}</div>` : ""}
+                  ${item.ig ? `<a class="shopping-ig" href="${item.ig}" target="_blank" rel="noreferrer">IG 介紹 ↗</a>` : ""}
                 </div>
               </div>
             </label>
