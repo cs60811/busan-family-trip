@@ -17,12 +17,14 @@
 
 ## 住宿安排
 
-| 日期 | 住宿 | 地址 / 叫車定位用 | 訂房平台 | 早餐 | 入住 / 退房 |
-|---|---|---|---|---|---|
-| 9/13-9/14 | Hotel Kyungsung | 26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256 | Booking.com | 無 | 16:00～24:00／11:00 前 |
-| 9/15-9/16 | UH Continental CenterPoint | 2-21, Dalmaji-gil, Haeundae-gu, Busan 48099 | 易遊網 | 含早餐（9/16、9/17 早上） | 15:00 後／11:00 前 |
-| 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 | Agoda | 無 | 16:00 後／11:00 前 |
-| 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） | Agoda | 無 | 16:00 後／11:00 前 |
+| 日期 | 住宿 | 地址 / 叫車定位用 | 訂房平台 | 早餐 | 洗衣 | 入住 / 退房 |
+|---|---|---|---|---|---|---|
+| 9/13-9/14 | Hotel Kyungsung | 26, Seomyeonmunhwa-ro, Busanjin-gu, Busan 47256 | Booking.com | 無 | 無洗衣機（官網 Q&A） | 16:00～24:00／11:00 前 |
+| 9/15-9/16 | UH Continental CenterPoint | 2-21, Dalmaji-gil, Haeundae-gu, Busan 48099 | 易遊網 | 含早餐（9/16、9/17 早上） | 洗衣服務（平台列免費，無自助機，問櫃檯） | 15:00 後／11:00 前 |
+| 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 | Agoda | 無 | 🧺 房內洗衣機（可烘） | 16:00 後／11:00 前 |
+| 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） | Agoda | 無 | 🧺 房內洗衣機，不提供洗衣粉、要自備 | 16:00 後／11:00 前 |
+
+- 洗衣策略：前 4 晚沒有自助洗衣機，9/17 起兩間 Elmomento 房內都有——衣物帶 4 天份就夠，洗衣粉自備旅行包。
 
 - 入住/退房日期以住宿平台顯示的訂單為準：Hotel Kyungsung 9/13 入住、9/15 退房；UH Continental 9/15 入住、9/17 退房；Elmomento Songdo 9/17 入住、9/19 退房；Elmomento Sasang Residence 9/19 入住、9/20 退房。四間退房時間都是 11:00 前。
 
