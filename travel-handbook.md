@@ -24,7 +24,7 @@
 | 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 | Agoda | 無 | 🧺 房內洗衣機（可烘） | 16:00 後／11:00 前 |
 | 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） | Agoda | 無 | 🧺 房內洗衣機，不提供洗衣粉、要自備 | 16:00 後／11:00 前 |
 
-- UH Continental 館內設施（官網 2026/9 查證）：4F Book&Barrel Lounge 10:00–25:00，**威士忌時光 19:00–23:00 免費**（威士忌／Highball／小點，房價已含，需成人證件，人多會等）；3F Wonder Lounge 兒童空間 09:00–20:00（8 歲以下、需大人陪同，活動預約制）；2F Casual Lounge 10:30–22:00，目前是 12:00–13:00 野餐飯捲課（6 組、需預約）。網路上流傳的「小孩免費可麗餅時間」官網現在沒有列，可能已換活動，check-in 時直接問。
+- UH Continental 館內設施（官網 2026/9 查證）：4F Book&Barrel Lounge 10:00–25:00 是房客專用空間（房價已含，可去看書），**免費的威士忌／Highball／小點只在「威士忌時光」19:00–23:00**，其餘時段官網另掛付費菜單、要點就自費；需成人證件，人多會等；3F Wonder Lounge 兒童空間 09:00–20:00（8 歲以下、需大人陪同，活動預約制）；2F Casual Lounge 10:30–22:00，目前是 12:00–13:00 野餐飯捲課（6 組、需預約）。網路上流傳的「小孩免費可麗餅時間」官網現在沒有列，可能已換活動，check-in 時直接問。
 - 洗衣策略：前 4 晚沒有自助洗衣機，9/17 起兩間 Elmomento 房內都有——衣物帶 4 天份就夠，洗衣粉自備旅行包。
 
 - 入住/退房日期以住宿平台顯示的訂單為準：Hotel Kyungsung 9/13 入住、9/15 退房；UH Continental 9/15 入住、9/17 退房；Elmomento Songdo 9/17 入住、9/19 退房；Elmomento Sasang Residence 9/19 入住、9/20 退房。四間退房時間都是 11:00 前。
