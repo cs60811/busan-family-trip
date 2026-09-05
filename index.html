@@ -211,6 +211,45 @@
 
     .pass-count { color: var(--muted); font-family: var(--mono); font-size: 13px; }
 
+    .pass-pickup {
+      margin: 18px 0 4px;
+      padding: 14px 16px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper-2);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .pass-pickup-head h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .pass-pickup-head p {
+      margin: 6px 0 12px;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pass-pickup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .pass-pickup-steps {
+      margin: 12px 0 0;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pass-pickup-steps li + li { margin-top: 4px; }
+
     .pass-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
 
     .pass-empty {
@@ -2575,6 +2614,19 @@
         </div>
         <a class="pass-link" href="https://www.visitbusanpass.com/attractions/?attrtp=free" target="_blank" rel="noreferrer">開啟官方清單 ↗</a>
       </div>
+      <div class="pass-pickup" id="passPickup">
+        <div class="pass-pickup-head">
+          <h3>領卡地點</h3>
+          <p>線上買好的卡片版 PASS，<strong>2026/9/3 起</strong>可在兩台 <strong>24 小時自助領卡機</strong>領取（中文介面，由 WOW PASS 代管；官方公告 2026-09-03）。本次建議 <strong>Day 1 落地後直接在金海機場 1F 領</strong>——出關走到 4 號門旁機台約 2 分鐘，不用另外跑釜山站。</p>
+        </div>
+        <div class="pass-pickup-grid" id="passPickupGrid"></div>
+        <ol class="pass-pickup-steps">
+          <li>打開購買平台（官網／KKday／Klook）的<strong>訂單 QR Code</strong>，對準機台掃描</li>
+          <li>機台吐出實體卡後，再把<strong>卡片背面的 QR</strong> 感應一次，才算完成取卡</li>
+          <li>領卡<strong>不會</strong>啟用 180 天有效期；第一次在景點刷卡（Day 3 Skyline Luge）才開始計算</li>
+          <li>只有「在機台直接購買」才需要刷護照；上線初期系統可能不穩，刷不過就改同層的釜山觀光諮詢處人工櫃檯，或找線上客服（機台問題由 WOW PASS 客服處理）</li>
+        </ol>
+      </div>
       <div class="backup-filters">
         <div class="backup-filter-row">
           <span class="backup-filter-label">地區</span>
@@ -2708,7 +2760,7 @@
           ["12:30", "機場午餐 / 換尿布 / 登機準備", "60 分", "不要排太緊", ["food"]],
           ["13:30", "搭乘飛機 / 登機", "215 分", "BX794 釜山航空・A321・經濟艙 H，TPE T2 起飛", ["transport", "ticket"]],
           ["17:05", "落地 / 領行李", "70 分", "PUS 釜山金海機場抵達，飛行時間 2h35m", ["luggage"]],
-          ["18:15", "出關 / 簡單補給", "30 分", "買水、交通卡、整理行李", ["luggage"]],
+          ["18:15", "出關 / 簡單補給", "30 分", "買水、交通卡、整理行李；順路到 1F 4 號門旁的釜山 PASS 自助領卡機領卡（掃訂單 QR → 取卡 → 再掃卡背 QR；領卡不會啟用有效期）", ["luggage", "pass"]],
           ["18:45", "搭車到 Hotel Kyungsung", "60 分", "輕軌+地鐵或行李多搭計程車", ["transport"]],
           ["19:45", "Hotel Kyungsung Check in", "30 分", "放行李、休息一下", ["rest", "luggage"]],
           ["20:15", "橋村炸雞西面店 / 晚餐宵夜", "75 分", "可外帶回飯店", ["food"]],
@@ -2881,6 +2933,7 @@
       "小孩水與點心",
       "尿布與濕紙巾",
       "當日票券截圖",
+      "釜山 PASS 訂單 QR 截圖（Day 1 機場領卡用）",
       "雨具或防曬",
       "推車或背巾"
     ];
@@ -2935,6 +2988,7 @@
     };
 
     const eventLocations = {
+      "d1-5": { query: "부산광역시 강서구 공항진입로 108", label: "金海機場 釜山 PASS 自助領卡機（國際線 1F 4 號門旁）" },
       "d1-7": { query: "부산광역시 부산진구 서면문화로 26", label: "Hotel Kyungsung" },
       "d1-8": { query: "부산광역시 부산진구 중앙대로 745-1", label: "橋村炸雞西面店" },
 
@@ -3063,6 +3117,11 @@
     ];
 
     const gamcheonVillageAddress = "부산 사하구 감내2로 203";
+
+    const passPickupLocations = [
+      { area: "金海機場・建議", name: "釜山 PASS 自助領卡機｜國際線 1F 4 號門旁", note: "24 小時。Day 1 17:05 落地、出關後順路領；同一層也有釜山觀光諮詢處的人工櫃檯可備援（有營業時間）", address: "부산광역시 강서구 공항진입로 108" },
+      { area: "釜山站・備援", name: "釜山 PASS 自助領卡機｜KTX 釜山站 2F 7 號出口旁", note: "24 小時，同層還有官方 VISIT BUSAN PASS 櫃檯。本次行程不經過釜山站，只在機場機台故障時當備案（Day 5 若改吃元祖冷麵1984，就在釜山站對面）", address: "부산광역시 동구 중앙대로 206" }
+    ];
 
     const passAddressBook = {
       "雷射競技場 松島": "부산시 서구 송도해변로 171",
@@ -4373,6 +4432,12 @@
       `;
     }
 
+    function renderPassPickup() {
+      const grid = document.getElementById("passPickupGrid");
+      if (!grid) return;
+      grid.innerHTML = passPickupLocations.map(renderShoppingBranch).join("");
+    }
+
     function renderShoppingItem(item, index) {
       const id = `busan-shop-${index}`;
       const checked = localStorage.getItem(id) === "1" ? "checked" : "";
@@ -4785,6 +4850,7 @@
     setupMapLinks();
     renderPassFilterChips();
     renderPassDirectory();
+    renderPassPickup();
     renderBackupFilterChips();
     renderBackupDirectory();
     loadForecastDirectory();
