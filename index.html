@@ -971,46 +971,20 @@
     .event-meta .event-location-label { font-size: 12px; }
 
     .event-alternatives {
-      margin-top: 0;
-      flex: 0 0 auto;
-      max-width: 100%;
+      margin-top: 8px;
+      border-top: 1px solid rgba(35,33,29,.16);
+      padding-top: 6px;
     }
-
-    .event-alternatives[open] { flex: 1 1 100%; }
 
     .event-alternatives summary {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 9px 3px 7px;
-      border: 1px solid currentColor;
-      border-radius: 999px;
       cursor: pointer;
       color: var(--coral);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
-      line-height: 1.4;
-      list-style: none;
-      background: #fffdf7;
-      transition: background .16s ease, transform .16s ease;
+      list-style-position: inside;
     }
 
-    .event-alternatives summary::-webkit-details-marker { display: none; }
-
-    .event-alternatives summary::before {
-      content: "▸";
-      font-size: 10px;
-      line-height: 1;
-      transition: transform .18s ease;
-    }
-
-    .event-alternatives[open] > summary::before { transform: rotate(90deg); }
-    .event-alternatives summary:hover { transform: translateY(-1px); }
-    .event-alternatives[open] > summary { background: #fff5e8; }
-    .event-rain-backup[open] > summary { background: #e8f0f5; }
-    .event-scenario[open] > summary { background: #f1e9f3; }
-
-    .event-alternatives summary span { color: var(--muted); font-weight: 500; margin-left: 2px; }
+    .event-alternatives summary span { color: var(--muted); font-weight: 500; margin-left: 5px; }
 
     .event-alternative-list { display: grid; gap: 6px; margin-top: 7px; }
 
@@ -1876,6 +1850,21 @@
       overflow: hidden;
     }
 
+    /* 出發前固定資訊（重點／住宿／航班／緊急／醫院／哺乳室）收成兩欄的折疊卡，打開的那張才佔滿整列 */
+    .fold-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 20px 0 22px;
+    }
+
+    .fold-group .stay-details { margin: 0; align-self: start; }
+    .fold-group .stay-details[open] { grid-column: 1 / -1; }
+    .fold-group .stay-details summary { padding: 12px 14px; font-size: 18px; flex-wrap: wrap; row-gap: 2px; }
+    .fold-group .stay-details summary small { font-size: 12px; }
+
+    .quick-fold .quick-notes { margin: 0; padding: 14px; }
+
     .stay-details summary {
       cursor: pointer;
       display: flex;
@@ -2097,9 +2086,12 @@
     }
 
     @media (max-width: 900px) {
-      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid {
+      .hero-grid, .main-grid, .controls, .quick-notes, .stay-grid, .fold-group {
         grid-template-columns: 1fr;
       }
+
+      .fold-group { gap: 10px; margin: 14px 0 16px; }
+      .fold-group .stay-details summary { padding: 11px 12px; font-size: 17px; }
 
       .chips {
         justify-content: flex-start;
@@ -2448,6 +2440,9 @@
       </div>
     </section>
 
+    <div class="fold-group" aria-label="出發前固定資訊">
+    <details class="stay-details quick-fold" id="quickNotes">
+      <summary><span>出發前重點</span><small>行李策略・親子節奏・必確認</small></summary>
     <section class="quick-notes" aria-label="旅行重點">
       <div class="quick">
         <h3>行李策略</h3>
@@ -2462,6 +2457,7 @@
         <p>藍線膠囊列車時段、飯店寄放行李、航班與推車托運；出發前量小孩身高（Luge 滿 85cm 才能共乘）。</p>
       </div>
     </section>
+    </details>
 
     <details class="stay-details" id="stayDetails">
       <summary><span>住宿與叫車地址</span><small>4 間飯店</small></summary>
@@ -2746,6 +2742,7 @@
         </div>
       </section>
     </details>
+    </div>
 
     <section class="controls" aria-label="行程類型篩選">
       <div class="chips">
@@ -4635,7 +4632,7 @@
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
             ${(() => {
-              // 一列「meta 條」：標籤、地圖、三個可展開的備案／提示都排在同一行，展開才往下長
+              // 一列「meta 條」：標籤跟地圖連結排同一行；備案／提示維持原本一列一列的呈現
               const parts = [
                 tagHtml ? `<div class="tags">${tagHtml}</div>` : "",
                 location ? `
@@ -4645,13 +4642,13 @@
                       <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">N</a>
                       <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${location.label}">K</a>
                     </div>
-                  </div>` : "",
-                renderEventAlternatives(dayId, index, event),
-                renderEventRainBackup(dayId, index),
-                renderEventScenario(dayId, index)
+                  </div>` : ""
               ].filter(Boolean);
               return parts.length ? `<div class="event-meta">${parts.join("")}</div>` : "";
             })()}
+            ${renderEventAlternatives(dayId, index, event)}
+            ${renderEventRainBackup(dayId, index)}
+            ${renderEventScenario(dayId, index)}
             ${lockerSketch}
           </div>
         </section>
