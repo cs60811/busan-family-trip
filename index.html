@@ -819,7 +819,7 @@
     }
 
     .day-head {
-      padding: 20px;
+      padding: 16px 18px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 14px;
@@ -956,21 +956,61 @@
 
     .backup-choice.selected::before { content: "✓ "; color: var(--sea-2); }
 
-    .event-alternatives {
-      margin-top: 9px;
-      border-top: 1px solid rgba(35,33,29,.16);
-      padding-top: 7px;
+    /* 事件卡下方的 meta 條：標籤、地圖、備案／提示的開關全部同一行，開啟的那個才往下展開 */
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 10px;
+      margin-top: 8px;
     }
+
+    .event-meta .tags { margin-top: 0; gap: 4px; }
+    .event-meta .event-location { margin-top: 0; gap: 6px; }
+    .event-meta .event-location .map-link { width: 26px; height: 26px; min-height: 26px; font-size: 11px; border-radius: 5px; }
+    .event-meta .event-location-label { font-size: 12px; }
+
+    .event-alternatives {
+      margin-top: 0;
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+
+    .event-alternatives[open] { flex: 1 1 100%; }
 
     .event-alternatives summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px 3px 7px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
       cursor: pointer;
       color: var(--coral);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      list-style-position: inside;
+      line-height: 1.4;
+      list-style: none;
+      background: #fffdf7;
+      transition: background .16s ease, transform .16s ease;
     }
 
-    .event-alternatives summary span { color: var(--muted); font-weight: 500; margin-left: 5px; }
+    .event-alternatives summary::-webkit-details-marker { display: none; }
+
+    .event-alternatives summary::before {
+      content: "▸";
+      font-size: 10px;
+      line-height: 1;
+      transition: transform .18s ease;
+    }
+
+    .event-alternatives[open] > summary::before { transform: rotate(90deg); }
+    .event-alternatives summary:hover { transform: translateY(-1px); }
+    .event-alternatives[open] > summary { background: #fff5e8; }
+    .event-rain-backup[open] > summary { background: #e8f0f5; }
+    .event-scenario[open] > summary { background: #f1e9f3; }
+
+    .event-alternatives summary span { color: var(--muted); font-weight: 500; margin-left: 2px; }
 
     .event-alternative-list { display: grid; gap: 6px; margin-top: 7px; }
 
@@ -1159,14 +1199,14 @@
     }
 
     .timeline {
-      padding: 18px;
+      padding: 12px 18px 14px;
     }
 
     .event {
       display: grid;
-      grid-template-columns: 82px 1fr;
-      gap: 14px;
-      padding: 13px 0;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      padding: 10px 0;
       border-bottom: 1px dashed var(--line);
       animation: rise .34s ease both;
     }
@@ -1176,10 +1216,23 @@
     .event.completed { opacity: .58; }
 
     .time {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
       font-family: var(--mono);
       color: var(--sea-2);
       font-weight: 700;
       padding-top: 2px;
+    }
+
+    /* 停留時間跟時間排在同一格：省掉右側一顆藥丸，標題列就不會被擠到換行 */
+    .time-duration {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--muted);
+      white-space: nowrap;
     }
 
     .event-title {
@@ -1199,18 +1252,8 @@
 
     .event h3 {
       margin: 0;
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.35;
-    }
-
-    .duration {
-      font-family: var(--mono);
-      font-size: 12px;
-      border: 1px solid var(--line);
-      background: var(--paper-2);
-      border-radius: 999px;
-      padding: 4px 8px;
-      white-space: nowrap;
     }
 
     .event-done {
@@ -1229,9 +1272,9 @@
 
     .note {
       color: var(--muted);
-      margin: 7px 0 0;
-      line-height: 1.55;
-      font-size: 14px;
+      margin: 4px 0 0;
+      line-height: 1.5;
+      font-size: 13.5px;
     }
 
     .event-location {
@@ -1389,10 +1432,12 @@
     }
 
     .tag {
-      font-size: 12px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .02em;
       color: #fff;
       background: var(--blue);
-      padding: 4px 7px;
+      padding: 2px 7px;
       border-radius: 999px;
     }
 
@@ -2093,31 +2138,44 @@
       }
 
       .event {
-        grid-template-columns: 64px minmax(0, 1fr);
+        grid-template-columns: 60px minmax(0, 1fr);
         gap: 10px;
-        padding: 15px 0;
+        padding: 11px 0;
       }
 
       .event > div:last-child { min-width: 0; }
 
       .time {
+        align-items: center;
+        gap: 2px;
         font-size: 12px;
         line-height: 1.2;
         text-align: center;
-        padding: 7px 4px;
+        padding: 6px 4px;
         color: #fff;
         background: var(--sea-2);
         border-radius: 4px;
         height: fit-content;
       }
 
-      .event h3 { font-size: 16px; }
+      .time-duration { color: rgba(255,255,255,.82); font-size: 10px; }
+
+      .event h3 { font-size: 15.5px; }
+
+      .day-head { padding: 14px; gap: 10px; }
+      .day-head h2 { font-size: 23px; line-height: 1.15; }
+      .day-head p { margin-top: 5px; font-size: 13px; line-height: 1.45; }
+      .sleep-badge { width: fit-content; max-width: 100%; padding: 7px 10px; font-size: 13px; line-height: 1.3; }
+      .sleep-badge-link { flex-wrap: wrap; gap: 4px 8px; }
+      .day-live { padding: 8px 10px; gap: 6px 10px; }
+      .day-live strong { font-size: 13px; }
 
       .event-title { gap: 6px; }
 
-      .event-actions { width: 100%; justify-content: flex-end; }
+      .event-actions { margin-left: auto; }
 
-      .duration { padding: 3px 6px; }
+      .event-done { min-height: 24px; padding: 2px 7px; font-size: 11px; }
+      .event-meta { gap: 5px 8px; }
 
       .day-head {
         grid-template-columns: 1fr;
@@ -4566,30 +4624,35 @@
         </details>` : "";
       return `
         <section class="event ${completed ? "completed" : ""}" style="animation-delay:${Math.min(index * 28, 280)}ms">
-          <div class="time">${time}</div>
+          <div class="time">${time}${duration ? `<small class="time-duration">${duration}</small>` : ""}</div>
           <div>
             <div class="event-title">
               <h3>${title}</h3>
               <div class="event-actions">
-                ${duration ? `<span class="duration">${duration}</span>` : ""}
                 ${weatherBadge}
                 <button class="event-done" type="button" data-event-check="${checkKey}" aria-pressed="${completed}">${completed ? "已完成" : "完成"}</button>
               </div>
             </div>
             ${note ? `<p class="note">${note}</p>` : ""}
-            ${location ? `
-              <div class="event-location">
-                <span class="event-location-label">${location.label}</span>
-                <div class="map-links">
-                  <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">N</a>
-                  <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${location.label}">K</a>
-                </div>
-              </div>` : ""}
-            ${renderEventAlternatives(dayId, index, event)}
-            ${renderEventRainBackup(dayId, index)}
-            ${renderEventScenario(dayId, index)}
+            ${(() => {
+              // 一列「meta 條」：標籤、地圖、三個可展開的備案／提示都排在同一行，展開才往下長
+              const parts = [
+                tagHtml ? `<div class="tags">${tagHtml}</div>` : "",
+                location ? `
+                  <div class="event-location">
+                    <span class="event-location-label">${location.label}</span>
+                    <div class="map-links">
+                      <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 開啟${location.label}">N</a>
+                      <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(location.query)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 開啟${location.label}">K</a>
+                    </div>
+                  </div>` : "",
+                renderEventAlternatives(dayId, index, event),
+                renderEventRainBackup(dayId, index),
+                renderEventScenario(dayId, index)
+              ].filter(Boolean);
+              return parts.length ? `<div class="event-meta">${parts.join("")}</div>` : "";
+            })()}
             ${lockerSketch}
-            ${tagHtml ? `<div class="tags">${tagHtml}</div>` : ""}
           </div>
         </section>
       `;
