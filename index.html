@@ -758,36 +758,11 @@
     }
 
     .controls {
-      display: grid;
-      grid-template-columns: minmax(220px, 1fr) auto;
+      display: flex;
+      justify-content: flex-start;
       gap: 12px;
       margin: 18px 0;
       align-items: center;
-    }
-
-    .search {
-      position: relative;
-    }
-
-    .search input {
-      width: 100%;
-      min-height: 46px;
-      border: 2px solid var(--ink);
-      border-radius: var(--radius);
-      padding: 0 14px 0 42px;
-      background: #fffdf7;
-      color: var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-
-    .search svg {
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      width: 20px;
-      height: 20px;
-      transform: translateY(-50%);
-      color: var(--muted);
     }
 
     .chips {
@@ -876,6 +851,38 @@
       white-space: nowrap;
       font-weight: 700;
     }
+
+    .sleep-badge-link {
+      font: inherit;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .sleep-badge-link:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .sleep-badge-link:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+
+    .sleep-badge-hint {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--sea-2);
+      border-left: 1px solid rgba(35,33,29,.25);
+      padding-left: 8px;
+    }
+
+    @keyframes stayFlash {
+      0% { box-shadow: 0 0 0 0 rgba(15,118,110,.55), 3px 3px 0 var(--ink); }
+      35% { box-shadow: 0 0 0 8px rgba(15,118,110,.28), 3px 3px 0 var(--ink); }
+      100% { box-shadow: 0 0 0 0 rgba(15,118,110,0), 3px 3px 0 var(--ink); }
+    }
+
+    .stay-card.stay-flash { animation: stayFlash 2.2s ease-out 1; }
 
     .day-live {
       grid-column: 1 / -1;
@@ -2256,7 +2263,7 @@
         <div class="intro">
           <span class="kicker">Busan family field guide</span>
           <h2>把釜山排成好走、好睡、好吃的一週。</h2>
-          <p>這份互動手冊把每日行程、行李寄放、交通選擇與幼童緩衝整合在同一頁。用上方日期切換，或直接搜尋景點、飯店、餐廳。</p>
+          <p>這份互動手冊把每日行程、行李寄放、交通選擇與幼童緩衝整合在同一頁。用上方日期切換，點行程標頭的「住宿」可直接跳到飯店地址。</p>
           <section class="countdown" aria-label="出發倒數">
             <div class="countdown-copy"><b id="countdownTitle">距離出發</b><span id="countdownNote">9/13 10:00 台灣時間</span></div>
             <div class="countdown-numbers">
@@ -2383,7 +2390,7 @@
       </div>
     </section>
 
-    <details class="stay-details">
+    <details class="stay-details" id="stayDetails">
       <summary><span>住宿與叫車地址</span><small>4 間飯店</small></summary>
       <section class="stay-grid" aria-label="住宿與地址">
         <div class="stay-card">
@@ -2596,11 +2603,7 @@
       </section>
     </details>
 
-    <section class="controls" aria-label="搜尋與篩選">
-      <label class="search">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 5.96-2.94l4.24 4.24-1.4 1.4-4.24-4.24A7.47 7.47 0 0 1 10.5 18Z" fill="currentColor"/></svg>
-        <input id="searchInput" type="search" placeholder="搜尋：水族館、行李、午休、釜山塔...">
-      </label>
+    <section class="controls" aria-label="行程類型篩選">
       <div class="chips">
         <button class="chip active" data-filter="all" type="button">全部</button>
         <button class="chip" data-filter="transport" type="button">交通</button>
@@ -3517,7 +3520,6 @@
 
     const tabs = document.getElementById("dayTabs");
     const panel = document.getElementById("dayPanel");
-    const searchInput = document.getElementById("searchInput");
     const backupList = document.getElementById("backupList");
     const itineraryView = document.getElementById("itineraryView");
     const passView = document.getElementById("passView");
@@ -4405,7 +4407,7 @@
             <h2>${day.title}</h2>
             <p>${day.focus}</p>
           </div>
-          <div class="sleep-badge">住宿：${day.stay}</div>
+          ${renderStayBadge(day)}
           <div class="day-live">
             <div><small>行程狀態</small><strong id="dayGuide">${getDayGuide(day)}</strong></div>
             <div class="day-badges">
@@ -4808,12 +4810,6 @@
       renderDay();
     });
 
-    searchInput.addEventListener("input", () => {
-      exitExpandedMode();
-      query = searchInput.value.trim();
-      renderDay();
-    });
-
     document.getElementById("resetChecks").addEventListener("click", () => {
       checks.forEach((_, index) => localStorage.removeItem(`busan-check-${index}`));
       renderChecklist();
@@ -4886,7 +4882,7 @@
       panel.innerHTML = days.map(day => `
         <div class="day-head">
           <div><span class="kicker">${day.label} · ${day.date}</span><h2>${day.title}</h2><p>${day.focus}</p></div>
-          <div class="sleep-badge">住宿：${day.stay}</div>
+          ${renderStayBadge(day)}
         </div>
         <div class="timeline">${day.events.map((item, eventIndex) => renderEvent(item, eventIndex, day.id)).join("")}</div>
       `).join("");
@@ -4901,11 +4897,46 @@
       if (allExpanded) setExpanded(false);
     }
 
+    // 行程標頭的「住宿」徽章：點一下跳到上方「住宿與叫車地址」對應的飯店卡片
+    function renderStayBadge(day) {
+      if (!day.stay || day.stay === "回家") return `<div class="sleep-badge">住宿：${day.stay}</div>`;
+      return `<button class="sleep-badge sleep-badge-link" type="button" data-stay-jump="${day.stay}" title="跳到這間飯店的地址與地圖">住宿：${day.stay}<span class="sleep-badge-hint">地址 ↗</span></button>`;
+    }
+
+    function normalizeStayName(text) {
+      return (text || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function jumpToStay(stayName) {
+      const details = document.getElementById("stayDetails");
+      if (!details) return;
+      const key = normalizeStayName(stayName);
+      const card = [...details.querySelectorAll(".stay-card")].find(el => {
+        const title = normalizeStayName(el.querySelector("h3")?.textContent);
+        return title && (title.startsWith(key) || key.startsWith(title));
+      });
+      details.open = true;
+      const target = card || details;
+      target.style.scrollMarginTop = `${Math.ceil(document.querySelector(".topbar").getBoundingClientRect().height + 16)}px`;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (card) {
+        card.classList.remove("stay-flash");
+        void card.offsetWidth;
+        card.classList.add("stay-flash");
+        window.setTimeout(() => card.classList.remove("stay-flash"), 2200);
+      }
+    }
+
+    panel.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-stay-jump]");
+      if (!button) return;
+      jumpToStay(button.dataset.stayJump);
+    });
+
     document.getElementById("expandAll").addEventListener("click", () => {
       if (!allExpanded) {
         activeFilter = "all";
         query = "";
-        searchInput.value = "";
         document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.toggle("active", btn.dataset.filter === "all"));
         setExpanded(true);
         renderAllDays();
