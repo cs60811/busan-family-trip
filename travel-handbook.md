@@ -462,7 +462,7 @@
 | ![](https://www.crown.co.kr/upload/system/product/34cbf559249b4dd994757fe8d16fa4d7_%E1%84%87%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%AA%E1%84%91%E1%85%B3%E1%86%AF.jpg) | CROWN | 鮮奶油鬆餅 | 크라운 생크림와플 | 이마트 사상店（官方品名是버터와플/奶油鬆餅，同一款） |
 | ![](https://img-cf.kurly.com/shop/data/goods/1626836342923z0.jpg) | Binch | 巧克力餅乾 | 롯데 빈츠 | 이마트 사상店 |
 | ![](https://product-image.kurly.com/product/image/a59a035a-bfa6-473e-a42e-27486c816b16.jpg) | Market O | 布朗尼蛋糕 | 마켓오 리얼 브라우니 | 이마트 사상店 |
-| — | LOVELY GANGJUNG | 手工江米條 | 러블리강정 강정 | LOVELY GANGJUNG 海雲台店（只有這間實體店，不是超商／超市貨）；純米糖膠製、甜度低不黏牙，常溫可放不用冷藏 |
+| ![](assets/shopping/19-lovely-gangjeong.jpg) | LOVELY GANGJUNG | 手工江米條 | 러블리강정 강정 | LOVELY GANGJUNG 海雲台店（只有這間實體店，不是超商／超市貨）；純米糖膠製、甜度低不黏牙，常溫可放不用冷藏 |
 
 **이마트 사상店**：부산광역시 사상구 광장로 17（跟 Day7「沙上附近超市／商圈採買」同一區，也離 OLIVE YOUNG 沙上分店很近）。一般零食類（農心／好麗友／樂天／CROWN）跟 No Brand 自有品牌都找得到，一次買齊。
 
