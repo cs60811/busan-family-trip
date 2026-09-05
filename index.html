@@ -1980,6 +1980,20 @@
     .stay-badge.badge-flight { background: #e3eef7; color: #1d4e73; }
     .stay-badge.badge-laundry { background: #e4f1ec; color: #1f5c4f; }
     .stay-badge.badge-laundry-service { background: #eef1ef; color: #4a5d55; border-style: dashed; }
+    .stay-badge.badge-whisky { background: #f6e9d6; color: #6b4a1e; }
+
+    .stay-lounge-note {
+      margin: 8px 0 0;
+      padding: 8px 10px;
+      border-left: 3px solid #c9a46a;
+      background: rgba(201,164,106,.1);
+      border-radius: 0 6px 6px 0;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .stay-lounge-note b { color: var(--ink); }
 
     .stay-hours {
       margin-top: 8px;
@@ -2488,10 +2502,12 @@
             <span class="stay-badge badge-booking"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>易遊網 訂房</span>
             <span class="stay-badge badge-breakfast"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><path d="M3 6.2h8v3A2.8 2.8 0 0 1 8.2 12H5.8A2.8 2.8 0 0 1 3 9.2v-3Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M11 6.8h1a1.5 1.5 0 0 1 0 3h-1" stroke="currentColor" stroke-width="1.3"/><path d="M5.6 3.4c.35.45-.35.75 0 1.3M8 3.4c.35.45-.35.75 0 1.3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>含早餐（9/16、9/17）</span>
             <span class="stay-badge badge-laundry-service" title="訂房平台列「免費洗衣服務」，但沒有自助洗衣機；要洗就 check-in 時問櫃檯怎麼送洗"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><rect x="2.5" y="2" width="11" height="12" rx="1.6" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="9" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M5 4.5h2M10.4 4.5h.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>洗衣服務（問櫃檯）</span>
+            <span class="stay-badge badge-whisky" title="官網：4F Book&Barrel Lounge 威士忌時光 19:00–23:00，威士忌／Highball／小點免費，房價已含，需成人證件，人多要等"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><path d="M4 2.5h8l-.9 8.2A2.2 2.2 0 0 1 8.9 12.6H7.1a2.2 2.2 0 0 1-2.2-1.9L4 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M4.6 7h6.8" stroke="currentColor" stroke-width="1.2"/><path d="M6 14h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>威士忌時光 19:00–23:00</span>
           </div>
           <p>2-21, Dalmaji-gil, Haeundae-gu, Busan 48099</p>
           <p class="local-address"><span>MAP / TAXI</span>부산광역시 해운대구 달맞이길 2-21</p>
           <p class="stay-hours">入住 <b>15:00 後</b>・退房 <b>11:00 前</b></p>
+          <p class="stay-lounge-note"><b>館內設施（官網 2026/9 查證）</b>：4F Book&amp;Barrel Lounge 10:00–25:00，<b>威士忌時光 19:00–23:00 免費</b>（威士忌／Highball／小點，房價已含，需成人證件，人多會等）；3F Wonder Lounge 兒童空間 09:00–20:00（8 歲以下、需大人陪同，活動採預約制、check-in 時問）；2F Casual Lounge 10:30–22:00，目前掛的是 12:00–13:00 野餐飯捲課（6 組、需預約）——<b>網路上說的「小孩免費可麗餅時間」官網現在沒列</b>，可能已換成別的活動，check-in 時直接問有沒有。</p>
           <div class="stay-actions">
             <div class="map-links">
               <a class="map-link naver" data-map="naver" aria-label="在 NAVER Map 搜尋 UH Continental CenterPoint 地址">N</a>
@@ -2997,7 +3013,7 @@
           ["16:00", "搭車回 UH Continental", "40 分", "Osiria 回海雲台，小孩常在車上先睡著", ["transport"]],
           ["16:40", "Check in / 午休補眠", "100 分", "當安靜休息時段，爸媽輪流整理行李", ["rest", "luggage"]],
           ["18:20", "海雲台附近晚餐", "90 分", "不建議再拉遠", ["food"]],
-          ["19:50", "回飯店休息", "", "UH Continental", ["rest"]]
+          ["19:50", "回飯店休息", "", "UH Continental；小孩睡了大人可輪流上 4F Book&Barrel Lounge——威士忌時光 19:00-23:00 免費（威士忌／Highball／小點，房價已含，需出示成人證件）", ["rest"]]
         ]
       },
       {
@@ -3025,7 +3041,7 @@
           ["18:20", "移動到 THE BAY 101", "20 分", "從 LCT 跨到東白島，建議計程車", ["transport"]],
           ["18:40", "THE BAY 101", "50 分", "夜景散步、拍照", []],
           ["19:30", "PURADAK CHICKEN 海雲台店 炸雞", "90 分", "晚餐 / 宵夜；海雲台站旁，營業到 24:00，THE BAY 101 過去計程車約 10 分；招牌口味偏辣，記得幫小孩點原味。小孩累了也可以直接叫外送回 UH Continental。原本排的 Outdark 海雲台沒分店，留到 Day 6 南浦店", ["food"]],
-          ["21:00", "回飯店 UH Continental", "", "休息", ["rest"]]
+          ["21:00", "回飯店 UH Continental", "", "休息；4F 威士忌時光到 23:00，最後一晚想小酌可輪流去", ["rest"]]
         ]
       },
       {

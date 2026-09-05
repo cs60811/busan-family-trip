@@ -24,6 +24,7 @@
 | 9/17-9/18 | Elmomento Songdo | 9, Deungdae-ro, Seo-gu, Busan 49263 | Agoda | 無 | 🧺 房內洗衣機（可烘） | 16:00 後／11:00 前 |
 | 9/19 | Elmomento Sasang Residence | 20, Saebyeok-ro 223beon-gil, Sasang-gu, Busan 46972（TheStayIaan） | Agoda | 無 | 🧺 房內洗衣機，不提供洗衣粉、要自備 | 16:00 後／11:00 前 |
 
+- UH Continental 館內設施（官網 2026/9 查證）：4F Book&Barrel Lounge 10:00–25:00，**威士忌時光 19:00–23:00 免費**（威士忌／Highball／小點，房價已含，需成人證件，人多會等）；3F Wonder Lounge 兒童空間 09:00–20:00（8 歲以下、需大人陪同，活動預約制）；2F Casual Lounge 10:30–22:00，目前是 12:00–13:00 野餐飯捲課（6 組、需預約）。網路上流傳的「小孩免費可麗餅時間」官網現在沒有列，可能已換活動，check-in 時直接問。
 - 洗衣策略：前 4 晚沒有自助洗衣機，9/17 起兩間 Elmomento 房內都有——衣物帶 4 天份就夠，洗衣粉自備旅行包。
 
 - 入住/退房日期以住宿平台顯示的訂單為準：Hotel Kyungsung 9/13 入住、9/15 退房；UH Continental 9/15 入住、9/17 退房；Elmomento Songdo 9/17 入住、9/19 退房；Elmomento Sasang Residence 9/19 入住、9/20 退房。四間退房時間都是 11:00 前。
@@ -149,7 +150,7 @@
 | 16:00 | 搭車回 UH Continental | 40 分 | 小孩常在車上先睡著 |
 | 16:40 | Check in / 午休補眠 | 100 分 | 當安靜休息時段，爸媽輪流整理行李 |
 | 18:20 | 海雲台附近晚餐 | 90 分 | 不建議再拉遠 |
-| 19:50 | 回飯店休息 |  | UH Continental |
+| 19:50 | 回飯店休息 |  | UH Continental；小孩睡了大人可輪流上 4F Book&Barrel Lounge——威士忌時光 19:00-23:00 免費（威士忌／Highball／小點，房價已含，需出示成人證件） |
 
 **親子提醒**：Luge 未滿 85cm 不能搭，改樂天 Outlet 或飯店休息。體力有餘可加 Museum 1（Centum City，檔期至 2026/10/11，最後入場為閉館前 1 小時）。
 
@@ -180,7 +181,7 @@
 | 18:20 | 移動到 THE BAY 101 | 20 分 | 從 LCT 跨到東白島，建議計程車 |
 | 18:40 | THE BAY 101 | 50 分 | 夜景散步、拍照 |
 | 19:30 | PURADAK CHICKEN 海雲台店 炸雞 | 90 分 | 晚餐 / 宵夜；海雲台站旁（해운대로483번길 1-7），營業到 24:00，THE BAY 101 過去計程車約 10 分；招牌口味偏辣，幫小孩點原味；可叫外送回 UH Continental。原排 Outdark 海雲台沒分店，留到 Day 6 南浦店 |
-| 21:00 | 回飯店 UH Continental |  | 休息 |
+| 21:00 | 回飯店 UH Continental |  | 休息；4F 威士忌時光到 23:00，最後一晚想小酌可輪流去 |
 
 **訂票提醒**：藍線膠囊列車只搶到清沙浦 14:00 這班（方向清沙浦→尾浦），提早 15-20 分到月台排隊才能搶到面海長椅第一排；膠囊列車不含釜山 PASS。海岸列車（尾浦-청사포-松亭）全程可用 PASS。
 
