@@ -1435,6 +1435,95 @@
       color: #45631f;
     }
 
+    .coupon-block {
+      margin: 16px 0 6px;
+      padding: 14px 16px;
+      border: 1.5px dashed var(--coral);
+      border-radius: 10px;
+      background: var(--paper-2);
+    }
+
+    .coupon-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .coupon-head h3 { margin: 2px 0 6px; font-size: 17px; }
+
+    .coupon-head p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .coupon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .coupon-card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+    }
+
+    .coupon-fit {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--coral);
+    }
+
+    .coupon-name {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .coupon-name span { font-size: 12px; color: var(--muted); }
+
+    .coupon-deal {
+      font-size: 14px;
+      font-weight: 800;
+      color: #45631f;
+    }
+
+    .coupon-card p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .coupon-card .local-address {
+      margin-top: 3px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--sea-2);
+    }
+
+    .coupon-card .map-links { margin-top: 4px; }
+
+    .coupon-more { margin-top: 12px; }
+
+    .coupon-more summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .shopping-cat-group { margin: 22px 0; }
 
     .shopping-cat-title {
@@ -2814,6 +2903,7 @@
           <h2 id="passTitle">釜山 PASS 免費景點</h2>
           <p>依你提供的 VISIT BUSAN PASS A／B 景點清單整理，點地區名稱展開查看。已排進本次行程的項目會標示「已排入」；合作內容可能調整，出發前請以官方清單為準。每個景點附簡單說明與親子注意事項；SPA／汗蒸幕、密室逃脫、跆拳道體驗、遊艇這幾類官方未明確公告幼兒年齡下限，出發前建議直接致電業者確認。</p>
           <p><strong>已選 BIG5 方案</strong>（每人 65,000 韓元，2 個紫組＋3 個藍組，啟用後 180 天有效）：紫組用在 Skyline Luge、BUSAN X the SKY；藍組用在海雲台海灘列車、松島海上纜車、釜山塔——這三個藍組單獨買票都比較貴（12,000～17,000 韓元／人），優先留給 PASS。松島龍宮雲橋（約 1,000 韓元）與太宗台다누비遊園列車（約 4,000 韓元）雖然也是 PASS 景點，但票價低，現場付現更划算，名額留給前面三個。全部單獨買票約需 194,000 韓元／2 大人，BIG5＋2 筆小額現金約 132,000 韓元，省下約 62,000 韓元。</p>
+          <p><strong>下單前先綁折價券</strong>：KTO 直飛趣韓國有一張 Visit Busan Pass 折 1,000 韓元的通享券——先在 visitbusanpass.com 註冊會員登入，到 MY PAGE → 優惠券盒輸入 email 收到的優惠券編號，再買 BIG5 結帳時就會折抵（券在「購物清單」頁的通享券區）。</p>
         </div>
         <a class="pass-link" href="https://www.visitbusanpass.com/attractions/?attrtp=free" target="_blank" rel="noreferrer">開啟官方清單 ↗</a>
       </div>
@@ -2903,7 +2993,7 @@
         <div>
           <span class="kicker">SHOPPING LIST</span>
           <h2 id="shoppingTitle">購物清單</h2>
-          <p>依類別分組。彩妝／保養／髮品<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；食品伴手禮大多在沙上的이마트可以一次買齊，CU 超商限定的兩樣（杜拜巧克力Q餅、IMINT咖啡糖）沿路任何一家 CU 都有。點每項的「哪裡買」看分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。</p>
+          <p>依類別分組。彩妝／保養／髮品<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；食品伴手禮大多在沙上的이마트可以一次買齊，CU 超商限定的兩樣（杜拜巧克力Q餅、IMINT咖啡糖）沿路任何一家 CU 都有。點每項的「哪裡買」看分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。OLIVE YOUNG 結帳滿 10 萬韓元可用下方 <span class="shopping-badge">KTO 通享券 9 折</span>（最多折 2 萬，走人工櫃檯），彩妝保養建議集中在同一家一次結。</p>
         </div>
       </div>
       <div class="side-card">
@@ -2914,6 +3004,7 @@
         <div class="progress-wrap" aria-hidden="true"><div class="progress" id="shopProgress"></div></div>
         <p class="map-note" id="shopProgressText">0 / 18 已買</p>
       </div>
+      <div class="coupon-block" id="couponBlock"></div>
       <div id="shoppingChecklist"></div>
     </section>
 
@@ -3141,6 +3232,7 @@
       "當日票券截圖",
       "釜山 PASS 訂單 QR 截圖（Day 1 機場領卡用）",
       "雨具或防曬",
+      "KTO 通享券頁面（結帳出示原網頁，不能截圖）",
       "推車或背巾"
     ];
 
@@ -3148,6 +3240,7 @@
       { id: "makeup", label: "彩妝" },
       { id: "skincare", label: "保養" },
       { id: "haircare", label: "髮品" },
+      { id: "fashion", label: "服飾／鞋" },
       { id: "food", label: "食品伴手禮" }
     ];
 
@@ -3157,7 +3250,10 @@
       nampo: { area: "南浦", name: "OLIVE YOUNG 南浦 Town", note: "2026 新開幕釜山最大旗艦店，4 層樓約 900 坪，就在 BIFF 廣場旁，商品最齊全", address: "부산광역시 중구 비프광장로 40", ig: "https://www.instagram.com/p/DcuwSb-CdR6/" },
       sasang: { area: "沙上", name: "OLIVE YOUNG 沙上 Apple Outlet 店", note: "西部巴士客運站旁 Apple Outlet 地下 1 樓，兩層規模，貨最齊全", address: "부산광역시 사상구 사상로 201" },
       emart_sasang: { area: "沙上", name: "이마트 사상店", note: "大型超市，農心／好麗友／樂天／CROWN 這類一般零食跟 No Brand 自有品牌都找得到；跟 Day7 沙上採買行程同一區", address: "부산광역시 사상구 광장로 17" },
-      lovely_gangjeong: { area: "海雲台", name: "LOVELY GANGJUNG（러블리강정）海雲台店", note: "海理團路上的粉紅色手工江米條專賣店；Day 3－4 住 UH Continental 時順路，走到海雲台站約 5 分", address: "부산광역시 해운대구 우동1로38번길 10" }
+      lovely_gangjeong: { area: "海雲台", name: "LOVELY GANGJUNG（러블리강정）海雲台店", note: "海理團路上的粉紅色手工江米條專賣店；Day 3－4 住 UH Continental 時順路，走到海雲台站約 5 分", address: "부산광역시 해운대구 우동1로38번길 10" },
+      crocs_lotte_busan: { area: "西面", name: "Crocs 樂天百貨釜山本店（5F）", note: "Day 2 下午本來就排了樂天百貨，直營櫃位可試穿；沿路三家中最早遇到，先來試尺寸，沒貨可請店員查另外兩家。電話 051-810-3593", address: "부산광역시 부산진구 가야대로 772 롯데백화점 5층" },
+      crocs_gwangbok: { area: "南浦", name: "Crocs 釜山光復店", note: "光復路上的街邊直營店，Day 6 逛國際市場／光復路時順路。電話 051-243-8885", address: "부산광역시 중구 광복로 75-1" },
+      crocs_sasang: { area: "沙上", name: "Crocs 釜山沙上 Apple Outlet 店（1F）", note: "西部巴士客運站旁 Apple Outlet 1 樓，跟 OLIVE YOUNG 沙上店同一棟，Day 7 採買時順路。電話 051-559-6319", address: "부산광역시 사상구 사상로 201 애플아울렛 1층" }
     };
 
     const allOliveYoungBranches = ["seomyeon", "haeundae", "nampo", "sasang"];
@@ -3173,6 +3269,7 @@
       { category: "skincare", brand: "SKIN1004", zh: "馬達加斯加積雪草弱酸洗面乳 125ml", ko: "스킨1004 마다가스카르 센텔라 앰플 폼 125ml", note: "pH 5 弱酸性洗面乳，含 33% 積雪草安瓶；上架올리브영後曾缺貨，看到就先拿", branches: allOliveYoungBranches, image: "assets/shopping/21-skin1004-foam.jpg" },
       { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches, image: "assets/shopping/07-unove.jpg" },
       { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches, image: "assets/shopping/08-longtake.jpg" },
+      { category: "fashion", brand: "Crocs", zh: "Miami 兩條帶涼鞋 可可奶油色（Cocoa Crème）", ko: "크록스 마이애미 투 스트랩 샌들 코코아 크림 · 209795-2PL", note: "韓國官網定價 49,900 韓元；款號 209795、色號 2PL，直接給店員看最快。沿路三家直營店都在行程順路上，Day 2 樂天百貨先試尺寸", branches: ["crocs_lotte_busan", "crocs_gwangbok", "crocs_sasang"], image: "assets/shopping/22-crocs-miami.jpg" },
       { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店", image: "assets/shopping/09-cu-dubai.jpg" },
       { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣", image: "assets/shopping/10-imint.jpg" },
       { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"], image: "assets/shopping/11-nongshim.jpg" },
@@ -3185,6 +3282,27 @@
       { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"], image: "assets/shopping/18-marketo.jpg" },
       { category: "food", brand: "LOVELY GANGJUNG", zh: "手工江米條", ko: "러블리강정 강정", note: "釜山在地 10 年以上的手工甜點店，純米糖膠製、甜度低不黏牙；常溫可放不用冷藏，適合帶回台灣當伴手禮；只有海雲台這間實體店，不是超商／超市貨", branches: ["lovely_gangjeong"], image: "assets/shopping/19-lovely-gangjeong.jpg", ig: "https://www.instagram.com/reel/DcvYVLFpy5d/" }
     ];
+
+    const ktoCoupons = {
+      page: "https://zhifeiquhanguo.com/cht/region/1/my-applications/1?uuid=97a659a9-8718-4ed4-b8bc-828ef9b89fbf&name=%E9%87%9C%E5%B1%B1+%EB%B6%80%EC%82%B0",
+      valid: "2026/05/01 ~ 2026/12/31",
+      items: [
+        { fit: "購物清單所有彩妝／保養／髮品", name: "OLIVE YOUNG", ko: "올리브영 할인권", deal: "滿 10 萬韓元打 9 折（最多折 2 萬）", how: "全韓國門市可用；不能用自助結帳機，走人工櫃檯，請店員先掃頂部條碼再掃底部條碼。每家分店只能用 1 次，所以把彩妝保養集中在一家一次結", priority: true },
+        { fit: "出發前線上買 PASS 時", name: "Visit Busan Pass", ko: "비짓부산패스 1,000원 할인권", deal: "折 1,000 韓元", how: "在 visitbusanpass.com 官網／App 註冊會員並登入 → MY PAGE → 優惠券盒 → 輸入 email 收到的「優惠券編號」綁定 → 結帳時折抵。要在下單 BIG5 之前先做", priority: true },
+        { fit: "Day 4 青沙浦（13:00 前後）", name: "Busan Super 青沙浦店", ko: "부산슈퍼 청사포점", deal: "自製週邊 85 折；同時出示 PASS 卡 8 折", how: "只折 Busan Super 自製週邊（感溫變色燒酒杯 10,000、鑰匙圈 5,000、釜山方言鑰匙圈組 12,000、明信片 2,000）", hours: "每日 10:00–18:00", address: "부산광역시 해운대구 청사포로 120 2층", priority: true },
+        { fit: "Day 3–4 住 UH Continental（達맞이길走路可到）", name: "非非非堂 傳統茶館", ko: "비비비당", deal: "餐點 85 折", how: "海景韓式茶館，4 樓；青少年以上每人低消一份（2 歲小孩不算）。推薦茶 10,000、季節花茶 10,000 韓元起", hours: "平日 10:30–21:30、週末 10:00–22:00", address: "부산광역시 해운대구 달맞이길 239-16 4층", priority: true },
+        { fit: "Day 4 晚上海雲台站附近", name: "愛茉莉釜山店（AMORE 釜山）", ko: "아모레 부산", deal: "消費 9 折＋送本月試用包", how: "愛茉莉太平洋旗下品牌（雪花秀／蘭芝／悅詩風吟等）的複合店，跟 PURADAK 同在海雲台站商圈", hours: "週二–日 11:00–22:00，週一公休（Day 4 是週三）", address: "부산광역시 해운대구 구남로 36 1층", priority: true },
+        { fit: "Day 5 影島（太宗台來回路上）", name: "B.elle 咖啡廳", ko: "카페 비엘르", deal: "折 1,000 韓元", how: "絕影海岸散步路旁的咖啡廳，每人低消一杯；美式 5,500、香草奶油拿鐵 6,800 韓元", hours: "平日 10:00–20:00、週末 09:00–20:00", address: "부산광역시 영도구 절영로 202-2", priority: true },
+        { fit: "Day 6 南浦（國際市場旁，下雨可改這裡）", name: "追憶寶物島 復古體驗館", ko: "추억보물섬", deal: "入場折 1,000 韓元", how: "3 樓室內；成人 5,000、36 個月以上小孩 2,500，2 歲免費。門票含懷舊校服體驗＋2 個懷舊零食＋黑白貼紙照 2 張，小孩放電剛好", hours: "平日 11:00–20:00、週末 11:00–21:00（不定休看 IG）", address: "부산광역시 중구 중구로23번길 9 3층", priority: true },
+        { fit: "Day 6 南浦（中央站附近，早上就開）", name: "聯涇齋 精品咖啡烘焙坊", ko: "카페 연경재", deal: "折 1,000 韓元", how: "每人低消一杯；美式 5,500、抹茶拿鐵 7,500、全天候早午餐盤 12,000 韓元", hours: "週一–六 08:30–21:30、週日 08:30–20:00", address: "부산광역시 중구 중앙대로29번길 6", priority: true },
+        { fit: "海雲台 · 帶 2 歲不太適合", name: "Hill Spa 24 小時海景汗蒸幕", ko: "힐스파", deal: "24 小時券＋行李寄存＋足浴劑＋面膜＋搓澡巾 25,000 韓元", how: "單次入場、出場不能再進；00:00–06:00 浴池清潔不能用", hours: "24 小時", address: "부산광역시 해운대구 달맞이길117번길 11" },
+        { fit: "海雲台 · 需一天前預約", name: "BRANME 個人色彩鑑定", ko: "브랜미 부산해운대점", deal: "2 人以上預約 85 折", how: "個人色彩分析 110,000 韓元起，須付訂金", hours: "平日 11:00–19:00、週末 11:00–18:00", address: "부산광역시 해운대구 해운대로 620 314호" },
+        { fit: "海雲台 · 需 IG 預約", name: "Firstlight 明星彩妝沙龍", ko: "퍼스트라이트", deal: "折 2,000 韓元＋送人生四格拍照", how: "彩妝造型 150,000 韓元起，60–90 分鐘", hours: "每日 10:00–20:00", address: "부산광역시 해운대구 양운로42번길 18 A1WAY 305호" },
+        { fit: "海雲台 · 需 24 小時前預約", name: "Dotnote 香水 DIY", ko: "닷노트 해운대", deal: "折 1,000 韓元", how: "一日課程 49,000 韓元起", hours: "每日 10:00–23:00", address: "부산광역시 해운대구 해운대해변로298번길 24 2층" },
+        { fit: "廣安里 · 不在行程上，需 IG 預約", name: "GOLDSTAR STUDIO 自助寫真", ko: "금빛사진관", deal: "折 1,000 韓元", how: "基礎方案 50,000 韓元（1–2 人）", hours: "11:00–18:00，週四休", address: "부산광역시 수영구 광남로48번길 5 4층" },
+        { fit: "廣安里／釜山站 · 不在行程上", name: "Jin 豬肉湯飯（米其林）", ko: "진돼지곰탕", deal: "折 1,000 韓元", how: "廣安本店與釜山站直營店都可用；豬骨湯 13,000 韓元", hours: "09:30–21:00", address: "부산광역시 수영구 광안해변로284번길 4 2층 201호" }
+      ]
+    };
 
     const tagNames = {
       transport: "交通",
@@ -3464,6 +3582,7 @@
       { category: "indoor", name: "SEA LIFE 釜山水族館", region: "海雲台", note: "幼童友善的雨天主力備案；本次行程 Day 4 改去松亭，改列為備案", alternative: "行程卡可選備案", time: 120, timeSource: "confirmed" },
       { category: "indoor", name: "BUSAN X the SKY", region: "海雲台", note: "傍晚接夜景的室內觀景點", scheduled: "Day 4", time: 80, timeSource: "confirmed" },
       { category: "indoor", name: "釜山電影體驗博物館", region: "南浦／舊城區", note: "互動式電影體驗，南浦下雨時可直接替換逛街", alternative: "可替換 Day 6 雨天", time: 90, timeSource: "estimate" },
+      { category: "indoor", name: "追憶寶物島 復古體驗館（추억보물섬）", region: "南浦", note: "國際市場旁 3 樓的復古校服／懷舊零食體驗館；成人 5,000、36 個月以上 2,500，2 歲免費，門票含校服體驗＋2 個懷舊零食＋黑白貼紙照 2 張。KTO 通享券折 1,000；平日 11:00–20:00、週末到 21:00，不定休看 IG", alternative: "Day 6 逛國際市場遇雨或小孩要放電時改來", time: 40, timeSource: "estimate" },
       { category: "indoor", name: "國立海洋博物館", region: "影島", note: "海洋主題常設展＋兒童體驗空間，適合放慢腳步；4D 影像廳未滿 4 歲不可入場，跳過即可", alternative: "行程卡可選備案", time: 100, timeSource: "estimate" },
       { category: "indoor", name: "國立釜山科學館", region: "機張", note: "適合親子；若 Luge 不適合或下雨可改這裡", alternative: "可替換 Day 3 雨天", time: 90, timeSource: "estimate" },
       { category: "indoor", name: "Arte Museum 釜山", region: "影島", note: "沉浸式展覽；可和影島／南浦行程擇一搭配", alternative: "可替換 Day 6 下午", time: 75, timeSource: "estimate" },
@@ -3635,6 +3754,7 @@
       "SEA LIFE 釜山水族館": "부산광역시 해운대구 해운대해변로 266",
       "BUSAN X the SKY": "부산광역시 해운대구 달맞이길 30",
       "釜山電影體驗博物館": "부산광역시 중구 대청로126번길 12",
+      "追憶寶物島 復古體驗館（추억보물섬）": "부산광역시 중구 중구로23번길 9 3층",
       "國立海洋博物館": "부산광역시 영도구 해양로301번길 45",
       "國立釜山科學館": "부산광역시 기장군 기장읍 동부산관광6로 59",
       "Arte Museum 釜山": "부산광역시 영도구 해양로247번길 29",
@@ -4499,7 +4619,8 @@
       "d5-4": { name: "國立海洋博物館", note: "影島室內親子展覽，跟太宗台同一區，順路好接" },
       "d6-1": { name: "釜山電影體驗博物館", note: "南浦室內互動館；沙灘挖沙下雨可改這裡" },
       "d6-2": { name: "釜山電影體驗博物館", note: "南浦室內互動館；纜車強風雷雨停駛時可改這裡" },
-      "d6-3": { name: "釜山電影體驗博物館", note: "南浦室內互動館；雲橋濕滑下雨可改這裡" }
+      "d6-3": { name: "釜山電影體驗博物館", note: "南浦室內互動館；雲橋濕滑下雨可改這裡" },
+      "d6-5": { name: "追憶寶物島 復古體驗館（추억보물섬）", note: "國際市場旁 3 樓室內；下雨或小孩要放電改來這裡，2 歲免費，KTO 通享券折 1,000" }
     };
 
     function renderEventRainBackup(dayId, index) {
@@ -4747,7 +4868,49 @@
       `;
     }
 
+    function renderCouponCard(c) {
+      const mapLinks = c.address ? `
+        <p class="local-address"><span>MAP / TAXI</span>${c.address}</p>
+        <div class="map-links">
+          <a class="map-link naver" href="https://map.naver.com/p/search/${encodeURIComponent(c.address)}" target="_blank" rel="noreferrer" aria-label="在 NAVER Map 搜尋 ${c.name}">N</a>
+          <a class="map-link kakao" href="https://map.kakao.com/link/search/${encodeURIComponent(c.address)}" target="_blank" rel="noreferrer" aria-label="在 KakaoMap 搜尋 ${c.name}">K</a>
+        </div>` : "";
+      return `
+        <article class="coupon-card">
+          <div class="coupon-fit">${c.fit}</div>
+          <div class="coupon-name"><strong>${c.name}</strong><span lang="ko">${c.ko}</span></div>
+          <div class="coupon-deal">${c.deal}</div>
+          <p>${c.how}</p>
+          ${c.hours ? `<p class="coupon-hours">營業：${c.hours}</p>` : ""}
+          ${mapLinks}
+        </article>
+      `;
+    }
+
+    function renderKtoCoupons() {
+      const box = document.getElementById("couponBlock");
+      if (!box) return;
+      const main = ktoCoupons.items.filter(c => c.priority);
+      const rest = ktoCoupons.items.filter(c => !c.priority);
+      box.innerHTML = `
+        <div class="coupon-head">
+          <div>
+            <span class="kicker">KTO · 直飛趣韓國</span>
+            <h3>外國人專用通享券（已領 ${ktoCoupons.items.length} 張）</h3>
+            <p>韓國觀光公社發的外國人折價券，效期 ${ktoCoupons.valid}。結帳時<strong>打開原網頁給店員看</strong>（禁止截圖／翻拍），每家店只能用 1 次；數量有限、先結帳先折，用完不另行通知。下面 ${main.length} 張跟這趟行程對得上，其餘收在最後。</p>
+          </div>
+          <a class="pass-link" href="${ktoCoupons.page}" target="_blank" rel="noreferrer">開啟我的優惠券頁 ↗</a>
+        </div>
+        <div class="coupon-grid">${main.map(renderCouponCard).join("")}</div>
+        <details class="coupon-more">
+          <summary>其他 ${rest.length} 張（不在行程上或帶小孩不適合）</summary>
+          <div class="coupon-grid">${rest.map(renderCouponCard).join("")}</div>
+        </details>
+      `;
+    }
+
     function renderShoppingList() {
+      renderKtoCoupons();
       const box = document.getElementById("shoppingChecklist");
       const indexed = shoppingList.map((item, index) => ({ item, index }));
       box.innerHTML = shoppingCategories.map(cat => {

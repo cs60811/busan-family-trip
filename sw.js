@@ -1,5 +1,5 @@
 // 更新 index.html 內容後，請把版本號 +1，離線快取才會換新。
-const CACHE_VERSION = "busan-handbook-v66";
+const CACHE_VERSION = "busan-handbook-v67";
 
 const PRECACHE_URLS = [
   "./",
@@ -29,7 +29,8 @@ const PRECACHE_URLS = [
   "assets/shopping/18-marketo.jpg",
   "assets/shopping/19-lovely-gangjeong.jpg",
   "assets/shopping/20-biodance-pdrn.jpg",
-  "assets/shopping/21-skin1004-foam.jpg"
+  "assets/shopping/21-skin1004-foam.jpg",
+  "assets/shopping/22-crocs-miami.jpg"
 ];
 
 self.addEventListener("install", event => {
