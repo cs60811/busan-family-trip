@@ -457,6 +457,8 @@
 | ![](https://mediheal.com/cdn/shop/files/thumbnail_The-N.M.F-Ampoule-Mask_shadow_2.png?v=1787242462) | 保養 | MEDIHEAL | N.M.F面膜 | 메디힐 더 엔엠에프 앰플 마스크 | |
 | ![](https://cdn-image.oliveyoung.com/prdtImg/1321/8e95c097-fd6a-4a4f-a1a4-1f07f18828b4.jpg?RS=1500x1500&AR=0&SF=webp&QT=80) | 保養 | Torriden | 玻尿酸精華 | 토리든 다이브인 세럼 | 올리브영長銷冠軍款，累積賣破 1300 萬瓶 |
 | ![](https://cfront.isoi.co.kr/com/common/main/m_01serum_260303.jpg) | 保養 | ISOI | 保加利亞玫瑰護理精華 | 이소이 불가리안 로즈 블레미쉬 케어 세럼 | |
+| ![](assets/shopping/20-biodance-pdrn.jpg) | 保養 | Biodance | 魚子精華 PDRN 深層煥活面膜（4 片） | 바이오던스 캐비어 PDRN 리얼 딥 마스크 4매 | 2026 新品，올리브영獨家先上市；34g×4 片，同系列多種口味，認盒上 CAVIAR + PDRN 字樣 |
+| ![](assets/shopping/21-skin1004-foam.jpg) | 保養 | SKIN1004 | 馬達加斯加積雪草弱酸洗面乳 125ml | 스킨1004 마다가스카르 센텔라 앰플 폼 125ml | pH 5 弱酸性，含 33% 積雪草安瓶；上架올리브영後曾缺貨，看到就先拿 |
 | ![](https://cdn-image.oliveyoung.com/prdtImg/1449/62d16f37-7f7d-4390-bfb8-ae4f57ace622.jpg) | 髮品 | UNOVE | 深層受損修護髮膜 | 어노브 딥 데미지 리페어 헤어 마스크 | 連續 4 年올리브영髮膜銷售冠軍 |
 | ![](https://cdn-image.oliveyoung.com/prdtImg/1748/0122e4f8-86b1-49b6-978e-88a6da54d4f1.png) | 髮品 | Longtake | 檀香強效護髮油 | 롱테이크 샌달우드 인텐시브 헤어오일 | |
 
