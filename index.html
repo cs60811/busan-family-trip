@@ -1524,6 +1524,31 @@
       font-weight: 700;
     }
 
+    .shopping-price {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 2px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sea-2);
+    }
+
+    .shopping-price small {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .shop-budget {
+      margin-top: 6px;
+      font-weight: 700;
+      color: var(--sea-2);
+    }
+
     .shopping-cat-group { margin: 22px 0; }
 
     .shopping-cat-title {
@@ -2993,7 +3018,7 @@
         <div>
           <span class="kicker">SHOPPING LIST</span>
           <h2 id="shoppingTitle">購物清單</h2>
-          <p>依類別分組。彩妝／保養／髮品<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；食品伴手禮大多在沙上的이마트可以一次買齊，CU 超商限定的兩樣（杜拜巧克力Q餅、IMINT咖啡糖）沿路任何一家 CU 都有。點每項的「哪裡買」看分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。OLIVE YOUNG 結帳滿 10 萬韓元可用下方 <span class="shopping-badge">KTO 通享券 9 折</span>（最多折 2 萬，走人工櫃檯），彩妝保養建議集中在同一家一次結。</p>
+          <p>依類別分組。彩妝／保養／髮品<span class="shopping-badge">全部在 OLIVE YOUNG 買得到</span>；食品伴手禮大多在沙上的이마트可以一次買齊，CU 超商限定的兩樣（杜拜巧克力Q餅、IMINT咖啡糖）沿路任何一家 CU 都有。點每項的「哪裡買」看分店地址與地圖連結——Fwee／Torriden／UNOVE／Longtake 這類小眾品牌已只列規模較大的分店，貨比較齊。OLIVE YOUNG 結帳滿 10 萬韓元可用下方 <span class="shopping-badge">KTO 通享券 9 折</span>（最多折 2 萬，走人工櫃檯），彩妝保養建議集中在同一家一次結。每項的「參考價」是 2026/9 用 Olive Young／이마트／CU 網路標價抓的區間，現場常有折扣或組合企劃，只當預算參考；標「估算」的兩項沒查到確切售價。</p>
         </div>
       </div>
       <div class="side-card">
@@ -3003,6 +3028,7 @@
         </div>
         <div class="progress-wrap" aria-hidden="true"><div class="progress" id="shopProgress"></div></div>
         <p class="map-note" id="shopProgressText">0 / 18 已買</p>
+        <p class="map-note shop-budget" id="shopBudget"></p>
       </div>
       <div class="coupon-block" id="couponBlock"></div>
       <div id="shoppingChecklist"></div>
@@ -3259,28 +3285,28 @@
     const allOliveYoungBranches = ["seomyeon", "haeundae", "nampo", "sasang"];
 
     const shoppingList = [
-      { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트", branches: allOliveYoungBranches, image: "assets/shopping/01-banila-co.jpg" },
-      { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名", branches: allOliveYoungBranches, image: "assets/shopping/02-fwee.jpg" },
-      { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드", branches: allOliveYoungBranches, image: "assets/shopping/03-mediheal-pad.jpg" },
-      { category: "skincare", brand: "MEDIHEAL", zh: "N.M.F面膜", ko: "메디힐 더 엔엠에프 앰플 마스크", branches: allOliveYoungBranches, image: "assets/shopping/04-mediheal-nmf.jpg" },
-      { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶", branches: allOliveYoungBranches, image: "assets/shopping/05-torriden.jpg" },
-      { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼", branches: allOliveYoungBranches, image: "assets/shopping/06-isoi.jpg" },
-      { category: "skincare", brand: "Biodance", zh: "魚子精華 PDRN 深層煥活面膜（4 片）", ko: "바이오던스 캐비어 PDRN 리얼 딥 마스크 4매", note: "Biodance 2026 新品，올리브영獨家先上市；34g×4 片，同系列還有膠原蛋白／PDRN 等口味，注意盒上要有 CAVIAR + PDRN 字樣", branches: allOliveYoungBranches, image: "assets/shopping/20-biodance-pdrn.jpg" },
-      { category: "skincare", brand: "SKIN1004", zh: "馬達加斯加積雪草弱酸洗面乳 125ml", ko: "스킨1004 마다가스카르 센텔라 앰플 폼 125ml", note: "pH 5 弱酸性洗面乳，含 33% 積雪草安瓶；上架올리브영後曾缺貨，看到就先拿", branches: allOliveYoungBranches, image: "assets/shopping/21-skin1004-foam.jpg" },
-      { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches, image: "assets/shopping/07-unove.jpg" },
-      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches, image: "assets/shopping/08-longtake.jpg" },
-      { category: "fashion", brand: "Crocs", zh: "Miami 兩條帶涼鞋 可可奶油色（Cocoa Crème）", ko: "크록스 마이애미 투 스트랩 샌들 코코아 크림 · 209795-2PL", note: "韓國官網定價 49,900 韓元；款號 209795、色號 2PL，直接給店員看最快。沿路三家直營店都在行程順路上，Day 2 樂天百貨先試尺寸", branches: ["crocs_lotte_busan", "crocs_gwangbok", "crocs_sasang"], image: "assets/shopping/22-crocs-miami.jpg" },
-      { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店", image: "assets/shopping/09-cu-dubai.jpg" },
-      { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣", image: "assets/shopping/10-imint.jpg" },
-      { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"], image: "assets/shopping/11-nongshim.jpg" },
-      { category: "food", brand: "好麗友", zh: "陽光波浪玉米脆片", ko: "오리온 태양의 맛 썬", note: "現在架上常見的是辣味版，原味單獨包裝的版本較少見，現場找不到可請店員確認", branches: ["emart_sasang"], image: "assets/shopping/12-orion-sun.jpg" },
-      { category: "food", brand: "好麗友", zh: "生洋芋片", ko: "오리온 포카칩", branches: ["emart_sasang"], image: "assets/shopping/13-orion-potato.jpg" },
-      { category: "food", brand: "No Brand", zh: "紫薯洋芋片", ko: "노브랜드 자색고구마칩", note: "이마트自有品牌，只有이마트／No Brand賣，一般超商買不到", branches: ["emart_sasang"], image: "assets/shopping/14-nobrand.jpg" },
-      { category: "food", brand: "好麗友", zh: "鯛魚燒蛋糕", ko: "오리온 참붕어빵", branches: ["emart_sasang"], image: "assets/shopping/15-orion-taiyaki.jpg" },
-      { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", note: "CROWN官方品名是「버터와플」（奶油鬆餅），常俗稱생크림와플，是同一款", branches: ["emart_sasang"], image: "assets/shopping/16-crown.jpg" },
-      { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"], image: "assets/shopping/17-binch.jpg" },
-      { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"], image: "assets/shopping/18-marketo.jpg" },
-      { category: "food", brand: "LOVELY GANGJUNG", zh: "手工江米條", ko: "러블리강정 강정", note: "釜山在地 10 年以上的手工甜點店，純米糖膠製、甜度低不黏牙；常溫可放不用冷藏，適合帶回台灣當伴手禮；只有海雲台這間實體店，不是超商／超市貨", branches: ["lovely_gangjeong"], image: "assets/shopping/19-lovely-gangjeong.jpg", ig: "https://www.instagram.com/reel/DcvYVLFpy5d/" }
+      { category: "makeup", brand: "BANILA CO", zh: "控油定妝蜜粉餅", ko: "바닐라코 프라임 프라이머 피니쉬 파우더 팩트", branches: allOliveYoungBranches, price: [21000, 26000], priceNote: "定價 22,000～26,000，Olive Young 常打到約 20,600", image: "assets/shopping/01-banila-co.jpg" },
+      { category: "makeup", brand: "Fwee", zh: "唇頰兩用布丁膏", ko: "퓌 립앤치크 블러리 푸딩팟", note: "2025 올리브영 어워즈 컨투어링部門第一名", branches: allOliveYoungBranches, price: [15000, 22000], priceNote: "定價 22,000，Olive Young 常態 7 折約 15,300～16,500", image: "assets/shopping/02-fwee.jpg" },
+      { category: "skincare", brand: "MEDIHEAL", zh: "集中護理舒緩棉片", ko: "메디힐 마데카소사이드 패드", branches: allOliveYoungBranches, price: [20000, 25000], priceNote: "100 片裝；線上約 20,000，Olive Young 依活動", image: "assets/shopping/03-mediheal-pad.jpg" },
+      { category: "skincare", brand: "MEDIHEAL", zh: "N.M.F面膜", ko: "메디힐 더 엔엠에프 앰플 마스크", branches: allOliveYoungBranches, price: [18000, 25000], priceNote: "10 片裝；歷史低價 18,000", image: "assets/shopping/04-mediheal-nmf.jpg" },
+      { category: "skincare", brand: "Torriden", zh: "玻尿酸精華", ko: "토리든 다이브인 세럼", note: "올리브영長銷冠軍款，累積賣破 1300 萬瓶", branches: allOliveYoungBranches, price: [22000, 25500], priceNote: "50ml 定價 25,500，Olive Young 企劃組約 22,000", image: "assets/shopping/05-torriden.jpg" },
+      { category: "skincare", brand: "ISOI", zh: "保加利亞玫瑰護理精華", ko: "이소이 불가리안 로즈 블레미쉬 케어 세럼", branches: allOliveYoungBranches, price: [37000, 49000], priceNote: "35ml 定價 49,000，官網折後約 36,750", image: "assets/shopping/06-isoi.jpg" },
+      { category: "skincare", brand: "Biodance", zh: "魚子精華 PDRN 深層煥活面膜（4 片）", ko: "바이오던스 캐비어 PDRN 리얼 딥 마스크 4매", note: "Biodance 2026 新品，올리브영獨家先上市；34g×4 片，同系列還有膠原蛋白／PDRN 等口味，注意盒上要有 CAVIAR + PDRN 字樣", branches: allOliveYoungBranches, price: [26000, 30000], priceNote: "估算：新品未查到單價；16 片裝定價 80,000，海外售價約 US$25", image: "assets/shopping/20-biodance-pdrn.jpg" },
+      { category: "skincare", brand: "SKIN1004", zh: "馬達加斯加積雪草弱酸洗面乳 125ml", ko: "스킨1004 마다가스카르 센텔라 앰플 폼 125ml", note: "pH 5 弱酸性洗面乳，含 33% 積雪草安瓶；上架올리브영後曾缺貨，看到就先拿", branches: allOliveYoungBranches, price: [12000, 17000], priceNote: "定價 17,000，常見折後約 12,000", image: "assets/shopping/21-skin1004-foam.jpg" },
+      { category: "haircare", brand: "UNOVE", zh: "深層受損修護髮膜", ko: "어노브 딥 데미지 리페어 헤어 마스크", note: "連續 4 年올리브영髮膜銷售冠軍", branches: allOliveYoungBranches, price: [30000, 42000], priceNote: "320ml 定價 42,000，Olive Young 常打到 29,800", image: "assets/shopping/07-unove.jpg" },
+      { category: "haircare", brand: "Longtake", zh: "檀香強效護髮油", ko: "롱테이크 샌달우드 인텐시브 헤어오일", branches: allOliveYoungBranches, price: [20000, 24000], priceNote: "40ml 定價 24,000，折後約 19,950～21,000", image: "assets/shopping/08-longtake.jpg" },
+      { category: "fashion", brand: "Crocs", zh: "Miami 兩條帶涼鞋 可可奶油色（Cocoa Crème）", ko: "크록스 마이애미 투 스트랩 샌들 코코아 크림 · 209795-2PL", note: "韓國官網定價 49,900 韓元；款號 209795、色號 2PL，直接給店員看最快。沿路三家直營店都在行程順路上，Day 2 樂天百貨先試尺寸", branches: ["crocs_lotte_busan", "crocs_gwangbok", "crocs_sasang"], price: [49900, 49900], priceNote: "韓國官網定價", image: "assets/shopping/22-crocs-miami.jpg" },
+      { category: "food", brand: "CU", zh: "杜拜巧克力Q餅", ko: "두바이 쫀득 찹쌀떡", note: "CU 超商限定新品（2025/10 上市後常缺貨，供不應求，看到建議先買）；沿路任何一家 CU 都有賣，不用特別找特定分店", price: [3500, 3500], priceNote: "2026/1 漲價後 CU 售價（原 3,100）", image: "assets/shopping/09-cu-dubai.jpg" },
+      { category: "food", brand: "IMINT", zh: "咖啡糖", ko: "아이민트 에스프레소 자일리톨 커피캔디", note: "CU 超商限定，咖啡豆造型糖，含木糖醇；沿路任何一家 CU 都有賣", price: [2000, 2500], priceNote: "估算：CU 架上價；網路轉售價偏高不參考", image: "assets/shopping/10-imint.jpg" },
+      { category: "food", brand: "農心", zh: "蝦味條 黑松露風味", ko: "농심 새우깡 블랙", branches: ["emart_sasang"], price: [2000, 2000], priceNote: "72g 一包", image: "assets/shopping/11-nongshim.jpg" },
+      { category: "food", brand: "好麗友", zh: "陽光波浪玉米脆片", ko: "오리온 태양의 맛 썬", note: "現在架上常見的是辣味版，原味單獨包裝的版本較少見，現場找不到可請店員確認", branches: ["emart_sasang"], price: [1900, 2500], priceNote: "135g；線上最低約 1,910", image: "assets/shopping/12-orion-sun.jpg" },
+      { category: "food", brand: "好麗友", zh: "生洋芋片", ko: "오리온 포카칩", branches: ["emart_sasang"], price: [1300, 1700], priceNote: "66g 一包", image: "assets/shopping/13-orion-potato.jpg" },
+      { category: "food", brand: "No Brand", zh: "紫薯洋芋片", ko: "노브랜드 자색고구마칩", note: "이마트自有品牌，只有이마트／No Brand賣，一般超商買不到", branches: ["emart_sasang"], price: [1500, 1500], priceNote: "160g，이마트 售價 1,480", image: "assets/shopping/14-nobrand.jpg" },
+      { category: "food", brand: "好麗友", zh: "鯛魚燒蛋糕", ko: "오리온 참붕어빵", branches: ["emart_sasang"], price: [4600, 7000], priceNote: "8 入 232g 約 4,640；12 入 約 6,980", image: "assets/shopping/15-orion-taiyaki.jpg" },
+      { category: "food", brand: "CROWN", zh: "鮮奶油鬆餅", ko: "크라운 생크림와플", note: "CROWN官方品名是「버터와플」（奶油鬆餅），常俗稱생크림와플，是同一款", branches: ["emart_sasang"], price: [4100, 4600], priceNote: "316g 12 入；이마트 約 4,074、樂天 4,580", image: "assets/shopping/16-crown.jpg" },
+      { category: "food", brand: "Binch", zh: "巧克力餅乾", ko: "롯데 빈츠", branches: ["emart_sasang"], price: [5300, 5300], priceNote: "204g；이마트 約 5,280", image: "assets/shopping/17-binch.jpg" },
+      { category: "food", brand: "Market O", zh: "布朗尼蛋糕", ko: "마켓오 리얼 브라우니", branches: ["emart_sasang"], price: [4300, 4300], priceNote: "12 入 240g；6 入約 2,640", image: "assets/shopping/18-marketo.jpg" },
+      { category: "food", brand: "LOVELY GANGJUNG", zh: "手工江米條", ko: "러블리강정 강정", note: "釜山在地 10 年以上的手工甜點店，純米糖膠製、甜度低不黏牙；常溫可放不用冷藏，適合帶回台灣當伴手禮；只有海雲台這間實體店，不是超商／超市貨", branches: ["lovely_gangjeong"], price: [6500, 11000], priceNote: "線上 idus 價：오란다 6,500、禮盒 11,000；門市可能略有出入", image: "assets/shopping/19-lovely-gangjeong.jpg", ig: "https://www.instagram.com/reel/DcvYVLFpy5d/" }
     ];
 
     const ktoCoupons = {
@@ -4850,6 +4876,7 @@
                   <div class="shopping-item-head"><span class="shopping-brand">${item.brand}</span></div>
                   <div>${item.zh}</div>
                   <div class="shopping-ko" lang="ko">${item.ko}</div>
+                  ${item.price ? `<div class="shopping-price" title="${item.priceNote || ""}">參考價 ${formatPriceRange(item.price)}${item.priceNote ? `<small>${item.priceNote}</small>` : ""}</div>` : ""}
                   ${item.note ? `<div class="shopping-note">${item.note}</div>` : ""}
                   ${item.ig ? `<a class="shopping-ig" href="${item.ig}" target="_blank" rel="noreferrer">IG 介紹 ↗</a>` : ""}
                 </div>
@@ -4866,6 +4893,20 @@
           ` : ""}
         </div>
       `;
+    }
+
+    function formatPriceRange([lo, hi]) {
+      const won = n => `₩${n.toLocaleString("en-US")}`;
+      return lo === hi ? won(lo) : `${won(lo)}～${won(hi)}`;
+    }
+
+    function renderShoppingBudget() {
+      const el = document.getElementById("shopBudget");
+      if (!el) return;
+      const priced = shoppingList.filter(item => Array.isArray(item.price));
+      const lo = priced.reduce((sum, item) => sum + item.price[0], 0);
+      const hi = priced.reduce((sum, item) => sum + item.price[1], 0);
+      el.textContent = `全部買齊各 1 份約 ${formatPriceRange([lo, hi])}（${priced.length} 項，2026/9 網路查價，未含 Olive Young 滿 10 萬 9 折）`;
     }
 
     function renderCouponCard(c) {
@@ -4911,6 +4952,7 @@
 
     function renderShoppingList() {
       renderKtoCoupons();
+      renderShoppingBudget();
       const box = document.getElementById("shoppingChecklist");
       const indexed = shoppingList.map((item, index) => ({ item, index }));
       box.innerHTML = shoppingCategories.map(cat => {
