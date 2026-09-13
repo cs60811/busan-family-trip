@@ -5056,6 +5056,44 @@
       });
     }
 
+    // 手機上直接開 NAVER Map App：桌機版網址 map.naver.com/p/search 在手機只會開網頁，
+    // 所以 iOS 走 nmap:// scheme、Android 走 intent（沒裝 App 會導去 Play 商店），桌機維持網頁連結。
+    const NAVER_APP_NAME = "https://cs60811.github.io/busan-family-trip/";
+    function naverPlatform() {
+      const ua = navigator.userAgent || "";
+      if (/iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) return "ios";
+      if (/Android/i.test(ua)) return "android";
+      return "desktop";
+    }
+    function buildNaverAppLink(webHref, platform) {
+      const match = String(webHref).match(/map\.naver\.com\/p\/search\/([^?#]+)/);
+      if (!match) return null;
+      const query = match[1];
+      const appname = encodeURIComponent(NAVER_APP_NAME);
+      if (platform === "android") {
+        return `intent://search?query=${query}&appname=${appname}#Intent;scheme=nmap;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.nmap;end`;
+      }
+      if (platform === "ios") return `nmap://search?query=${query}&appname=${appname}`;
+      return null;
+    }
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a.map-link.naver");
+      if (!link || !link.href) return;
+      const platform = naverPlatform();
+      const appHref = buildNaverAppLink(link.href, platform);
+      if (!appHref) return;
+      event.preventDefault();
+      const webHref = link.href;
+      const startedAt = Date.now();
+      window.location.href = appHref;
+      if (platform === "ios") {
+        // 沒裝 App 時 Safari 只會跳「無效網址」，1.6 秒後頁面還在就退回網頁版
+        window.setTimeout(() => {
+          if (!document.hidden && Date.now() - startedAt < 2500) window.location.href = webHref;
+        }, 1600);
+      }
+    });
+
     function updateProgress() {
       const inputs = [...document.querySelectorAll("[data-check]")];
       const done = inputs.filter(input => input.checked).length;
